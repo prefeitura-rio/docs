@@ -1,0 +1,49 @@
+site_name: Documentação
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-outline
+        name: Mudar para tema escuro
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch-off
+        name: Mudar para tema claro
+  language: pt
+  font:
+    text: Lato
+  favicon: static/img/logo.png
+  logo: static/img/logo.png
+  features:
+    - header.autohide
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    - navigation.tabs
+
+repo_url: https://github.com/prefeitura-rio/docs
+repo_name: prefeitura-rio/docs
+
+extra:
+  version: 2.0
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/dados_rio
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/Xx8Y6mYaq2
+    - icon: fontawesome/brands/github
+      link: https://github.com/prefeitura-rio
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - pymdownx.tabbed
+  - pymdownx.superfences
+
+extra_css:
+- static/css/custom.css
