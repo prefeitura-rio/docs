@@ -1,17 +1,11 @@
-# Welcome to MkDocs
+# Bem-vinde à documentação do Escritório de Dados Rio!
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Aqui, você encontrará um repositório colaborativo de informações para ajudar você a fazer o melhor
+uso de todos os recursos que podemos oferecer. Sinta-se à vontade para navegar.
 
-## Commands
+Na aba de navegação, você verá algumas opções:
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+- **Home**: você está aqui! 🎉
+- **Tutoriais**: guias auxiliares para garantir que todos possam usar de nossos recursos 🤓
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Abaixo, você encontra nossas mídias sociais. Venha interagir com nossa comunidade!

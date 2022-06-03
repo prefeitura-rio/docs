@@ -1,4 +1,9 @@
-site_name: Documentação
+site_name: Escritório de Dados Rio
+
+nav:
+  - Home: index.md
+  - Tutoriais:
+    - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
 
 theme:
   name: material
