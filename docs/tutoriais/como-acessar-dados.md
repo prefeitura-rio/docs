@@ -168,6 +168,8 @@ Quando você executar esse snippet, será solicitada a autenticação com sua co
 E assim que autorizar, você vai ter seu dado lindo de bonito já em um DataFrame do [Pandas](https://pandas.pydata.org/)!
 É pura magia 🪄
 
+![Dataframe](../static/img/tutoriais/resultado-python.png)
+
 ## Acessando dados via R
 
 Vide [aqui](https://medium.com/basedosdados/como-usar-a-bd-com-r-427aded95448)
