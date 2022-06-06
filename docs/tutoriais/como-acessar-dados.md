@@ -1,4 +1,56 @@
-## Como encontrar dados
+Olá! Quer acessar dados do data lake? Beleza! Esse guia tem como objetivo cobrir diversos cenários
+de acesso a eles. Mas, para isso, deixo aqui algumas perguntas e redirecionamentos que podem te ajudar:
+
+- **Ainda não sabe qual dado quer acessar?**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8594; Sem problemas! Vamos para a seção [**Como buscar dados**](#como-buscar-dados).
+
+- **Já escolheu o dado no data.rio e quer acessá-lo via download?**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8594; Excelente! Basta clicar no link, ele fará o download do arquivo. Se ele
+não estiver disponível, [**entre em contato conosco**](/contato), será um prazer te ajudar.
+
+- **Já escolheu o dado no data.rio e quer acessá-lo via BigQuery/Python/R/PowerBI?**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8594; Sensacional! Caso ainda não tenha uma conta na GCP e um projeto
+configurado, siga para a seção [**Como criar uma conta na GCP**](#como-criar-uma-conta-na-gcp). Se já tiver,
+melhor ainda! Basta olhar aqui ao lado, no menu de navegação, a seção que melhor se encaixa com suas necessidades.
+
+- **Seu caso não se encaixa em nenhum acima?**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8594; Poxa! Vamos trabalhar juntos para melhorar o acesso aos dados!
+[**Entre em contato conosco**](/contato), vamos entender sua demanda e te ajudar! 🤗
+
+## Como buscar dados
+
+### Conhecendo o data.rio
+
+Você ainda não conhece o [data.rio](https://data.rio)? 🤯
+
+![Homepage do data.rio](../static/img/tutoriais/data-rio-home.png)
+
+O [data.rio](https://data.rio) é o portal de dados abertos da Prefeitura do Rio de Janeiro. Ele é estruturado e mantido
+pelo Instituto Pereira Passos. Nós, como Escritório de Dados, em parceria, disponibilizamos os dados do data lake lá também! 🤩
+
+Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
+
+### Identificando dados do data lake
+
+Na [página de pesquisa](https://www.data.rio/search) do data.rio, você poderá buscar por dados das mais
+diversas formas. Ao acessá-la, você deve encontrar algo assim:
+
+![Pesquisa do data.rio](../static/img/tutoriais/data-rio-pesquisa.png)
+
+Rolando a página, ao lado esquerdo, você verá um campo "Tags". Ali, você pode utilizar a tag `escritorio_de_dados` para
+encontrar os dados do data lake!
+
+![Tags do data.rio](../static/img/tutoriais/data-rio-tags.png)
+
+Então você pode escolher o dado que quiser ali e, ao clicar, você vai se deparar com uma página semelhante à seguinte:
+
+![Página de dados do data.rio](../static/img/tutoriais/data-rio-exemplo.png)
+
+Ali tem tudo que você precisa saber sobre o dado e diversas maneiras de acessá-lo! 💥
 
 ## Como criar uma conta na GCP
 
@@ -172,9 +224,13 @@ E assim que autorizar, você vai ter seu dado lindo de bonito já em um DataFram
 
 ## Acessando dados via R
 
-Vide [aqui](https://medium.com/basedosdados/como-usar-a-bd-com-r-427aded95448)
+A basedosdados possui um guia excelente de como acessar dados do BigQuery via R. Você pode acessá-lo
+[aqui](https://medium.com/basedosdados/como-usar-a-bd-com-r-427aded95448)!
 
 ## Acessando dados via PowerBI
+
+A documentação oficial da Microsoft possui um guia excelente de como acessar dados do BigQuery via PowerBI.
+Você pode acessá-lo [aqui](https://docs.microsoft.com/pt-br/power-bi/connect-data/desktop-connect-bigquery)!
 
 ## Referências
 
