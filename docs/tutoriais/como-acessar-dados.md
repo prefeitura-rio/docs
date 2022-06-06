@@ -25,7 +25,7 @@ melhor ainda! Basta olhar aqui ao lado, no menu de navegação, a seção que me
 
 ### Conhecendo o data.rio
 
-Você ainda não conhece o [data.rio](https://data.rio)? 🤯
+Você ainda não conhece o [data.rio](https://www.data.rio/)? 🤯
 
 ![Homepage do data.rio](../static/img/tutoriais/data-rio-home.png)
 
