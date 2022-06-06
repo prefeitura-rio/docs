@@ -7,5 +7,6 @@ Na aba de navegação, você verá algumas opções:
 
 - **Home**: você está aqui! 🎉
 - **Tutoriais**: guias auxiliares para garantir que todos possam usar de nossos recursos 🤓
+- **Contato**: vários meios para entrar em contato com a equipe do Escritório de Dados Rio! 🤗
 
 Abaixo, você encontra nossas mídias sociais. Venha interagir com nossa comunidade!

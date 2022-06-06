@@ -4,6 +4,7 @@ nav:
   - Home: index.md
   - Tutoriais:
     - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
+  - Contato: contato.md
 
 theme:
   name: material
