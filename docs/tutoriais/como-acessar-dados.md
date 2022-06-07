@@ -232,9 +232,61 @@ A basedosdados possui um guia excelente de como acessar dados do BigQuery via R.
 A documentação oficial da Microsoft possui um guia excelente de como acessar dados do BigQuery via PowerBI.
 Você pode acessá-lo [aqui](https://docs.microsoft.com/pt-br/power-bi/connect-data/desktop-connect-bigquery)!
 
+## Dicas para reduzir o custo de uma query no GCP
+
+__1 - Evite `SELECT *`__
+
+Para contornar o uso do `SELECT *` você pode:
+
+- Escrever apenas os nomes das colunas que deseja como retorno.
+Ex: `SELECT id_aluno, turma, situacao FROM datario.educacao_basica.aluno`
+- Excluir algumas colunas com o uso do `EXCEPT`.
+Ex: `SELECT * EXCEPT(id_aluno, turma, situacao) FROM datario.educacao_basica.aluno`
+
+__2 - Espiar como são os dados__ 🕵🏽‍♀️
+
+Para olhar como são os dados você pode:
+
+Clicar nos pontinhos verticais e "Open". E depois selecionar a aba "Preview" para visualizar algumas linhas dessa tabela.
+
+![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
+Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.
+
+__3 - Filtrar a partição__
+
+Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “. 
+
+![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
+
+Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
+
+Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
+Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
+![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png)
+
+Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
+![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png)
+
+Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.” 
+Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
+![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
+
+Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
+
+Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!
+
+__4 - JOIN__
+
+Para melhorar a eficiência dos JOIN podemos:
+
+- reduzir a quantidade de dados das tabelas antes de uma cláusula JOIN. Quanto antes reduzirmos a quantidade de dados, menos processamento iremos exigir.
+- sempre que possível, utilize colunas de inteiros para realizar o join entre tabelas.
+
+
 ## Referências
 
 - [Documentação oficial da GCP](https://cloud.google.com/docs)
 - [Cota gratuita da GCP](https://cloud.google.com/free/docs/gcp-free-tier)
 - [Documentação oficial do BigQuery](https://cloud.google.com/bigquery/docs)
+- [Melhores práticas para reduzir custos](https://cloud.google.com/bigquery/docs/best-practices-costs#preview-data)
 - [Documentação oficial da basedosdados](https://basedosdados.github.io/mais/access_data_packages/)
