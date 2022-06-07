@@ -34,6 +34,9 @@ theme:
 repo_url: https://github.com/prefeitura-rio/docs
 repo_name: prefeitura-rio/docs
 
+plugins:
+  - mkdocs-video
+
 extra:
   version: 2.0
   social:
