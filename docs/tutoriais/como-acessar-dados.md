@@ -157,7 +157,7 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
 ### Fazendo sua primeira query e usando os resultados
 
-- Pode-se fazer uma query nessa tabela clicando em "Query" ou nos três pontinhos veritcais e escolhendo
+- Pode-se fazer uma query nessa tabela clicando em "Query" ou nos três pontinhos verticais e escolhendo
   "Query". Em ambas as formas, será gerada uma query básica para a tabela.
 
 ![Query basica](../static/img/tutoriais/query-basica.png)
