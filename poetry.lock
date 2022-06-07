@@ -266,7 +266,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "a3091dea0ff5c16ce7b20aa56cbfb32c9555976e562122523d66136f3bc8ec22"
+content-hash = "96fa1b90f0d42f866e28d7753e13b504fc566f75bc3259af3837d55f36967a6e"
 
 [metadata.files]
 click = [
