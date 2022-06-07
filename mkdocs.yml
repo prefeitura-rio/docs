@@ -47,7 +47,11 @@ extra:
 markdown_extensions:
   - admonition
   - pymdownx.details
+  - mkdocs_click
   - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.tabbed
   - pymdownx.superfences
 
