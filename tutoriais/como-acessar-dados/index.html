@@ -499,6 +499,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dicas-para-reduzir-o-custo-de-uma-query-no-gcp" class="md-nav__link">
+    Dicas para reduzir o custo de uma query no GCP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#referencias" class="md-nav__link">
     Referências
   </a>
@@ -749,11 +756,46 @@ ao nome do projeto. No caso da imagem abaixo, seria <code>"primeiro-projeto-3500
 <h2 id="acessando-dados-via-powerbi">Acessando dados via PowerBI</h2>
 <p>A documentação oficial da Microsoft possui um guia excelente de como acessar dados do BigQuery via PowerBI.
 Você pode acessá-lo <a href="https://docs.microsoft.com/pt-br/power-bi/connect-data/desktop-connect-bigquery">aqui</a>!</p>
+<h2 id="dicas-para-reduzir-o-custo-de-uma-query-no-gcp">Dicas para reduzir o custo de uma query no GCP</h2>
+<p><strong>1 - Evite <code>SELECT *</code></strong></p>
+<p>Para contornar o uso do <code>SELECT *</code> você pode:</p>
+<ul>
+<li>Escrever apenas os nomes das colunas que deseja como retorno.
+Ex: <code>SELECT id_aluno, turma, situacao FROM datario.educacao_basica.aluno</code></li>
+<li>Excluir algumas colunas com o uso do <code>EXCEPT</code>.
+Ex: <code>SELECT * EXCEPT(id_aluno, turma, situacao) FROM datario.educacao_basica.aluno</code></li>
+</ul>
+<p><strong>2 - Espiar como são os dados</strong> 🕵🏽‍♀️</p>
+<p>Para olhar como são os dados você pode:</p>
+<p>Clicar nos pontinhos verticais e "Open". E depois selecionar a aba "Preview" para visualizar algumas linhas dessa tabela.</p>
+<p><img alt="Ver tabela pt3" src="../../static/img/tutoriais/ver-tabela-3.png" />
+Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.</p>
+<p><strong>3 - Filtrar a partição</strong></p>
+<p>Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “. </p>
+<p><img alt="Partição da tabela" src="../../static/img/tutoriais/particao-tabela.png" /></p>
+<p>Como vimos na imagem acima, a tabela <code>datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite</code> é particionada pela coluna <code>data_particao</code>. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:</p>
+<p>Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
+Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
+<img alt="Partição da tabela 2" src="../../static/img/tutoriais/particao-tabela-2.png" /></p>
+<p>Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
+<img alt="Partição da tabela 3" src="../../static/img/tutoriais/particao-tabela-3.png" /></p>
+<p>Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.” 
+Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
+<img alt="Partição da tabela 4" src="../../static/img/tutoriais/particao-tabela-4.png" /></p>
+<p>Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!</p>
+<p>Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!</p>
+<p><strong>4 - JOIN</strong></p>
+<p>Para melhorar a eficiência dos JOIN podemos:</p>
+<ul>
+<li>reduzir a quantidade de dados das tabelas antes de uma cláusula JOIN. Quanto antes reduzirmos a quantidade de dados, menos processamento iremos exigir.</li>
+<li>sempre que possível, utilize colunas de inteiros para realizar o join entre tabelas.</li>
+</ul>
 <h2 id="referencias">Referências</h2>
 <ul>
 <li><a href="https://cloud.google.com/docs">Documentação oficial da GCP</a></li>
 <li><a href="https://cloud.google.com/free/docs/gcp-free-tier">Cota gratuita da GCP</a></li>
 <li><a href="https://cloud.google.com/bigquery/docs">Documentação oficial do BigQuery</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/best-practices-costs#preview-data">Melhores práticas para reduzir custos</a></li>
 <li><a href="https://basedosdados.github.io/mais/access_data_packages/">Documentação oficial da basedosdados</a></li>
 </ul>
 
