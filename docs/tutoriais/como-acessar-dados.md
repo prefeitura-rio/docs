@@ -27,8 +27,6 @@ melhor ainda! Basta olhar aqui ao lado, no menu de navegação, a seção que me
 
 Você ainda não conhece o [data.rio](https://www.data.rio/)? 🤯
 
-![type:video](https://www.youtube.com/embed/ScMzIvxBSi4)
-
 ![Homepage do data.rio](../static/img/tutoriais/data-rio-home.png)
 
 O [data.rio](https://data.rio) é o portal de dados abertos da Prefeitura do Rio de Janeiro. Ele é estruturado e mantido
@@ -38,21 +36,29 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
 ### Identificando dados do data lake
 
-Na [página de pesquisa](https://www.data.rio/search) do data.rio, você poderá buscar por dados das mais
-diversas formas. Ao acessá-la, você deve encontrar algo assim:
+=== "Vídeo"
 
-![Pesquisa do data.rio](../static/img/tutoriais/data-rio-pesquisa.png)
+    ![type:video](https://www.youtube.com/embed/B60JP39X-zI)
 
-Rolando a página, ao lado esquerdo, você verá um campo "Tags". Ali, você pode utilizar a tag `escritorio_de_dados` para
-encontrar os dados do data lake!
+    ![type:video](https://www.youtube.com/embed/O51W8-3-Wh8)
 
-![Tags do data.rio](../static/img/tutoriais/data-rio-tags.png)
+=== "Texto"
 
-Então você pode escolher o dado que quiser ali e, ao clicar, você vai se deparar com uma página semelhante à seguinte:
+    Na [página de pesquisa](https://www.data.rio/search) do data.rio, você poderá buscar por dados das mais
+    diversas formas. Ao acessá-la, você deve encontrar algo assim:
 
-![Página de dados do data.rio](../static/img/tutoriais/data-rio-exemplo.png)
+    ![Pesquisa do data.rio](../static/img/tutoriais/data-rio-pesquisa.png)
 
-Ali tem tudo que você precisa saber sobre o dado e diversas maneiras de acessá-lo! 💥
+    Rolando a página, ao lado esquerdo, você verá um campo "Tags". Ali, você pode utilizar a tag `escritorio_de_dados` para
+    encontrar os dados do data lake!
+
+    ![Tags do data.rio](../static/img/tutoriais/data-rio-tags.png)
+
+    Então você pode escolher o dado que quiser ali e, ao clicar, você vai se deparar com uma página semelhante à seguinte:
+
+    ![Página de dados do data.rio](../static/img/tutoriais/data-rio-exemplo.png)
+
+    Ali tem tudo que você precisa saber sobre o dado e diversas maneiras de acessá-lo! 💥
 
 ## Como criar uma conta na GCP
 
@@ -143,51 +149,63 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
 ### Navegando pelos dados
 
-- Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
-  as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.
+=== "Vídeo"
 
-![Ver tabela](../static/img/tutoriais/ver-tabela.png)
+    ![type:video](https://www.youtube.com/embed/xwzSzPkYGGo)
 
-- Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
-  atualização, etc.
+=== "Texto"
 
-![Ver tabela pt2](../static/img/tutoriais/ver-tabela-2.png)
+    - Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
+      as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.
 
-- Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.
+    ![Ver tabela](../static/img/tutoriais/ver-tabela.png)
 
-![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
+    - Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
+      atualização, etc.
+
+    ![Ver tabela pt2](../static/img/tutoriais/ver-tabela-2.png)
+
+    - Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.
+
+    ![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
 
 ### Fazendo sua primeira query e usando os resultados
 
-- Pode-se fazer uma query nessa tabela clicando em "Query" ou nos três pontinhos verticais e escolhendo
-  "Query". Em ambas as formas, será gerada uma query básica para a tabela.
+=== "Vídeo"
 
-![Query basica](../static/img/tutoriais/query-basica.png)
+    ![type:video](https://www.youtube.com/embed/uN-fEDSY5J0)
 
-- Para executar a query, basta clicar em "Run" ou pressionar Ctrl + Enter. Os resultados serão exibidos
-  como na imagem acima.
+=== "Texto"
 
-Ao final, com os resultados da query que desejamos, podemos fazer coisas legais! 🤓
+    - Pode-se fazer uma query nessa tabela clicando em "Query" ou nos três pontinhos verticais e escolhendo
+      "Query". Em ambas as formas, será gerada uma query básica para a tabela.
 
-É possível, por exemplo:
+    ![Query basica](../static/img/tutoriais/query-basica.png)
 
-1. Baixar ou salvar os resultados clicando em "Save results".
+    - Para executar a query, basta clicar em "Run" ou pressionar Ctrl + Enter. Os resultados serão exibidos
+      como na imagem acima.
 
-![Salvar query](../static/img/tutoriais/salvar-query.png)
+    Ao final, com os resultados da query que desejamos, podemos fazer coisas legais! 🤓
 
-2. Salvar a query ou criar uma view com ela para utilizar depois, clicando em "Save", ao lado de "Run".
+    É possível, por exemplo:
 
-![Query para view](../static/img/tutoriais/query-para-view.png)
+    1. Baixar ou salvar os resultados clicando em "Save results".
 
-3. Fazer gráficos e dashboards com os resultados, clicando em "Explore data".
+    ![Salvar query](../static/img/tutoriais/salvar-query.png)
 
-![Abrir datastudio](../static/img/tutoriais/abrir-datastudio.png)
+    2. Salvar a query ou criar uma view com ela para utilizar depois, clicando em "Save", ao lado de "Run".
 
-4. Criar um schedule para executar essa mesma query em intervalos de tempo definidos, clicando em "Schedule".
+    ![Query para view](../static/img/tutoriais/query-para-view.png)
 
-![Criar schedule](../static/img/tutoriais/criar-schedule.png)
+    3. Fazer gráficos e dashboards com os resultados, clicando em "Explore data".
 
-E é isso! Agora é hora de voar! 🚀
+    ![Abrir datastudio](../static/img/tutoriais/abrir-datastudio.png)
+
+    4. Criar um schedule para executar essa mesma query em intervalos de tempo definidos, clicando em "Schedule".
+
+    ![Criar schedule](../static/img/tutoriais/criar-schedule.png)
+
+    E é isso! Agora é hora de voar! 🚀
 
 ## Acessando dados via Python
 
@@ -200,29 +218,35 @@ Então você quer acessar os dados **diretamente** via Python? A gente te dá um
 
 ### Fazendo uma query
 
-A seguir, vamos consultar dados da maneira mais simples possível. Se liga só nesse snippet curtinho
-mas SUPER poderoso 💪:
+=== "Vídeo"
 
-```py
-import basedosdados as bd
+    ![type:video](https://www.youtube.com/embed/uN-fEDSY5J0)
 
-query = "SELECT * FROM `datario.educacao_basica.aluno` LIMIT 10"
-df = bd.read_sql(query, billing_project_id="<id-do-seu-projeto>")
-```
+=== "Texto"
 
-**Importante:** note que esse `billing_project_id` deve corresponder ao ID do seu projeto na GCP, NÃO
-ao nome do projeto. No caso da imagem abaixo, seria `"primeiro-projeto-350017"`
+    A seguir, vamos consultar dados da maneira mais simples possível. Se liga só nesse snippet curtinho
+    mas SUPER poderoso 💪:
 
-![ID x nome do projeto](../static/img/tutoriais/id-do-projeto.png)
+    ```py
+    import basedosdados as bd
 
-Quando você executar esse snippet, será solicitada a autenticação com sua conta Google:
+    query = "SELECT * FROM `datario.educacao_basica.aluno` LIMIT 10"
+    df = bd.read_sql(query, billing_project_id="<id-do-seu-projeto>")
+    ```
 
-![Autorizar BD](../static/img/tutoriais/autoriza-bd.png)
+    **Importante:** note que esse `billing_project_id` deve corresponder ao ID do seu projeto na GCP, NÃO
+    ao nome do projeto. No caso da imagem abaixo, seria `"primeiro-projeto-350017"`
 
-E assim que autorizar, você vai ter seu dado lindo de bonito já em um DataFrame do [Pandas](https://pandas.pydata.org/)!
-É pura magia 🪄
+    ![ID x nome do projeto](../static/img/tutoriais/id-do-projeto.png)
 
-![Dataframe](../static/img/tutoriais/resultado-python.png)
+    Quando você executar esse snippet, será solicitada a autenticação com sua conta Google:
+
+    ![Autorizar BD](../static/img/tutoriais/autoriza-bd.png)
+
+    E assim que autorizar, você vai ter seu dado lindo de bonito já em um DataFrame do [Pandas](https://pandas.pydata.org/)!
+    É pura magia 🪄
+
+    ![Dataframe](../static/img/tutoriais/resultado-python.png)
 
 ## Acessando dados via R
 

@@ -30,6 +30,7 @@ theme:
     - navigation.top
     - toc.integrate
     - navigation.tabs
+    - content.tabs.link
 
 repo_url: https://github.com/prefeitura-rio/docs
 repo_name: prefeitura-rio/docs
@@ -55,7 +56,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.superfences
 
 extra_css:
