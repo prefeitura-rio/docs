@@ -664,7 +664,7 @@ encontrar os dados do data lake!</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Vídeo</label><label for="__tabbed_2_2">Texto</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/xwzSzPkYGGo" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+<p><img alt="type:video" src="https://www.youtube.com/watch?v=yMGhxwouE7k" /></p>
 </div>
 <div class="tabbed-block">
 <ul>
@@ -776,6 +776,12 @@ Você pode acessá-lo <a href="https://docs.microsoft.com/pt-br/power-bi/connect
 Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.</p>
 <p><strong>3 - Filtrar a partição</strong></p>
 <p>Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Vídeo</label><label for="__tabbed_5_2">Texto</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="type:video" src="https://www.youtube.com/watch?v=EjYoC1EtEII" /></p>
+</div>
+<div class="tabbed-block">
 <p><img alt="Partição da tabela" src="../../static/img/tutoriais/particao-tabela.png" /></p>
 <p>Como vimos na imagem acima, a tabela <code>datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite</code> é particionada pela coluna <code>data_particao</code>. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:</p>
 <p>Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
@@ -787,6 +793,9 @@ Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a qu
 Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
 <img alt="Partição da tabela 4" src="../../static/img/tutoriais/particao-tabela-4.png" /></p>
 <p>Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!</p>
+</div>
+</div>
+</div>
 <p>Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!</p>
 <p><strong>4 - JOIN</strong></p>
 <p>Para melhorar a eficiência dos JOIN podemos:</p>
