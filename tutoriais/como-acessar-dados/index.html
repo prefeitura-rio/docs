@@ -406,15 +406,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#navegando-pelos-dados" class="md-nav__link">
-    Navegando pelos dados
+  <a href="#fazendo-sua-primeira-query-e-usando-os-resultados" class="md-nav__link">
+    Fazendo sua primeira query e usando os resultados
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fazendo-sua-primeira-query-e-usando-os-resultados" class="md-nav__link">
-    Fazendo sua primeira query e usando os resultados
+  <a href="#navegando-pelos-dados" class="md-nav__link">
+    Navegando pelos dados
   </a>
   
 </li>
@@ -562,8 +562,8 @@ pelo Instituto Pereira Passos. Nós, como Escritório de Dados, em parceria, dis
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Vídeo</label><label for="__tabbed_1_2">Texto</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/B60JP39X-zI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/O51W8-3-Wh8" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/phbzdxVWE78" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/muALqUbzFt0" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
 </div>
 <div class="tabbed-block">
 <p>Na <a href="https://www.data.rio/search">página de pesquisa</a> do data.rio, você poderá buscar por dados das mais
@@ -582,7 +582,7 @@ encontrar os dados do data lake!</p>
 <h3 id="requisitos">Requisitos</h3>
 <ul>
 <li>Ter uma conta Google válida (um Gmail, por exemplo)</li>
-<li>Cartão de crédito (apesar de ser necessário, a GCP provê 1TB de consumo de dados gratuitamente todo mês, dentre outras coisas.
+<li>Cartão de crédito (em alguns poucos casos a GCP exige o cadastro do cartão de crédito. Apesar de ser necessário, a GCP provê 1TB de consumo de dados gratuitamente todo mês, dentre outras coisas e é possível ativar o sandbox posteriormente.
   Para mais informações, veja <a href="#referencias">referências</a>)</li>
 </ul>
 <h3 id="criando-uma-conta">Criando uma conta</h3>
@@ -591,12 +591,17 @@ encontrar os dados do data lake!</p>
 </ul>
 <p><img alt="Tela do GCP Console" src="../../static/img/tutoriais/criar-conta-gcp.png" /></p>
 <ul>
-<li>
-<p>Faça login com sua conta Google</p>
-</li>
-<li>
-<p>Preencha as informações necessárias para cadastro, incluindo os dados do cartão de crédito</p>
-</li>
+<li>Faça login com sua conta Google</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Caminho sem cartão de crédito</label><label for="__tabbed_2_2">Caminho com cartão de crédito</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Se não houver necessidade de cadastrar cartão de crédito, a GCP só irá solicitar para você preencher qual seu país e aceitar os Termos de Serviço. Feito isso é só criar um projeto!</p>
+<p><img alt="Termos de serviço" src="../../static/img/tutoriais/termos-servi%C3%A7o.png" /></p>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Preencha as informações necessárias para cadastro, incluindo os dados do cartão de crédito</li>
 </ul>
 <p><img alt="Preenchendo dados no GCP Console" src="../../static/img/tutoriais/preencher-dados-conta-gcp.png" /></p>
 <ul>
@@ -604,8 +609,17 @@ encontrar os dados do data lake!</p>
 </ul>
 <p><img alt="Validação de dados de pagamento" src="../../static/img/tutoriais/validacao-cartao.png" /></p>
 <ul>
-<li>A aprovação dos documentos pode levar até 2 dias úteis.</li>
+<li>
+<p>A aprovação dos documentos pode levar até 2 dias úteis.</p>
+</li>
+<li>
+<p>Para entrar na sandbox e desabilitar o billing siga esse tutorial:</p>
+</li>
 </ul>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/maFV-fZA6To" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+</div>
+</div>
+</div>
 <h3 id="criando-um-projeto">Criando um projeto</h3>
 <p>Para consumir dados via Google BigQuery, será necessário criar um projeto na GCP. Para fazê-lo, siga as seguintes etapas:</p>
 <ul>
@@ -660,35 +674,11 @@ encontrar os dados do data lake!</p>
   ao seguinte:</li>
 </ul>
 <p><img alt="Dados do datario" src="../../static/img/tutoriais/dados-datario.png" /></p>
-<h3 id="navegando-pelos-dados">Navegando pelos dados</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Vídeo</label><label for="__tabbed_2_2">Texto</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p><img alt="type:video" src="https://www.youtube.com/watch?v=yMGhxwouE7k" /></p>
-</div>
-<div class="tabbed-block">
-<ul>
-<li>Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
-  as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.</li>
-</ul>
-<p><img alt="Ver tabela" src="../../static/img/tutoriais/ver-tabela.png" /></p>
-<ul>
-<li>Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
-  atualização, etc.</li>
-</ul>
-<p><img alt="Ver tabela pt2" src="../../static/img/tutoriais/ver-tabela-2.png" /></p>
-<ul>
-<li>Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.</li>
-</ul>
-<p><img alt="Ver tabela pt3" src="../../static/img/tutoriais/ver-tabela-3.png" /></p>
-</div>
-</div>
-</div>
 <h3 id="fazendo-sua-primeira-query-e-usando-os-resultados">Fazendo sua primeira query e usando os resultados</h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Vídeo</label><label for="__tabbed_3_2">Texto</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/uN-fEDSY5J0" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/-UFJL2sO4PI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
 </div>
 <div class="tabbed-block">
 <ul>
@@ -722,6 +712,30 @@ encontrar os dados do data lake!</p>
 </div>
 </div>
 </div>
+<h3 id="navegando-pelos-dados">Navegando pelos dados</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Vídeo</label><label for="__tabbed_4_2">Texto</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/qepmsnhtPWs" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
+  as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.</li>
+</ul>
+<p><img alt="Ver tabela" src="../../static/img/tutoriais/ver-tabela.png" /></p>
+<ul>
+<li>Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
+  atualização, etc.</li>
+</ul>
+<p><img alt="Ver tabela pt2" src="../../static/img/tutoriais/ver-tabela-2.png" /></p>
+<ul>
+<li>Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.</li>
+</ul>
+<p><img alt="Ver tabela pt3" src="../../static/img/tutoriais/ver-tabela-3.png" /></p>
+</div>
+</div>
+</div>
 <h2 id="acessando-dados-via-python">Acessando dados via Python</h2>
 <p>Então você quer acessar os dados <strong>diretamente</strong> via Python? A gente te dá uma força! 👨‍💻</p>
 <h3 id="requisitos_1">Requisitos</h3>
@@ -730,10 +744,10 @@ encontrar os dados do data lake!</p>
 <li><a href="https://github.com/basedosdados/mais">basedosdados</a> (instale com <code>pip install basedosdados</code>)</li>
 </ul>
 <h3 id="fazendo-uma-query">Fazendo uma query</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Vídeo</label><label for="__tabbed_4_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Vídeo</label><label for="__tabbed_5_2">Texto</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/uN-fEDSY5J0" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/pKpe2QQQrdI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
 </div>
 <div class="tabbed-block">
 <p>A seguir, vamos consultar dados da maneira mais simples possível. Se liga só nesse snippet curtinho
@@ -776,10 +790,10 @@ Você pode acessá-lo <a href="https://docs.microsoft.com/pt-br/power-bi/connect
 Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.</p>
 <p><strong>3 - Filtrar a partição</strong></p>
 <p>Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Vídeo</label><label for="__tabbed_5_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Vídeo</label><label for="__tabbed_6_2">Texto</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="type:video" src="https://www.youtube.com/watch?v=EjYoC1EtEII" /></p>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/lE84-6zeyIw" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
 </div>
 <div class="tabbed-block">
 <p><img alt="Partição da tabela" src="../../static/img/tutoriais/particao-tabela.png" /></p>
