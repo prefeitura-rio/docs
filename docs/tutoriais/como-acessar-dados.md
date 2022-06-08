@@ -151,7 +151,7 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
 === "Vídeo"
 
-    ![type:video](https://www.youtube.com/embed/xwzSzPkYGGo)
+    ![type:video](https://www.youtube.com/watch?v=yMGhxwouE7k)
 
 === "Texto"
 
@@ -282,22 +282,27 @@ Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota
 
 Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.
 
-![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
+=== "Vídeo"
 
-Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
+    ![type:video](https://www.youtube.com/watch?v=EjYoC1EtEII)
 
-Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
-Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
-![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png)
+=== "Texto"
+    ![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
 
-Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
-![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png)
+    Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
 
-Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.”
-Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
-![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
+    Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
+    Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
+    ![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png)
 
-Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
+    Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
+    ![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png)
+
+    Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.”
+    Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
+    ![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
+
+    Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
 
 Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!
 
