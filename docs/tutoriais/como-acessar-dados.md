@@ -76,14 +76,13 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
 - Faça login com sua conta Google
 
-=== "Caminho sem cartão de crédito"
+=== "Sem cartão de crédito"
 
     Se não houver necessidade de cadastrar cartão de crédito, a GCP só irá solicitar para você preencher qual seu país e aceitar os Termos de Serviço. Feito isso é só criar um projeto!
 
     ![Termos de serviço](../static/img/tutoriais/termos-serviço.png)
 
-
-=== "Caminho com cartão de crédito"
+=== "Com cartão de crédito"
 
     - Preencha as informações necessárias para cadastro, incluindo os dados do cartão de crédito
 
@@ -300,6 +299,7 @@ Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partiç
     ![type:video](https://www.youtube.com/embed/lE84-6zeyIw)
 
 === "Texto"
+
     ![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
 
     Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
