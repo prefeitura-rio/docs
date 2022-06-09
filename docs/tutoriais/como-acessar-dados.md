@@ -38,9 +38,9 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
 === "Vídeo"
 
-    ![type:video](https://www.youtube.com/embed/B60JP39X-zI)
+    ![type:video](https://www.youtube.com/embed/phbzdxVWE78)
 
-    ![type:video](https://www.youtube.com/embed/O51W8-3-Wh8)
+    ![type:video](https://www.youtube.com/embed/muALqUbzFt0)
 
 === "Texto"
 
@@ -65,7 +65,7 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 ### Requisitos
 
 - Ter uma conta Google válida (um Gmail, por exemplo)
-- Cartão de crédito (apesar de ser necessário, a GCP provê 1TB de consumo de dados gratuitamente todo mês, dentre outras coisas.
+- Cartão de crédito (em alguns poucos casos a GCP exige o cadastro do cartão de crédito. Apesar de ser necessário, a GCP provê 1TB de consumo de dados gratuitamente todo mês, dentre outras coisas e é possível ativar o sandbox posteriormente.
   Para mais informações, veja [referências](#referencias))
 
 ### Criando uma conta
@@ -76,15 +76,28 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
 - Faça login com sua conta Google
 
-- Preencha as informações necessárias para cadastro, incluindo os dados do cartão de crédito
+=== "Caminho sem cartão de crédito"
 
-![Preenchendo dados no GCP Console](../static/img/tutoriais/preencher-dados-conta-gcp.png)
+    Se não houver necessidade de cadastrar cartão de crédito, a GCP só irá solicitar para você preencher qual seu país e aceitar os Termos de Serviço. Feito isso é só criar um projeto!
 
-- Quando chegar na etapa de verificação de informações de pagamento, clique em "Prosseguir para a verificação"
+    ![Termos de serviço](../static/img/tutoriais/termos-serviço.png)
 
-![Validação de dados de pagamento](../static/img/tutoriais/validacao-cartao.png)
 
-- A aprovação dos documentos pode levar até 2 dias úteis.
+=== "Caminho com cartão de crédito"
+
+    - Preencha as informações necessárias para cadastro, incluindo os dados do cartão de crédito
+
+    ![Preenchendo dados no GCP Console](../static/img/tutoriais/preencher-dados-conta-gcp.png)
+
+    - Quando chegar na etapa de verificação de informações de pagamento, clique em "Prosseguir para a verificação"
+
+    ![Validação de dados de pagamento](../static/img/tutoriais/validacao-cartao.png)
+
+    - A aprovação dos documentos pode levar até 2 dias úteis.
+
+    - Para entrar na sandbox e desabilitar o billing siga esse tutorial:
+
+    ![type:video](https://www.youtube.com/embed/maFV-fZA6To)
 
 ### Criando um projeto
 
@@ -147,33 +160,11 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
 ![Dados do datario](../static/img/tutoriais/dados-datario.png)
 
-### Navegando pelos dados
-
-=== "Vídeo"
-
-    ![type:video](https://www.youtube.com/embed/xwzSzPkYGGo)
-
-=== "Texto"
-
-    - Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
-      as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.
-
-    ![Ver tabela](../static/img/tutoriais/ver-tabela.png)
-
-    - Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
-      atualização, etc.
-
-    ![Ver tabela pt2](../static/img/tutoriais/ver-tabela-2.png)
-
-    - Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.
-
-    ![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
-
 ### Fazendo sua primeira query e usando os resultados
 
 === "Vídeo"
 
-    ![type:video](https://www.youtube.com/embed/uN-fEDSY5J0)
+    ![type:video](https://www.youtube.com/embed/-UFJL2sO4PI)
 
 === "Texto"
 
@@ -207,6 +198,28 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
     E é isso! Agora é hora de voar! 🚀
 
+### Navegando pelos dados
+
+=== "Vídeo"
+
+    ![type:video](https://www.youtube.com/embed/qepmsnhtPWs)
+
+=== "Texto"
+
+    - Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
+      as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.
+
+    ![Ver tabela](../static/img/tutoriais/ver-tabela.png)
+
+    - Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
+      atualização, etc.
+
+    ![Ver tabela pt2](../static/img/tutoriais/ver-tabela-2.png)
+
+    - Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.
+
+    ![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
+
 ## Acessando dados via Python
 
 Então você quer acessar os dados **diretamente** via Python? A gente te dá uma força! 👨‍💻
@@ -220,7 +233,7 @@ Então você quer acessar os dados **diretamente** via Python? A gente te dá um
 
 === "Vídeo"
 
-    ![type:video](https://www.youtube.com/embed/uN-fEDSY5J0)
+    ![type:video](https://www.youtube.com/embed/pKpe2QQQrdI)
 
 === "Texto"
 
@@ -282,22 +295,27 @@ Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota
 
 Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.
 
-![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
+=== "Vídeo"
 
-Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
+    ![type:video](https://www.youtube.com/embed/lE84-6zeyIw)
 
-Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
-Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
-![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png)
+=== "Texto"
+    ![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
 
-Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
-![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png)
+    Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
 
-Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.”
-Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
-![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
+    Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
+    Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
+    ![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png)
 
-Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
+    Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
+    ![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png)
+
+    Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.”
+    Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
+    ![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
+
+    Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
 
 Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!
 
