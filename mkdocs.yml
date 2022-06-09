@@ -1,4 +1,4 @@
-site_name: Escritório de Dados Rio
+site_name: Escritório de Dados
 
 nav:
   - Home: index.md
@@ -23,7 +23,7 @@ theme:
   font:
     text: Lato
   favicon: static/img/logo.png
-  logo: static/img/logo.png
+  logo: static/img/logo_header.png
   features:
     - header.autohide
     - navigation.sections
