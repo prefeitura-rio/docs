@@ -4,6 +4,7 @@ nav:
   - Home: index.md
   - Tutoriais:
     - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
+    - Metadados, padronização e normalização: tutoriais/metadados-padronizacao.md
   - Contato: contato.md
 
 theme:
