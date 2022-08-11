@@ -1,11 +1,13 @@
 site_name: Escritório de Dados
 
 nav:
-  - Home: index.md
-  - Tutoriais:
-    - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
-    - Metadados, padronização e normalização: tutoriais/metadados-padronizacao.md
-  - Contato: contato.md
+  - Home:
+    - Olá!: index.md
+    - Tutoriais:
+      - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
+      - Metadados, padronização e normalização: tutoriais/metadados-padronizacao.md
+    - Sobre:
+      - Contato: contato.md
 
 theme:
   name: material
@@ -30,7 +32,6 @@ theme:
     - navigation.sections
     - navigation.top
     - toc.integrate
-    - navigation.tabs
     - content.tabs.link
 
 repo_url: https://github.com/prefeitura-rio/docs
