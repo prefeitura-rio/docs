@@ -5,6 +5,8 @@ nav:
     - Olá!: index.md
     - Tutoriais:
       - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
+      - Como configurar a conexão do PowerBI com o BigQuery: tutoriais/como-configurar-conexao-powerbi-bigquery.md
+    - Guia de desenvolvedores:
       - Metadados, padronização e normalização: tutoriais/metadados-padronizacao.md
     - Sobre:
       - Contato: contato.md
