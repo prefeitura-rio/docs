@@ -84,7 +84,7 @@ E essas informações estão salvas no [meta.dados.rio](meta.dados.rio/admin).
 
 O [meta.dados.rio](meta.dados.rio/admin) é o nosso repositório oficial de metadados.
 
-![Homepage do meta.dados.rio](../static/img/tutoriais//metadados-padronizacao/metadadosrio.png)
+![Homepage do meta.dados.rio](../static/img/tutoriais/metadados-padronizacao/metadadosrio.png)
 
 Os valores a serem preenchidos em cada campo devem ter sido validados por um profissional da IPLAN. Para mais detalhes olhar a documentação sobre o "Fluxo de Aprovação" descrito nesse tutorial.
 
@@ -102,7 +102,7 @@ As principais informações que precisamos preencher sobre o dataset são:
 - Title prefix: prefixo que aparecerá na frente do nome de cada tabela no [data.rio](https://www.data.rio)
 - Project: qual o nome do projeto que ele pertence dentro do BigQuery. Para ter essa tabela publicada no [data.rio](https://www.data.rio) é necessário setar esse valor para 'datario'.
 
-![Informações sobre o Dataset](../static/img/tutoriais//metadados-padronizacao/dataset-dados_basicos.png)
+![Informações sobre o Dataset](../static/img/tutoriais/metadados-padronizacao/dataset-dados_basicos.png)
 
 Para preencher as informações sobre a tabela criada podemos continuar no mesmo link do `Dataset` ou entrar na página `Tables`. Aqui, os campos a serem preenchidos são:
 
@@ -121,9 +121,9 @@ Para preencher as informações sobre a tabela criada podemos continuar no mesmo
 - Tags: Tags para facilitar a busca desses dados no [data.rio](https://www.data.rio). As tags obrigatórias estão relacionadas ao orgão que disponibilizou os dados (Ex: cor, alertario, sme, ...), sistema que originou os dados (Ex: comando), sinônimos, nome do dataset*id e table_id. As tags devem ser escritas em minúsculo, sem acentos e o espaçamento de palavras dado por *. Automaticamente são geradas as tags: escritorio_de_dados, datalake
 - Categories: selecionar quais categorias se adequam aos seus dados.
 
-![Informações sobre a Tabela - parte 1](../static/img/tutoriais//metadados-padronizacao/dataset-tabela_1.png)
+![Informações sobre a Tabela - parte 1](../static/img/tutoriais/metadados-padronizacao/dataset-tabela_1.png)
 
-![Informações sobre a Tabela - parte 2](../static/img/tutoriais//metadados-padronizacao/dataset-tabela_2.png)
+![Informações sobre a Tabela - parte 2](../static/img/tutoriais/metadados-padronizacao/dataset-tabela_2.png)
 
 ![Informações sobre a Tabela - parte 3](../static/img/tutoriais//metadados-padronizacao/dataset-tabela_3.png)
 
@@ -136,7 +136,7 @@ Já para o preenchimento dos metadados das colunas os campos obrigatórios são:
 - Is sensitive: se essa coluna possui um dado sensível que não deve ser publicado.
 - Measurement unit: unidade do dado (se fizer sentido).
 
-![Informações sobre a Tabela - Colunas](../static/img/tutoriais//metadados-padronizacao/colunas.png)
+![Informações sobre a Tabela - Colunas](../static/img/tutoriais/metadados-padronizacao/colunas.png)
 
 ### Onde ficam disponibilizadas as informações preenchidas?
 
@@ -144,8 +144,8 @@ Quando o projeto selecionado é o `datario`, os metadados são disponibilizados 
 
 Nas figuras abaixo é possível verificar como ficaram os metadados dentro do [data.rio](https://www.data.rio) com destaque para os campos _Title prefix_, preenchido nas informações do dataset, _Title_, _Short_ e _Long_ description que são preenchidos nas informações da tabela.
 
-![Publicação no dados.rio - parte 1](../static/img/tutoriais//metadados-padronizacao/datario_1.png)
+![Publicação no dados.rio - parte 1](../static/img/tutoriais/metadados-padronizacao/datario_1.png)
 
-![Publicação no dados.rio - parte 2](../static/img/tutoriais//metadados-padronizacao/datario_2.png)
+![Publicação no dados.rio - parte 2](../static/img/tutoriais/metadados-padronizacao/datario_2.png)
 
 ## Fluxo de Aprovação
