@@ -78,11 +78,11 @@ Aqui no Escritório de Dados armazenamos os seguintes campos no metadados:
   - unidade de medida (se necessário)
   - flag se a coluna tem dados sensíveis
 
-E essas informações estão salvas no [meta.dados.rio](meta.dados.rio/admin).
+E essas informações estão salvas no [meta.dados.rio](https://meta.dados.rio/admin).
 
 ## meta.dados.rio
 
-O [meta.dados.rio](meta.dados.rio/admin) é o nosso repositório oficial de metadados.
+O [meta.dados.rio](https://meta.dados.rio/admin) é o nosso repositório oficial de metadados.
 
 ![Homepage do meta.dados.rio](../static/img/tutoriais/metadados-padronizacao/metadadosrio.png)
 
