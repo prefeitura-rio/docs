@@ -13,7 +13,7 @@
     
     
       
-        <title>Metadados, padronização e normalização - Escritório de Dados</title>
+        <title>Como configurar a conexão do PowerBI com o BigQuery - Escritório de Dados</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#metadados-padronizacao-e-normalizacao" class="md-skip">
+        <a href="#restricoes-e-premissas" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Metadados, padronização e normalização
+              Como configurar a conexão do PowerBI com o BigQuery
             
           </span>
         </div>
@@ -246,12 +246,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
       
       
       
@@ -286,11 +288,62 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Como configurar a conexão do PowerBI com o BigQuery
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Como configurar a conexão do PowerBI com o BigQuery
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#restricoes-e-premissas" class="md-nav__link">
+    Restrições e premissas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-as-variaveis-de-ambiente" class="md-nav__link">
+    Configurando as variáveis de ambiente
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observacoes-finais" class="md-nav__link">
+    Observações finais
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -307,14 +360,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
       
       
       
@@ -335,141 +386,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Metadados, padronização e normalização
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../metadados-padronizacao/" class="md-nav__link">
         Metadados, padronização e normalização
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Índice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#como-estao-estruturados-os-dados-no-ed" class="md-nav__link">
-    Como estão estruturados os dados no ED?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quais-as-melhores-praticas-na-criacao-das-tabelas" class="md-nav__link">
-    Quais as melhores práticas na criação das tabelas?
-  </a>
-  
-    <nav class="md-nav" aria-label="Quais as melhores práticas na criação das tabelas?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#nome-do-dataset_id-e-table_id" class="md-nav__link">
-    Nome do dataset_id e table_id
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nome-e-ordem-das-colunas" class="md-nav__link">
-    Nome e ordem das colunas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conteudo-das-variaveis" class="md-nav__link">
-    Conteúdo das variáveis
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#particionamento" class="md-nav__link">
-    Particionamento
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o-que-sao-metadados-e-para-o-que-servem" class="md-nav__link">
-    O que são Metadados e para o que servem?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metadadosrio" class="md-nav__link">
-    meta.dados.rio
-  </a>
-  
-    <nav class="md-nav" aria-label="meta.dados.rio">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#como-criar-uma-conta-acessar" class="md-nav__link">
-    Como criar uma conta/ acessar?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#como-preencher" class="md-nav__link">
-    Como preencher?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#onde-ficam-disponibilizadas-as-informacoes-preenchidas" class="md-nav__link">
-    Onde ficam disponibilizadas as informações preenchidas?
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fluxo-de-aprovacao" class="md-nav__link">
-    Fluxo de Aprovação
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -547,140 +468,42 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/tutoriais/metadados-padronizacao.md" title="Editar esta página" class="md-content__button md-icon">
+  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/tutoriais/como-configurar-conexao-powerbi-bigquery.md" title="Editar esta página" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="metadados-padronizacao-e-normalizacao">Metadados, padronização e normalização</h1>
-<h2 id="como-estao-estruturados-os-dados-no-ed">Como estão estruturados os dados no ED?</h2>
-<p>A estrutura de dados utilizada segue a mesma hierarquia do BigQuery com project no nível mais alto, seguido de dataset e table.</p>
-<p><img alt="'Hierarquia de objetos'" src="https://cloud.google.com/static/bigquery/images/table-details.png?hl=pt-br" /></p>
-<p>Todo conjunto de dados terá obrigatoriamente 3 níveis de identificação sendo os dois primeiros para definir o nome do dataset_id e o último para definir o nome da tabela:</p>
-<table>
-<thead>
-<tr>
-<th>objeto</th>
-<th>formato</th>
-<th>exemplo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dataset_id</td>
-<td>&lt;primeiro_nivel>_&lt;segundo_nivel>_&lt;area ou tipo do conjunto (opcional)></td>
-<td>meio_ambiente_clima</td>
-</tr>
-<tr>
-<td>table_id</td>
-<td>&lt;nome da tabela></td>
-<td>taxa_precipitacao_satelite</td>
-</tr>
-</tbody>
-</table>
-<p>Nesse nosso caso em que temos uma tabela que contém informações sobre a quantidade de precipitação obtida por satélite a nomenclatura para acessarmos os dados dentro de um determinado projeto seria <em>meio_ambiente_clima.taxa_precipitacao_satelite</em> onde <em>meio_ambiente</em> se refere ao primeiro nível, <em>clima</em> ao segundo e <em>taxa_precipitacao_satelite</em> é o nome da tabela que corresponde ao terceiro nível.</p>
-<h2 id="quais-as-melhores-praticas-na-criacao-das-tabelas">Quais as melhores práticas na criação das tabelas?</h2>
-<h3 id="nome-do-dataset_id-e-table_id">Nome do dataset_id e table_id</h3>
-<p>Para nomeação de objetos no datalake seguimos as melhores práticas detalhadas do Vocabulário Controlado de Governo Eletrônico - Ministério do Planejamento (VCGE).
-Para saber quais as possibilidades de nomeação acesse essa <a href="https://docs.google.com/spreadsheets/d/1qcQjxhrWEkhQbG2tIag_fWx2vxtsktKtzB1hs4tUTvc/edit?usp=sharing">tabela</a>.</p>
-<p><strong>Restrições:</strong></p>
+  <h1>Como configurar a conexão do PowerBI com o BigQuery</h1>
+
+<p>Tendo problemas em se conectar ao BigQuery via PowerBI? Vamos tentar ajudar!</p>
+<h2 id="restricoes-e-premissas">Restrições e premissas</h2>
+<p>Esse guia contempla somente o caso onde o usuário está tentando se conectar a partir da rede de computadores da Prefeitura do Rio. Se esse não for o seu caso, mas ainda estiver com problemas, <a href="/contato"><strong>entre em contato conosco</strong></a>, será um prazer te ajudar.</p>
+<p>Também, o guia foi focado no sistema operacional Windows. Caso precise da descrição desses passos para outros sistemas operacionais, <a href="https://iplanrio.prefeitura.rio/"><strong>entre em contato com a IPLANRIO</strong></a>, que desenvolveu essa solução.</p>
+<h2 id="configurando-as-variaveis-de-ambiente">Configurando as variáveis de ambiente</h2>
+<p>Os passos necessários são os seguintes:</p>
 <ul>
-<li>Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)</li>
-<li>Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por _</li>
-<li>Não incluir conectores como de, da, dos, e, a, em, etc.</li>
-<li>Sempre que possível utilizar singular</li>
-<li>Não é permitida alteração do primeiro nível do VCGE.</li>
-<li>Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake. (ex: administracao_processo).</li>
-<li>Nenhuma palavra deve ser repetida no dataset<em>id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao</em>…)</li>
-<li>O dataset_id pode ser ser nomeado como "dados_mestres", não seguindo o VCGE, caso a tabela em questão seja uma referência para outras tabelas de outros sistemas incluídos no datalake.</li>
+<li>Clicar na lupa da barra de tarefas</li>
+<li>Buscar por "Environment" ou "editar as variáveis de ambiente do sistema" e clicar no ícone que aparecer</li>
+<li>Clicar em "Novo" na seção da janela descrita como "Variáveis de usuário para..."</li>
+<li>Adicionar as seguintes variáveis:</li>
 </ul>
-<p><strong>Referências:</strong></p>
+<div class="highlight"><pre><span></span><code> - Nome da variável: http_proxy
+   Valor da variável: http://proxy.rio.rj.gov.br:8080
+
+ - Nome da variável: https_proxy
+   Valor da variável: http://proxy.rio.rj.gov.br:8080
+</code></pre></div>
 <ul>
-<li><a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></li>
-<li><a href="https://github.com/RJ-SMTR/maestro/wiki/Ontologia-de-nomea%C3%A7%C3%A3o-Datasets-e-Tabelas">Ontologia SMTR</a></li>
-<li><a href="https://www.gov.br/governodigital/pt-br/governanca-de-dados/vocabulario-controlado-do-governo-eletronico">VCGE</a> | <a href="https://www.gov.br/governodigital/pt-br/governanca-de-dados/vcge_2_1_0.pdf">VCGE versão resumida</a> | <a href="https://www.gov.br/governodigital/pt-br/governanca-de-dados/vcge_2_1_0_det.pdf">VCGE versão detalhada</a></li>
+<li>Atente-se para eventuais erros de digitação!</li>
 </ul>
-<h3 id="nome-e-ordem-das-colunas">Nome e ordem das colunas</h3>
-<p>O nome e a ordem das colunas tem que respeitar o mesmo padrão descrito nas partes "Nomeação de variáveis" e "Ordenamento de variáveis" do <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></p>
-<h3 id="conteudo-das-variaveis">Conteúdo das variáveis</h3>
-<p>Sobre o conteúdo das colunas deve-se respeitar o mesmo padrão descrito nas partes "Tipos de Variáveis", "Limpando STRINGs", "Formatos de valores" e "Quais variáveis manter, quais adicionar e quais remover" do <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></p>
-<h3 id="particionamento">Particionamento</h3>
-<p>Tabelas grandes ou com grande potencial de crescimento devem ser particionadas a fim de melhorarmos o desempenho de consulta e reduzir os custos.</p>
-<p>Em geral, o particionamento é feito sobre o valors de uma data criando-se três colunas novas cujos nomes são dados por: <code>ano_particao</code>, <code>mes_particao</code>, <code>data_particao</code> e que possuem os respectivos formatos 'YYYY', 'MM', 'YYYY-MM-DD'.</p>
-<p><strong>Datas nulas em coluna de particionamento</strong> - caso a coluna utilizada para particionamento seja nula, preencher esses valores pela Unix epoch (1 de janeiro de 1970).</p>
-<p>Em caso de necessidade de particionamento por outra coluna consultar o tópico "Particionamento de tabelas" no <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a>.</p>
-<h2 id="o-que-sao-metadados-e-para-o-que-servem">O que são Metadados e para o que servem?</h2>
-<p>Metadados são informações utilizadas para descrever tanto sobre do que se trata a tabela em específico quanto para descrever em profundidade o que são cada uma das suas colunas. Eles servem para facilitar o entendimento e a utilização dos dados.
-Dessa forma, para cada tabela criada precisamos especificar através dos metadados o que cada coluna significa e o seu formato.</p>
-<p>Aqui no Escritório de Dados armazenamos os seguintes campos no metadados:</p>
-<ul>
-<li>A nível de tabela:</li>
-<li>descrição geral sobre o que são os dados;</li>
-<li>tags que ajudam a encontrar a tabela;</li>
-<li>categoria da tabela;</li>
-<li>orgão da prefeitura de origem dos dados;</li>
-<li>quem é a pessoa responsável pela publicação;</li>
-<li>frequência de atualização da tabela;</li>
-<li>entre outros...</li>
-<li>A nível de coluna:</li>
-<li>descrição de cada uma das colunas</li>
-<li>formato em que os dados estão salvos</li>
-<li>unidade de medida (se necessário)</li>
-<li>flag se a coluna tem dados sensíveis</li>
-</ul>
-<p>E essas informações estão salvas no <a href="meta.dados.rio/admin">meta.dados.rio</a>.</p>
-<h2 id="metadadosrio">meta.dados.rio</h2>
-<p>O <a href="meta.dados.rio/admin">meta.dados.rio</a> é o nosso repositório oficial de metadados.</p>
-<p><img alt="Homepage do meta.dados.rio" src="../../static/img/tutoriais/metadados-padronizacao/metadadosrio.png" /></p>
-<p>Os valores a serem preenchidos em cada campo devem ter sido validados por um profissional da IPLAN. Para mais detalhes olhar a documentação sobre o "Fluxo de Aprovação" descrito nesse tutorial.</p>
-<h3 id="como-criar-uma-conta-acessar">Como criar uma conta/ acessar?</h3>
-<h3 id="como-preencher">Como preencher?</h3>
-<p>Toda vez que criamos uma tabela nova precisamos entrar no meta.dados.rio e preencher os campos de <code>Datasets</code> (caso ele não exista), <code>Projects</code> (caso ele não exista) e <code>Tables</code>.</p>
-<p>Dentro de <code>Datasets</code> podemos criar um dataset_id novo utilizando o botão <code>ADD Dataset</code> ou modificar alguma coisa ao clicar no nome do nosso dataset de interesse.</p>
-<p>As principais informações que precisamos preencher sobre o dataset são:</p>
-<ul>
-<li>Name: qual o nome desse dataset. Tem que ser o mesmo nome definido no BigQuery.</li>
-<li>Title prefix: prefixo que aparecerá na frente do nome de cada tabela no <a href="https://www.data.rio">data.rio</a></li>
-<li>Project: qual o nome do projeto que ele pertence dentro do BigQuery. Para ter essa tabela publicada no <a href="https://www.data.rio">data.rio</a> é necessário setar esse valor para 'datario'.</li>
-</ul>
-<p><img alt="Informações sobre o Dataset" src="../../static/img/tutoriais/metadados-padronizacao/dataset-dados_basicos.png" /></p>
-<p>Para preencher as informações sobre a tabela criada podemos continuar no mesmo link do <code>Dataset</code> ou entrar na página <code>Tables</code>. Aqui, os campos a serem preenchidos são:</p>
-<ul>
-<li>Name: nome da tabela. Tem que ser o mesmo nome definido no BigQuery.</li>
-<li>Title: o título da tabela que irá aparecer no <a href="https://www.data.rio">data.rio</a> após o prefixo definido no dataset.</li>
-<li>Short description: resumo sobre os dados disponibilizados nessa tabela.</li>
-<li>Long description: descrição detalhada sobre os dados disponibilizados nessa tabela (limite de 200 caracteres).</li>
-<li>Update frequency: qual é a frequência de atualização desses dados (Anual, Mensal, Semanal, Diária, Nunca).</li>
-<li>Temporal coverage: qual a última data de atualização (ex: Até data corrente).</li>
-<li>Data owner: Órgão responsável pela criação e disponibilização dos dadaos.</li>
-<li>Publisher name: Nome da pessoa responsável pelo pipeline dos dados.</li>
-<li>Publisher email: E-mail da pessoa responsável pelo pipeline dos dados.</li>
-<li>Source database: Base de dados de origem.</li>
-<li>Source table: Nome da tabela de origem dos dados.</li>
-<li>Source query: Query utilizada na extração dos dados.</li>
-<li>Tags: Tags para facilitar a busca desses dados no <a href="https://www.data.rio">data.rio</a>. As tags obrigatórias estão relacionadas ao orgão que disponibilizou os dados (Ex: cor, alertario, sme, ...), sistema que originou os dados (Ex: comando), sinônimos, nome do dataset<em>id e table_id. As tags devem ser escritas em minúsculo, sem acentos e o espaçamento de palavras dado por </em>. Automaticamente são geradas as tags: escritorio_de_dados, datalake</li>
-<li>Categories: selecionar quais categorias se adequam aos seus dados.</li>
-</ul>
-<p><img alt="Informações sobre a Tabela - parte 1" src="../../static/img/tutoriais/metadados-padronizacao/dataset-tabela_1.png" /></p>
-<p><img alt="Informações sobre a Tabela - parte 2" src="../../static/img/tutoriais/metadados-padronizacao/dataset-tabela_2.png" /></p>
-<p><img alt="Informações sobre a Tabela - parte 3" src="../../static/img/tutoriais/metadados-padronizacao/dataset-tabela_3.png" /></p>
-<p>Já para o preenchimento dos metadados das colunas os campos obrigatórios são:</p>
-<ul>
-<li>Original name: nome original da coluna. Tem que ser o mesmo nome definido no BigQuery.</li>
-<li>Name: nome que irá aparecer no <a href="https://www.data.rio">data.rio</a>.</li>
-<li>Type: se essa coluna é um INTEGER, FLOAT, DATE, DATETIME ou STRING.</li>
-<li>Description: Descrição detalhada do que representa essa coluna.</li>
-<li>Is sensitive: se essa coluna possui um dado sensível que não deve ser publicado.</li>
-<li>Measurement unit: unidade do dado (se fizer sentido).</li>
-</ul>
-<p><img alt="Informações sobre a Tabela - Colunas" src="../../static/img/tutoriais/metadados-padronizacao/colunas.png" /></p>
-<h3 id="onde-ficam-disponibilizadas-as-informacoes-preenchidas">Onde ficam disponibilizadas as informações preenchidas?</h3>
-<p>Quando o projeto selecionado é o <code>datario</code>, os metadados são disponibilizados no <a href="https://www.data.rio">data.rio</a>.</p>
-<p>Nas figuras abaixo é possível verificar como ficaram os metadados dentro do <a href="https://www.data.rio">data.rio</a> com destaque para os campos <em>Title prefix</em>, preenchido nas informações do dataset, <em>Title</em>, <em>Short</em> e <em>Long</em> description que são preenchidos nas informações da tabela.</p>
-<p><img alt="Publicação no dados.rio - parte 1" src="../../static/img/tutoriais/metadados-padronizacao/datario_1.png" /></p>
-<p><img alt="Publicação no dados.rio - parte 2" src="../../static/img/tutoriais/metadados-padronizacao/datario_2.png" /></p>
-<h2 id="fluxo-de-aprovacao">Fluxo de Aprovação</h2>
+<p>Ao final, a tela deverá se assemelhar à seguinte:</p>
+<p><img alt="Tela de configuração de variáveis de ambiente" src="../../static/img/tutoriais/powerbi-bigquery.png" /></p>
+<h2 id="observacoes-finais">Observações finais</h2>
+<p>As variáveis atribuídas via Domínio serão identificadas na seção "Variáveis do sistema", que abrangerá
+qualquer usuário da máquina caso ela seja compartilhada. Caso a máquina que não esteja no domínio RIO
+também seja compartilhada, as variáveis também deverão ser criadas manualmente na seção "Variáveis do
+sistema" e não em "Variáveis de usuário".</p>
 
               
             </article>
@@ -703,7 +526,7 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
     <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
       
         
-        <a href="../como-configurar-conexao-powerbi-bigquery/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Como configurar a conexão do PowerBI com o BigQuery" rel="prev">
+        <a href="../como-acessar-dados/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Como acessar dados no data lake" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -712,20 +535,20 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
               <span class="md-footer__direction">
                 Anterior
               </span>
-              Como configurar a conexão do PowerBI com o BigQuery
+              Como acessar dados no data lake
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../contato/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Contato" rel="next">
+        <a href="../metadados-padronizacao/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Metadados, padronização e normalização" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Próximo
               </span>
-              Contato
+              Metadados, padronização e normalização
             </div>
           </div>
           <div class="md-footer__button md-icon">
