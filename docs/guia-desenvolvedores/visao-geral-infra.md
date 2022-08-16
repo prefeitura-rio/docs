@@ -434,7 +434,7 @@ armazenamento:
    nome no formato `dataset_id_staging`, contém as tabelas externas geradas a partir dos dados brutos
    hospedados no **GCS**. Já o de **produção**, com nome no formato `dataset_id`, contém as tabelas
    nativas já tratadas e padronizadas geradas pelo **DBT**. Vale ressaltar que o **BQ** possui 3 tipos diferentes de tabelas;
-    1. **Tabelas Externas**: Uma tabela externa é uma tabela que funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo **GCS**, **Google Sheets**, **Google Drive**, entre outros. Para mais informações, consulte [como consultar fontes de dados externas.](https://cloud.google.com/bigquery/docs/external-data-sources)
+    1. **Tabelas Externas**: Uma tabela externa funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo **GCS**, **Google Sheets**, **Google Drive**, entre outros. Para mais informações, consulte [como consultar fontes de dados externas.](https://cloud.google.com/bigquery/docs/external-data-sources)
     2. **Tabelas Nativas**: Uma tabela nativa tem os dados armazenadas diretamente no **BQ**. Essas tabelas são extremamente rápidas, porem possuem apenas um nivel de particionamento com 4 mil partições.
     3. **Views**: Uma view é uma tabela virtual definida por uma consulta SQL. Para mais informações, consulte [Como criar visualizações.](https://cloud.google.com/bigquery/docs/views)
 
