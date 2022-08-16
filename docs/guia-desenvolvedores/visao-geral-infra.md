@@ -442,7 +442,7 @@ Uma vez com os dados no **GCS**, são criados os dois datasets no **BQ** - de pr
 e staging (`dataset_id_staging`). Na ultima etapa, a tabela externa é criada no dataset de staging
 (`dataset_id_staging.table_id`), gerando um link entre os dados brutos armazenados no **GCS** e o **BQ**.
 Esse link permite a adição de novos dados no **GCS** sem a necessidade de recriação das tabelas do
-**BQ**, ao fazer o `append` de um novo no **GCS** ele automaticamente já estará disponível para
+**BQ**, ao fazer o `append` de um novo dado no **GCS** ele automaticamente já estará disponível para
 consulta no **BQ**.
 
 Assim a tabela está pronta para ser tratada e padronizada utilizando o DBT. E você aprenderá a fazer
