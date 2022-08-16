@@ -409,6 +409,11 @@ Então vamos incluir esses servidores RPC no diagrama:
 
 ![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-07.png)
 
+### Google Cloud Storage e Google BigQuery
+
+Como esses serviços são gerenciados pela Google, não cabe a nós criar instâncias deles. Então, também
+não fazem parte do diagrama de hospedagem.
+
 ## Comunicação e interações
 
 > Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
