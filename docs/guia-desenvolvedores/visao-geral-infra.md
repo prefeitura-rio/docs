@@ -405,8 +405,9 @@ somente aos modelos de dados definidos em [queries-rj-escritorio](https://github
 Analogamente, se eu estiver nesse namespace `rj-orgao`, eu terei acesso somente aos modelos de dados
 desse órgão.
 
-> Explicar como as coisas são hospedadas, falar da descentralização, escalabilidade, Kubernetes,
-> repositórios, GitHub Actions, etc.
+Então vamos incluir esses servidores RPC no diagrama:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-07.png)
 
 ## Comunicação e interações
 
