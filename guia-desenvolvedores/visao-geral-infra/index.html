@@ -1014,7 +1014,12 @@ armazenamento:</p>
 <li><strong>Google BigQuery (BQ)</strong>: nossas tabelas serão separadas em dois datasets: o de <strong>staging</strong>, que terá o
    nome no formato <code>dataset_id_staging</code>, contém as tabelas externas geradas a partir dos dados brutos
    hospedados no <strong>GCS</strong>. Já o de <strong>produção</strong>, com nome no formato <code>dataset_id</code>, contém as tabelas
-   nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>.</li>
+   nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>. Vale ressaltar que o <strong>BQ</strong> possui 3 tipos diferentes de tabelas;<ol>
+<li><strong>Tabelas Externas</strong>: Uma tabela externa é uma tabela que funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo <strong>GCS</strong>, <strong>Google Sheets</strong>, <strong>Google Drive</strong>, entre outros. Para mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/external-data-sources">como consultar fontes de dados externas.</a></li>
+<li><strong>Tabelas Nativas</strong>: Uma tabela nativa tem os dados armazenadas diretamente no <strong>BQ</strong>. Essas tabelas são extremamente rápidas, porem possuem apenas um nivel de particionamento com 4 mil partições.</li>
+<li><strong>Views</strong>: Uma view é uma tabela virtual definida por uma consulta SQL. Para mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/views">Como criar visualizações.</a></li>
+</ol>
+</li>
 </ol>
 <p>A primeira etapa realizada pelo pacote <code>basedosdados</code> é o upload dos dados para o <strong>GCS</strong>. Lá, os
 dados serão salvos no bucket do projeto com o seguinte caminho: <code>project_id/dataset_id/table_id/data.csv</code>.</p>
