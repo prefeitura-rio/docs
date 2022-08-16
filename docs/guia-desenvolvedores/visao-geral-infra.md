@@ -265,16 +265,17 @@ a ser dita aqui, vamos em frente.
 > Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
 > falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,
 
-Com os dados prontos para subir para o Datalake, utilizaremos o pacote `basedosdados` (disponivel em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por 2 componentes do Google Cloud;
+Com os dados prontos para subir para o _data lake_, utilizaremos o pacote `basedosdados` (disponivel
+em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por nossos componentes de
+armazenamento:
 
-    1. `Storage`: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas também aceita outros formatos como `parquet` e arquivos compactados.
-    2. `Bigquery`: Super banco de dados do Google. Nossas tabelas seram separadas em 2 tipos de datasets, 
-       - `Staging`: Dataset do tipo `dataset_id_staging`. Contem as tabelas externas geradas a partir dos dados brutos que estão hospedados no `storage`
-       - `Producao`: Dataset do tipo `dataset_id`. Contem as tabelas nativas já tratadas e padronizadas geradas pelo `DBT`
+1. **Google Cloud Storage (GCS)**: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas
+   também aceita outros formatos como `.parquet` e arquivos compactados.
+2. **Google BigQuery (BQ)**: nossas tabelas serão separadas em dois datasets: o de **staging**, que terá o
+   nome no formato `dataset_id_staging`, contém as tabelas externas geradas a partir dos dados brutos
+   hospedados no **GCS**. Já o de **produção**, com nome no formato `dataset_id`, contém as tabelas
+   nativas já tratadas e padronizadas geradas pelo **DBT**.
 
-
-A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o `Storage`....
-
-
+A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o **GCS**....
 
 > tabelas externas, etc.
