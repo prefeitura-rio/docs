@@ -1022,7 +1022,7 @@ dados serão salvos no bucket do projeto com o seguinte caminho: <code>project_i
 e staging (<code>dataset_id_staging</code>). Na ultima etapa, a tabela externa é criada no dataset de staging
 (<code>dataset_id_staging.table_id</code>), gerando um link entre os dados brutos armazenados no <strong>GCS</strong> e o <strong>BQ</strong>.
 Esse link permite a adição de novos dados no <strong>GCS</strong> sem a necessidade de recriação das tabelas do
-<strong>BQ</strong>, ao fazer o <code>append</code> de um novo no <strong>GCS</strong> ele automaticamente já estará disponível para
+<strong>BQ</strong>, ao fazer o <code>append</code> de um novo dado no <strong>GCS</strong> ele automaticamente já estará disponível para
 consulta no <strong>BQ</strong>.</p>
 <p>Assim a tabela está pronta para ser tratada e padronizada utilizando o DBT. E você aprenderá a fazer
 isso em outro guia!</p>
