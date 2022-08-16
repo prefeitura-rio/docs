@@ -414,7 +414,7 @@ desse órgão.
 > falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,
 
 Com os dados prontos para subir para o _data lake_, utilizaremos o pacote `basedosdados` (disponivel
-em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por nossos componentes de
+em Python ou CLI) para orquestrar todo esse processo. Os dados iraõ passar por nossos componentes de
 armazenamento:
 
 1. **Google Cloud Storage (GCS)**: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas
@@ -429,7 +429,7 @@ dados serão salvos no bucket do projeto com o seguinte caminho: `project_id/dat
 
 Uma vez com os dados no **GCS**, são criados os dois datasets no **BQ** - de producão (`dataset_id`)
 e staging (`dataset_id_staging`). Na ultima etapa, a tabela externa é criada no dataset de staging
-(`dataset_id_staging.table_id`), gerando um link entre os dados brutos armazenados no **GCS** e o **BQ**.
+(`dataset_id_staging.table_id`), gerando um link entre os dados brutos armazenados no **GCS** e o **BQ**. Esse link permite a adição de novos dados no **GCS** sem a necessidade de recriação das tabelas do **BQ**, ao fazer o `append` de um novo no **GCS** ele automaticamente já estará disponível para consulta no **BQ**.
 
 Assim a tabela está pronta para ser tratada e padronizada utilizando o DBT. E você aprenderá a fazer
 isso em outro guia!
