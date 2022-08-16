@@ -7,7 +7,10 @@ nav:
       - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
       - Como configurar a conexão do PowerBI com o BigQuery: tutoriais/como-configurar-conexao-powerbi-bigquery.md
     - Guia de desenvolvedores:
+      - Visão geral da infraestrutura: guia-desenvolvedores/visao-geral-infra.md
       - Metadados, padronização e normalização: guia-desenvolvedores/metadados-padronizacao.md
+      - Desenvolvimento de pipelines de dados: guia-desenvolvedores/pipelines.md
+      - Publicando dados com DBT: guia-desenvolvedores/dbt.md
     - Sobre:
       - Contato: contato.md
 
