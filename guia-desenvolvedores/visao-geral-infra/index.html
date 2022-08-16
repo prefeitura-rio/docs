@@ -1,0 +1,1141 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../static/img/logo.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>Visão geral da infraestrutura - Escritório de Dados</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Lato";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../static/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducao-ao-fluxo-de-dados" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Escritório de Dados" class="md-header__button md-logo" aria-label="Escritório de Dados" data-md-component="logo">
+      
+  <img src="../../static/img/logo_header.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Escritório de Dados
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Visão geral da infraestrutura
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4m0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/prefeitura-rio/docs" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    prefeitura-rio/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Escritório de Dados" class="md-nav__button md-logo" aria-label="Escritório de Dados" data-md-component="logo">
+      
+  <img src="../../static/img/logo_header.png" alt="logo">
+
+    </a>
+    Escritório de Dados
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/prefeitura-rio/docs" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    prefeitura-rio/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Olá!
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          Tutoriais
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutoriais" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutoriais
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutoriais/como-acessar-dados/" class="md-nav__link">
+        Como acessar dados no data lake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
+        Como configurar a conexão do PowerBI com o BigQuery
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          Guia de desenvolvedores
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guia de desenvolvedores" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Guia de desenvolvedores
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Visão geral da infraestrutura
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Visão geral da infraestrutura
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introducao-ao-fluxo-de-dados" class="md-nav__link">
+    Introdução ao fluxo de dados
+  </a>
+  
+    <nav class="md-nav" aria-label="Introdução ao fluxo de dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#armazem-de-dados" class="md-nav__link">
+    Armazém de dados
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ingestao" class="md-nav__link">
+    Ingestão
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformacao" class="md-nav__link">
+    Transformação
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacao" class="md-nav__link">
+    Aplicação
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideracoes-finais" class="md-nav__link">
+    Considerações finais
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apresentacao-dos-componentes" class="md-nav__link">
+    Apresentação dos componentes
+  </a>
+  
+    <nav class="md-nav" aria-label="Apresentação dos componentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-chegamos-a-isso" class="md-nav__link">
+    Como chegamos a isso
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extracao-prefect" class="md-nav__link">
+    Extração (Prefect)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformacoes-dbt" class="md-nav__link">
+    Transformações (DBT)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#armazenamento-google-cloud-storage-e-google-bigquery" class="md-nav__link">
+    Armazenamento (Google Cloud Storage e Google BigQuery)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-estao-hospedados" class="md-nav__link">
+    Como estão hospedados
+  </a>
+  
+    <nav class="md-nav" aria-label="Como estão hospedados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefect" class="md-nav__link">
+    Prefect
+  </a>
+  
+    <nav class="md-nav" aria-label="Prefect">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#servidor" class="md-nav__link">
+    Servidor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ambiente-de-execucao" class="md-nav__link">
+    Ambiente de execução
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbt" class="md-nav__link">
+    DBT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#google-cloud-storage-e-google-bigquery" class="md-nav__link">
+    Google Cloud Storage e Google BigQuery
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-e-interacoes" class="md-nav__link">
+    Comunicação e interações
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadados-padronizacao/" class="md-nav__link">
+        Metadados, padronização e normalização
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelines/" class="md-nav__link">
+        Desenvolvimento de pipelines de dados
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dbt/" class="md-nav__link">
+        Publicando dados com DBT
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_4">
+          Sobre
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Sobre" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Sobre
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contato/" class="md-nav__link">
+        Contato
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/guia-desenvolvedores/visao-geral-infra.md" title="Editar esta página" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Visão geral da infraestrutura</h1>
+
+<p>E aí, quer entender melhor nossa infraestrutura de dados, os componentes selecionados, como interagem
+entre si e onde estão hospedados? Então vamos lá! 👨‍💻</p>
+<h2 id="introducao-ao-fluxo-de-dados">Introdução ao fluxo de dados</h2>
+<p>Não há nada extravagante em nosso fluxo de dados, na realidade, ele é tão intuitivo quanto pode ser.
+No entanto, é muito importante entender cada etapa para que seja possível compreender o funcionamento
+da infraestrutura como um todo.</p>
+<p>Então, vamos colocar aqui um diagrama que ajudará a entender por onde o dado transita e no que consistem
+as etapas:</p>
+<p><img alt="Diagrama de etapas de processamento dos dados" src="../../static/img/tutoriais/visao-geral-infra/visao-geral-sem-componentes.jpg" /></p>
+<p>Como estamos falando sobre a infraestrutura de dados, vamos focar única e exclusivamente na parte
+central desse diagrama, ou seja, as três grandes etapas - Ingestão, Transformação e Aplicação - e o
+bloco central, o Armazém de Dados.</p>
+<h3 id="armazem-de-dados">Armazém de dados</h3>
+<p>Como o próprio nome já diz, é o local onde os dados são armazenados. No entanto, não é uma ferramenta
+tão simples quanto o nome faz parecer, dado que é o componente central do fluxo de dados e, portanto,
+deve suportar uma grande variedade de operações, além de uma imensa capacidade de processamento e
+armazenamento, visto que os dados podem ter tamanhos e prioridades diferentes.</p>
+<p>Mais especificamente, uma ferramenta de armazém de dados para nossa infraestrutura deve possuir as
+seguintes funcionalidades:</p>
+<ul>
+<li><strong>Capacidade de armazenamento e processamento "ilimitada"</strong>: não queremos nos preocupar em qual o tamanho do dado
+  que vamos armazenar, nós o queremos e ponto!</li>
+<li><strong>Otimização de processamento via particionamento e correlatos</strong>: para dados de grande volume, é
+  sempre interessante recorrer a mecanismos de particionamento e semelhantes para otimizar o processamento
+  e, consequentemente, os custos de uma consulta.</li>
+<li><strong>Suporte a SQL</strong>: nós queremos usar a linguagem de consulta mais popular e acessível até o momento.</li>
+<li><strong>Funções de análise geoespacial</strong>: por se tratar de dados da cidade são, em maioria, geolocalizados.
+  Assim, ter funcionalidades de análise geoespacial é fundamental.</li>
+<li><strong>Governança simplificada</strong>: ter uma interface amigável para gerir o armazém de dados é fundamental.</li>
+<li><strong>Conexões com plataformas de desenvolvimento de dashboards</strong>: não adianta ter dados se não conseguimos
+  visualizá-los ou usá-los.</li>
+<li><strong>Possibilidade de disponibilizar os dados publicamente</strong>: afinal, queremos que a comunidade acesse!</li>
+</ul>
+<h3 id="ingestao">Ingestão</h3>
+<p>A ingestão é o ato de obter um dado e trazê-lo para seu ambiente. Ela consiste em duas subetapas: a
+extração e o armazenamento.</p>
+<p>A <strong>Extração</strong> é ato de adquirir o dado a partir de alguma fonte, como um banco de dados, uma API ou
+um arquivo qualquer. A partir daí, o <strong>Armazenamento</strong> é a etapa de salvar esse dado em algum lugar
+como, por exemplo, um computador ou um armazém de dados.</p>
+<p>Se você parar para pensar, coisas rotineiras podem ser enxergadas como ingestão: ao consultar seu
+contracheque, por exemplo, você está realizando uma extração, ao requerer os dados no website de
+consulta, e um armazenamento, ao baixá-lo para seu computador.</p>
+<h3 id="transformacao">Transformação</h3>
+<p>A transformação de dados é um conceito extremamente abrangente, então sua definição deve ser suficientemente
+ampla: modificar um dado buscando um objetivo. Então, qualquer modificação no dado original é considerada
+uma transformação. Seguindo o exemplo do contracheque, uma possível transformação seria a conversão de
+moeda, caso você precisasse de um contracheque em dólar.</p>
+<p>Note que, após a transformação, uma nova etapa de armazenamento é realizada. Porém, esse dado transformado
+poderá sobrescrever o original, ou seja, o dado original não será mais acessível, ou coexistir com ele.</p>
+<h3 id="aplicacao">Aplicação</h3>
+<p>Essa é a última etapa de um fluxo de dados. Ela consiste em utilizar o dado para algum fim. Aqui se
+encontram coisas como dashboards, aplicativos, chat bots e outros sendo, então, um pouco fora do
+escopo desse guia.</p>
+<p>Mas seguindo nosso exemplo do contracheque, uma possível aplicação seria a utilização dos dados do
+seu contracheque para a declaração do IRPF.</p>
+<h3 id="consideracoes-finais">Considerações finais</h3>
+<p>Como é possível notar pelo próprio diagrama, é possível iterar nesse fluxo indefinidamente. Então,
+grandes projetos de dados não usam somente um dado contido no armazém, mas múltiplos, fazendo transformações
+para uní-los e obter informações mais ricas. Também, as transformações podem ocorrer indefinidamente,
+até que se obtenha o resultado esperado.</p>
+<h2 id="apresentacao-dos-componentes">Apresentação dos componentes</h2>
+<p>Vamos incrementar aquele diagrama!</p>
+<p><img alt="Diagrama de componentes" src="../../static/img/tutoriais/visao-geral-infra/visao-geral-componentes.jpg" /></p>
+<p>Aqui temos os componentes que compõem a infraestrutura de dados. Na parte de "Extração de dados",
+temos o <a href="https://prefect.io/">Prefect</a> para realizar a extração e <a href="https://cloud.google.com/storage/">Google Cloud Storage</a>
+<a href="https://cloud.google.com/bigquery/">Google BigQuery</a> para armazenamento. Logo mais, você irá entender
+o que cada um faz e como foram selecionados.</p>
+<p>Já na parte de "Transformações", temos ali o <a href="https://www.getdbt.com/">DBT</a> para realizar as transformações
+e novamente o <a href="https://cloud.google.com/bigquery/">Google BigQuery</a> para armazenamento.</p>
+<h3 id="como-chegamos-a-isso">Como chegamos a isso</h3>
+<p>Muitos pontos foram levantados durante o levantamento das ferramentas. Dentre eles, selecionamos um
+conjunto dos que julgamos mais adequados para nossa infraestrutura que, de forma simplificada, é o
+seguinte:</p>
+<ul>
+<li><strong>Escalonamento</strong>: todos os componentes devem funcionar bem para cargas de trabalho
+  pequenas, mas devem ter a possibilidade de suportar cargas de trabalho enormes.</li>
+<li><strong>Liberdade</strong>: como estamos hospedando nossos serviços em nuvem, gostaríamos de ter a possibilidade
+  de transitar entre provedores com facilidade. Por isso, sempre que razoável, optamos por usar
+  software livre.</li>
+<li><strong>Possibilidades</strong>: poder usufruir por completo de uma linguagem de programação, como Python, ou
+  de consulta, como SQL, permite fazer trabalhos extremamente complexos e replicáveis.</li>
+<li><strong>Descentralização</strong>: hospedar cargas de trabalho de todos os órgãos da prefeitura em servidores
+  separados permite um maior controle sobre os custos de cada órgão e dificulta condições em que
+  cargas de trabalho de um órgão poderia onerar outro.</li>
+<li><strong>Simplicidade</strong>: menos é mais. Um sistema com poucos componentes é mais fácil de manter e entender.</li>
+</ul>
+<p>Claro que esses itens são muito abstratos e, sabendo disso, construímos um instrumento de avaliação
+de serviços com diversos fatores quantificáveis e, a partir dele, conduzimos uma consulta pública
+com vários provedores de serviços em nuvem, para que propusessem soluções para nosso problema.</p>
+<p>Após a análise, os componentes escolhidos foram os explicitados no diagrama acima. Agora vamos conversar
+sobre cada um deles e explicar como eles funcionam.</p>
+<h3 id="extracao-prefect">Extração (Prefect)</h3>
+<p>Como mencionado anteriormente, para realizar a extração de dados, a ferramenta selecionada foi o
+<a href="https://prefect.io/">Prefect</a>. Essa é uma ferramenta de código aberto, que permite a automação
+de quaisquer tarefas através de sua API, em Python.</p>
+<p>Por possuir uma interface muito simples de usar, é extremamente fácil modificar seu código para
+usufruir de suas funcionalidades. Mas, para nós, além da linda interface que ele possui, os dois
+itens que mais foram convidativos para nós foram:</p>
+<ul>
+<li><strong>Confiança</strong>: é muito fácil lidar com falhas no Prefect, você não vai quebrar todo seu fluxo
+  de dados se algo ruim acontecer. Além disso, em nossos testes preliminares, conseguimos executar
+  mais de 10 mil pipelines por dia, consumindo poucos recursos, sem problemas.</li>
+<li><strong>Modelo híbrido de execução</strong>: esse deve ser o item mais apelativo para todos que aderem o Prefect.
+  O <a href="https://www.prefect.io/why-prefect/hybrid-model/">modelo híbrido</a> dele permite que você tenha o servidor
+  hospedado em um local, seu código em outro e o ambiente de execução em um terceiro. Existe uma clara
+  separação de papeis que garante a segurança da execução do código e, de tabela, uma completa descentralização:
+  podemos executar pipelines de um órgão em um servidor, outro em outro e, ao mesmo tempo, conseguir
+  enxergar todas elas em uma única interface.</li>
+</ul>
+<p>E quando eu falo sobre facilidade de uso, eu realmente quero dizer que é muito fácil. Olha só esse
+exemplo: suponha que você tenha um código de extração de dados em Python puro, dá só uma olhada em
+como portá-lo para o Prefect.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python puro</label><label for="__tabbed_1_2">Prefect</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="k">def</span> <span class="nf">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dados.csv&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://url.da.api.que.voce.quer.extrair&#39;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">Flow</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dados.csv&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://url.da.api.que.voce.quer.extrair&#39;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Bom demais, né?</p>
+<h3 id="transformacoes-dbt">Transformações (DBT)</h3>
+<p>Aqui é onde a galera do SQL se empolga. O <a href="https://getdbt.com">DBT</a> é uma ferramenta de código aberto,
+que permite a definição de modelos de dados em linguagem SQL. Então, em outras palavras, você pode
+escrever uma query e, usando o DBT, materializar os resultados dessa query em diferentes formas e,
+o que é mais legal, em diferentes plataformas.</p>
+<p>Assim, com a mesma query, você pode criar tabelas e <em>views</em> em diferentes plataformas. E não só isso,
+as tabelas podem ser materializadas de maneiras diferentes, como, por exemplo, de forma incremental,
+que consiste em adicionar novas linhas ao final de uma tabela.</p>
+<p>Além de tudo, você pode parametrizar suas queries para que elas sejam executadas com diferentes
+valores de entrada. Não bastante, você pode especificar configurações de particionamento, dentre
+outras, diretamente no seu modelo de dados. Dá uma olhada só nesse exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"></span>
+<span class="w">    </span><span class="n">config</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">partition_by</span><span class="o">=</span><span class="err">{</span><span class="w"></span>
+<span class="w">            </span><span class="ss">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;data_particao&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="ss">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;date&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="ss">&quot;granularity&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;month&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
+<span class="err">}}</span><span class="w"></span>
+
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">datario</span><span class="p">.</span><span class="n">dataset_id</span><span class="p">.</span><span class="n">table_id</span><span class="o">`</span><span class="w"></span>
+</code></pre></div>
+<p>Pode relaxar, você não precisa entender tudo desse modelo ainda, teremos guias para isso. Mas, apesar
+de curto, tem muita coisa rolando nesse modelo aí! Estamos especificando para ele que deve se materializar
+em formato de tabela nativa com o <code>materialized='table'</code>, e estamos especificando que deve ser particionado
+por data na coluna <code>data_particao</code> com uma granularidade mensal. Pouquíssimas linhas e simplesmente
+funciona!</p>
+<h3 id="armazenamento-google-cloud-storage-e-google-bigquery">Armazenamento (Google Cloud Storage e Google BigQuery)</h3>
+<p>Eu sei o que você vai dizer:</p>
+<blockquote>
+<p>Mas você disse "sempre que razoável, optamos por usar software livre"</p>
+</blockquote>
+<p>Sim, exatamente, sempre que razoável. Porém, no caso do armazenamento, principalmente, as ferramentas
+apresentadas pela Google atenderam todos os requisitos que havíamos levantado, além de reduzirem o
+número de componentes para dois ao invés de múltiplos open-source que teríamos que manter em conjunto.
+Ok, vamos voltar ao que viemos fazer: apresentar os componentes.</p>
+<ul>
+<li>
+<p><strong>Google Cloud Storage</strong> é um serviço de armazenamento de objetos. Então, através de uma API, é
+  possível fazer upload de qualquer tipo de arquivo, configurar permissões para ele e, caso tenha acesso,
+  baixá-lo novamente. Além disso, você pode utilizá-lo como um <em>data lake</em> em sua definição original -
+  você pode armazenar arquivos na mesma estrutura de partições Hive e obter seus dados particionados
+  para consulta. Você, então, pode consultar seus dados com SQL no console do BigQuery.</p>
+</li>
+<li>
+<p><strong>Google BigQuery</strong> é um serviço de <em>data warehouse serverless</em>. Ele permite análises escalonáveis
+  em petabytes (mil terabytes) de dados. Como mencionado anteriormente, você pode consumir dados de
+  <em>data lakes</em> hospedados no Google Cloud Storage mas, ao mesmo tempo, pode criar tabelas nativas,
+  que possuem performance muito superior.</p>
+</li>
+</ul>
+<p>E aqui, então, finalizamos a apresentação de nossos componentes. Mas calma, ainda tem muita coisa
+a ser dita aqui, vamos em frente.</p>
+<h2 id="como-estao-hospedados">Como estão hospedados</h2>
+<p>Agora que você conheceu os componentes, vamos entender onde eles estão. A medida que essa seção avança,
+iremos criar um diagrama e incrementá-lo aos poucos, até chegar na visão completa. Você vai notar que
+as partes inseridas no diagrama possuem a cor azul, assim fica mais fácil notar a diferença.</p>
+<h3 id="prefect">Prefect</h3>
+<p>Devido à separação de papéis nativa do Prefect, vamos separar essa subseção em três partes:</p>
+<ul>
+<li>O servidor: como estamos hospedando nosso back-end do Prefect, será mostrado onde ele está e
+  adaptações que fizemos para seu funcionamento seguro.</li>
+<li>Os códigos: mostraremos onde ele fica (todos podem acessá-lo!)</li>
+<li>Os ambientes de execução: se você chegou a ler sobre o modelo híbrido do Prefect, sabe que ele
+  depende de <em>agents</em> para a execução de pipelines. Se você ainda não sabe do que se trata, tudo
+  certo, vamos abordar essa parte aqui também.</li>
+</ul>
+<h4 id="servidor">Servidor</h4>
+<p>Esse subcomponente é o responsável por saber onde o código mora, suas versões, agendar execuções,
+armazenar histórico, exibir logs e relatórios sobre o funcionamento do Prefect como um todo. Porém,
+em sua versão open-source, nativamente, ele não possui qualquer tipo de camada de autenticação para
+realizar qualquer uma dessas operações (mas vamos abordar isso em breve aqui).</p>
+<p>Então, para hospedá-lo de forma que pudéssemos ter redundância e facilidade para escalar, optamos
+por usar um cluster Kubernetes. Não é do escopo desse guia explicar o que é um cluster Kubernetes,
+mas, em poucas palavras e muito simplificadamente, pode ser visto como um grupo de máquinas que, a
+partir de um controlador (em software) é capaz de hospedar e gerenciar vários containers. Vamos, então,
+começar nosso diagrama:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-01.png" /></p>
+<p>Simples até demais, não é? Sim, de fato. Poderíamos até nos contentar em mostrar isso, mas faltaria
+muita informação para compreender como as coisas se comunicam. Então, vamos continuar. Para não exagerar
+nos detalhes, podemos considerar o cluster como uma única coisa, mas não podemos esquecer que ele é
+composto de vários computadores e que, necessariamente, esse computadores têm que estar conectados a
+uma rede (isso permite que eles se comuniquem entre si e com a internet). Então, vamos incluir essa
+parte do diagrama:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-02.png" /></p>
+<p>Sem problemas até aqui, vamos lá: um conceito que também é utilizado em clusters Kubernetes é o de
+<em>namespace</em>: um espaço de nomes que separa ambientes em um cluster. Claro, coisas hospedadas em um
+namespace podem ser acessadas por outros namespaces, mas, devido a essa hierarquia, nomes iguais não
+irão conflitar entre si.</p>
+<p>Antes de incluir no diagrama, vamos a um exemplo: suponha que você deseje hospedar, em um mesmo cluster,
+dois servidores (que podem ser coisas completamente distintas). Se você colocar o nome <code>servidor</code> em um
+e quiser usar <code>servidor</code> no outro, como ele poderia distinguir ambos? A resposta para isso é o <em>namespace</em>:
+basta você hospedar cada um em um namespace diferente. Assim, quando você perguntar quem é <code>servidor</code>,
+você terá que informar o namespace e, assim, não haverá conflito. Claro que há outras possibilidades
+a serem exploradas com namespaces, mas vamos manter isso para o momento e incluí-lo no diagrama:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-03.png" /></p>
+<p>Pode não parecer fazer diferença agora, mas vai fazer sentido mais pra frente, eu juro.</p>
+<h4 id="codigo">Código</h4>
+<p>Essa parte é um pouco mais leve, vamos lá: o código de todas as nossas pipelines está versionado,
+publicamente, no GitHub. Você pode acessá-lo em <a href="https://github.com/prefeitura-rio/pipelines">https://github.com/prefeitura-rio/pipelines</a>.
+Porém, para armazenamento que o Prefect usa, o código é hospedado no Google Cloud Storage.</p>
+<p>Então, o fluxo de desenvolvimento de código ocorre todo no GitHub e, quando alguma alteração está
+aprovada para ser publicada, ela automaticamente é salva no Google Cloud Storage, que os ambientes
+de execução do Prefect usam para buscar o código. Vale ressaltar que quem informa ao ambiente de
+execução onde o código se encontra é o servidor do Prefect. Porém, ele só sabe onde o código está,
+não tem acesso a ele. Incluindo isso no diagrama, vamos lá:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-04.png" /></p>
+<p>Está ficando complexo! Note que ainda não abordamos como acontece a comunicação entre o GitHub e o
+servidor do Prefect, mas estamos chegando lá.</p>
+<h4 id="ambiente-de-execucao">Ambiente de execução</h4>
+<p>O ambiente é gerido por <em>agents</em>, responsáveis por "perguntar" ao servidor do Prefect se há alguma pipeline que precisa
+ser executada e, se houver, lançar uma execução para ela. Porém, nem toda execução pode ser lançada
+por qualquer agente. A separação, então, ocorre através de <em>labels</em>: cada agente pode ser associado a
+um ou mais labels, que são usados para identificar qual pipelines (também associadas a labels) ele
+pode executar.</p>
+<p>Entendido isso, vamos entender como ele se comunica com o servidor do Prefect. Lembra que comentei
+ali em cima que a versão open-source do servidor do Prefect não possui camada de segurança nativa?
+Pois é, não queremos que isso fique exposto, certo? Então, criamos uma camada de segurança para ele.
+Não vou me aprofundar muito nesse assunto, pois não é o escopo do guia, então vou incluí-la no diagrama
+e corrigí-lo com relação a comunicação do GitHub para que possamos continuar:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-05.png" /></p>
+<p>A ideia dessa mudança do diagrama é só entender que existe uma forma segura de comunicar com o servidor
+do Prefect através da internet e que, consequentemente, todas as interações com o servidor do Prefect
+são intermediadas por um servidor de autenticação.</p>
+<blockquote>
+<p>Mas o que isso tem a ver com o agente do Prefect?</p>
+</blockquote>
+<p>Boa! Lembra que o agente do Prefect é o responsável por "perguntar" ao servidor do Prefect se há alguma
+pipeline que precisa ser executada? Então, para isso, ele precisa também interagir com o servidor de
+autenticação.</p>
+<p>Mas falamos muito e até agora não falamos onde esses agentes estão hospedados. E aí é que vem a parte
+legal: em qualquer lugar! Como temos uma forma segura de comunicação com o Prefect através da internet,
+desde que os agentes tenham acesso à internet, eles podem estar em qualquer lugar! Então, para fins de
+exemplificação, vamos incluir nesse esquema aí os seguintes agentes:</p>
+<ul>
+<li><code>rj-escritorio</code>: um agente nosso, do Escritório de Dados. Ele vai ficar hospedado no mesmo cluster
+  do servidor do Prefect, porém em um namespace diferente (você vai logo entender o motivo).</li>
+<li><code>rj-escritorio-dev</code>: outro agente do Escritório de Dados, mas para desenvolvimento. Isso significa
+  que, caso tenhamos desenvolvido uma pipeline que está estável, mas ainda queremos testá-la bastante
+  antes de deixá-la definitiva, ela pode ser executada com esse agente. Ele também vai ficar hospedado
+  em um namespace exclusivo.</li>
+<li><code>rj-orgao</code>: um agente de um órgão qualquer da prefeitura. Ele vai ficar hospedado em um outro cluster
+  Kubernetes, (nesse cenário) pertencente a outro órgão. Isso permite uma clara divisão de custos com
+  infraestrutura, já que quem arcará com os custos das execuções de pipelines do órgão é o próprio órgão.</li>
+</ul>
+<p>Incluindo no diagrama:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-06.png" /></p>
+<h3 id="dbt">DBT</h3>
+<p>A hospedagem do DBT é razoavelmente simples. O modo que utilizamos para hospedá-lo é através de um
+servidor RPC, que contém os modelos de dados definidos e credenciais de acesso à plataforma onde
+ele irá operar. Então, para materializar os modelos de dados, é necessário pedir ao servidor RPC,
+através das pipelines do Prefect, que fará essa tarefa e informará se foi bem sucedida ou não.</p>
+<p>Os modelos de dados estão definidos em repositórios do GitHub, um para cada órgão. Os nomes dos
+repositórios seguem o padrão <code>queries-rj-&lt;nome do órgão&gt;</code>. Então, por exemplo, o repositório
+<a href="https://github.com/prefeitura-rio/queries-rj-escritorio">queries-rj-escritorio</a> contém os modelos
+de dados do órgão Escritório de Dados.</p>
+<p>Além desses repositórios, existe um repositório <a href="https://github.com/prefeitura-rio/queries-datario">queries-datario</a>,
+que define os modelos de dados que serão publicados no <a href="https://www.data.rio">data.rio</a>.</p>
+<p>O que acontece é que, quando são realizadas alterações nesses modelos de dados, uma instância atualizada
+do servidor RPC é criada exatamente no mesmo cluster e namespace onde o agente do Prefect correspondente
+está hospedado. Então, por exemplo, para o repositório <a href="https://github.com/prefeitura-rio/queries-rj-escritorio">queries-rj-escritorio</a>,
+será criado um servidor RPC atualizado para os namespaces <code>rj-escritorio</code> e <code>rj-escritorio-dev</code>, já
+mostrados acima.</p>
+<p>E é aqui que o conceito de namespace fica mais relevante, olha só:</p>
+<ul>
+<li>Para materializar um modelo de dados, as pipelines precisam solicitar ao servidor RPC do DBT</li>
+<li>As pipelines são executadas no mesmo namespace onde o agente do Prefect está hospedado</li>
+<li>O servidor RPC do DBT é criado para cada namespace</li>
+</ul>
+<p>Então, se eu estiver no namespace <code>rj-escritorio</code> e perguntar pelo servidor RPC do DBT, eu terei acesso
+somente aos modelos de dados definidos em <a href="https://github.com/prefeitura-rio/queries-rj-escritorio">queries-rj-escritorio</a>.
+Analogamente, se eu estiver nesse namespace <code>rj-orgao</code>, eu terei acesso somente aos modelos de dados
+desse órgão.</p>
+<p>Então vamos incluir esses servidores RPC no diagrama:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-07.png" /></p>
+<h3 id="google-cloud-storage-e-google-bigquery">Google Cloud Storage e Google BigQuery</h3>
+<p>Como esses serviços são gerenciados pela Google, não cabe a nós criar instâncias deles. Então, também
+não fazem parte do diagrama de hospedagem.</p>
+<p>Assim, nosso diagrama final fica assim:</p>
+<p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-08.png" /></p>
+<h2 id="comunicacao-e-interacoes">Comunicação e interações</h2>
+<blockquote>
+<p>Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
+falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,</p>
+</blockquote>
+<p>Com os dados prontos para subir para o <em>data lake</em>, utilizaremos o pacote <code>basedosdados</code> (disponivel
+em Python ou CLI) para orquestrar todo esse processo. Os dados irão passar por nossos componentes de
+armazenamento:</p>
+<ol>
+<li><strong>Google Cloud Storage (GCS)</strong>: local onde serão armazenados os arquivos brutos, geralmente <code>.csv</code>, mas
+   também aceita outros formatos como <code>.parquet</code> e arquivos compactados.</li>
+<li><strong>Google BigQuery (BQ)</strong>: nossas tabelas serão separadas em dois datasets: o de <strong>staging</strong>, que terá o
+   nome no formato <code>dataset_id_staging</code>, contém as tabelas externas geradas a partir dos dados brutos
+   hospedados no <strong>GCS</strong>. Já o de <strong>produção</strong>, com nome no formato <code>dataset_id</code>, contém as tabelas
+   nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>.</li>
+</ol>
+<p>A primeira etapa realizada pelo pacote <code>basedosdados</code> é o upload dos dados para o <strong>GCS</strong>. Lá, os
+dados serão salvos no bucket do projeto com o seguinte caminho: <code>project_id/dataset_id/table_id/data.csv</code>.</p>
+<p>Uma vez com os dados no <strong>GCS</strong>, são criados os dois datasets no <strong>BQ</strong> - de producão (<code>dataset_id</code>)
+e staging (<code>dataset_id_staging</code>). Na ultima etapa, a tabela externa é criada no dataset de staging
+(<code>dataset_id_staging.table_id</code>), gerando um link entre os dados brutos armazenados no <strong>GCS</strong> e o <strong>BQ</strong>.
+Esse link permite a adição de novos dados no <strong>GCS</strong> sem a necessidade de recriação das tabelas do
+<strong>BQ</strong>, ao fazer o <code>append</code> de um novo no <strong>GCS</strong> ele automaticamente já estará disponível para
+consulta no <strong>BQ</strong>.</p>
+<p>Assim a tabela está pronta para ser tratada e padronizada utilizando o DBT. E você aprenderá a fazer
+isso em outro guia!</p>
+
+              
+            </article>
+            
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Voltar ao topo
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
+      
+        
+        <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Como configurar a conexão do PowerBI com o BigQuery" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Como configurar a conexão do PowerBI com o BigQuery
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../metadados-padronizacao/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Metadados, padronização e normalização" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Próximo
+              </span>
+              Metadados, padronização e normalização
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dados_rio" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/Xx8Y6mYaq2" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/prefeitura-rio" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.sections", "navigation.top", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.config.lang": "pt", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Buscar", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version.title": "Selecione a vers\u00e3o"}, "version": 2.0}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+    
+  </body>
+</html>

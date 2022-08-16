@@ -13,7 +13,7 @@
     
     
       
-        <title>Como configurar a conexão do PowerBI com o BigQuery - Escritório de Dados</title>
+        <title>Publicando dados com DBT - Escritório de Dados</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#restricoes-e-premissas" class="md-skip">
+        <a href="#o-que-e-o-dbt-e-para-que-serve" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Como configurar a conexão do PowerBI com o BigQuery
+              Publicando dados com DBT
             
           </span>
         </div>
@@ -246,14 +246,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
       
       
       
@@ -276,7 +274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../como-acessar-dados/" class="md-nav__link">
+      <a href="../../tutoriais/como-acessar-dados/" class="md-nav__link">
         Como acessar dados no data lake
       </a>
     </li>
@@ -288,62 +286,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Como configurar a conexão do PowerBI com o BigQuery
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
         Como configurar a conexão do PowerBI com o BigQuery
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Índice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#restricoes-e-premissas" class="md-nav__link">
-    Restrições e premissas
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configurando-as-variaveis-de-ambiente" class="md-nav__link">
-    Configurando as variáveis de ambiente
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#observacoes-finais" class="md-nav__link">
-    Observações finais
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -360,12 +307,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
       
       
       
@@ -388,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guia-desenvolvedores/visao-geral-infra/" class="md-nav__link">
+      <a href="../visao-geral-infra/" class="md-nav__link">
         Visão geral da infraestrutura
       </a>
     </li>
@@ -402,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guia-desenvolvedores/metadados-padronizacao/" class="md-nav__link">
+      <a href="../metadados-padronizacao/" class="md-nav__link">
         Metadados, padronização e normalização
       </a>
     </li>
@@ -416,7 +365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guia-desenvolvedores/pipelines/" class="md-nav__link">
+      <a href="../pipelines/" class="md-nav__link">
         Desenvolvimento de pipelines de dados
       </a>
     </li>
@@ -428,11 +377,69 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../guia-desenvolvedores/dbt/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Publicando dados com DBT
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Publicando dados com DBT
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-o-dbt-e-para-que-serve" class="md-nav__link">
+    O que é o DBT e para que serve?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escrevendo-seu-primeiro-modelo-dbt" class="md-nav__link">
+    Escrevendo seu primeiro modelo DBT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parametrizando-queries" class="md-nav__link">
+    Parametrizando queries
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrando-com-as-pipelines-do-prefect" class="md-nav__link">
+    Integrando com as pipelines do Prefect
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -510,42 +517,18 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/tutoriais/como-configurar-conexao-powerbi-bigquery.md" title="Editar esta página" class="md-content__button md-icon">
+  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/guia-desenvolvedores/dbt.md" title="Editar esta página" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Como configurar a conexão do PowerBI com o BigQuery</h1>
+  <h1>Publicando dados com DBT</h1>
 
-<p>Tendo problemas em se conectar ao BigQuery via PowerBI? Vamos tentar ajudar!</p>
-<h2 id="restricoes-e-premissas">Restrições e premissas</h2>
-<p>Esse guia contempla somente o caso onde o usuário está tentando se conectar a partir da rede de computadores da Prefeitura do Rio. Se esse não for o seu caso, mas ainda estiver com problemas, <a href="/contato"><strong>entre em contato conosco</strong></a>, será um prazer te ajudar.</p>
-<p>Também, o guia foi focado no sistema operacional Windows. Caso precise da descrição desses passos para outros sistemas operacionais, <a href="https://iplanrio.prefeitura.rio/"><strong>entre em contato com a IPLANRIO</strong></a>, que desenvolveu essa solução.</p>
-<h2 id="configurando-as-variaveis-de-ambiente">Configurando as variáveis de ambiente</h2>
-<p>Os passos necessários são os seguintes:</p>
-<ul>
-<li>Clicar na lupa da barra de tarefas</li>
-<li>Buscar por "Environment" ou "editar as variáveis de ambiente do sistema" e clicar no ícone que aparecer</li>
-<li>Clicar em "Novo" na seção da janela descrita como "Variáveis de usuário para..."</li>
-<li>Adicionar as seguintes variáveis:</li>
-</ul>
-<div class="highlight"><pre><span></span><code> - Nome da variável: http_proxy
-   Valor da variável: http://proxy.rio.rj.gov.br:8080
-
- - Nome da variável: https_proxy
-   Valor da variável: http://proxy.rio.rj.gov.br:8080
-</code></pre></div>
-<ul>
-<li>Atente-se para eventuais erros de digitação!</li>
-</ul>
-<p>Ao final, a tela deverá se assemelhar à seguinte:</p>
-<p><img alt="Tela de configuração de variáveis de ambiente" src="../../static/img/tutoriais/powerbi-bigquery.png" /></p>
-<h2 id="observacoes-finais">Observações finais</h2>
-<p>As variáveis atribuídas via Domínio serão identificadas na seção "Variáveis do sistema", que abrangerá
-qualquer usuário da máquina caso ela seja compartilhada. Caso a máquina que não esteja no domínio RIO
-também seja compartilhada, as variáveis também deverão ser criadas manualmente na seção "Variáveis do
-sistema" e não em "Variáveis de usuário".</p>
+<h2 id="o-que-e-o-dbt-e-para-que-serve">O que é o DBT e para que serve?</h2>
+<h2 id="escrevendo-seu-primeiro-modelo-dbt">Escrevendo seu primeiro modelo DBT</h2>
+<h2 id="parametrizando-queries">Parametrizando queries</h2>
+<h2 id="integrando-com-as-pipelines-do-prefect">Integrando com as pipelines do Prefect</h2>
 
               
             </article>
@@ -568,7 +551,7 @@ sistema" e não em "Variáveis de usuário".</p>
     <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
       
         
-        <a href="../como-acessar-dados/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Como acessar dados no data lake" rel="prev">
+        <a href="../pipelines/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Desenvolvimento de pipelines de dados" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -577,20 +560,20 @@ sistema" e não em "Variáveis de usuário".</p>
               <span class="md-footer__direction">
                 Anterior
               </span>
-              Como acessar dados no data lake
+              Desenvolvimento de pipelines de dados
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../guia-desenvolvedores/visao-geral-infra/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Visão geral da infraestrutura" rel="next">
+        <a href="../../contato/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Contato" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Próximo
               </span>
-              Visão geral da infraestrutura
+              Contato
             </div>
           </div>
           <div class="md-footer__button md-icon">
