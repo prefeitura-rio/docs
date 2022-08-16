@@ -218,7 +218,11 @@ Com os dados prontos para subir para o Datalake, utilizaremos o pacote `basedosd
        - `Producao`: Dataset do tipo `dataset_id`. Contem as tabelas nativas já tratadas e padronizadas geradas pelo `DBT`
 
 
-A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o `Storage`....
+A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o `Storage`, os dados serão salvos no bucket do projeto com o seguinte caminho: `project_id/dataset_id/table_id/data.csv`. 
+
+Uma vez com os dados no `Storage`, são criados os dois datasets no `Bigquery`, de producão (`dataset_id`) e staging (`dataset_id_staging`). Na ultima etapa a tabela externa é criada no dataset de staging (`dataset_id_staging.table_id`), gerando um link entre os dados brutos armazenados no `Storage` e o `Bigquery`. 
+
+Assim a tabela está pronta para ser tratada e padronizada utilizando o `DBT`
 
 
 
