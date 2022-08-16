@@ -257,6 +257,154 @@ a ser dita aqui, vamos em frente.
 
 ## Como estão hospedados
 
+Agora que você conheceu os componentes, vamos entender onde eles estão. A medida que essa seção avança,
+iremos criar um diagrama e incrementá-lo aos poucos, até chegar na visão completa.
+
+### Prefect
+
+Devido à separação de papéis nativa do Prefect, vamos separar essa subseção em três partes:
+
+- O servidor: como estamos hospedando nosso back-end do Prefect, será mostrado onde ele está e
+  adaptações que fizemos para seu funcionamento seguro.
+- Os códigos: mostraremos onde ele fica (todos podem acessá-lo!)
+- Os ambientes de execução: se você chegou a ler sobre o modelo híbrido do Prefect, sabe que ele
+  depende de _agents_ para a execução de pipelines. Se você ainda não sabe do que se trata, tudo
+  certo, vamos abordar essa parte aqui também.
+
+#### Servidor
+
+Esse subcomponente é o responsável por saber onde o código mora, suas versões, agendar execuções,
+armazenar histórico, exibir logs e relatórios sobre o funcionamento do Prefect como um todo. Porém,
+em sua versão open-source, nativamente, ele não possui qualquer tipo de camada de autenticação para
+realizar qualquer uma dessas operações (mas vamos abordar isso em breve aqui).
+
+Então, para hospedá-lo de forma que pudéssemos ter redundância e facilidade para escalar, optamos
+por usar um cluster Kubernetes. Não é do escopo desse guia explicar o que é um cluster Kubernetes,
+mas, em poucas palavras e muito simplificadamente, pode ser visto como um grupo de máquinas que, a
+partir de um controlador (em software) é capaz de hospedar e gerenciar vários containers. Vamos, então,
+começar nosso diagrama:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-01.png)
+
+Simples até demais, não é? Sim, de fato. Poderíamos até nos contentar em mostrar isso, mas faltaria
+muita informação para compreender como as coisas se comunicam. Então, vamos continuar. Para não exagerar
+nos detalhes, podemos considerar o cluster como uma única coisa, mas não podemos esquecer que ele é
+composto de vários computadores e que, necessariamente, esse computadores têm que estar conectados a
+uma rede (isso permite que eles se comuniquem entre si e com a internet). Então, vamos incluir essa
+parte do diagrama:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-02.png)
+
+Sem problemas até aqui, vamos lá: um conceito que também é utilizado em clusters Kubernetes é o de
+_namespace_: um espaço de nomes que separa ambientes em um cluster. Claro, coisas hospedadas em um
+namespace podem ser acessadas por outros namespaces, mas, devido a essa hierarquia, nomes iguais não
+irão conflitar entre si.
+
+Antes de incluir no diagrama, vamos a um exemplo: suponha que você deseje hospedar, em um mesmo cluster,
+dois servidores (que podem ser coisas completamente distintas). Se você colocar o nome `servidor` em um
+e quiser usar `servidor` no outro, como ele poderia distinguir ambos? A resposta para isso é o _namespace_:
+basta você hospedar cada um em um namespace diferente. Assim, quando você perguntar quem é `servidor`,
+você terá que informar o namespace e, assim, não haverá conflito. Claro que há outras possibilidades
+a serem exploradas com namespaces, mas vamos manter isso para o momento e incluí-lo no diagrama:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-03.png)
+
+Pode não parecer fazer diferença agora, mas vai fazer sentido mais pra frente, eu juro.
+
+#### Código
+
+Essa parte é um pouco mais leve, vamos lá: o código de todas as nossas pipelines está versionado,
+publicamente, no GitHub. Você pode acessá-lo em [https://github.com/prefeitura-rio/pipelines](https://github.com/prefeitura-rio/pipelines).
+Porém, para armazenamento que o Prefect usa, o código é hospedado no Google Cloud Storage.
+
+Então, o fluxo de desenvolvimento de código ocorre todo no GitHub e, quando alguma alteração está
+aprovada para ser publicada, ela automaticamente é salva no Google Cloud Storage, que os ambientes
+de execução do Prefect usam para buscar o código. Vale ressaltar que quem informa ao ambiente de
+execução onde o código se encontra é o servidor do Prefect. Porém, ele só sabe onde o código está,
+não tem acesso a ele. Incluindo isso no diagrama, vamos lá:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-04.png)
+
+Está ficando complexo! Note que ainda não abordamos como acontece a comunicação entre o GitHub e o
+servidor do Prefect, mas estamos chegando lá.
+
+#### Ambiente de execução
+
+O ambiente é gerido por _agents_, responsáveis por "perguntar" ao servidor do Prefect se há alguma pipeline que precisa
+ser executada e, se houver, lançar uma execução para ela. Porém, nem toda execução pode ser lançada
+por qualquer agente. A separação, então, ocorre através de _labels_: cada agente pode ser associado a
+um ou mais labels, que são usados para identificar qual pipelines (também associadas a labels) ele
+pode executar.
+
+Entendido isso, vamos entender como ele se comunica com o servidor do Prefect. Lembra que comentei
+ali em cima que a versão open-source do servidor do Prefect não possui camada de segurança nativa?
+Pois é, não queremos que isso fique exposto, certo? Então, criamos uma camada de segurança para ele.
+Não vou me aprofundar muito nesse assunto, pois não é o escopo do guia, então vou incluí-la no diagrama
+e corrigí-lo com relação a comunicação do GitHub para que possamos continuar:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-05.png)
+
+A ideia dessa mudança do diagrama é só entender que existe uma forma segura de comunicar com o servidor
+do Prefect através da internet e que, consequentemente, todas as interações com o servidor do Prefect
+são intermediadas por um servidor de autenticação.
+
+> Mas o que isso tem a ver com o agente do Prefect?
+
+Boa! Lembra que o agente do Prefect é o responsável por "perguntar" ao servidor do Prefect se há alguma
+pipeline que precisa ser executada? Então, para isso, ele precisa também interagir com o servidor de
+autenticação.
+
+Mas falamos muito e até agora não falamos onde esses agentes estão hospedados. E aí é que vem a parte
+legal: em qualquer lugar! Como temos uma forma segura de comunicação com o Prefect através da internet,
+desde que os agentes tenham acesso à internet, eles podem estar em qualquer lugar! Então, para fins de
+exemplificação, vamos incluir nesse esquema aí os seguintes agentes:
+
+- `rj-escritorio`: um agente nosso, do Escritório de Dados. Ele vai ficar hospedado no mesmo cluster
+  do servidor do Prefect, porém em um namespace diferente (você vai logo entender o motivo).
+- `rj-escritorio-dev`: outro agente do Escritório de Dados, mas para desenvolvimento. Isso significa
+  que, caso tenhamos desenvolvido uma pipeline que está estável, mas ainda queremos testá-la bastante
+  antes de deixá-la definitiva, ela pode ser executada com esse agente. Ele também vai ficar hospedado
+  em um namespace exclusivo.
+- `rj-orgao`: um agente de um órgão qualquer da prefeitura. Ele vai ficar hospedado em um outro cluster
+  Kubernetes, (nesse cenário) pertencente a outro órgão. Isso permite uma clara divisão de custos com
+  infraestrutura, já que quem arcará com os custos das execuções de pipelines do órgão é o próprio órgão.
+
+Incluindo no diagrama:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-06.png)
+
+### DBT
+
+A hospedagem do DBT é razoavelmente simples. O modo que utilizamos para hospedá-lo é através de um
+servidor RPC, que contém os modelos de dados definidos e credenciais de acesso à plataforma onde
+ele irá operar. Então, para materializar os modelos de dados, é necessário pedir ao servidor RPC,
+através das pipelines do Prefect, que fará essa tarefa e informará se foi bem sucedida ou não.
+
+Os modelos de dados estão definidos em repositórios do GitHub, um para cada órgão. Os nomes dos
+repositórios seguem o padrão `queries-rj-<nome do órgão>`. Então, por exemplo, o repositório
+[queries-rj-escritorio](https://github.com/prefeitura-rio/queries-rj-escritorio) contém os modelos
+de dados do órgão Escritório de Dados.
+
+Além desses repositórios, existe um repositório [queries-datario](https://github.com/prefeitura-rio/queries-datario),
+que define os modelos de dados que serão publicados no [data.rio](https://www.data.rio).
+
+O que acontece é que, quando são realizadas alterações nesses modelos de dados, uma instância atualizada
+do servidor RPC é criada exatamente no mesmo cluster e namespace onde o agente do Prefect correspondente
+está hospedado. Então, por exemplo, para o repositório [queries-rj-escritorio](https://github.com/prefeitura-rio/queries-rj-escritorio),
+será criado um servidor RPC atualizado para os namespaces `rj-escritorio` e `rj-escritorio-dev`, já
+mostrados acima.
+
+E é aqui que o conceito de namespace fica mais relevante, olha só:
+
+- Para materializar um modelo de dados, as pipelines precisam solicitar ao servidor RPC do DBT
+- As pipelines são executadas no mesmo namespace onde o agente do Prefect está hospedado
+- O servidor RPC do DBT é criado para cada namespace
+
+Então, se eu estiver no namespace `rj-escritorio` e perguntar pelo servidor RPC do DBT, eu terei acesso
+somente aos modelos de dados definidos em [queries-rj-escritorio](https://github.com/prefeitura-rio/queries-rj-escritorio).
+Analogamente, se eu estiver nesse namespace `rj-orgao`, eu terei acesso somente aos modelos de dados
+desse órgão.
+
 > Explicar como as coisas são hospedadas, falar da descentralização, escalabilidade, Kubernetes,
 > repositórios, GitHub Actions, etc.
 
