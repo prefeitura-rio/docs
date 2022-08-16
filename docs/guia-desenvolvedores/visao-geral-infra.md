@@ -413,9 +413,25 @@ desse órgão.
 > Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
 > falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,
 
+<<<<<<< HEAD
+Com os dados prontos para subir para o Datalake, utilizaremos o pacote `basedosdados` (disponivel em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por 2 componentes do Google Cloud;
+
+    1. `Storage`: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas também aceita outros formatos como `parquet` e arquivos compactados.
+    2. `Bigquery`: Super banco de dados do Google. Nossas tabelas seram separadas em 2 tipos de datasets, 
+       - `Staging`: Dataset do tipo `dataset_id_staging`. Contem as tabelas externas geradas a partir dos dados brutos que estão hospedados no `storage`
+       - `Producao`: Dataset do tipo `dataset_id`. Contem as tabelas nativas já tratadas e padronizadas geradas pelo `DBT`
+
+
+A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o `Storage`, os dados serão salvos no bucket do projeto com o seguinte caminho: `project_id/dataset_id/table_id/data.csv`. 
+
+Uma vez com os dados no `Storage`, são criados os dois datasets no `Bigquery`, de producão (`dataset_id`) e staging (`dataset_id_staging`). Na ultima etapa a tabela externa é criada no dataset de staging (`dataset_id_staging.table_id`), gerando um link entre os dados brutos armazenados no `Storage` e o `Bigquery`. 
+
+Assim a tabela está pronta para ser tratada e padronizada utilizando o `DBT`
+=======
 Com os dados prontos para subir para o _data lake_, utilizaremos o pacote `basedosdados` (disponivel
 em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por nossos componentes de
 armazenamento:
+>>>>>>> a01ea3a33d083c50ea6e05961d5fa78cb9802474
 
 1. **Google Cloud Storage (GCS)**: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas
    também aceita outros formatos como `.parquet` e arquivos compactados.
