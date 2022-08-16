@@ -258,7 +258,8 @@ a ser dita aqui, vamos em frente.
 ## Como estão hospedados
 
 Agora que você conheceu os componentes, vamos entender onde eles estão. A medida que essa seção avança,
-iremos criar um diagrama e incrementá-lo aos poucos, até chegar na visão completa.
+iremos criar um diagrama e incrementá-lo aos poucos, até chegar na visão completa. Você vai notar que
+as partes inseridas no diagrama possuem a cor azul, assim fica mais fácil notar a diferença.
 
 ### Prefect
 
@@ -413,6 +414,10 @@ Então vamos incluir esses servidores RPC no diagrama:
 
 Como esses serviços são gerenciados pela Google, não cabe a nós criar instâncias deles. Então, também
 não fazem parte do diagrama de hospedagem.
+
+Assim, nosso diagrama final fica assim:
+
+![Diagrama de hospedagem](../static/img/tutoriais/visao-geral-infra/hospedagem-08.png)
 
 ## Comunicação e interações
 
