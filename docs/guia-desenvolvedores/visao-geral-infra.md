@@ -194,11 +194,66 @@ Bom demais, né?
 
 ### Transformações (DBT)
 
-To do.
+Aqui é onde a galera do SQL se empolga. O [DBT](https://getdbt.com) é uma ferramenta de código aberto,
+que permite a definição de modelos de dados em linguagem SQL. Então, em outras palavras, você pode
+escrever uma query e, usando o DBT, materializar os resultados dessa query em diferentes formas e,
+o que é mais legal, em diferentes plataformas.
+
+Assim, com a mesma query, você pode criar tabelas e _views_ em diferentes plataformas. E não só isso,
+as tabelas podem ser materializadas de maneiras diferentes, como, por exemplo, de forma incremental,
+que consiste em adicionar novas linhas ao final de uma tabela.
+
+Além de tudo, você pode parametrizar suas queries para que elas sejam executadas com diferentes
+valores de entrada. Não bastante, você pode especificar configurações de particionamento, dentre
+outras, diretamente no seu modelo de dados. Dá uma olhada só nesse exemplo:
+
+```sql
+{{
+    config(
+        materialized='table',
+        partition_by={
+            "field": "data_particao",
+            "data_type": "date",
+            "granularity": "month",
+        }
+    )
+}}
+
+SELECT
+    *
+FROM `datario.dataset_id.table_id`
+```
+
+Pode relaxar, você não precisa entender tudo desse modelo ainda, teremos guias para isso. Mas, apesar
+de curto, tem muita coisa rolando nesse modelo aí! Estamos especificando para ele que deve se materializar
+em formato de tabela nativa com o `materialized='table'`, e estamos especificando que deve ser particionado
+por data na coluna `data_particao` com uma granularidade mensal. Pouquíssimas linhas e simplesmente
+funciona!
 
 ### Armazenamento (Google Cloud Storage e Google BigQuery)
 
-To do.
+Eu sei o que você vai dizer:
+
+> Mas você disse "sempre que razoável, optamos por usar software livre"
+
+Sim, exatamente, sempre que razoável. Porém, no caso do armazenamento, principalmente, as ferramentas
+apresentadas pela Google atenderam todos os requisitos que havíamos levantado, além de reduzirem o
+número de componentes para dois ao invés de múltiplos open-source que teríamos que manter em conjunto.
+Ok, vamos voltar ao que viemos fazer: apresentar os componentes.
+
+- **Google Cloud Storage** é um serviço de armazenamento de objetos. Então, através de uma API, é
+  possível fazer upload de qualquer tipo de arquivo, configurar permissões para ele e, caso tenha acesso,
+  baixá-lo novamente. Além disso, você pode utilizá-lo como um _data lake_ em sua definição original -
+  você pode armazenar arquivos na mesma estrutura de partições Hive e obter seus dados particionados
+  para consulta. Você, então, pode consultar seus dados com SQL no console do BigQuery.
+
+- **Google BigQuery** é um serviço de _data warehouse serverless_. Ele permite análises escalonáveis
+  em petabytes (mil terabytes) de dados. Como mencionado anteriormente, você pode consumir dados de
+  _data lakes_ hospedados no Google Cloud Storage mas, ao mesmo tempo, pode criar tabelas nativas,
+  que possuem performance muito superior.
+
+E aqui, então, finalizamos a apresentação de nossos componentes. Mas calma, ainda tem muita coisa
+a ser dita aqui, vamos em frente.
 
 ## Como estão hospedados
 
@@ -210,6 +265,7 @@ To do.
 > Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
 > falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,
 
+<<<<<<< HEAD
 Com os dados prontos para subir para o Datalake, utilizaremos o pacote `basedosdados` (disponivel em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por 2 componentes do Google Cloud;
 
     1. `Storage`: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas também aceita outros formatos como `parquet` e arquivos compactados.
@@ -223,11 +279,19 @@ A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para
 Uma vez com os dados no `Storage`, são criados os dois datasets no `Bigquery`, de producão (`dataset_id`) e staging (`dataset_id_staging`). Na ultima etapa a tabela externa é criada no dataset de staging (`dataset_id_staging.table_id`), gerando um link entre os dados brutos armazenados no `Storage` e o `Bigquery`. 
 
 Assim a tabela está pronta para ser tratada e padronizada utilizando o `DBT`
+=======
+Com os dados prontos para subir para o _data lake_, utilizaremos o pacote `basedosdados` (disponivel
+em Python ou CLI) para orquestrar todo esse processo. Os dados iram passar por nossos componentes de
+armazenamento:
+>>>>>>> a01ea3a33d083c50ea6e05961d5fa78cb9802474
 
+1. **Google Cloud Storage (GCS)**: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas
+   também aceita outros formatos como `.parquet` e arquivos compactados.
+2. **Google BigQuery (BQ)**: nossas tabelas serão separadas em dois datasets: o de **staging**, que terá o
+   nome no formato `dataset_id_staging`, contém as tabelas externas geradas a partir dos dados brutos
+   hospedados no **GCS**. Já o de **produção**, com nome no formato `dataset_id`, contém as tabelas
+   nativas já tratadas e padronizadas geradas pelo **DBT**.
 
+A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o **GCS**....
 
 > tabelas externas, etc.
-
-```
-
-```
