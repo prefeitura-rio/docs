@@ -1001,25 +1001,34 @@ não fazem parte do diagrama de hospedagem.</p>
 <p>Assim, nosso diagrama final fica assim:</p>
 <p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-08.png" /></p>
 <h2 id="comunicacao-e-interacoes">Comunicação e interações</h2>
-<blockquote>
-<p>Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
-falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,</p>
-</blockquote>
-<p>Com os dados prontos para subir para o <em>data lake</em>, utilizaremos o pacote <code>basedosdados</code> (disponivel
-em Python ou CLI) para orquestrar todo esse processo. Os dados irão passar por nossos componentes de
-armazenamento:</p>
+<p>Recapitulando e unindo todas as informações que trouxemos até aqui, o fluxo completo de funcionamento
+da infraestrutura é o seguinte:</p>
+<ol>
+<li>Desenvolvemos o código para uma pipeline de dados no repositório <a href="https://github.com/prefeitura-rio/pipelines">prefeitura-rio/pipelines</a></li>
+<li>O <strong>GitHub</strong> armazena essas pipelines no <strong>Google Cloud Storage</strong> e diz ao <strong>Servidor do Prefect</strong>
+   onde elas estão.</li>
+<li>Desenvolvemos códigos para transformações de dados em um repositório do estilo <code>queries-rj-&lt;nome do órgão&gt;</code>
+   (por exemplo, <a href="https://github.com/prefeitura-rio/queries-rj-escritorio">queries-rj-escritorio</a>).</li>
+<li>O <strong>GitHub</strong> cria uma instância do <strong>DBT RPC</strong> para o namespace correspondente.</li>
+<li>O <strong>Agente do Prefect</strong> pergunta ao <strong>Servidor do Prefect</strong> se há alguma pipeline para ser executada.</li>
+<li>O <strong>Servidor do Prefect</strong> informa a ele qual pipeline deve ser executada.</li>
+<li>O <strong>Agente do Prefect</strong> lança a execução dessa pipeline, que pode ter um ou mais dos seguintes passos:
+   (1) extração dos dados; (2) upload dos dados para o <strong>Google Cloud Storage</strong>; (3) transformação dos
+   dados em tabelas nativas do <strong>Google BigQuery</strong> (usando os modelos do <strong>DBT</strong>);</li>
+</ol>
+<p>Vale, ainda, ressaltar como o upload dos dados para o <strong>Google Cloud Storage</strong> e a criação de tabelas
+externas no <strong>Google BigQuery</strong> são feitos. Para isso, usamos o pacote <code>basedosdados</code> (disponivel
+em Python ou CLI). Os dados irão passar por nossos componentes de armazenamento:</p>
 <ol>
 <li><strong>Google Cloud Storage (GCS)</strong>: local onde serão armazenados os arquivos brutos, geralmente <code>.csv</code>, mas
    também aceita outros formatos como <code>.parquet</code> e arquivos compactados.</li>
 <li><strong>Google BigQuery (BQ)</strong>: nossas tabelas serão separadas em dois datasets: o de <strong>staging</strong>, que terá o
    nome no formato <code>dataset_id_staging</code>, contém as tabelas externas geradas a partir dos dados brutos
    hospedados no <strong>GCS</strong>. Já o de <strong>produção</strong>, com nome no formato <code>dataset_id</code>, contém as tabelas
-   nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>. Vale ressaltar que o <strong>BQ</strong> possui 3 tipos diferentes de tabelas;<ol>
+   nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>. Vale ressaltar que o <strong>BQ</strong> possui 3 tipos diferentes de tabelas;</li>
 <li><strong>Tabelas Externas</strong>: Uma tabela externa funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo <strong>GCS</strong>, <strong>Google Sheets</strong>, <strong>Google Drive</strong>, entre outros. Para mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/external-data-sources">como consultar fontes de dados externas.</a></li>
 <li><strong>Tabelas Nativas</strong>: Uma tabela nativa tem os dados armazenadas diretamente no <strong>BQ</strong>. Essas tabelas são extremamente rápidas, porem possuem apenas um nivel de particionamento com 4 mil partições.</li>
 <li><strong>Views</strong>: Uma view é uma tabela virtual definida por uma consulta SQL. Para mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/views">Como criar visualizações.</a></li>
-</ol>
-</li>
 </ol>
 <p>A primeira etapa realizada pelo pacote <code>basedosdados</code> é o upload dos dados para o <strong>GCS</strong>. Lá, os
 dados serão salvos no bucket do projeto com o seguinte caminho: <code>project_id/dataset_id/table_id/data.csv</code>.</p>
