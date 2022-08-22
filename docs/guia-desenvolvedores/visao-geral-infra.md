@@ -421,12 +421,24 @@ Assim, nosso diagrama final fica assim:
 
 ## Comunicação e interações
 
-> Os componentes precisam se comunicar pra fazer com que tudo funcione. Mencionar como isso é feito,
-> falar do basedosdados que é um pacote importante que a gente usa, etc. Falar do BigQuery, GCS,
+Recapitulando e unindo todas as informações que trouxemos até aqui, o fluxo completo de funcionamento
+da infraestrutura é o seguinte:
 
-Com os dados prontos para subir para o _data lake_, utilizaremos o pacote `basedosdados` (disponivel
-em Python ou CLI) para orquestrar todo esse processo. Os dados irão passar por nossos componentes de
-armazenamento:
+1. Desenvolvemos o código para uma pipeline de dados no repositório [prefeitura-rio/pipelines](https://github.com/prefeitura-rio/pipelines)
+2. O **GitHub** armazena essas pipelines no **Google Cloud Storage** e diz ao **Servidor do Prefect**
+   onde elas estão.
+3. Desenvolvemos códigos para transformações de dados em um repositório do estilo `queries-rj-<nome do órgão>`
+   (por exemplo, [queries-rj-escritorio](https://github.com/prefeitura-rio/queries-rj-escritorio)).
+4. O **GitHub** cria uma instância do **DBT RPC** para o namespace correspondente.
+5. O **Agente do Prefect** pergunta ao **Servidor do Prefect** se há alguma pipeline para ser executada.
+6. O **Servidor do Prefect** informa a ele qual pipeline deve ser executada.
+7. O **Agente do Prefect** lança a execução dessa pipeline, que pode ter um ou mais dos seguintes passos:
+   (1) extração dos dados; (2) upload dos dados para o **Google Cloud Storage**; (3) transformação dos
+   dados em tabelas nativas do **Google BigQuery** (usando os modelos do **DBT**);
+
+Vale, ainda, ressaltar como o upload dos dados para o **Google Cloud Storage** e a criação de tabelas
+externas no **Google BigQuery** são feitos. Para isso, usamos o pacote `basedosdados` (disponivel
+em Python ou CLI). Os dados irão passar por nossos componentes de armazenamento:
 
 1. **Google Cloud Storage (GCS)**: local onde serão armazenados os arquivos brutos, geralmente `.csv`, mas
    também aceita outros formatos como `.parquet` e arquivos compactados.
@@ -434,9 +446,9 @@ armazenamento:
    nome no formato `dataset_id_staging`, contém as tabelas externas geradas a partir dos dados brutos
    hospedados no **GCS**. Já o de **produção**, com nome no formato `dataset_id`, contém as tabelas
    nativas já tratadas e padronizadas geradas pelo **DBT**. Vale ressaltar que o **BQ** possui 3 tipos diferentes de tabelas;
-    1. **Tabelas Externas**: Uma tabela externa funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo **GCS**, **Google Sheets**, **Google Drive**, entre outros. Para mais informações, consulte [como consultar fontes de dados externas.](https://cloud.google.com/bigquery/docs/external-data-sources)
-    2. **Tabelas Nativas**: Uma tabela nativa tem os dados armazenadas diretamente no **BQ**. Essas tabelas são extremamente rápidas, porem possuem apenas um nivel de particionamento com 4 mil partições.
-    3. **Views**: Uma view é uma tabela virtual definida por uma consulta SQL. Para mais informações, consulte [Como criar visualizações.](https://cloud.google.com/bigquery/docs/views)
+   1. **Tabelas Externas**: Uma tabela externa funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo **GCS**, **Google Sheets**, **Google Drive**, entre outros. Para mais informações, consulte [como consultar fontes de dados externas.](https://cloud.google.com/bigquery/docs/external-data-sources)
+   2. **Tabelas Nativas**: Uma tabela nativa tem os dados armazenadas diretamente no **BQ**. Essas tabelas são extremamente rápidas, porem possuem apenas um nivel de particionamento com 4 mil partições.
+   3. **Views**: Uma view é uma tabela virtual definida por uma consulta SQL. Para mais informações, consulte [Como criar visualizações.](https://cloud.google.com/bigquery/docs/views)
 
 A primeira etapa realizada pelo pacote `basedosdados` é o upload dos dados para o **GCS**. Lá, os
 dados serão salvos no bucket do projeto com o seguinte caminho: `project_id/dataset_id/table_id/data.csv`.
