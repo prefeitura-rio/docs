@@ -723,6 +723,14 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
 <p><img alt="Publicação no dados.rio - parte 1" src="../../static/img/tutoriais/metadados-padronizacao/datario_1.png" /></p>
 <p><img alt="Publicação no dados.rio - parte 2" src="../../static/img/tutoriais/metadados-padronizacao/datario_2.png" /></p>
 <h2 id="fluxo-de-aprovacao">Fluxo de Aprovação</h2>
+<p>Antes de começar a construção do pipeline de dados é fundamental que tenhamos definidos quais serão os nomes do dataset, tabela e de cada uma das colunas.</p>
+<p>Para garantir que todas as nomenclaturas estejam de acordo com o padrão pré-definido, precisamos que cada tabela criada no data lake passe por um fluxo de aprovação.</p>
+<p>Esse fluxo inicia-se criando um card para cada uma das tabelas dentro do <a href="https://trello.com/b/UwQB6YSJ/datalake-bases">Trello do Data Lake</a>. Nesse Trello faremos o acompanhamento para todas as etapas de produtização dos dados.</p>
+<p>Em seguida, deve-se criar uma pasta (se ela não existir) dentro da pasta "Bases" com o nome do seu dataset e copiando a mesma estrutura de arquitetura presente no <a href="https://docs.google.com/spreadsheets/d/1fkeJyFbp95lkDjZ84CTNF6TB8Uc-rb9B/edit?usp=sharing&amp;ouid=110461902090406283473&amp;rtpof=true&amp;sd=true">template</a>. Nesse template, você deve preencher ambas as abas com as informações solicitadas, lembrando que os nomes devem seguir o padrão definido na <a href="https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit?usp=sharing">Ontologia das Bases</a>.</p>
+<p>Os dados preenchidos devem ser validados em reunião com membros da IPLAN e do Escritório de Dados. <a href="https://docs.google.com/spreadsheets/d/1SrWMDLAL0eB4W1lfkHR0eBRMaEbdLBlA/edit?usp=sharing&amp;ouid=110461902090406283473&amp;rtpof=true&amp;sd=true">Aqui</a> temos como exemplo o preenchimento das informações da tabela de logradouros.</p>
+<p>Se tudo estiver aprovado, as mesmas informações da planilha do Google Sheets devem ser preenchidas no site do <a href="https://meta.dados.rio/admin">meta.dados.rio</a> conforme explicitado anteriormente.</p>
+<p>E, por fim, pode-se dar início a construção do pipeline! </p>
+<p><img alt="Fluxo de Aprovação" src="../../static/img/tutoriais/metadados-padronizacao/fluxo_aprovacao.png" /></p>
 
               
             </article>
