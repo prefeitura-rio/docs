@@ -95,7 +95,7 @@ As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive
 
 - `Observações`: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.
 
-- `Nome original da coluna YYYY`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. Existiam colunas que deixaram de existir em determinados anos. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
+- `Nome original da coluna YYYY`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. Essa etapa ajuda na normalização de tabelas, onde o nome de colunas podem mudar no tempo ou não existirem mais. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
 
 ## meta.dados.rio
 
