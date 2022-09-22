@@ -8,6 +8,7 @@ nav:
       - Como configurar a conexão do PowerBI com o BigQuery: tutoriais/como-configurar-conexao-powerbi-bigquery.md
     - Guia de desenvolvedores:
       - Visão geral da infraestrutura: guia-desenvolvedores/visao-geral-infra.md
+      - Manual de Estilo: guia-desenvolvedores/manual-estilo.md
       - Metadados, padronização e normalização: guia-desenvolvedores/metadados-padronizacao.md
       - Desenvolvimento de pipelines de dados: guia-desenvolvedores/pipelines.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
@@ -60,11 +61,11 @@ markdown_extensions:
   - pymdownx.details
   - mkdocs_click
   - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.tabbed:
-      alternate_style: true
+  # - pymdownx.emoji:
+  #     emoji_index: !!python/name:materialx.emoji.twemoji
+  #     emoji_generator: !!python/name:materialx.emoji.to_svg
+  # - pymdownx.tabbed:
+  #     alternate_style: true
   - pymdownx.superfences
 
 extra_css:

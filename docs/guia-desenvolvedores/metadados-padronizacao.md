@@ -80,12 +80,38 @@ E essas informações estão salvas no [meta.dados.rio](https://meta.dados.rio/a
 
 ## Tabela de Arquitetura e Normalização
 
-- [Modelo de Pasta de Arquitetura](https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv)
-- [Modelo de Tabela de Arquitetura](https://docs.google.com/spreadsheets/d/1QcIA0QuBxEYZ1reqpE-7Pd_crvCqwF4O/edit#gid=1924046717)
+As tabelas de arquitetura determinam **qual a estrutura de
+cada tabela do seu conjunto de dados**. Elas definem, por exemplo, o nome, ordem e alguns metadados das colunas, e como uma coluna deve ser tratada quando há mudanças em versões (por exemplo, se uma coluna muda de nome de um ano para o outro).
+
+!!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
+
+<!-- 
+TODO: Não vejo relação dessas perguntas com o exemplo dado
+da tabela de arquitetura da RAIS.
+Perguntas que uma arquitetura deve responder:
+* *Quais serão as tabelas finais na base?* Essas não precisam ser
+  exatamente o que veio nos dados brutos. -> não tem isso no exemplo
+* *Qual é nível da observação de cada tabela?* O "nível da observação" é
+  a menor unidade a que se refere cada linha na tabela (ex: municipio-ano, candidato,
+  estabelecimento-cnae). -> não tem isso no exemplo
+* *Será gerada alguma tabela derivada com agregações em cima dos dados
+  originais?* -> não tem isso no exemplo -->
+
+As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n), o [template da pasta de arquitetura pode ser consultado aqui](https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv). Seguindo nosso [manual de estilo](./manual-estilo.md), nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas). 
+ 
+- `Nome da coluna`: nome da coluna.
+
+- `Tipo da Coluna`: tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](./manual-estilo.md)).
+
+- `Descrição da coluna`: descrição dos dados que estão nesta coluna. 
+
+- `Observações`: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.
+
+- `Nome original da coluna YYYY`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. Existiam colunas que deixaram de existir em determinados anos. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
 
 ## meta.dados.rio
 
-O [meta.dados.rio](https://meta.dados.rio/admin) é o nosso repositório oficial de metadados.
+O [meta.dados.rio](https://meta.dados.rio/admin) é o nosso repositório oficial de metadados. Podemos reaproveitar as informações já preenchidas na tabela de arquitetura para preencher os metadados das colunas
 
 ![Homepage do meta.dados.rio](../static/img/tutoriais/metadados-padronizacao/metadadosrio.png)
 
