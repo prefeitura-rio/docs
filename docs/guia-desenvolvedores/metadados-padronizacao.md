@@ -19,7 +19,6 @@ Nesse nosso caso em que temos uma tabela que contém informações sobre a quant
 
 ### Nome do dataset_id e table_id
 
-Para nomeação de objetos no datalake seguimos as melhores práticas detalhadas do Vocabulário Controlado de Governo Eletrônico - Ministério do Planejamento (VCGE).
 Para saber quais as possibilidades de nomeação acesse essa [tabela](https://docs.google.com/spreadsheets/d/1qcQjxhrWEkhQbG2tIag_fWx2vxtsktKtzB1hs4tUTvc/edit?usp=sharing).
 
 **Restrições:**
@@ -27,17 +26,16 @@ Para saber quais as possibilidades de nomeação acesse essa [tabela](https://do
 - Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)
 - Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por \_
 - Não incluir conectores como de, da, dos, e, a, em, etc.
-- Sempre que possível utilizar singular
-- Não é permitida alteração do primeiro nível do VCGE.
 - Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake. (ex: administracao_processo).
 - Nenhuma palavra deve ser repetida no dataset*id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao*…)
-- O dataset_id pode ser ser nomeado como "dados_mestres", não seguindo o VCGE, caso a tabela em questão seja uma referência para outras tabelas de outros sistemas incluídos no datalake.
+- O dataset_id pode ser ser nomeado como "dados_mestres", caso a tabela em questão seja uma referência para outras tabelas de outros sistemas incluídos no datalake.
 
 **Referências:**
 
+- [Regras de Nomeação de conjutos do Escritório de Dados](https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit#gid=637885056)
 - [Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)](https://basedosdados.github.io/mais/style_data/)
 - [Ontologia SMTR](https://github.com/RJ-SMTR/maestro/wiki/Ontologia-de-nomea%C3%A7%C3%A3o-Datasets-e-Tabelas)
-- [VCGE](https://www.gov.br/governodigital/pt-br/governanca-de-dados/vocabulario-controlado-do-governo-eletronico) | [VCGE versão resumida](https://www.gov.br/governodigital/pt-br/governanca-de-dados/vcge_2_1_0.pdf) | [VCGE versão detalhada](https://www.gov.br/governodigital/pt-br/governanca-de-dados/vcge_2_1_0_det.pdf)
+
 
 ### Nome e ordem das colunas
 
@@ -80,9 +78,28 @@ Aqui no Escritório de Dados armazenamos os seguintes campos no metadados:
 
 E essas informações estão salvas no [meta.dados.rio](https://meta.dados.rio/admin).
 
+## Tabela de Arquitetura e Normalização
+
+As tabelas de arquitetura determinam **qual a estrutura de
+cada tabela do seu conjunto de dados**. Elas definem, por exemplo, o nome, ordem e alguns metadados das colunas, e como uma coluna deve ser tratada quando há mudanças em versões (por exemplo, se uma coluna muda de nome de um ano para o outro).
+
+!!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
+
+As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n), o [template da pasta de arquitetura pode ser consultado aqui](https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv). Seguindo nosso [manual de estilo](./manual-estilo.md), nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas). 
+ 
+- `Nome da coluna`: nome da coluna.
+
+- `Tipo da Coluna`: tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](./manual-estilo.md)).
+
+- `Descrição da coluna`: descrição dos dados que estão nesta coluna. 
+
+- `Observações`: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.
+
+- `Nome original da coluna YYYY`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. Existiam colunas que deixaram de existir em determinados anos. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
+
 ## meta.dados.rio
 
-O [meta.dados.rio](https://meta.dados.rio/admin) é o nosso repositório oficial de metadados.
+O [meta.dados.rio](https://meta.dados.rio/admin) é o nosso repositório oficial de metadados. Podemos reaproveitar as informações já preenchidas na tabela de arquitetura para preencher os metadados das colunas
 
 ![Homepage do meta.dados.rio](../static/img/tutoriais/metadados-padronizacao/metadadosrio.png)
 
