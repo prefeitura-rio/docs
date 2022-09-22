@@ -85,18 +85,6 @@ cada tabela do seu conjunto de dados**. Elas definem, por exemplo, o nome, ordem
 
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
 
-<!-- 
-TODO: Não vejo relação dessas perguntas com o exemplo dado
-da tabela de arquitetura da RAIS.
-Perguntas que uma arquitetura deve responder:
-* *Quais serão as tabelas finais na base?* Essas não precisam ser
-  exatamente o que veio nos dados brutos. -> não tem isso no exemplo
-* *Qual é nível da observação de cada tabela?* O "nível da observação" é
-  a menor unidade a que se refere cada linha na tabela (ex: municipio-ano, candidato,
-  estabelecimento-cnae). -> não tem isso no exemplo
-* *Será gerada alguma tabela derivada com agregações em cima dos dados
-  originais?* -> não tem isso no exemplo -->
-
 As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n), o [template da pasta de arquitetura pode ser consultado aqui](https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv). Seguindo nosso [manual de estilo](./manual-estilo.md), nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas). 
  
 - `Nome da coluna`: nome da coluna.
