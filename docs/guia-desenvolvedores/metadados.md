@@ -31,15 +31,16 @@ cada tabela do conjunto de dados**. Elas definem, por exemplo, o nome, ordem e a
  
 !!! Info "Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto)."
  
-[Baixe aqui](https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv) a pasta template e renomeie para o nome do seu conjunto de dados.  as tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n). Seguindo nosso [manual de estilo](./manual-estilo.md), nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas).
+[Baixe aqui](https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv) a pasta template e renomeie para o nome do seu conjunto de dados. Seguindo nosso [manual de estilo](./manual-estilo.md), nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas). As tabelas de arquitetura preenchidas [podem ser consultadas aqui](https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n).
+
 - `Nome da coluna`: nome da coluna.
- 
+
 - `Tipo da Coluna`: tipo de dado do BigQuery (veja quais são no nosso [manual de estilo](./manual-estilo.md#tipos-de-colunas)).
- 
+
 - `Descrição da coluna`: descrição dos dados que estão nesta coluna.
- 
+
 - `Observações`: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.
- 
+
 - `Nome original da coluna YYYY`: indicar o nome original de cada coluna para cada ano, no formato `original_name_YYYY`. Essa etapa ajuda na normalização de tabelas, onde o nome de colunas podem mudar no tempo ou não existirem mais. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).
  
 ## O portal meta.dados.rio

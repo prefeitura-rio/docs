@@ -15,21 +15,20 @@ A estrutura utilizada para nomeação de tabelas seguirá boas práticas de nome
 É importante que os datasets possuam alguma granularidade, pois não queremos um unico dataset com dezenas de tabelas.
  
 Nomeamos datasets no formato `<primeiro_nivel>_<segundo_nivel>_<terceiro_nivel>`
-Portanto a composição dos nomes serão em dois níveis.
+Portanto a composição dos nomes serão em três níveis.
  
-- `primeiro_nivel`: refere-se ao tema pertinente à área.
-- `segundo_nivel`: refere-se ao objeto do conjunto
+- `primeiro_nivel`: refere-se ao tema pertinente à área. [Lista de temas predefinidos](https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit#gid=296761183)
+- `segundo_nivel`: refere-se ao objeto do conjunto (opcional)
 - `terceiro_nivel`: refere-se à secretaria ou sistema (opcional)
  
-Exemplo: educacao_basica_aluno; educacao_basica_escola; meio_ambiente_clima_satelite; meio_ambiente_clima_radar
+Exemplo: **educacao_basica_aluno**; **educacao_basica_escola**; **meio_ambiente_clima_satelite**; **meio_ambiente_clima_radar**; **adm_cor_comando**
  
 ### Tabelas (table_id)
  
 Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temos algumas regras:
  
-- Não incluir a unidade temporal no nome. Exemplo: educacao_basica.aluno, e não educacao_basica.aluno_ano
-- Deixar nomes no singular. Exemplo: educacao_basica_escola.escola, e não educacao_basica_escola.escolas
-- Uso de sinônimos para facilitar o entendimento do usuário. Exemplo: educacao_basica_avaliacao.prova_rio, e não educacao_basica_avaliacao.prova
+- Não incluir a unidade temporal no nome. Exemplo: **educacao_basica.aluno**, e não **educacao_basica.aluno_ano**
+- Uso de sinônimos para facilitar o entendimento do usuário. Exemplo: **educacao_basica_avaliacao.prova_rio**, e não **educacao_basica_avaliacao.avaliacao**
  
 ### Restrições de nomeação
  
@@ -39,9 +38,9 @@ Para mantermos uma consistência nas nomeações, são necessárias algumas rest
 - Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)
 - Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por \_
 - Não incluir conectores como de, da, dos, e, a, em, etc.
-- Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake. (ex: administracao_processo).
-- Nenhuma palavra deve ser repetida no dataset*id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao*…)
-- O dataset_id pode ser ser nomeado como "dados_mestres", caso a tabela em questão seja uma referência para outras tabelas de outros sistemas incluídos no datalake.
+- Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake.
+- Nenhuma palavra deve ser repetida no dataset_id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao)
+- O dataset_id pode ser ser nomeado como [dados_mestres](./manual-estilo.md#dados-mestres), caso a tabela em questão seja uma referência para outras tabelas do datalake.
  
  
 **Referências:**
@@ -55,7 +54,7 @@ Para mantermos uma consistência nas nomeações, são necessárias algumas rest
  
 A ordem das colunas em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:
  
-- Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: `ano`, `sigla_uf`, `id_municipio`, `id_escola`, `nota_ideb`.   
+- Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: **ano**, **sigla_uf**, **id_municipio**, **id_escola**, **nota_ideb**.
 - Agrupar e ordenar colunas por importância ou temas.
  
 ### Tipos de colunas
