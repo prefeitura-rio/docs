@@ -416,16 +416,57 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nome-e-ordem-das-colunas" class="md-nav__link">
     Nome e ordem das colunas
+  </a>
+  
+    <nav class="md-nav" aria-label="Nome e ordem das colunas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-colunas" class="md-nav__link">
+    Tipos de colunas
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#conteudo-das-variaveis" class="md-nav__link">
-    Conteúdo das variáveis
+  <a href="#quais-variaveis-manter-quais-adicionar-e-quais-remover" class="md-nav__link">
+    Quais variáveis manter, quais adicionar e quais remover
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limpando-strings" class="md-nav__link">
+    Limpando STRINGs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unidades-de-medida" class="md-nav__link">
+    Unidades de medida
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatos-de-valores" class="md-nav__link">
+    Formatos de valores
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dicionarios" class="md-nav__link">
+    Dicionários
   </a>
   
 </li>
@@ -439,6 +480,20 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-mestres" class="md-nav__link">
+    Dados Mestres
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pensou-em-melhorias-para-os-padroes-definidos" class="md-nav__link">
+    Pensou em melhorias para os padrões definidos?
+  </a>
   
 </li>
       
@@ -597,7 +652,7 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <li>Uso de sinônimos para facilitar o entendimento do usuário. Exemplo: educacao_basica_avaliacao.prova_rio, e não educacao_basica_avaliacao.prova</li>
 </ul>
 <h3 id="restricoes-de-nomeacao">Restrições de nomeação</h3>
-<p>Para mantermos uma consistencia nas nomeações são necessarias algumas restrições</p>
+<p>Para mantermos uma consistencia nas nomeações são necessarias algumas restrições:</p>
 <ul>
 <li>Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)</li>
 <li>Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por _</li>
@@ -612,15 +667,95 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <li><a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></li>
 <li><a href="https://github.com/RJ-SMTR/maestro/wiki/Ontologia-de-nomea%C3%A7%C3%A3o-Datasets-e-Tabelas">Ontologia SMTR</a></li>
 </ul>
-<h3 id="nome-e-ordem-das-colunas">Nome e ordem das colunas</h3>
-<p>O nome e a ordem das colunas tem que respeitar o mesmo padrão descrito nas partes "Nomeação de variáveis" e "Ordenamento de variáveis" do <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></p>
-<h3 id="conteudo-das-variaveis">Conteúdo das variáveis</h3>
-<p>Sobre o conteúdo das colunas deve-se respeitar o mesmo padrão descrito nas partes "Tipos de Variáveis", "Limpando STRINGs", "Formatos de valores" e "Quais variáveis manter, quais adicionar e quais remover" do <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></p>
+<h2 id="nome-e-ordem-das-colunas">Nome e ordem das colunas</h2>
+<p>A ordem das colunas em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:</p>
+<ul>
+<li>Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: <code>ano</code>, <code>sigla_uf</code>, <code>id_municipio</code>, <code>id_escola</code>, <code>nota_ideb</code>.    </li>
+<li>Agrupar e ordenar colunas por importância ou temas.</li>
+</ul>
+<h3 id="tipos-de-colunas">Tipos de colunas</h3>
+<p>Nós utilizamos algumas das opções de <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types">tipos do BigQuery</a>: <code>STRING</code>, <code>INT64</code>, <code>FLOAT64</code>, <code>DATE</code>, <code>TIME</code>, <code>GEOGRAPHY</code>.</p>
+<p>Quando escolher:</p>
+<ul>
+<li><code>STRING</code>:<ul>
+<li>Colunas de texto</li>
+<li>Chaves de variáveis categóricas com dicionário</li>
+</ul>
+</li>
+<li><code>INT64</code>:<ul>
+<li>Colunas de números inteiros com as quais é possível fazer contas (adição, subtração).</li>
+</ul>
+</li>
+<li><code>FLOAT64</code>:<ul>
+<li>Colunas de números com casas decimais com as quais é possível fazer contas (adição, subtração).</li>
+</ul>
+</li>
+<li><code>DATE</code>:<ul>
+<li>Colunas de data no formato <code>YYYY-MM-DD</code>.</li>
+</ul>
+</li>
+<li><code>TIME</code>:<ul>
+<li>Colunas de tempo no formato <code>HH:MM:SS</code>.</li>
+</ul>
+</li>
+<li><code>GEOGRAPHY</code>:<ul>
+<li>Colunas de geografia.</li>
+</ul>
+</li>
+</ul>
+<h3 id="quais-variaveis-manter-quais-adicionar-e-quais-remover">Quais variáveis manter, quais adicionar e quais remover</h3>
+<p>Mantemos nossas tabelas parcialmente <a href="https://www.guru99.com/database-normalization.html">normalizadas</a>, e temos regras para quais variáveis incluirmos em produção. Elas são:</p>
+<ul>
+<li>Remover variáveis de nomes de entidades que já estão nos <code>dados_mestres</code>. Exemplo: retirar <code>bairro</code> da tabela que já inclui <code>id_bairro</code>.</li>
+<li>Remover variáveis servindo de partição. Exemplo: remover <code>ano</code> e <code>id_bairro</code> se a tabela é particionada nessas duas dimensões.</li>
+<li>Adicionar chaves primárias principais para cada entidade já existente. Exemplo: adicionar <code>id_bairro</code> a tabelas que só incluem <code>bairro</code>.</li>
+<li>Manter todas as chaves primárias que já vem com a tabela, mas (1) adicionar chaves relevantes (e.g. <code>id_bairro</code>) e (2) retirar chaves irrelevantes (e.g. <code>regiao</code>).</li>
+</ul>
+<h3 id="limpando-strings">Limpando STRINGs</h3>
+<ul>
+<li>Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.</li>
+<li>STRINGs não-estruturadas: manter igual aos dados originais.</li>
+</ul>
+<h3 id="unidades-de-medida">Unidades de medida</h3>
+<p>A regra é manter variáveis com suas unidades de medida originais, com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).</p>
+<p>Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter <code>BRL</code> ao invés de <code>1000 BRL</code>, ou <code>pessoa</code> ao invés de <code>1000 pessoas</code>. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.</p>
+<h3 id="formatos-de-valores">Formatos de valores</h3>
+<ul>
+<li>Decimal: formato americano, i.e. sempre <code>.</code> (ponto) ao invés de <code>,</code> (vírgula).</li>
+<li>Data: <code>YYYY-MM-DD</code></li>
+<li>Horário (24h): <code>HH:MM:SS</code></li>
+<li>Datetime (<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a>): <code>YYYY-MM-DDTHH:MM:SS.sssZ</code></li>
+<li>Valor nulo: <code>""</code> (csv), <code>NULL</code> (Python), <code>NA</code> (R), <code>.</code> ou <code>""</code> (Stata)</li>
+<li>Proporção/porcentagem: entre 0-100</li>
+</ul>
+<h3 id="dicionarios">Dicionários</h3>
+<ul>
+<li>Cada base inclui somente um dicionário (que cobre uma ou mais tabelas).</li>
+<li>Para cada tabela, coluna, e cada chave mapeia unicamente um valor.</li>
+<li>Chaves não podem ter valores nulos.</li>
+<li>Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.</li>
+<li>
+<p>Chaves só podem possuir zeros à esquerda quando o número de dígitos da variável tiver significado. Quando a variável for <code>enum</code> padrão, nós excluimos os zeros à esquerda.</p>
+</li>
+<li>
+<p>Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.</p>
+</li>
+</ul>
 <h3 id="particionamento">Particionamento</h3>
-<p>Tabelas grandes ou com grande potencial de crescimento devem ser particionadas a fim de melhorarmos o desempenho de consulta e reduzir os custos.</p>
+<p>Uma tabela particionada é uma tabela especial dividida em segmentos, chamados de partições, que facilitam o gerenciamento e a consulta de seus dados. Ao dividir uma grande tabela em partições menores, você pode melhorar o desempenho da consulta e pode controlar os custos reduzindo o número de bytes lidos por uma consulta. Por isso, sempre recomendamos que tabelas grandes sejam particionadas. Leia mais a respeito na <a href="https://cloud.google.com/bigquery/docs/partitioned-tables">documentação da Google Cloud</a>.</p>
 <p>Em geral, o particionamento é feito sobre o valors de uma data criando-se três colunas novas cujos nomes são dados por: <code>ano_particao</code>, <code>mes_particao</code>, <code>data_particao</code> e que possuem os respectivos formatos 'YYYY', 'MM', 'YYYY-MM-DD'.</p>
 <p><strong>Datas nulas em coluna de particionamento</strong> - caso a coluna utilizada para particionamento seja nula, preencher esses valores pela Unix epoch (1 de janeiro de 1970).</p>
-<p>Em caso de necessidade de particionamento por outra coluna consultar o tópico "Particionamento de tabelas" no <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a>.</p>
+<h2 id="dados-mestres">Dados Mestres</h2>
+<p>Dados Mestres são as pedras fundamentais da estrutura do nosso <em>datalake</em>. Nossas regras para gerenciar esses dados são:</p>
+<ul>
+<li>Representam <em>entidades</em> do repositório que tenham chaves primárias (e.g. <code>bairro</code>, <code>logradouro</code>)</li>
+<li>Cada tabela tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: <code>bairro:id_bairro</code>, <code>logradouro:id_trecho</code>.</li>
+<li>Nomes de variáveis com prefixo <code>id_</code> são reservadas para chaves
+  primárias de entidades.</li>
+</ul>
+<p>Veja todas as <a href="https://www.data.rio/search?q=datalake">tabelas públicas já disponíveis aqui.</a></p>
+<h2 id="pensou-em-melhorias-para-os-padroes-definidos"><strong>Pensou em melhorias para os padrões definidos?</strong></h2>
+<p>Abra um <a href="https://github.com/prefeitura-rio/docs/issues/new/choose">issue no nosso Github</a> ou mande uma mensagem no <a href="https://discord.gg/WcvNkTbYdA">Discord</a> para conversarmos :)</p>
 
               
             </article>
