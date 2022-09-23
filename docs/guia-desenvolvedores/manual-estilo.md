@@ -66,7 +66,7 @@ Quando escolher:
  
 - `STRING`:
    - Colunas de texto
-   - Chaves de variáveis categóricas com dicionário
+   - Chaves de colunas categóricas com dicionário
 - `INT64`:
    - Colunas de números inteiros com as quais é possível fazer contas (adição, subtração).
 - `FLOAT64`:
@@ -79,26 +79,26 @@ Quando escolher:
    - Colunas de geografia.
  
  
-### Quais variáveis manter, quais adicionar e quais remover
+### Quais colunas manter, quais adicionar e quais remover
  
-Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais variáveis incluirmos em produção. Elas são:
+Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais colunas incluirmos em produção. Elas são:
  
-- Remover variáveis de nomes de entidades que já estão nos `dados_mestres`. Exemplo: retirar `bairro` da tabela que já inclui `id_bairro`.
-- Remover variáveis servindo de partição. Exemplo: remover `ano` e `id_bairro` se a tabela é particionada nessas duas dimensões.
+- Remover colunas de nomes de entidades que já estão nos `dados_mestres`. Exemplo: retirar `bairro` da tabela que já inclui `id_bairro`.
+- Remover colunas servindo de partição. Exemplo: remover `ano` e `id_bairro` se a tabela é particionada nessas duas dimensões.
 - Adicionar chaves primárias principais para cada entidade já existente. Exemplo: adicionar `id_bairro` a tabelas que só incluem `bairro`.
 - Manter todas as chaves primárias que já vem com a tabela, mas (1) adicionar chaves relevantes (e.g. `id_bairro`) e (2) retirar chaves irrelevantes (e.g. `regiao`).
  
  
 ### Limpando STRINGs
  
-- Variáveis categóricas: inicial maiúscula e resto minúsculo, com acentos.
+- Colunas categóricas: inicial maiúscula e resto minúsculo, com acentos.
 - STRINGs não-estruturadas: manter igual aos dados originais.
  
 ### Unidades de medida
  
-A regra é manter variáveis com suas unidades de medida originais, com a exceção de variáveis financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
+A regra é manter colunas com suas unidades de medida originais, com a exceção de colunas financeiras onde convertermos moedas antigas para as atuais (e.g. Cruzeiro para Real).
  
-Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
+Colunas devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao invés de `1000 BRL`, ou `pessoa` ao invés de `1000 pessoas`. Essa informação, como outros metadados de colunas, são registradas na tabela de arquitetura da tabela.
  
 ### Formatos de valores
  
@@ -111,11 +111,13 @@ Variáveis devem ter sempre unidades de medida com base 1. Ou seja, ter `BRL` ao
  
 ### Dicionários
  
+ A tabela template para preenchimento do dicionário pode ser [baixada aqui](https://docs.google.com/spreadsheets/d/1ZKsa1-DMTyfF6F3KtdKX2Zii4inCX_Hk/edit?usp=sharing&ouid=102857770245123086140&rtpof=true&sd=true)
+
 - Cada base inclui somente um dicionário (que cobre uma ou mais tabelas).
 - Para cada tabela, coluna, e cada chave mapeia unicamente um valor.
 - Chaves não podem ter valores nulos.
 - Dicionários devem cobrir todas as chaves disponíveis nas tabelas originais.
-- Chaves só podem possuir zeros à esquerda quando o número de dígitos da variável tiver significado. Quando a variável for `enum` padrão, nós excluimos os zeros à esquerda.
+- Chaves só podem possuir zeros à esquerda quando o número de dígitos da coluna tiver significado. Quando a coluna for `enum` padrão, nós excluimos os zeros à esquerda.
  
 - Valores são padronizados: sem espaços extras, inicial maiúscula e resto minúsculo, etc.
  
@@ -134,7 +136,7 @@ Dados Mestres são as pedras fundamentais da estrutura do nosso _datalake_. Noss
  
 - Representam _entidades_ do repositório que tenham chaves primárias (e.g. `bairro`, `logradouro`)
 - Cada tabela tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: `bairro:id_bairro`, `logradouro:id_trecho`.
-- Nomes de variáveis com prefixo `id_` são reservadas para chaves
+- Nomes de colunas com prefixo `id_` são reservadas para chaves
  primárias de entidades.
  
  
