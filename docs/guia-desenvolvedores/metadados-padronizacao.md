@@ -111,11 +111,11 @@ Nas figuras abaixo é possível verificar como ficaram os metadados dentro do [d
  
 ## Fluxo de Aprovação
  
-Antes de começar a construção do pipeline de dados é fundamental que tenhamos definidos quais serão os nomes do dataset, tabela e de cada uma das colunas.
+Antes de começar a construção da pipeline de dados é fundamental que tenhamos definidos quais serão os nomes do dataset, tabela e de cada uma das colunas.
  
-Para garantir que todas as nomenclaturas estejam de acordo com o padrão pré-definido, precisamos que cada tabela criada no data lake passe por um fluxo de aprovação.
+Para garantir que todas as nomenclaturas estejam de acordo com o padrão pré-definido, precisamos que cada tabela criada no datalake passe por um fluxo de aprovação.
  
-Esse fluxo inicia-se criando um card para cada uma das tabelas dentro do [Trello do Data Lake](https://trello.com/b/UwQB6YSJ/datalake-bases). Nesse Trello faremos o acompanhamento para todas as etapas de produtização dos dados.
+Esse fluxo inicia-se criando um card para cada uma das tabelas dentro do [Trello do DataLake](https://trello.com/b/UwQB6YSJ/datalake-bases). Nesse Trello faremos o acompanhamento para todas as etapas de produtização dos dados.
  
 Em seguida, deve-se criar uma pasta (se ela não existir) dentro da pasta "Bases" com o nome do seu dataset e copiando a mesma estrutura de arquitetura presente no [template](https://docs.google.com/spreadsheets/d/1fkeJyFbp95lkDjZ84CTNF6TB8Uc-rb9B/edit?usp=sharing&ouid=110461902090406283473&rtpof=true&sd=true). Nesse template, você deve preencher ambas as abas com as informações solicitadas, lembrando que os nomes devem seguir o padrão definido na [Ontologia das Bases](https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit?usp=sharing).
  
@@ -123,7 +123,7 @@ Os dados preenchidos devem ser validados em reunião com membros da IPLAN e do E
  
 Se tudo estiver aprovado, as mesmas informações da planilha do Google Sheets devem ser preenchidas no site do [meta.dados.rio](https://meta.dados.rio/admin) conforme explicitado anteriormente.
  
-E, por fim, pode-se dar início a construção do pipeline!
+E, por fim, pode-se dar início a construção da pipeline!
  
 ![Fluxo de Aprovação](../static/img/tutoriais/metadados-padronizacao/fluxo_aprovacao.png)
 

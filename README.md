@@ -17,7 +17,7 @@ Para adicionar seu arquivo no sumário da documentação, adicione-o em
 nav:
   - Home: index.md
   - Tutoriais:
-    - Como acessar dados no data lake: tutoriais/como-acessar-dados.md
+    - Como acessar dados no datalake: tutoriais/como-acessar-dados.md
   - Contato: contato.md
     - [Seu novo título]: <seu_arquivo>.md
 ```

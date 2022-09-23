@@ -1,4 +1,4 @@
-Olá! Quer acessar dados do data lake? Beleza! Esse guia tem como objetivo cobrir diversos cenários
+Olá! Quer acessar dados do datalake? Beleza! Esse guia tem como objetivo cobrir diversos cenários
 de acesso a eles. Mas, para isso, deixo aqui algumas perguntas e redirecionamentos que podem te ajudar:
 
 - **Ainda não sabe qual dado quer acessar?**
@@ -30,11 +30,11 @@ Você ainda não conhece o [data.rio](https://www.data.rio/)? 🤯
 ![Homepage do data.rio](../static/img/tutoriais/data-rio-home.png)
 
 O [data.rio](https://data.rio) é o portal de dados abertos da Prefeitura do Rio de Janeiro. Ele é estruturado e mantido
-pelo Instituto Pereira Passos. Nós, como Escritório de Dados, em parceria, disponibilizamos os dados do data lake lá também! 🤩
+pelo Instituto Pereira Passos. Nós, como Escritório de Dados, em parceria, disponibilizamos os dados do datalake lá também! 🤩
 
 Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
-### Identificando dados do data lake
+### Identificando dados do datalake
 
 === "Vídeo"
 
@@ -50,7 +50,7 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
     ![Pesquisa do data.rio](../static/img/tutoriais/data-rio-pesquisa.png)
 
     Rolando a página, ao lado esquerdo, você verá um campo "Tags". Ali, você pode utilizar a tag `escritorio_de_dados` para
-    encontrar os dados do data lake!
+    encontrar os dados do datalake!
 
     ![Tags do data.rio](../static/img/tutoriais/data-rio-tags.png)
 

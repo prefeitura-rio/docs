@@ -243,13 +243,13 @@ Ok, vamos voltar ao que viemos fazer: apresentar os componentes.
  
 - **Google Cloud Storage** é um serviço de armazenamento de objetos. Então, através de uma API, é
  possível fazer upload de qualquer tipo de arquivo, configurar permissões para ele e, caso tenha acesso,
- baixá-lo novamente. Além disso, você pode utilizá-lo como um _data lake_ em sua definição original -
+ baixá-lo novamente. Além disso, você pode utilizá-lo como um _datalake_ em sua definição original -
  você pode armazenar arquivos na mesma estrutura de partições Hive e obter seus dados particionados
  para consulta. Você, então, pode consultar seus dados com SQL no console do BigQuery.
  
 - **Google BigQuery** é um serviço de _data warehouse serverless_. Ele permite análises escalonáveis
  em petabytes (mil terabytes) de dados. Como mencionado anteriormente, você pode consumir dados de
- _data lakes_ hospedados no Google Cloud Storage mas, ao mesmo tempo, pode criar tabelas nativas,
+ _datalakes_ hospedados no Google Cloud Storage mas, ao mesmo tempo, pode criar tabelas nativas,
  que possuem performance muito superior.
  
 E aqui, então, finalizamos a apresentação de nossos componentes. Mas calma, ainda tem muita coisa
