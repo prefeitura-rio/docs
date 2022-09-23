@@ -59,26 +59,34 @@ A ordem das colunas em tabelas é padronizada para manter uma consistência no r
 - Agrupar e ordenar colunas por importância ou temas.
  
 ### Tipos de colunas
- 
-Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): `STRING`, `INT64`, `FLOAT64`, `DATE`, `TIME`, `GEOGRAPHY`.
- 
+
+Nós utilizamos algumas das opções de [tipos do BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types): STRING, INT64, FLOAT64, DATE, TIME, GEOGRAPHY.
+
 Quando escolher:
- 
-- `STRING`:
-   - Colunas de texto
-   - Chaves de colunas categóricas com dicionário
-- `INT64`:
-   - Colunas de números inteiros com as quais é possível fazer contas (adição, subtração).
-- `FLOAT64`:
-   - Colunas de números com casas decimais com as quais é possível fazer contas (adição, subtração).
-- `DATE`:
-   - Colunas de data no formato `YYYY-MM-DD`.
-- `TIME`:
-   - Colunas de tempo no formato `HH:MM:SS`.
-- `GEOGRAPHY`:
-   - Colunas de geografia.
- 
- 
+
+**STRING:**
+  
+- Colunas de texto
+- Chaves de colunas categóricas com dicionário
+
+**INT64:**
+
+- Colunas de números inteiros com as quais é possível fazer contas (adição, subtração).
+
+**FLOAT64**
+
+- Colunas de números com casas decimais com as quais é possível fazer contas (adição, subtração).
+
+**DATE:**
+
+- Colunas de data no formato `YYYY-MM-DD`.
+
+**TIME:**
+
+- Colunas de tempo no formato `HH:MM:SS`.
+**`GEOGRAPHY`:**
+- Colunas de geografia.
+
 ### Quais colunas manter, quais adicionar e quais remover
  
 Mantemos nossas tabelas parcialmente [normalizadas](https://www.guru99.com/database-normalization.html), e temos regras para quais colunas incluirmos em produção. Elas são:
