@@ -8,18 +8,19 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
 Aqui no Escritório de Dados armazenamos os seguintes campos no metadados:
  
 - A nível de tabela:
-   - descrição geral sobre o que são os dados;
-   - tags que ajudam a encontrar a tabela;
-   - categoria da tabela;
-   - órgão da prefeitura de origem dos dados;
-   - quem é a pessoa responsável pela publicação;
-   - frequência de atualização da tabela;
-   - entre outros...
+  - descrição geral sobre o que são os dados;
+  - tags que ajudam a encontrar a tabela;
+  - categoria da tabela;
+  - órgão da prefeitura de origem dos dados;
+  - quem é a pessoa responsável pela publicação;
+  - frequência de atualização da tabela;
+  - entre outros...
+
 - A nível de coluna:
-   - descrição de cada uma das colunas
-   - formato em que os dados estão salvos
-   - unidade de medida (se necessário)
-   - flag se a coluna tem dados sensíveis
+  - descrição de cada uma das colunas
+  - formato em que os dados estão salvos
+  - unidade de medida (se necessário)
+  - flag se a coluna tem dados sensíveis
  
 E essas informações estão salvas no [meta.dados.rio](https://meta.dados.rio/admin).
  
