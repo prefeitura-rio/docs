@@ -637,19 +637,18 @@
 <p>A estrutura utilizada para nomeação de tabelas seguirá boas práticas de nomeação. Entretanto, o objetivo principal é nomear de modo que seja possível identificar a essência da base disponível.
 É importante que os datasets possuam alguma granularidade, pois não queremos um unico dataset com dezenas de tabelas.</p>
 <p>Nomeamos datasets no formato <code>&lt;primeiro_nivel&gt;_&lt;segundo_nivel&gt;_&lt;terceiro_nivel&gt;</code>
-Portanto a composição dos nomes serão em dois níveis.</p>
+Portanto a composição dos nomes serão em três níveis.</p>
 <ul>
-<li><code>primeiro_nivel</code>: refere-se ao tema pertinente à área.</li>
-<li><code>segundo_nivel</code>: refere-se ao objeto do conjunto</li>
+<li><code>primeiro_nivel</code>: refere-se ao tema pertinente à área. <a href="https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit#gid=296761183">Lista de temas predefinidos</a></li>
+<li><code>segundo_nivel</code>: refere-se ao objeto do conjunto (opcional)</li>
 <li><code>terceiro_nivel</code>: refere-se à secretaria ou sistema (opcional)</li>
 </ul>
-<p>Exemplo: educacao_basica_aluno; educacao_basica_escola; meio_ambiente_clima_satelite; meio_ambiente_clima_radar</p>
+<p>Exemplo: <strong>educacao_basica_aluno</strong>; <strong>educacao_basica_escola</strong>; <strong>meio_ambiente_clima_satelite</strong>; <strong>meio_ambiente_clima_radar</strong>; <strong>adm_cor_comando</strong></p>
 <h3 id="tabelas-table_id">Tabelas (table_id)</h3>
 <p>Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temos algumas regras:</p>
 <ul>
-<li>Não incluir a unidade temporal no nome. Exemplo: educacao_basica.aluno, e não educacao_basica.aluno_ano</li>
-<li>Deixar nomes no singular. Exemplo: educacao_basica_escola.escola, e não educacao_basica_escola.escolas</li>
-<li>Uso de sinônimos para facilitar o entendimento do usuário. Exemplo: educacao_basica_avaliacao.prova_rio, e não educacao_basica_avaliacao.prova</li>
+<li>Não incluir a unidade temporal no nome. Exemplo: <strong>educacao_basica.aluno</strong>, e não <strong>educacao_basica.aluno_ano</strong></li>
+<li>Uso de sinônimos para facilitar o entendimento do usuário. Exemplo: <strong>educacao_basica_avaliacao.prova_rio</strong>, e não <strong>educacao_basica_avaliacao.avaliacao</strong></li>
 </ul>
 <h3 id="restricoes-de-nomeacao">Restrições de nomeação</h3>
 <p>Para mantermos uma consistência nas nomeações, são necessárias algumas restrições:</p>
@@ -657,9 +656,9 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <li>Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)</li>
 <li>Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por _</li>
 <li>Não incluir conectores como de, da, dos, e, a, em, etc.</li>
-<li>Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake. (ex: administracao_processo).</li>
-<li>Nenhuma palavra deve ser repetida no dataset<em>id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao</em>…)</li>
-<li>O dataset_id pode ser ser nomeado como "dados_mestres", caso a tabela em questão seja uma referência para outras tabelas de outros sistemas incluídos no datalake.</li>
+<li>Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake.</li>
+<li>Nenhuma palavra deve ser repetida no dataset_id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao)</li>
+<li>O dataset_id pode ser ser nomeado como <a href="./#dados-mestres">dados_mestres</a>, caso a tabela em questão seja uma referência para outras tabelas do datalake.</li>
 </ul>
 <p><strong>Referências:</strong></p>
 <ul>
@@ -670,7 +669,7 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <h2 id="nome-e-ordem-das-colunas">Nome e ordem das colunas</h2>
 <p>A ordem das colunas em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:</p>
 <ul>
-<li>Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: <code>ano</code>, <code>sigla_uf</code>, <code>id_municipio</code>, <code>id_escola</code>, <code>nota_ideb</code>.   </li>
+<li>Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: <strong>ano</strong>, <strong>sigla_uf</strong>, <strong>id_municipio</strong>, <strong>id_escola</strong>, <strong>nota_ideb</strong>.</li>
 <li>Agrupar e ordenar colunas por importância ou temas.</li>
 </ul>
 <h3 id="tipos-de-colunas">Tipos de colunas</h3>
