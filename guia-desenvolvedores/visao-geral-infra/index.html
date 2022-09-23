@@ -780,55 +780,53 @@ itens que mais foram convidativos para nós foram:</p>
 <p>E quando eu falo sobre facilidade de uso, eu realmente quero dizer que é muito fácil. Olha só esse
 exemplo: suponha que você tenha um código de extração de dados em Python puro, dá só uma olhada em
 como portá-lo para o Prefect.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python puro</label><label for="__tabbed_1_2">Prefect</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">data</span>
+<p>=== "Python puro"</p>
+<pre><code>```py
+def extrair_dados(url):
+    response = requests.get(url)
+    data = response.json()
+    return data
 
-<span class="k">def</span> <span class="nf">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
+def montar_dataframe(data):
+    df = pd.DataFrame(data)
+    return df
 
-<span class="k">def</span> <span class="nf">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
-    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dados.csv&#39;</span><span class="p">)</span>
+def salvar_dados(dataframe):
+    dataframe.to_csv('dados.csv')
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://url.da.api.que.voce.quer.extrair&#39;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">Flow</span>
+def main():
+    url = 'https://url.da.api.que.voce.quer.extrair'
+    data = extrair_dados(url)
+    dataframe = montar_dataframe(data)
+    salvar_dados(dataframe)
+```
+</code></pre>
+<p>=== "Prefect"</p>
+<pre><code>```py
+from prefect import task, Flow
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">data</span>
+@task
+def extrair_dados(url):
+    response = requests.get(url)
+    data = response.json()
+    return data
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
+@task
+def montar_dataframe(data):
+    df = pd.DataFrame(data)
+    return df
 
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
-    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dados.csv&#39;</span><span class="p">)</span>
+@task
+def salvar_dados(dataframe):
+    dataframe.to_csv('dados.csv')
 
-<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://url.da.api.que.voce.quer.extrair&#39;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="p">)</span>
-</code></pre></div>
-</div>
-</div>
-</div>
+with Flow("main") as flow:
+    url = 'https://url.da.api.que.voce.quer.extrair'
+    data = extrair_dados(url=url)
+    dataframe = montar_dataframe(data=data)
+    salvar_dados(dataframe=dataframe)
+```
+</code></pre>
 <p>Bom demais, né?</p>
 <h3 id="transformacoes-dbt">Transformações (DBT)</h3>
 <p>Aqui é onde a galera do SQL se empolga. O <a href="https://getdbt.com">DBT</a> é uma ferramenta de código aberto,

@@ -399,54 +399,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#como-estao-estruturados-os-dados-no-ed" class="md-nav__link">
-    Como estão estruturados os dados no ED?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quais-as-melhores-praticas-na-criacao-das-tabelas" class="md-nav__link">
-    Quais as melhores práticas na criação das tabelas?
-  </a>
-  
-    <nav class="md-nav" aria-label="Quais as melhores práticas na criação das tabelas?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#nome-do-dataset_id-e-table_id" class="md-nav__link">
-    Nome do dataset_id e table_id
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nome-e-ordem-das-colunas" class="md-nav__link">
-    Nome e ordem das colunas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conteudo-das-variaveis" class="md-nav__link">
-    Conteúdo das variáveis
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#particionamento" class="md-nav__link">
-    Particionamento
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#o-que-sao-metadados-e-para-o-que-servem" class="md-nav__link">
     O que são Metadados e para o que servem?
   </a>
@@ -461,19 +413,12 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#metadadosrio" class="md-nav__link">
-    meta.dados.rio
+  <a href="#o-portal-metadadosrio" class="md-nav__link">
+    O portal meta.dados.rio
   </a>
   
-    <nav class="md-nav" aria-label="meta.dados.rio">
+    <nav class="md-nav" aria-label="O portal meta.dados.rio">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#como-criar-uma-conta-acessar" class="md-nav__link">
-    Como criar uma conta/ acessar?
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#como-preencher" class="md-nav__link">
@@ -617,59 +562,6 @@
 
 
 <h1 id="metadados-padronizacao-e-normalizacao">Metadados, padronização e normalização</h1>
-<h2 id="como-estao-estruturados-os-dados-no-ed">Como estão estruturados os dados no ED?</h2>
-<p>A estrutura de dados utilizada segue a mesma hierarquia do BigQuery com project no nível mais alto, seguido de dataset e table.</p>
-<p><img alt="'Hierarquia de objetos'" src="https://cloud.google.com/static/bigquery/images/table-details.png?hl=pt-br" /></p>
-<p>Todo conjunto de dados terá obrigatoriamente 3 níveis de identificação sendo os dois primeiros para definir o nome do dataset_id e o último para definir o nome da tabela:</p>
-<table>
-<thead>
-<tr>
-<th>objeto</th>
-<th>formato</th>
-<th>exemplo</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>dataset_id</td>
-<td>&lt;primeiro_nivel>_&lt;segundo_nivel>_&lt;area ou tipo do conjunto (opcional)></td>
-<td>meio_ambiente_clima</td>
-</tr>
-<tr>
-<td>table_id</td>
-<td>&lt;nome da tabela></td>
-<td>taxa_precipitacao_satelite</td>
-</tr>
-</tbody>
-</table>
-<p>Nesse nosso caso em que temos uma tabela que contém informações sobre a quantidade de precipitação obtida por satélite a nomenclatura para acessarmos os dados dentro de um determinado projeto seria <em>meio_ambiente_clima.taxa_precipitacao_satelite</em> onde <em>meio_ambiente</em> se refere ao primeiro nível, <em>clima</em> ao segundo e <em>taxa_precipitacao_satelite</em> é o nome da tabela que corresponde ao terceiro nível.</p>
-<h2 id="quais-as-melhores-praticas-na-criacao-das-tabelas">Quais as melhores práticas na criação das tabelas?</h2>
-<h3 id="nome-do-dataset_id-e-table_id">Nome do dataset_id e table_id</h3>
-<p>Para saber quais as possibilidades de nomeação acesse essa <a href="https://docs.google.com/spreadsheets/d/1qcQjxhrWEkhQbG2tIag_fWx2vxtsktKtzB1hs4tUTvc/edit?usp=sharing">tabela</a>.</p>
-<p><strong>Restrições:</strong></p>
-<ul>
-<li>Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)</li>
-<li>Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por _</li>
-<li>Não incluir conectores como de, da, dos, e, a, em, etc.</li>
-<li>Não deve ser utilizado como segundo nível “Outros…”. Caso a categoria do seu conjunto não se encaixe em nenhuma das opções, é permitida a sugestão de novos termos desde que aprovado na reunião de Gestão do Datalake. (ex: administracao_processo).</li>
-<li>Nenhuma palavra deve ser repetida no dataset<em>id ou tabel_id (ex: educacao_basica.turmas deve ser usado, e não educacao_educacao</em>…)</li>
-<li>O dataset_id pode ser ser nomeado como "dados_mestres", caso a tabela em questão seja uma referência para outras tabelas de outros sistemas incluídos no datalake.</li>
-</ul>
-<p><strong>Referências:</strong></p>
-<ul>
-<li><a href="https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit#gid=637885056">Regras de Nomeação de conjutos do Escritório de Dados</a></li>
-<li><a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></li>
-<li><a href="https://github.com/RJ-SMTR/maestro/wiki/Ontologia-de-nomea%C3%A7%C3%A3o-Datasets-e-Tabelas">Ontologia SMTR</a></li>
-</ul>
-<h3 id="nome-e-ordem-das-colunas">Nome e ordem das colunas</h3>
-<p>O nome e a ordem das colunas tem que respeitar o mesmo padrão descrito nas partes "Nomeação de variáveis" e "Ordenamento de variáveis" do <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></p>
-<h3 id="conteudo-das-variaveis">Conteúdo das variáveis</h3>
-<p>Sobre o conteúdo das colunas deve-se respeitar o mesmo padrão descrito nas partes "Tipos de Variáveis", "Limpando STRINGs", "Formatos de valores" e "Quais variáveis manter, quais adicionar e quais remover" do <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a></p>
-<h3 id="particionamento">Particionamento</h3>
-<p>Tabelas grandes ou com grande potencial de crescimento devem ser particionadas a fim de melhorarmos o desempenho de consulta e reduzir os custos.</p>
-<p>Em geral, o particionamento é feito sobre o valors de uma data criando-se três colunas novas cujos nomes são dados por: <code>ano_particao</code>, <code>mes_particao</code>, <code>data_particao</code> e que possuem os respectivos formatos 'YYYY', 'MM', 'YYYY-MM-DD'.</p>
-<p><strong>Datas nulas em coluna de particionamento</strong> - caso a coluna utilizada para particionamento seja nula, preencher esses valores pela Unix epoch (1 de janeiro de 1970).</p>
-<p>Em caso de necessidade de particionamento por outra coluna consultar o tópico "Particionamento de tabelas" no <a href="https://basedosdados.github.io/mais/style_data/">Manual de estilo e diretrizes de dados - Documentação (Base dos Dados)</a>.</p>
 <h2 id="o-que-sao-metadados-e-para-o-que-servem">O que são Metadados e para o que servem?</h2>
 <p>Metadados são informações utilizadas para descrever tanto sobre do que se trata a tabela em específico quanto para descrever em profundidade o que são cada uma das suas colunas. Eles servem para facilitar o entendimento e a utilização dos dados.
 Dessa forma, para cada tabela criada precisamos especificar através dos metadados o que cada coluna significa e o seu formato.</p>
@@ -691,12 +583,12 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
 </ul>
 <p>E essas informações estão salvas no <a href="https://meta.dados.rio/admin">meta.dados.rio</a>.</p>
 <h2 id="tabela-de-arquitetura-e-normalizacao">Tabela de Arquitetura e Normalização</h2>
-<p>As tabelas de arquitetura determinam <strong>qual a estrutura de
-cada tabela do seu conjunto de dados</strong>. Elas definem, por exemplo, o nome, ordem e alguns metadados das colunas, e como uma coluna deve ser tratada quando há mudanças em versões (por exemplo, se uma coluna muda de nome de um ano para o outro).</p>
+<p>As tabelas de arquitetura auxiliam na determininação da <strong>estrutura de
+cada tabela do conjunto de dados</strong>. Elas definem, por exemplo, o nome, ordem e alguns metadados das colunas, e como uma coluna deve ser tratada quando há mudanças em versões (por exemplo, se uma coluna muda de nome de um ano para o outro).</p>
 <div class="admonition info">
 <p class="admonition-title">Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto).</p>
 </div>
-<p>As tabelas de arquitetura preenchidas <a href="https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n">podem ser consultadas aqui</a>, o <a href="https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv">template da pasta de arquitetura pode ser consultado aqui</a>. Seguindo nosso <a href="../manual-estilo/">manual de estilo</a>, nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas). </p>
+<p><a href="https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv">Baixe aqui</a> a pasta template e renomeie para o nome do seu conjunto de dados.  as tabelas de arquitetura preenchidas <a href="https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n">podem ser consultadas aqui</a>. Seguindo nosso <a href="../manual-estilo/">manual de estilo</a>, nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas).</p>
 <ul>
 <li>
 <p><code>Nome da coluna</code>: nome da coluna.</p>
@@ -714,11 +606,12 @@ cada tabela do seu conjunto de dados</strong>. Elas definem, por exemplo, o nome
 <p><code>Nome original da coluna YYYY</code>: indicar o nome original de cada coluna para cada ano, no formato <code>original_name_YYYY</code>. Essa etapa ajuda na normalização de tabelas, onde o nome de colunas podem mudar no tempo ou não existirem mais. Por isso, criamos colunas à direita  em ordem descendente (e.g. 2020, 2019, 2018, ...).</p>
 </li>
 </ul>
-<h2 id="metadadosrio">meta.dados.rio</h2>
+<h2 id="o-portal-metadadosrio">O portal meta.dados.rio</h2>
 <p>O <a href="https://meta.dados.rio/admin">meta.dados.rio</a> é o nosso repositório oficial de metadados. Podemos reaproveitar as informações já preenchidas na tabela de arquitetura para preencher os metadados das colunas</p>
 <p><img alt="Homepage do meta.dados.rio" src="../../static/img/tutoriais/metadados-padronizacao/metadadosrio.png" /></p>
 <p>Os valores a serem preenchidos em cada campo devem ter sido validados por um profissional da IPLAN. Para mais detalhes olhar a documentação sobre o "Fluxo de Aprovação" descrito nesse tutorial.</p>
-<h3 id="como-criar-uma-conta-acessar">Como criar uma conta/ acessar?</h3>
+<!-- ### Como criar uma conta/ acessar? -->
+
 <h3 id="como-preencher">Como preencher?</h3>
 <p>Toda vez que criamos uma tabela nova precisamos entrar no meta.dados.rio e preencher os campos de <code>Datasets</code> (caso ele não exista), <code>Projects</code> (caso ele não exista) e <code>Tables</code>.</p>
 <p>Dentro de <code>Datasets</code> podemos criar um dataset_id novo utilizando o botão <code>ADD Dataset</code> ou modificar alguma coisa ao clicar no nome do nosso dataset de interesse.</p>
