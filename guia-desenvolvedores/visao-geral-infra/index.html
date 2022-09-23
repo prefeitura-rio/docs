@@ -689,16 +689,16 @@ armazenamento, visto que os dados podem ter tamanhos e prioridades diferentes.</
 seguintes funcionalidades:</p>
 <ul>
 <li><strong>Capacidade de armazenamento e processamento "ilimitada"</strong>: não queremos nos preocupar em qual o tamanho do dado
-  que vamos armazenar, nós o queremos e ponto!</li>
+ que vamos armazenar, nós o queremos e ponto!</li>
 <li><strong>Otimização de processamento via particionamento e correlatos</strong>: para dados de grande volume, é
-  sempre interessante recorrer a mecanismos de particionamento e semelhantes para otimizar o processamento
-  e, consequentemente, os custos de uma consulta.</li>
+ sempre interessante recorrer a mecanismos de particionamento e semelhantes para otimizar o processamento
+ e, consequentemente, os custos de uma consulta.</li>
 <li><strong>Suporte a SQL</strong>: nós queremos usar a linguagem de consulta mais popular e acessível até o momento.</li>
 <li><strong>Funções de análise geoespacial</strong>: por se tratar de dados da cidade são, em maioria, geolocalizados.
-  Assim, ter funcionalidades de análise geoespacial é fundamental.</li>
+ Assim, ter funcionalidades de análise geoespacial é fundamental.</li>
 <li><strong>Governança simplificada</strong>: ter uma interface amigável para gerir o armazém de dados é fundamental.</li>
 <li><strong>Conexões com plataformas de desenvolvimento de dashboards</strong>: não adianta ter dados se não conseguimos
-  visualizá-los ou usá-los.</li>
+ visualizá-los ou usá-los.</li>
 <li><strong>Possibilidade de disponibilizar os dados publicamente</strong>: afinal, queremos que a comunidade acesse!</li>
 </ul>
 <h3 id="ingestao">Ingestão</h3>
@@ -743,15 +743,15 @@ conjunto dos que julgamos mais adequados para nossa infraestrutura que, de forma
 seguinte:</p>
 <ul>
 <li><strong>Escalonamento</strong>: todos os componentes devem funcionar bem para cargas de trabalho
-  pequenas, mas devem ter a possibilidade de suportar cargas de trabalho enormes.</li>
+ pequenas, mas devem ter a possibilidade de suportar cargas de trabalho enormes.</li>
 <li><strong>Liberdade</strong>: como estamos hospedando nossos serviços em nuvem, gostaríamos de ter a possibilidade
-  de transitar entre provedores com facilidade. Por isso, sempre que razoável, optamos por usar
-  software livre.</li>
+ de transitar entre provedores com facilidade. Por isso, sempre que razoável, optamos por usar
+ software livre.</li>
 <li><strong>Possibilidades</strong>: poder usufruir por completo de uma linguagem de programação, como Python, ou
-  de consulta, como SQL, permite fazer trabalhos extremamente complexos e replicáveis.</li>
+ de consulta, como SQL, permite fazer trabalhos extremamente complexos e replicáveis.</li>
 <li><strong>Descentralização</strong>: hospedar cargas de trabalho de todos os órgãos da prefeitura em servidores
-  separados permite um maior controle sobre os custos de cada órgão e dificulta condições em que
-  cargas de trabalho de um órgão poderia onerar outro.</li>
+ separados permite um maior controle sobre os custos de cada órgão e dificulta condições em que
+ cargas de trabalho de um órgão poderia onerar outro.</li>
 <li><strong>Simplicidade</strong>: menos é mais. Um sistema com poucos componentes é mais fácil de manter e entender.</li>
 </ul>
 <p>Claro que esses itens são muito abstratos e, sabendo disso, construímos um instrumento de avaliação
@@ -768,65 +768,61 @@ usufruir de suas funcionalidades. Mas, para nós, além da linda interface que e
 itens que mais foram convidativos para nós foram:</p>
 <ul>
 <li><strong>Confiança</strong>: é muito fácil lidar com falhas no Prefect, você não vai quebrar todo seu fluxo
-  de dados se algo ruim acontecer. Além disso, em nossos testes preliminares, conseguimos executar
-  mais de 10 mil pipelines por dia, consumindo poucos recursos, sem problemas.</li>
+ de dados se algo ruim acontecer. Além disso, em nossos testes preliminares, conseguimos executar
+ mais de 10 mil pipelines por dia, consumindo poucos recursos, sem problemas.</li>
 <li><strong>Modelo híbrido de execução</strong>: esse deve ser o item mais apelativo para todos que aderem o Prefect.
-  O <a href="https://www.prefect.io/why-prefect/hybrid-model/">modelo híbrido</a> dele permite que você tenha o servidor
-  hospedado em um local, seu código em outro e o ambiente de execução em um terceiro. Existe uma clara
-  separação de papeis que garante a segurança da execução do código e, de tabela, uma completa descentralização:
-  podemos executar pipelines de um órgão em um servidor, outro em outro e, ao mesmo tempo, conseguir
-  enxergar todas elas em uma única interface.</li>
+ O <a href="https://www.prefect.io/why-prefect/hybrid-model/">modelo híbrido</a> dele permite que você tenha o servidor
+ hospedado em um local, seu código em outro e o ambiente de execução em um terceiro. Existe uma clara
+ separação de papeis que garante a segurança da execução do código e, de tabela, uma completa descentralização:
+ podemos executar pipelines de um órgão em um servidor, outro em outro e, ao mesmo tempo, conseguir
+ enxergar todas elas em uma única interface.</li>
 </ul>
 <p>E quando eu falo sobre facilidade de uso, eu realmente quero dizer que é muito fácil. Olha só esse
 exemplo: suponha que você tenha um código de extração de dados em Python puro, dá só uma olhada em
 como portá-lo para o Prefect.</p>
 <p>=== "Python puro"</p>
-<pre><code>```py
-def extrair_dados(url):
-    response = requests.get(url)
-    data = response.json()
-    return data
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
 
-def montar_dataframe(data):
-    df = pd.DataFrame(data)
-    return df
+<span class="k">def</span> <span class="nf">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 
-def salvar_dados(dataframe):
-    dataframe.to_csv('dados.csv')
+<span class="k">def</span> <span class="nf">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dados.csv&#39;</span><span class="p">)</span>
 
-def main():
-    url = 'https://url.da.api.que.voce.quer.extrair'
-    data = extrair_dados(url)
-    dataframe = montar_dataframe(data)
-    salvar_dados(dataframe)
-```
-</code></pre>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://url.da.api.que.voce.quer.extrair&#39;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+</code></pre></div>
 <p>=== "Prefect"</p>
-<pre><code>```py
-from prefect import task, Flow
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span><span class="p">,</span> <span class="n">Flow</span>
 
-@task
-def extrair_dados(url):
-    response = requests.get(url)
-    data = response.json()
-    return data
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
 
-@task
-def montar_dataframe(data):
-    df = pd.DataFrame(data)
-    return df
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
 
-@task
-def salvar_dados(dataframe):
-    dataframe.to_csv('dados.csv')
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="p">):</span>
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;dados.csv&#39;</span><span class="p">)</span>
 
-with Flow("main") as flow:
-    url = 'https://url.da.api.que.voce.quer.extrair'
-    data = extrair_dados(url=url)
-    dataframe = montar_dataframe(data=data)
-    salvar_dados(dataframe=dataframe)
-```
-</code></pre>
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://url.da.api.que.voce.quer.extrair&#39;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">extrair_dados</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">montar_dataframe</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">salvar_dados</span><span class="p">(</span><span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="p">)</span>
+</code></pre></div>
 <p>Bom demais, né?</p>
 <h3 id="transformacoes-dbt">Transformações (DBT)</h3>
 <p>Aqui é onde a galera do SQL se empolga. O <a href="https://getdbt.com">DBT</a> é uma ferramenta de código aberto,
@@ -840,18 +836,18 @@ que consiste em adicionar novas linhas ao final de uma tabela.</p>
 valores de entrada. Não bastante, você pode especificar configurações de particionamento, dentre
 outras, diretamente no seu modelo de dados. Dá uma olhada só nesse exemplo:</p>
 <div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"></span>
-<span class="w">    </span><span class="n">config</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">partition_by</span><span class="o">=</span><span class="err">{</span><span class="w"></span>
-<span class="w">            </span><span class="ss">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;data_particao&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="ss">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;date&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="ss">&quot;granularity&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;month&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="err">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="n">config</span><span class="p">(</span><span class="w"></span>
+<span class="w">       </span><span class="n">materialized</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">       </span><span class="n">partition_by</span><span class="o">=</span><span class="err">{</span><span class="w"></span>
+<span class="w">           </span><span class="ss">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;data_particao&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="ss">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;date&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="ss">&quot;granularity&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;month&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">       </span><span class="err">}</span><span class="w"></span>
+<span class="w">   </span><span class="p">)</span><span class="w"></span>
 <span class="err">}}</span><span class="w"></span>
 
 <span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="o">*</span><span class="w"></span>
+<span class="w">   </span><span class="o">*</span><span class="w"></span>
 <span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">datario</span><span class="p">.</span><span class="n">dataset_id</span><span class="p">.</span><span class="n">table_id</span><span class="o">`</span><span class="w"></span>
 </code></pre></div>
 <p>Pode relaxar, você não precisa entender tudo desse modelo ainda, teremos guias para isso. Mas, apesar
@@ -871,16 +867,16 @@ Ok, vamos voltar ao que viemos fazer: apresentar os componentes.</p>
 <ul>
 <li>
 <p><strong>Google Cloud Storage</strong> é um serviço de armazenamento de objetos. Então, através de uma API, é
-  possível fazer upload de qualquer tipo de arquivo, configurar permissões para ele e, caso tenha acesso,
-  baixá-lo novamente. Além disso, você pode utilizá-lo como um <em>data lake</em> em sua definição original -
-  você pode armazenar arquivos na mesma estrutura de partições Hive e obter seus dados particionados
-  para consulta. Você, então, pode consultar seus dados com SQL no console do BigQuery.</p>
+ possível fazer upload de qualquer tipo de arquivo, configurar permissões para ele e, caso tenha acesso,
+ baixá-lo novamente. Além disso, você pode utilizá-lo como um <em>data lake</em> em sua definição original -
+ você pode armazenar arquivos na mesma estrutura de partições Hive e obter seus dados particionados
+ para consulta. Você, então, pode consultar seus dados com SQL no console do BigQuery.</p>
 </li>
 <li>
 <p><strong>Google BigQuery</strong> é um serviço de <em>data warehouse serverless</em>. Ele permite análises escalonáveis
-  em petabytes (mil terabytes) de dados. Como mencionado anteriormente, você pode consumir dados de
-  <em>data lakes</em> hospedados no Google Cloud Storage mas, ao mesmo tempo, pode criar tabelas nativas,
-  que possuem performance muito superior.</p>
+ em petabytes (mil terabytes) de dados. Como mencionado anteriormente, você pode consumir dados de
+ <em>data lakes</em> hospedados no Google Cloud Storage mas, ao mesmo tempo, pode criar tabelas nativas,
+ que possuem performance muito superior.</p>
 </li>
 </ul>
 <p>E aqui, então, finalizamos a apresentação de nossos componentes. Mas calma, ainda tem muita coisa
@@ -893,11 +889,11 @@ as partes inseridas no diagrama possuem a cor azul, assim fica mais fácil notar
 <p>Devido à separação de papéis nativa do Prefect, vamos separar essa subseção em três partes:</p>
 <ul>
 <li>O servidor: como estamos hospedando nosso back-end do Prefect, será mostrado onde ele está e
-  adaptações que fizemos para seu funcionamento seguro.</li>
+ adaptações que fizemos para seu funcionamento seguro.</li>
 <li>Os códigos: mostraremos onde ele fica (todos podem acessá-lo!)</li>
 <li>Os ambientes de execução: se você chegou a ler sobre o modelo híbrido do Prefect, sabe que ele
-  depende de <em>agents</em> para a execução de pipelines. Se você ainda não sabe do que se trata, tudo
-  certo, vamos abordar essa parte aqui também.</li>
+ depende de <em>agents</em> para a execução de pipelines. Se você ainda não sabe do que se trata, tudo
+ certo, vamos abordar essa parte aqui também.</li>
 </ul>
 <h4 id="servidor">Servidor</h4>
 <p>Esse subcomponente é o responsável por saber onde o código mora, suas versões, agendar execuções,
@@ -968,14 +964,14 @@ desde que os agentes tenham acesso à internet, eles podem estar em qualquer lug
 exemplificação, vamos incluir nesse esquema aí os seguintes agentes:</p>
 <ul>
 <li><code>rj-escritorio</code>: um agente nosso, do Escritório de Dados. Ele vai ficar hospedado no mesmo cluster
-  do servidor do Prefect, porém em um namespace diferente (você vai logo entender o motivo).</li>
+ do servidor do Prefect, porém em um namespace diferente (você vai logo entender o motivo).</li>
 <li><code>rj-escritorio-dev</code>: outro agente do Escritório de Dados, mas para desenvolvimento. Isso significa
-  que, caso tenhamos desenvolvido uma pipeline que está estável, mas ainda queremos testá-la bastante
-  antes de deixá-la definitiva, ela pode ser executada com esse agente. Ele também vai ficar hospedado
-  em um namespace exclusivo.</li>
+ que, caso tenhamos desenvolvido uma pipeline que está estável, mas ainda queremos testá-la bastante
+ antes de deixá-la definitiva, ela pode ser executada com esse agente. Ele também vai ficar hospedado
+ em um namespace exclusivo.</li>
 <li><code>rj-orgao</code>: um agente de um órgão qualquer da prefeitura. Ele vai ficar hospedado em um outro cluster
-  Kubernetes, (nesse cenário) pertencente a outro órgão. Isso permite uma clara divisão de custos com
-  infraestrutura, já que quem arcará com os custos das execuções de pipelines do órgão é o próprio órgão.</li>
+ Kubernetes, (nesse cenário) pertencente a outro órgão. Isso permite uma clara divisão de custos com
+ infraestrutura, já que quem arcará com os custos das execuções de pipelines do órgão é o próprio órgão.</li>
 </ul>
 <p>Incluindo no diagrama:</p>
 <p><img alt="Diagrama de hospedagem" src="../../static/img/tutoriais/visao-geral-infra/hospedagem-06.png" /></p>
@@ -1018,33 +1014,33 @@ da infraestrutura é o seguinte:</p>
 <ol>
 <li>Desenvolvemos o código para uma pipeline de dados no repositório <a href="https://github.com/prefeitura-rio/pipelines">prefeitura-rio/pipelines</a></li>
 <li>O <strong>GitHub</strong> armazena essas pipelines no <strong>Google Cloud Storage</strong> e diz ao <strong>Servidor do Prefect</strong>
-   onde elas estão.</li>
+  onde elas estão.</li>
 <li>Desenvolvemos códigos para transformações de dados em um repositório do estilo <code>queries-rj-&lt;nome do órgão&gt;</code>
-   (por exemplo, <a href="https://github.com/prefeitura-rio/queries-rj-escritorio">queries-rj-escritorio</a>).</li>
+  (por exemplo, <a href="https://github.com/prefeitura-rio/queries-rj-escritorio">queries-rj-escritorio</a>).</li>
 <li>O <strong>GitHub</strong> cria uma instância do <strong>DBT RPC</strong> para o namespace correspondente.</li>
 <li>O <strong>Agente do Prefect</strong> pergunta ao <strong>Servidor do Prefect</strong> se há alguma pipeline para ser executada.</li>
 <li>O <strong>Servidor do Prefect</strong> informa a ele qual pipeline deve ser executada.</li>
 <li>O <strong>Agente do Prefect</strong> lança a execução dessa pipeline, que pode ter um ou mais dos seguintes passos:
-   (1) extração dos dados; (2) upload dos dados para o <strong>Google Cloud Storage</strong>; (3) transformação dos
-   dados em tabelas nativas do <strong>Google BigQuery</strong> (usando os modelos do <strong>DBT</strong>);</li>
+  (1) extração dos dados; (2) upload dos dados para o <strong>Google Cloud Storage</strong>; (3) transformação dos
+  dados em tabelas nativas do <strong>Google BigQuery</strong> (usando os modelos do <strong>DBT</strong>);</li>
 </ol>
 <p>Vale, ainda, ressaltar como o upload dos dados para o <strong>Google Cloud Storage</strong> e a criação de tabelas
 externas no <strong>Google BigQuery</strong> são feitos. Para isso, usamos o pacote <code>basedosdados</code> (disponivel
 em Python ou CLI). Os dados irão passar por nossos componentes de armazenamento:</p>
 <ol>
 <li><strong>Google Cloud Storage (GCS)</strong>: local onde serão armazenados os arquivos brutos, geralmente <code>.csv</code>, mas
-   também aceita outros formatos como <code>.parquet</code> e arquivos compactados.</li>
+  também aceita outros formatos como <code>.parquet</code> e arquivos compactados.</li>
 <li><strong>Google BigQuery (BQ)</strong>: nossas tabelas serão separadas em dois datasets: o de <strong>staging</strong>, que terá o
-   nome no formato <code>dataset_id_staging</code>, contém as tabelas externas geradas a partir dos dados brutos
-   hospedados no <strong>GCS</strong>. Já o de <strong>produção</strong>, com nome no formato <code>dataset_id</code>, contém as tabelas
-   nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>. Vale ressaltar que o <strong>BQ</strong> possui 3 tipos diferentes de tabelas;</li>
+  nome no formato <code>dataset_id_staging</code>, contém as tabelas externas geradas a partir dos dados brutos
+  hospedados no <strong>GCS</strong>. Já o de <strong>produção</strong>, com nome no formato <code>dataset_id</code>, contém as tabelas
+  nativas já tratadas e padronizadas geradas pelo <strong>DBT</strong>. Vale ressaltar que o <strong>BQ</strong> possui 3 tipos diferentes de tabelas;</li>
 <li><strong>Tabelas Externas</strong>: Uma tabela externa funciona como uma tabela padrão do BigQuery. Os metadados da tabela, incluindo o esquema, são armazenados no BigQuery, mas os dados em si residem na fonte externa,como por exemplo <strong>GCS</strong>, <strong>Google Sheets</strong>, <strong>Google Drive</strong>, entre outros. Para mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/external-data-sources">como consultar fontes de dados externas.</a></li>
 <li><strong>Tabelas Nativas</strong>: Uma tabela nativa tem os dados armazenadas diretamente no <strong>BQ</strong>. Essas tabelas são extremamente rápidas, porem possuem apenas um nivel de particionamento com 4 mil partições.</li>
 <li><strong>Views</strong>: Uma view é uma tabela virtual definida por uma consulta SQL. Para mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/views">Como criar visualizações.</a></li>
 </ol>
 <p>A primeira etapa realizada pelo pacote <code>basedosdados</code> é o upload dos dados para o <strong>GCS</strong>. Lá, os
 dados serão salvos no bucket do projeto com o seguinte caminho: <code>project_id/dataset_id/table_id/data.csv</code>.</p>
-<p>Uma vez com os dados no <strong>GCS</strong>, são criados os dois datasets no <strong>BQ</strong> - de producão (<code>dataset_id</code>)
+<p>Uma vez com os dados no <strong>GCS</strong>, são criados os dois datasets no <strong>BQ</strong> - de produção (<code>dataset_id</code>)
 e staging (<code>dataset_id_staging</code>). Na ultima etapa, a tabela externa é criada no dataset de staging
 (<code>dataset_id_staging.table_id</code>), gerando um link entre os dados brutos armazenados no <strong>GCS</strong> e o <strong>BQ</strong>.
 Esse link permite a adição de novos dados no <strong>GCS</strong> sem a necessidade de recriação das tabelas do

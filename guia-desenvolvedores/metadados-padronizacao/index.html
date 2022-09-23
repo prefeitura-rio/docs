@@ -571,7 +571,7 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
 <li>descrição geral sobre o que são os dados;</li>
 <li>tags que ajudam a encontrar a tabela;</li>
 <li>categoria da tabela;</li>
-<li>orgão da prefeitura de origem dos dados;</li>
+<li>órgão da prefeitura de origem dos dados;</li>
 <li>quem é a pessoa responsável pela publicação;</li>
 <li>frequência de atualização da tabela;</li>
 <li>entre outros...</li>
@@ -583,21 +583,19 @@ Dessa forma, para cada tabela criada precisamos especificar através dos metadad
 </ul>
 <p>E essas informações estão salvas no <a href="https://meta.dados.rio/admin">meta.dados.rio</a>.</p>
 <h2 id="tabela-de-arquitetura-e-normalizacao">Tabela de Arquitetura e Normalização</h2>
-<p>As tabelas de arquitetura auxiliam na determininação da <strong>estrutura de
+<p>As tabelas de arquitetura auxiliam na determinação da <strong>estrutura de
 cada tabela do conjunto de dados</strong>. Elas definem, por exemplo, o nome, ordem e alguns metadados das colunas, e como uma coluna deve ser tratada quando há mudanças em versões (por exemplo, se uma coluna muda de nome de um ano para o outro).</p>
 <div class="admonition info">
 <p class="admonition-title">Cada tabela do conjunto de dados deve ter sua própria tabela de arquitetura (planilha), que pode ser preenchida no Google Drive ou localmente (Excel, editor de texto).</p>
 </div>
-<p><a href="https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv">Baixe aqui</a> a pasta template e renomeie para o nome do seu conjunto de dados.  as tabelas de arquitetura preenchidas <a href="https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n">podem ser consultadas aqui</a>. Seguindo nosso <a href="../manual-estilo/">manual de estilo</a>, nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas).</p>
+<p><a href="https://drive.google.com/drive/folders/11iW9q6ar1PloK6WpOHsE3-89lIs4Nfcv">Baixe aqui</a> a pasta template e renomeie para o nome do seu conjunto de dados.  as tabelas de arquitetura preenchidas <a href="https://drive.google.com/drive/folders/11nb5kl9h6xLsvEnYgQQYXpP7vPyfsK_n">podem ser consultadas aqui</a>. Seguindo nosso <a href="../manual-estilo/">manual de estilo</a>, nós renomeamos, definimos os tipos, preenchemos descrições e aplicamos a compatibilização entre anos para todas as variáveis (colunas).
+- <code>Nome da coluna</code>: nome da coluna.</p>
 <ul>
 <li>
-<p><code>Nome da coluna</code>: nome da coluna.</p>
+<p><code>Tipo da Coluna</code>: tipo de dado do BigQuery (veja quais são no nosso <a href="../manual-estilo/#tipos-de-colunas">manual de estilo</a>).</p>
 </li>
 <li>
-<p><code>Tipo da Coluna</code>: tipo de dado do BigQuery (veja quais são no nosso <a href="../manual-estilo/">manual de estilo</a>).</p>
-</li>
-<li>
-<p><code>Descrição da coluna</code>: descrição dos dados que estão nesta coluna. </p>
+<p><code>Descrição da coluna</code>: descrição dos dados que estão nesta coluna.</p>
 </li>
 <li>
 <p><code>Observações</code>: observações de tratamento que precisam ser evidenciados. Indicar, por exemplo, porque determinada coluna foi criada ou modificada.</p>
@@ -609,7 +607,7 @@ cada tabela do conjunto de dados</strong>. Elas definem, por exemplo, o nome, or
 <h2 id="o-portal-metadadosrio">O portal meta.dados.rio</h2>
 <p>O <a href="https://meta.dados.rio/admin">meta.dados.rio</a> é o nosso repositório oficial de metadados. Podemos reaproveitar as informações já preenchidas na tabela de arquitetura para preencher os metadados das colunas</p>
 <p><img alt="Homepage do meta.dados.rio" src="../../static/img/tutoriais/metadados-padronizacao/metadadosrio.png" /></p>
-<p>Os valores a serem preenchidos em cada campo devem ter sido validados por um profissional da IPLAN. Para mais detalhes olhar a documentação sobre o "Fluxo de Aprovação" descrito nesse tutorial.</p>
+<p>Os valores a serem preenchidos em cada campo devem ter sido validados por um profissional da IPLAN. Para mais detalhes olhar a documentação sobre o "Fluxo de Aprovação" descrito neste tutorial.</p>
 <!-- ### Como criar uma conta/ acessar? -->
 
 <h3 id="como-preencher">Como preencher?</h3>
@@ -636,7 +634,7 @@ cada tabela do conjunto de dados</strong>. Elas definem, por exemplo, o nome, or
 <li>Source database: Base de dados de origem.</li>
 <li>Source table: Nome da tabela de origem dos dados.</li>
 <li>Source query: Query utilizada na extração dos dados.</li>
-<li>Tags: Tags para facilitar a busca desses dados no <a href="https://www.data.rio">data.rio</a>. As tags obrigatórias estão relacionadas ao orgão que disponibilizou os dados (Ex: cor, alertario, sme, ...), sistema que originou os dados (Ex: comando), sinônimos, nome do dataset<em>id e table_id. As tags devem ser escritas em minúsculo, sem acentos e o espaçamento de palavras dado por </em>. Automaticamente são geradas as tags: escritorio_de_dados, datalake</li>
+<li>Tags: Tags para facilitar a busca desses dados no <a href="https://www.data.rio">data.rio</a>. As tags obrigatórias estão relacionadas ao órgão que disponibilizou os dados (Ex: cor, alertario, sme, ...), sistema que originou os dados (Ex: comando), sinônimos, nome do dataset<em>id e table_id. As tags devem ser escritas em minúsculo, sem acentos e o espaçamento de palavras dado por </em>. Automaticamente são geradas as tags: escritorio_de_dados, datalake</li>
 <li>Categories: selecionar quais categorias se adequam aos seus dados.</li>
 </ul>
 <p><img alt="Informações sobre a Tabela - parte 1" src="../../static/img/tutoriais/metadados-padronizacao/dataset-tabela_1.png" /></p>
@@ -664,7 +662,7 @@ cada tabela do conjunto de dados</strong>. Elas definem, por exemplo, o nome, or
 <p>Em seguida, deve-se criar uma pasta (se ela não existir) dentro da pasta "Bases" com o nome do seu dataset e copiando a mesma estrutura de arquitetura presente no <a href="https://docs.google.com/spreadsheets/d/1fkeJyFbp95lkDjZ84CTNF6TB8Uc-rb9B/edit?usp=sharing&amp;ouid=110461902090406283473&amp;rtpof=true&amp;sd=true">template</a>. Nesse template, você deve preencher ambas as abas com as informações solicitadas, lembrando que os nomes devem seguir o padrão definido na <a href="https://docs.google.com/spreadsheets/d/12A6NWEAPtYnFkeIMbBNSeq04PLSQJhPa4HIwaDXAo3I/edit?usp=sharing">Ontologia das Bases</a>.</p>
 <p>Os dados preenchidos devem ser validados em reunião com membros da IPLAN e do Escritório de Dados. <a href="https://docs.google.com/spreadsheets/d/1SrWMDLAL0eB4W1lfkHR0eBRMaEbdLBlA/edit?usp=sharing&amp;ouid=110461902090406283473&amp;rtpof=true&amp;sd=true">Aqui</a> temos como exemplo o preenchimento das informações da tabela de logradouros.</p>
 <p>Se tudo estiver aprovado, as mesmas informações da planilha do Google Sheets devem ser preenchidas no site do <a href="https://meta.dados.rio/admin">meta.dados.rio</a> conforme explicitado anteriormente.</p>
-<p>E, por fim, pode-se dar início a construção do pipeline! </p>
+<p>E, por fim, pode-se dar início a construção do pipeline!</p>
 <p><img alt="Fluxo de Aprovação" src="../../static/img/tutoriais/metadados-padronizacao/fluxo_aprovacao.png" /></p>
 
               

@@ -628,7 +628,7 @@
 
   <h1>Manual de Estilo</h1>
 
-<p>Nessa seção listamos todos os padrões do nosso manual de estilo e diretrizes de dados que usamos no Escritório de Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.</p>
+<p>Nesta seção listamos todos os padrões do nosso manual de estilo e diretrizes de dados que usamos no Escritório de Dados. Eles nos ajudam a manter os dados e metadados que publicamos com qualidade alta.</p>
 <h2 id="como-estao-estruturados-os-dados-no-ed">Como estão estruturados os dados no ED?</h2>
 <p>A estrutura de dados utilizada segue a mesma hierarquia do BigQuery com project no nível mais alto, seguido de dataset e table.</p>
 <p><img alt="'Hierarquia de objetos'" src="https://cloud.google.com/static/bigquery/images/table-details.png?hl=pt-br" /></p>
@@ -641,7 +641,7 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <ul>
 <li><code>primeiro_nivel</code>: refere-se ao tema pertinente à área.</li>
 <li><code>segundo_nivel</code>: refere-se ao objeto do conjunto</li>
-<li><code>terceiro_nivel</code>: refere-se a secretaria ou sistema (opcional)</li>
+<li><code>terceiro_nivel</code>: refere-se à secretaria ou sistema (opcional)</li>
 </ul>
 <p>Exemplo: educacao_basica_aluno; educacao_basica_escola; meio_ambiente_clima_satelite; meio_ambiente_clima_radar</p>
 <h3 id="tabelas-table_id">Tabelas (table_id)</h3>
@@ -652,7 +652,7 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <li>Uso de sinônimos para facilitar o entendimento do usuário. Exemplo: educacao_basica_avaliacao.prova_rio, e não educacao_basica_avaliacao.prova</li>
 </ul>
 <h3 id="restricoes-de-nomeacao">Restrições de nomeação</h3>
-<p>Para mantermos uma consistencia nas nomeações são necessarias algumas restrições:</p>
+<p>Para mantermos uma consistência nas nomeações são necessárias algumas restrições:</p>
 <ul>
 <li>Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)</li>
 <li>Ter todas letras minúsculas (inclusive siglas), sem acentos, conectados por _</li>
@@ -670,38 +670,26 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <h2 id="nome-e-ordem-das-colunas">Nome e ordem das colunas</h2>
 <p>A ordem das colunas em tabelas é padronizada para manter uma consistência no repositório. Nossas regras são:</p>
 <ul>
-<li>Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: <code>ano</code>, <code>sigla_uf</code>, <code>id_municipio</code>, <code>id_escola</code>, <code>nota_ideb</code>.    </li>
+<li>Chaves primárias à esquerda, em ordem descendente de abrangência. Exemplo de ordem: <code>ano</code>, <code>sigla_uf</code>, <code>id_municipio</code>, <code>id_escola</code>, <code>nota_ideb</code>.   </li>
 <li>Agrupar e ordenar colunas por importância ou temas.</li>
 </ul>
 <h3 id="tipos-de-colunas">Tipos de colunas</h3>
 <p>Nós utilizamos algumas das opções de <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types">tipos do BigQuery</a>: <code>STRING</code>, <code>INT64</code>, <code>FLOAT64</code>, <code>DATE</code>, <code>TIME</code>, <code>GEOGRAPHY</code>.</p>
 <p>Quando escolher:</p>
 <ul>
-<li><code>STRING</code>:<ul>
+<li><code>STRING</code>:</li>
 <li>Colunas de texto</li>
 <li>Chaves de variáveis categóricas com dicionário</li>
-</ul>
-</li>
-<li><code>INT64</code>:<ul>
+<li><code>INT64</code>:</li>
 <li>Colunas de números inteiros com as quais é possível fazer contas (adição, subtração).</li>
-</ul>
-</li>
-<li><code>FLOAT64</code>:<ul>
+<li><code>FLOAT64</code>:</li>
 <li>Colunas de números com casas decimais com as quais é possível fazer contas (adição, subtração).</li>
-</ul>
-</li>
-<li><code>DATE</code>:<ul>
+<li><code>DATE</code>:</li>
 <li>Colunas de data no formato <code>YYYY-MM-DD</code>.</li>
-</ul>
-</li>
-<li><code>TIME</code>:<ul>
+<li><code>TIME</code>:</li>
 <li>Colunas de tempo no formato <code>HH:MM:SS</code>.</li>
-</ul>
-</li>
-<li><code>GEOGRAPHY</code>:<ul>
+<li><code>GEOGRAPHY</code>:</li>
 <li>Colunas de geografia.</li>
-</ul>
-</li>
 </ul>
 <h3 id="quais-variaveis-manter-quais-adicionar-e-quais-remover">Quais variáveis manter, quais adicionar e quais remover</h3>
 <p>Mantemos nossas tabelas parcialmente <a href="https://www.guru99.com/database-normalization.html">normalizadas</a>, e temos regras para quais variáveis incluirmos em produção. Elas são:</p>
@@ -751,7 +739,7 @@ Portanto a composição dos nomes serão em dois níveis.</p>
 <li>Representam <em>entidades</em> do repositório que tenham chaves primárias (e.g. <code>bairro</code>, <code>logradouro</code>)</li>
 <li>Cada tabela tem ao menos uma chave primária com valores únicos e sem nulos. Exemplos: <code>bairro:id_bairro</code>, <code>logradouro:id_trecho</code>.</li>
 <li>Nomes de variáveis com prefixo <code>id_</code> são reservadas para chaves
-  primárias de entidades.</li>
+ primárias de entidades.</li>
 </ul>
 <p>Veja todas as <a href="https://www.data.rio/search?q=datalake">tabelas públicas já disponíveis aqui.</a></p>
 <h2 id="pensou-em-melhorias-para-os-padroes-definidos"><strong>Pensou em melhorias para os padrões definidos?</strong></h2>
