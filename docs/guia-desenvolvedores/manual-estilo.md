@@ -33,7 +33,7 @@ Nomear tabelas é algo menos estruturado e, por isso, requer bom senso. Mas temo
  
 ### Restrições de nomeação
  
-Para mantermos uma consistência nas nomeações são necessárias algumas restrições:
+Para mantermos uma consistência nas nomeações, são necessárias algumas restrições:
  
  
 - Ter sempre 2 níveis de identificação do dado: dataset_id (nome do conjunto) + table_id (nome da tabela)
