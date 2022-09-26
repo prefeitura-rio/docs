@@ -12,6 +12,8 @@ nav:
       - Metadados: guia-desenvolvedores/metadados.md
       - Desenvolvimento de pipelines de dados: guia-desenvolvedores/pipelines.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
+    - Governança:
+      - Compartilhamento de Dataset e Tabelas: governanca/governanca.md
     - Sobre:
       - Contato: contato.md
 
