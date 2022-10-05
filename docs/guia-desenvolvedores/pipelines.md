@@ -34,10 +34,208 @@ _Obs.:_ para a Prefeitura do Rio, já existem diversos agentes registrados, esse
 
 ## Desenvolvendo seu primeiro Flow
 
-> - Criar repositório de exemplo
-> - Criar tasks simples
-> - Criar Flow
-> - Executar Flow localmente
+Aqui, vamos tratar do desenvolvimento de uma pipeline de exemplo, que consiste em:
+
+1. Baixar dados de uma API;
+2. Converter esses dados em um formato tabular;
+3. Armazenar esses dados em um arquivo CSV.
+
+**Obs:** esse exemplo tratará exclusivamente de uma execução local, em sua máquina, sem interações com o servidor do Prefect ou mecanismos de armazenamento, como o Google Cloud Storage. Abaixo, nessa mesma página, haverão exemplos mais complexos.
+
+### Preparando o ambiente
+
+Requisitos:
+
+- Python 3.9, pois a versão deve coincidir com a que usamos
+- `pip`, para instalar dependências
+
+A primeira boa prática é criar um arquivo `requirements.txt` para armazenar as dependências do seu projeto. Nesse arquivo, você deve colocar todas as bibliotecas que serão utilizadas no desenvolvimento do seu _Flow_. O que vamos usar, por exemplo, é o seguinte:
+
+```
+prefect==0.15.9
+requests
+pandas
+```
+
+Note que o único pacote que tem sua versão especificada é o Prefect, pois a versão dele deve corresponder à que usamos em nossos servidores.
+
+Em seguida, para instalar as dependências declaradas nesse arquivo, você deve executar o seguinte comando:
+
+```bash
+pip install -r requirements.txt
+```
+
+E pronto, você já tem tudo o que precisa para começar a desenvolver seu _Flow_. Caso, no futuro, você deseje adicionar novas dependências, basta adicionar no arquivo `requirements.txt` e executar o comando acima novamente.
+
+Para manter um padrão de desenvolvimento, devemos criar os seguintes arquivos:
+
+- `tasks.py`: arquivo que conterá as funções que serão utilizadas no _Flow_.
+- `flows.py`: arquivo que conterá o _Flow_ propriamente dito.
+- `utils.py`: arquivo que conterá funções auxiliares, como por exemplo, funções para imprimir logs.
+
+### Criando funções auxiliares
+
+Começando então no arquivo `utils.py`, vamos criar uma função que imprime logs no console. Essa função será útil para acompanhar o andamento do _Flow_. Como é uma função que envolve conhecer o Prefect um pouquinho mais a fundo, vamos explicar o que ela faz.
+
+```python
+import prefect
+
+def log(message) -> None:
+    """Logs a message"""
+    prefect.context.logger.info(f"\n{message}")
+```
+
+A função `log` recebe uma mensagem e a imprime no console. Ela faz isso através do objeto `prefect.context.logger`, que é um objeto que contém o logger do Prefect. Esse logger é um objeto que está dentro do `prefect.context`, esse que contém informações sobre o _Flow_ e a execução atual, como por exemplo, o nome do _Flow_ e o ID da execução atual. Por isso, é importante que essa função seja chamada dentro de um _Flow_, pois ela depende do objeto `prefect.context` para funcionar.
+
+### Criando _tasks_
+
+Aqui é onde vamos criar as funções que implementam os passos da nossa pipeline. Essas funções serão chamadas de _tasks_. Então, abrindo o arquivo `tasks.py`, vamos criar as seguintes funções:
+
+```python
+from io import StringIO
+
+import pandas as pd
+from prefect import task
+import requests
+
+from utils import log
+
+@task
+def download_data(n_users: int) -> str:
+    """
+    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.
+
+    Args:
+        n_users (int): número de usuários a serem baixados.
+
+    Returns:
+        str: texto em formato CSV.
+    """
+    response = requests.get(
+        "https://randomuser.me/api/?results={}&format=csv".format(n_users)
+    )
+    log("Dados baixados com sucesso!")
+    return response.text
+
+@task
+def parse_data(data: str) -> pd.DataFrame:
+    """
+    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.
+
+    Args:
+        data (str): texto em formato CSV.
+
+    Returns:
+        pd.DataFrame: DataFrame do Pandas.
+    """
+    df = pd.read_csv(StringIO(data))
+    log("Dados convertidos em DataFrame com sucesso!")
+    return df
+
+@task
+def save_report(dataframe: pd.DataFrame) -> None:
+    """
+    Salva o DataFrame em um arquivo CSV.
+
+    Args:
+        dataframe (pd.DataFrame): DataFrame do Pandas.
+    """
+    dataframe.to_csv("report.csv", index=False)
+    log("Dados salvos em report.csv com sucesso!")
+```
+
+Como as funções estão comentadas, não há muito o que explicar. Mas vale ressaltar que elas são decoradas com o `@task`, que é um decorator do Prefect. Esse decorator é necessário para que o Prefect reconheça as funções como _tasks_.
+
+### Definindo o _Flow_
+
+Agora, vamos criar o _Flow_ propriamente dito. Aqui vamos definir como as _tasks_ interagem entre si e os parâmetros que elas recebem. Para isso, abra o arquivo `flows.py` e crie a seguinte função:
+
+```python
+from prefect import Flow, Parameter
+
+from tasks import (
+    download_data,
+    parse_data,
+    save_report,
+)
+
+with Flow("Users report") as flow:
+
+    # Parâmetros
+    n_users = Parameter("n_users", default=10)
+
+    # Tasks
+    data = download_data(n_users)
+    dataframe = parse_data(data)
+    save_report(dataframe)
+```
+
+Aqui, criamos um _Flow_ chamado `Users report` com o seguinte parâmetro:
+
+- `n_users`: número de usuários a serem baixados.
+
+Observe que foi configurado um valor padrão para esse parâmetro, que é 10. Isso significa que, caso o parâmetro não seja passado na hora de executar o _Flow_, ele será executado com o valor padrão.
+
+Além disso, inserimos as três _tasks_ que criamos anteriormente. Observe que a _task_ `download_data` recebe o parâmetro `n_users` como argumento. Isso significa que, quando a _task_ for executada, ela receberá o valor do parâmetro `n_users` como argumento. Depois disso, a _task_ `parse_data` recebe o retorno da _task_ `download_data` como argumento, fazendo com que o dado baixado seja passado a ela, para converter em um DataFrame. Por fim, a _task_ `save_report` recebe o retorno da _task_ `parse_data` como argumento, fazendo com que o DataFrame seja salvo em um arquivo CSV.
+
+### Executando
+
+Ufa! Com tudo pronto, vamos executar o _Flow_! Para facilitar a execução, vamos criar um arquivo `run.py` e colocar o seguinte código nele:
+
+```python
+from flows import flow
+
+flow.run()
+```
+
+Depois, podemos executar o _Flow_ com o seguinte comando:
+
+```bash
+python3 run.py
+```
+
+A saída deve ser semelhante ao seguinte:
+
+```
+[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Beginning Flow run for 'Users report'
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'n_users': Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'n_users': Finished task run for task with final state: 'Success'
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'download_data': Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.download_data |
+Dados baixados com sucesso!
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'download_data': Finished task run for task with final state: 'Success'
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'parse_data': Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.parse_data |
+Dados convertidos em DataFrame com sucesso!
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'parse_data': Finished task run for task with final state: 'Success'
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'save_report': Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.save_report |
+Dados salvos em report.csv com sucesso!
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task 'save_report': Finished task run for task with final state: 'Success'
+[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
+```
+
+Observe que um arquivo chamado `report.csv` foi criado. Esse arquivo contém os dados baixados e convertidos em um DataFrame.
+
+Observe também que as mensagens de log foram impressas na saída. Isso acontece porque, como vimos anteriormente, as funções `log` são decoradas com o `@task`, que é um decorator do Prefect. Isso faz com que o Prefect reconheça as funções como _tasks_ e, por isso, as mensagens de log são impressas na saída.
+
+### Executando com parâmetros
+
+Agora, vamos executar o _Flow_ passando um valor para o parâmetro `n_users`. Para isso, vamos modificar o arquivo `run.py` para o seguinte:
+
+```python
+from flows import flow
+
+flow.run(n_users=20)
+```
+
+Novamente, podemos executar o _Flow_ com o seguinte comando:
+
+```bash
+python3 run.py
+```
+
+E pronto! O _Flow_ foi executado com sucesso e um arquivo `report.csv` foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro `n_users` foi passado com o valor 20.
 
 <!-- ## O repositório de pipelines
 
