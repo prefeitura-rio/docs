@@ -420,47 +420,53 @@
     Desenvolvendo seu primeiro Flow
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o-repositorio-de-pipelines" class="md-nav__link">
-    O repositório de pipelines
+    <nav class="md-nav" aria-label="Desenvolvendo seu primeiro Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparando-o-ambiente" class="md-nav__link">
+    Preparando o ambiente
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#concatenando-flows" class="md-nav__link">
-    Concatenando Flows
+        
+          <li class="md-nav__item">
+  <a href="#criando-funcoes-auxiliares" class="md-nav__link">
+    Criando funções auxiliares
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#adicionando-dependencias" class="md-nav__link">
-    Adicionando dependências
+        
+          <li class="md-nav__item">
+  <a href="#criando-tasks" class="md-nav__link">
+    Criando tasks
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#como-testar-pipelines-em-diversos-ambientes" class="md-nav__link">
-    Como testar pipelines em diversos ambientes
+        
+          <li class="md-nav__item">
+  <a href="#definindo-o-flow" class="md-nav__link">
+    Definindo o Flow
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#colocando-uma-pipeline-em-producao" class="md-nav__link">
-    Colocando uma pipeline em produção
+        
+          <li class="md-nav__item">
+  <a href="#executando" class="md-nav__link">
+    Executando
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#ui-do-prefect" class="md-nav__link">
-    UI do Prefect
+        
+          <li class="md-nav__item">
+  <a href="#executando-com-parametros" class="md-nav__link">
+    Executando com parâmetros
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -567,23 +573,193 @@
 
   <h1>Desenvolvimento de pipelines de dados</h1>
 
+<p>Como você deve se recordar, no capítulo sobre <a href="/guia-desenvolvedores/visao-geral-infra">Visão geral da infraestrutura</a>, comentamos sobre o Prefect, que é a ferramenta que utilizamos para automatizar os processos de ETL (Extração, Transformação e Carga de Dados). Neste capítulo, vamos aprofundar um pouco sobre o funcionamento do Prefect e desenvolver uma pipeline de exemplo.</p>
 <h2 id="como-o-prefect-funciona">Como o Prefect funciona?</h2>
-<blockquote>
-<p>Falar do que ele faz, do modelo de execução híbrida, etc.</p>
-</blockquote>
+<p>O Prefect trabalha em um <strong>modelo híbrido</strong>: a <strong>orquestração</strong> de tarefas é feita em um servidor, os <strong>códigos</strong> das tarefas são armazenados em outro e a <strong>execução</strong> é feita em um terceiro. Essa arquitetura permite a descentralização completa das execuções em diferentes centros de custo, além de permitir uma maior privacidade e segurança de todos os servidores envolvidos. Para entender melhor como isso funciona, traduzimos e adaptamos <a href="https://www.prefect.io/why-prefect/hybrid-model/">um texto extraído do site oficial do Prefect</a>, que mostra os passos de desenvolvimento com Prefect:</p>
+<p><img alt="Passo 1: Construir seu Flow" src="../../static/img/tutoriais/pipelines/step1.png" /></p>
+<p><strong>Passo 1: Construir seu <em>Flow</em></strong>: uma pipeline, no Prefect, recebe o nome de <em>Flow</em>. Você deve utilizar o pacote Python <code>prefect</code> (em nosso caso, na versão 0.15.9) para desenvolver seu fluxo de trabalho. Depois de desenvolver, você pode executá-lo e testá-lo em sua máquina.</p>
+<p><img alt="Passo 2: Registrar seu Flow" src="../../static/img/tutoriais/pipelines/step2.png" /></p>
+<p><strong>Passo 2: Registrar seu <em>Flow</em></strong>: esse passo consiste em armazenar seu código em um repositório de objetos, em nosso caso o Google Cloud Storage, de forma que ele possa ser acessado posteriormente. Depois de armazená-lo, sabendo sua localização, você envia esse metadado para o servidor do Prefect (registra o <em>Flow</em>). Isso permite que você possa localizá-lo na interface web do Prefect e inspecioná-lo.</p>
+<p><em>Obs.:</em> no caso das pipelines desenvolvidas em nosso repositório no GitHub, esse processo de registrar <em>Flows</em> é automatizado.</p>
+<p><img alt="Passo 3: Executar um Agent" src="../../static/img/tutoriais/pipelines/step3.png" /></p>
+<p><strong>Passo 3: Executar um agente</strong>: agentes do Prefect são processos que se comunicam com o servidor do Prefect, procurando por cargas de trabalho agendada. Quando ele encontra, lança sua execução. Agentes podem ser executados em qualquer lugar, o que permite que as cargas de trabalho sejam lançadas em diferentes centros de custo.</p>
+<p><em>Obs.:</em> para a Prefeitura do Rio, já existem diversos agentes registrados, esse passo não será necessário.</p>
+<p><img alt="Passo 4: Agendar cargas de trabalho" src="../../static/img/tutoriais/pipelines/step4.png" /></p>
+<p><strong>Passo 4: Agendar cargas de trabalho</strong>: você pode agendar cargas de trabalho para serem executadas em um determinado horário, ou com certa recorrência. Você pode fazer isso através do próprio código, em Python (recomendado para manter consistência), ou através da interface web do Prefect.</p>
+<p><img alt="Passo 5: Executar o _Flow_" src="../../static/img/tutoriais/pipelines/step5.png" /></p>
+<p><strong>Passo 5: Executar o <em>Flow</em></strong>: o agente do Prefect encontrará a carga de trabalho agendada e a executará. Dessa forma, a carga de trabalho será executada onde o agente estiver rodando. Ao mesmo tempo, todo o processo de execução e logs poderão ser acompanhados através da interface web do Prefect, já que o agente os comunica ao servidor.</p>
+<p><img alt="Passo 6: Monitorar e gerenciar" src="../../static/img/tutoriais/pipelines/step6.png" /></p>
+<p><strong>Passo 6: Monitorar e gerenciar</strong>: você pode monitorar e gerenciar as cargas de trabalho através da interface web do Prefect. Você pode ver o status de cada carga de trabalho, visualizar os logs, inspecionar o código, etc. de quaisquer cargas de trabalho, seja em execução ou já finalizadas.</p>
 <h2 id="desenvolvendo-seu-primeiro-flow">Desenvolvendo seu primeiro Flow</h2>
-<blockquote>
-<p>Escrever tasks simples, juntar tasks</p>
-</blockquote>
-<h2 id="o-repositorio-de-pipelines">O repositório de pipelines</h2>
-<blockquote>
-<p>Estrutura organizacional, CLI (manage.py), Actions, utils (fazer subseção só pro utils)</p>
-</blockquote>
-<h2 id="concatenando-flows">Concatenando Flows</h2>
-<h2 id="adicionando-dependencias">Adicionando dependências</h2>
-<h2 id="como-testar-pipelines-em-diversos-ambientes">Como testar pipelines em diversos ambientes</h2>
-<h2 id="colocando-uma-pipeline-em-producao">Colocando uma pipeline em produção</h2>
-<h2 id="ui-do-prefect">UI do Prefect</h2>
+<p>Aqui, vamos tratar do desenvolvimento de uma pipeline de exemplo, que consiste em:</p>
+<ol>
+<li>Baixar dados de uma API;</li>
+<li>Converter esses dados em um formato tabular;</li>
+<li>Armazenar esses dados em um arquivo CSV.</li>
+</ol>
+<p><strong>Obs:</strong> esse exemplo tratará exclusivamente de uma execução local, em sua máquina, sem interações com o servidor do Prefect ou mecanismos de armazenamento, como o Google Cloud Storage. Abaixo, nessa mesma página, haverão exemplos mais complexos.</p>
+<h3 id="preparando-o-ambiente">Preparando o ambiente</h3>
+<p>Requisitos:</p>
+<ul>
+<li>Python 3.9, pois a versão deve coincidir com a que usamos</li>
+<li><code>pip</code>, para instalar dependências</li>
+</ul>
+<p>A primeira boa prática é criar um arquivo <code>requirements.txt</code> para armazenar as dependências do seu projeto. Nesse arquivo, você deve colocar todas as bibliotecas que serão utilizadas no desenvolvimento do seu <em>Flow</em>. O que vamos usar, por exemplo, é o seguinte:</p>
+<div class="highlight"><pre><span></span><code>prefect==0.15.9
+requests
+pandas
+</code></pre></div>
+<p>Note que o único pacote que tem sua versão especificada é o Prefect, pois a versão dele deve corresponder à que usamos em nossos servidores.</p>
+<p>Em seguida, para instalar as dependências declaradas nesse arquivo, você deve executar o seguinte comando:</p>
+<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
+</code></pre></div>
+<p>E pronto, você já tem tudo o que precisa para começar a desenvolver seu <em>Flow</em>. Caso, no futuro, você deseje adicionar novas dependências, basta adicionar no arquivo <code>requirements.txt</code> e executar o comando acima novamente.</p>
+<p>Para manter um padrão de desenvolvimento, devemos criar os seguintes arquivos:</p>
+<ul>
+<li><code>tasks.py</code>: arquivo que conterá as funções que serão utilizadas no <em>Flow</em>.</li>
+<li><code>flows.py</code>: arquivo que conterá o <em>Flow</em> propriamente dito.</li>
+<li><code>utils.py</code>: arquivo que conterá funções auxiliares, como por exemplo, funções para imprimir logs.</li>
+</ul>
+<h3 id="criando-funcoes-auxiliares">Criando funções auxiliares</h3>
+<p>Começando então no arquivo <code>utils.py</code>, vamos criar uma função que imprime logs no console. Essa função será útil para acompanhar o andamento do <em>Flow</em>. Como é uma função que envolve conhecer o Prefect um pouquinho mais a fundo, vamos explicar o que ela faz.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">prefect</span>
+
+<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Logs a message&quot;&quot;&quot;</span>
+    <span class="n">prefect</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>A função <code>log</code> recebe uma mensagem e a imprime no console. Ela faz isso através do objeto <code>prefect.context.logger</code>, que é um objeto que contém o logger do Prefect. Esse logger é um objeto que está dentro do <code>prefect.context</code>, esse que contém informações sobre o <em>Flow</em> e a execução atual, como por exemplo, o nome do <em>Flow</em> e o ID da execução atual. Por isso, é importante que essa função seja chamada dentro de um <em>Flow</em>, pois ela depende do objeto <code>prefect.context</code> para funcionar.</p>
+<h3 id="criando-tasks">Criando <em>tasks</em></h3>
+<p>Aqui é onde vamos criar as funções que implementam os passos da nossa pipeline. Essas funções serão chamadas de <em>tasks</em>. Então, abrindo o arquivo <code>tasks.py</code>, vamos criar as seguintes funções:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">log</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_users (int): número de usuários a serem baixados.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: texto em formato CSV.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s2">&quot;https://randomuser.me/api/?results=</span><span class="si">{}</span><span class="s2">&amp;format=csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados baixados com sucesso!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (str): texto em formato CSV.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame do Pandas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados convertidos em DataFrame com sucesso!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pd.DataFrame): DataFrame do Pandas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;report.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados salvos em report.csv com sucesso!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Como as funções estão comentadas, não há muito o que explicar. Mas vale ressaltar que elas são decoradas com o <code>@task</code>, que é um decorator do Prefect. Esse decorator é necessário para que o Prefect reconheça as funções como <em>tasks</em>.</p>
+<h3 id="definindo-o-flow">Definindo o <em>Flow</em></h3>
+<p>Agora, vamos criar o <em>Flow</em> propriamente dito. Aqui vamos definir como as <em>tasks</em> interagem entre si e os parâmetros que elas recebem. Para isso, abra o arquivo <code>flows.py</code> e crie a seguinte função:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Parameter</span>
+
+<span class="kn">from</span> <span class="nn">tasks</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">download_data</span><span class="p">,</span>
+    <span class="n">parse_data</span><span class="p">,</span>
+    <span class="n">save_report</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;Users report&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
+
+    <span class="c1"># Parâmetros</span>
+    <span class="n">n_users</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;n_users&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Tasks</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+</code></pre></div>
+<p>Aqui, criamos um <em>Flow</em> chamado <code>Users report</code> com o seguinte parâmetro:</p>
+<ul>
+<li><code>n_users</code>: número de usuários a serem baixados.</li>
+</ul>
+<p>Observe que foi configurado um valor padrão para esse parâmetro, que é 10. Isso significa que, caso o parâmetro não seja passado na hora de executar o <em>Flow</em>, ele será executado com o valor padrão.</p>
+<p>Além disso, inserimos as três <em>tasks</em> que criamos anteriormente. Observe que a <em>task</em> <code>download_data</code> recebe o parâmetro <code>n_users</code> como argumento. Isso significa que, quando a <em>task</em> for executada, ela receberá o valor do parâmetro <code>n_users</code> como argumento. Depois disso, a <em>task</em> <code>parse_data</code> recebe o retorno da <em>task</em> <code>download_data</code> como argumento, fazendo com que o dado baixado seja passado a ela, para converter em um DataFrame. Por fim, a <em>task</em> <code>save_report</code> recebe o retorno da <em>task</em> <code>parse_data</code> como argumento, fazendo com que o DataFrame seja salvo em um arquivo CSV.</p>
+<h3 id="executando">Executando</h3>
+<p>Ufa! Com tudo pronto, vamos executar o <em>Flow</em>! Para facilitar a execução, vamos criar um arquivo <code>run.py</code> e colocar o seguinte código nele:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flows</span> <span class="kn">import</span> <span class="n">flow</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<p>Depois, podemos executar o <em>Flow</em> com o seguinte comando:</p>
+<div class="highlight"><pre><span></span><code>python3 run.py
+</code></pre></div>
+<p>A saída deve ser semelhante ao seguinte:</p>
+<div class="highlight"><pre><span></span><code>[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Beginning Flow run for &#39;Users report&#39;
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;n_users&#39;: Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;n_users&#39;: Finished task run for task with final state: &#39;Success&#39;
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;download_data&#39;: Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.download_data |
+Dados baixados com sucesso!
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;download_data&#39;: Finished task run for task with final state: &#39;Success&#39;
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;parse_data&#39;: Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.parse_data |
+Dados convertidos em DataFrame com sucesso!
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;parse_data&#39;: Finished task run for task with final state: &#39;Success&#39;
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;save_report&#39;: Starting task run...
+[2022-10-05 14:40:40-0300] INFO - prefect.save_report |
+Dados salvos em report.csv com sucesso!
+[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;save_report&#39;: Finished task run for task with final state: &#39;Success&#39;
+[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
+</code></pre></div>
+<p>Observe que um arquivo chamado <code>report.csv</code> foi criado. Esse arquivo contém os dados baixados e convertidos em um DataFrame.</p>
+<p>Observe também que as mensagens de log foram impressas na saída. Isso acontece porque, como vimos anteriormente, as funções <code>log</code> são decoradas com o <code>@task</code>, que é um decorator do Prefect. Isso faz com que o Prefect reconheça as funções como <em>tasks</em> e, por isso, as mensagens de log são impressas na saída.</p>
+<h3 id="executando-com-parametros">Executando com parâmetros</h3>
+<p>Agora, vamos executar o <em>Flow</em> passando um valor para o parâmetro <code>n_users</code>. Para isso, vamos modificar o arquivo <code>run.py</code> para o seguinte:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flows</span> <span class="kn">import</span> <span class="n">flow</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_users</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+<p>Novamente, podemos executar o <em>Flow</em> com o seguinte comando:</p>
+<div class="highlight"><pre><span></span><code>python3 run.py
+</code></pre></div>
+<p>E pronto! O <em>Flow</em> foi executado com sucesso e um arquivo <code>report.csv</code> foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro <code>n_users</code> foi passado com o valor 20.</p>
+<!-- ## O repositório de pipelines
+
+
+## Concatenando Flows
+
+## Adicionando dependências
+
+## Como testar pipelines em diversos ambientes
+
+## Colocando uma pipeline em produção
+
+## UI do Prefect -->
 
               
             </article>
