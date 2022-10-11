@@ -345,6 +345,26 @@
     Requisitos
   </a>
   
+    <nav class="md-nav" aria-label="Requisitos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pessoas-externas-a-pcrj" class="md-nav__link">
+    Pessoas externas à PCRJ
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pessoas-internas-a-pcrj" class="md-nav__link">
+    Pessoas internas à PCRJ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -691,12 +711,8 @@ melhor ainda! Basta olhar aqui ao lado, no menu de navegação, a seção que me
 pelo Instituto Pereira Passos. Nós, como Escritório de Dados, em parceria, disponibilizamos os dados do datalake lá também! 🤩</p>
 <p>Tome um tempo para navegar pelo site e conhecer os dados disponíveis!</p>
 <h3 id="identificando-dados-do-datalake">Identificando dados do datalake</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Vídeo</label><label for="__tabbed_1_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Texto</label><label for="__tabbed_1_2">Vídeo</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/phbzdxVWE78" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/muALqUbzFt0" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-</div>
 <div class="tabbed-block">
 <p>Na <a href="https://www.data.rio/search">página de pesquisa</a> do data.rio, você poderá buscar por dados das mais
 diversas formas. Ao acessá-la, você deve encontrar algo assim:</p>
@@ -708,14 +724,24 @@ encontrar os dados do datalake!</p>
 <p><img alt="Página de dados do data.rio" src="../../static/img/tutoriais/data-rio-exemplo.png" /></p>
 <p>Ali tem tudo que você precisa saber sobre o dado e diversas maneiras de acessá-lo! 💥</p>
 </div>
+<div class="tabbed-block">
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/phbzdxVWE78" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/muALqUbzFt0" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+</div>
 </div>
 </div>
 <h2 id="como-criar-uma-conta-na-gcp">Como criar uma conta na GCP</h2>
 <h3 id="requisitos">Requisitos</h3>
+<h4 id="pessoas-externas-a-pcrj">Pessoas externas à PCRJ</h4>
 <ul>
 <li>Ter uma conta Google válida (um Gmail, por exemplo)</li>
 <li>Cartão de crédito (em alguns poucos casos a GCP exige o cadastro do cartão de crédito. Apesar de ser necessário, a GCP provê 1TB de consumo de dados gratuitamente todo mês, dentre outras coisas e é possível ativar o sandbox posteriormente.
   Para mais informações, veja <a href="#referencias">referências</a>)</li>
+</ul>
+<h4 id="pessoas-internas-a-pcrj">Pessoas internas à PCRJ</h4>
+<ul>
+<li>Preencher o formulário de <a href="https://docs.google.com/forms/d/e/1FAIpQLSfgokhri9-7m31IYNh-O-ZuTRIv_BXmSYDX-cmtqAhVW8bOUg/viewform">Solicitação de criação de credenciais de acesso aos dados</a> também disponível dentro do botão institucional na ṕágina Datalake do <a href="https://www.dados.rio/">Escritório de Dados</a>.</li>
+<li>Ter uma conta @dados.rio. Vocês devem usar somente essa conta para todo o resto do tutorial.</li>
 </ul>
 <h3 id="criando-uma-conta">Criando uma conta</h3>
 <ul>
@@ -723,7 +749,7 @@ encontrar os dados do datalake!</p>
 </ul>
 <p><img alt="Tela do GCP Console" src="../../static/img/tutoriais/criar-conta-gcp.png" /></p>
 <ul>
-<li>Faça login com sua conta Google</li>
+<li>Faça login com sua conta Google ou sua conta @dados.rio para acesso institucional. Nesse último caso, não aparecerá a opção de adicionar cartão de crédito.</li>
 </ul>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sem cartão de crédito</label><label for="__tabbed_2_2">Com cartão de crédito</label></div>
 <div class="tabbed-content">
@@ -759,14 +785,15 @@ encontrar os dados do datalake!</p>
 </ul>
 <p><img alt="Selecionando projetos" src="../../static/img/tutoriais/selecionar-projeto.png" /></p>
 <ul>
-<li>Clique na opção "Novo projeto"</li>
+<li>Se você não possui e-mail institucional escolha a opção <em>Sem organização</em>, caso contrário selecione <em>dados.rio</em>. Depois, clique na opção "Novo projeto".</li>
 </ul>
-<p><img alt="Novo projeto" src="../../static/img/tutoriais/novo-projeto.png" /></p>
+<p><img alt="Novo projeto" src="../../static/img/tutoriais/novo-projeto.png" width="50%" /></p>
+<p>Se você for redirecionado para a página da imagem abaixo, clique em <strong>Criar projeto</strong>.</p>
+<p><img alt="Novo projeto 2" src="../../static/img/tutoriais/novo-projeto_2.png" width="80%" /></p>
 <ul>
-<li>Preencha o nome e o ID do projeto. Por questões de organização, sugerimos que o ID do projeto seja o mesmo do nome do projeto.
-  Ambos devem ter hífens (<code>-</code>) no lugar de espaços.</li>
+<li>Preencha o nome do projeto lembrando que esse é um projeto só seu. Logo abaixo do nome do projeto haverá a possibilidade de alterar o ID do projeto. Por questões de organização, sugerimos que o ID do projeto seja o mesmo do nome do projeto e que a separação seja feita por hífens (<code>-</code>) no lugar de espaços. Para as pessoas que acessarem com um e-mail institucional (@dados.rio) deverá ser escolhida a opção de <em>dados.rio</em> do campo <em>Organização</em>. Para os demais, pode deixar essa opção marca com <em>Sem organização</em>.</li>
 </ul>
-<p><img alt="Preenchendo dados do projeto" src="../../static/img/tutoriais/preencher-projeto.png" /></p>
+<p><img alt="Preenchendo dados do projeto" src="../../static/img/tutoriais/preencher-projeto.png" width="90%" /></p>
 <ul>
 <li>Clique em "Criar". Você será redirecionado para a página inicial do console da GCP. Quando o projeto tiver sido criado,
   clique em "Selecionar projeto".</li>
@@ -774,15 +801,15 @@ encontrar os dados do datalake!</p>
 <p><img alt="Selecionando projeto criado" src="../../static/img/tutoriais/selecionar-projeto-criado.png" /></p>
 <p>Parabéns! Você já pode usar o Google BigQuery! 🎉</p>
 <h2 id="acessando-dados-via-bigquery">Acessando dados via BigQuery</h2>
-<p>Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQuery. Vamos lá!</p>
+<p>Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQuery. Vamos lá! <img alt="😃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f603.svg" title=":smiley:" /></p>
 <h3 id="adicionando-o-projeto-do-escritorio-de-dados">Adicionando o projeto do Escritório de Dados</h3>
 <ul>
 <li>No <a href="https://console.cloud.google.com/">GCP Console</a>, verifique se você está com o projeto correto selecionado e,
-  em seguida, clique no ícone de hamburguér.</li>
+  em seguida, clique no ícone de hambúrguer.</li>
 </ul>
 <p><img alt="Selecionando icone hamburguer" src="../../static/img/tutoriais/console-hamburguer.png" /></p>
 <ul>
-<li>Procure, na lista, o serviço "BigQuery". Passe o mouse por cima e selecione "Espaço de trabalho SQL".</li>
+<li>Procure na lista do hambúrguer o serviço "BigQuery". Passe o mouse por cima e selecione "Espaço de trabalho SQL".</li>
 </ul>
 <p>🆘 Se tiver dificuldade em encontrar o BigQuery, pode procurar por ele na barra de pesquisa lá em cima!.</p>
 <p><img alt="Abrindo BigQuery" src="../../static/img/tutoriais/abrindo-bigquery.png" /></p>
@@ -792,26 +819,33 @@ encontrar os dados do datalake!</p>
 </ul>
 <p><img alt="Console do BigQuery" src="../../static/img/tutoriais/console-bq.png" /></p>
 <ul>
-<li>Na barra <strong>Explorer</strong>, clique em "+ Adicionar dados" para adicionar novos projetos. Depois, clique em
-  "Pin a project" e "Search for project".</li>
+<li>Na barra <strong>Explorer</strong>, clique nas três bolinhas verticais e depois em "+ Adicionar dados" para adicionar novos projetos. Para algumas pessoas o botão "+ Adicionar dados" aparerá diretamente.</li>
 </ul>
-<p><img alt="Procurando projeto" src="../../static/img/tutoriais/procurar-projeto.png" /></p>
+<p><img alt="Procurando projeto" src="../../static/img/tutoriais/adicionar-dados.png" /></p>
+<ul>
+<li>Depois, clique em "Fixar um projeto por nome".</li>
+</ul>
+<p><img alt="Procurando projeto" src="../../static/img/tutoriais/adicionar-dados_2.png" /></p>
 <ul>
 <li>Em seguida, procure pelo projeto <strong>datario</strong>, que se refere aos dados disponibilizados pela equipe
-  do Escritório de Dados Rio. Ao encontrar, clique em "Abrir".</li>
+  do Escritório de Dados Rio. Ao encontrar, clique em "Fixar".</li>
 </ul>
-<p><img alt="Adicionando datario" src="../../static/img/tutoriais/add-projeto-datario.png" /></p>
+<p><img alt="Adicionando datario" src="../../static/img/tutoriais/fixar-projeto.png" /></p>
 <ul>
-<li>Agora o projeto <strong>datario</strong> estará aparecendo em sua aba "Explorer". Ao navegar por ele, verá algo semelhante
-  ao seguinte:</li>
+<li>Depois de alguns segundos o projeto <strong>datario</strong> estará aparecendo em sua aba "Explorer". Ao navegar por ele, verá algo semelhante ao seguinte:</li>
 </ul>
-<p><img alt="Dados do datario" src="../../static/img/tutoriais/dados-datario.png" /></p>
+<p><img alt="Dados do datario" src="../../static/img/tutoriais/dados-datario.png" width="90%" /></p>
+<p>Agora você está pronto para utilizar os dados abertos da Prefeitura do Rio de Janeiro!  <img alt="😉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f609.svg" title=":wink:" /></p>
+<p>Se você trabalha para a prefeitura e quer adicionar os demais projetos que tem acesso, basta seguir o mesmo passo mostrado anteriormente e buscar o nome do projeto da sua secretaria ou órgão. Exemplo de projetos internos:</p>
+<ul>
+<li>rj-cor</li>
+<li>rj-escritorio</li>
+<li>rj-segovi</li>
+<li>rj-sme</li>
+</ul>
 <h3 id="fazendo-sua-primeira-query-e-usando-os-resultados">Fazendo sua primeira query e usando os resultados</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Vídeo</label><label for="__tabbed_3_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Texto</label><label for="__tabbed_3_2">Vídeo</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/-UFJL2sO4PI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-</div>
 <div class="tabbed-block">
 <ul>
 <li>Pode-se fazer uma query nessa tabela clicando em "Query" ou nos três pontinhos verticais e escolhendo
@@ -842,14 +876,14 @@ encontrar os dados do datalake!</p>
 <p><img alt="Criar schedule" src="../../static/img/tutoriais/criar-schedule.png" /></p>
 <p>E é isso! Agora é hora de voar! 🚀</p>
 </div>
+<div class="tabbed-block">
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/-UFJL2sO4PI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+</div>
 </div>
 </div>
 <h3 id="navegando-pelos-dados">Navegando pelos dados</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Vídeo</label><label for="__tabbed_4_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Texto</label><label for="__tabbed_4_2">Vídeo</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/qepmsnhtPWs" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-</div>
 <div class="tabbed-block">
 <ul>
 <li>Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
@@ -866,6 +900,9 @@ encontrar os dados do datalake!</p>
 </ul>
 <p><img alt="Ver tabela pt3" src="../../static/img/tutoriais/ver-tabela-3.png" /></p>
 </div>
+<div class="tabbed-block">
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/qepmsnhtPWs" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
+</div>
 </div>
 </div>
 <h2 id="acessando-dados-via-python">Acessando dados via Python</h2>
@@ -876,11 +913,8 @@ encontrar os dados do datalake!</p>
 <li><a href="https://github.com/basedosdados/mais">basedosdados</a> (instale com <code>pip install basedosdados</code>)</li>
 </ul>
 <h3 id="fazendo-uma-query">Fazendo uma query</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Vídeo</label><label for="__tabbed_5_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Texto</label><label for="__tabbed_5_2">Vídeo</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/pKpe2QQQrdI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-</div>
 <div class="tabbed-block">
 <p>A seguir, vamos consultar dados da maneira mais simples possível. Se liga só nesse snippet curtinho
 mas SUPER poderoso 💪:</p>
@@ -897,6 +931,9 @@ ao nome do projeto. No caso da imagem abaixo, seria <code>"primeiro-projeto-3500
 <p>E assim que autorizar, você vai ter seu dado lindo de bonito já em um DataFrame do <a href="https://pandas.pydata.org/">Pandas</a>!
 É pura magia 🪄</p>
 <p><img alt="Dataframe" src="../../static/img/tutoriais/resultado-python.png" /></p>
+</div>
+<div class="tabbed-block">
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/pKpe2QQQrdI" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
 </div>
 </div>
 </div>
@@ -922,11 +959,8 @@ Você pode acessá-lo <a href="https://docs.microsoft.com/pt-br/power-bi/connect
 Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.</p>
 <p><strong>3 - Filtrar a partição</strong></p>
 <p>Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Vídeo</label><label for="__tabbed_6_2">Texto</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Texto</label><label for="__tabbed_6_2">Vídeo</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
-<p><div class="video-container"><iframe src="https://www.youtube.com/embed/lE84-6zeyIw" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
-</div>
 <div class="tabbed-block">
 <p><img alt="Partição da tabela" src="../../static/img/tutoriais/particao-tabela.png" /></p>
 <p>Como vimos na imagem acima, a tabela <code>datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite</code> é particionada pela coluna <code>data_particao</code>. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:</p>
@@ -939,6 +973,9 @@ Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a qu
 Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
 <img alt="Partição da tabela 4" src="../../static/img/tutoriais/particao-tabela-4.png" /></p>
 <p>Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!</p>
+</div>
+<div class="tabbed-block">
+<p><div class="video-container"><iframe src="https://www.youtube.com/embed/lE84-6zeyIw" style="position: relative; width: 100%; height: 22.172vw" frameborder="0" allowfullscreen></iframe></div></p>
 </div>
 </div>
 </div>
