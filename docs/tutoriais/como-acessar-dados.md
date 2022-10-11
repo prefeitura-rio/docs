@@ -36,12 +36,6 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
 ### Identificando dados do datalake
 
-=== "Vídeo"
-
-    ![type:video](https://www.youtube.com/embed/phbzdxVWE78)
-
-    ![type:video](https://www.youtube.com/embed/muALqUbzFt0)
-
 === "Texto"
 
     Na [página de pesquisa](https://www.data.rio/search) do data.rio, você poderá buscar por dados das mais
@@ -60,13 +54,25 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
     Ali tem tudo que você precisa saber sobre o dado e diversas maneiras de acessá-lo! 💥
 
+=== "Vídeo"
+
+    ![type:video](https://www.youtube.com/embed/phbzdxVWE78)
+
+    ![type:video](https://www.youtube.com/embed/muALqUbzFt0)
+
 ## Como criar uma conta na GCP
 
-### Requisitos
+### Requisitos 
+#### Pessoas externas à PCRJ
 
 - Ter uma conta Google válida (um Gmail, por exemplo)
 - Cartão de crédito (em alguns poucos casos a GCP exige o cadastro do cartão de crédito. Apesar de ser necessário, a GCP provê 1TB de consumo de dados gratuitamente todo mês, dentre outras coisas e é possível ativar o sandbox posteriormente.
   Para mais informações, veja [referências](#referencias))
+
+#### Pessoas internas à PCRJ
+
+- Preencher o formulário de [Solicitação de criação de credenciais de acesso aos dados](https://docs.google.com/forms/d/e/1FAIpQLSfgokhri9-7m31IYNh-O-ZuTRIv_BXmSYDX-cmtqAhVW8bOUg/viewform) também disponível dentro do botão institucional na ṕágina Datalake do [Escritório de Dados](https://www.dados.rio/).
+- Ter uma conta @dados.rio. Vocês devem usar somente essa conta para todo o resto do tutorial.
 
 ### Criando uma conta
 
@@ -74,7 +80,7 @@ Tome um tempo para navegar pelo site e conhecer os dados disponíveis!
 
 ![Tela do GCP Console](../static/img/tutoriais/criar-conta-gcp.png)
 
-- Faça login com sua conta Google
+- Faça login com sua conta Google ou sua conta @dados.rio para acesso institucional. Nesse último caso, não aparecerá a opção de adicionar cartão de crédito.
 
 === "Sem cartão de crédito"
 
@@ -106,14 +112,17 @@ Para consumir dados via Google BigQuery, será necessário criar um projeto na G
 
 ![Selecionando projetos](../static/img/tutoriais/selecionar-projeto.png)
 
-- Clique na opção "Novo projeto"
+- Se você não possui e-mail institucional escolha a opção _Sem organização_, caso contrário selecione _dados.rio_. Depois, clique na opção "Novo projeto".
 
-![Novo projeto](../static/img/tutoriais/novo-projeto.png)
+![Novo projeto](../static/img/tutoriais/novo-projeto.png){ width=50% }
 
-- Preencha o nome e o ID do projeto. Por questões de organização, sugerimos que o ID do projeto seja o mesmo do nome do projeto.
-  Ambos devem ter hífens (`-`) no lugar de espaços.
+Se você for redirecionado para a página da imagem abaixo, clique em **Criar projeto**.
 
-![Preenchendo dados do projeto](../static/img/tutoriais/preencher-projeto.png)
+![Novo projeto 2](../static/img/tutoriais/novo-projeto_2.png){ width=80% }
+
+- Preencha o nome do projeto lembrando que esse é um projeto só seu. Logo abaixo do nome do projeto haverá a possibilidade de alterar o ID do projeto. Por questões de organização, sugerimos que o ID do projeto seja o mesmo do nome do projeto e que a separação seja feita por hífens (`-`) no lugar de espaços. Para as pessoas que acessarem com um e-mail institucional (@dados.rio) deverá ser escolhida a opção de _dados.rio_ do campo *Organização*. Para os demais, pode deixar essa opção marca com _Sem organização_.
+
+![Preenchendo dados do projeto](../static/img/tutoriais/preencher-projeto.png){ width=90% }
 
 - Clique em "Criar". Você será redirecionado para a página inicial do console da GCP. Quando o projeto tiver sido criado,
   clique em "Selecionar projeto".
@@ -124,16 +133,16 @@ Parabéns! Você já pode usar o Google BigQuery! 🎉
 
 ## Acessando dados via BigQuery
 
-Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQuery. Vamos lá!
+Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQuery. Vamos lá! :smiley:
 
 ### Adicionando o projeto do Escritório de Dados
 
 - No [GCP Console](https://console.cloud.google.com/), verifique se você está com o projeto correto selecionado e,
-  em seguida, clique no ícone de hamburguér.
+  em seguida, clique no ícone de hambúrguer.
 
 ![Selecionando icone hamburguer](../static/img/tutoriais/console-hamburguer.png)
 
-- Procure, na lista, o serviço "BigQuery". Passe o mouse por cima e selecione "Espaço de trabalho SQL".
+- Procure na lista do hambúrguer o serviço "BigQuery". Passe o mouse por cima e selecione "Espaço de trabalho SQL".
 
 🆘 Se tiver dificuldade em encontrar o BigQuery, pode procurar por ele na barra de pesquisa lá em cima!.
 
@@ -144,26 +153,33 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
 ![Console do BigQuery](../static/img/tutoriais/console-bq.png)
 
-- Na barra **Explorer**, clique em "+ Adicionar dados" para adicionar novos projetos. Depois, clique em
-  "Pin a project" e "Search for project".
+- Na barra **Explorer**, clique nas três bolinhas verticais e depois em "+ Adicionar dados" para adicionar novos projetos. Para algumas pessoas o botão "+ Adicionar dados" aparerá diretamente.
 
-![Procurando projeto](../static/img/tutoriais/procurar-projeto.png)
+![Procurando projeto](../static/img/tutoriais/adicionar-dados.png)
+
+- Depois, clique em "Fixar um projeto por nome".
+
+![Procurando projeto](../static/img/tutoriais/adicionar-dados_2.png)
 
 - Em seguida, procure pelo projeto **datario**, que se refere aos dados disponibilizados pela equipe
-  do Escritório de Dados Rio. Ao encontrar, clique em "Abrir".
+  do Escritório de Dados Rio. Ao encontrar, clique em "Fixar".
 
-![Adicionando datario](../static/img/tutoriais/add-projeto-datario.png)
+![Adicionando datario](../static/img/tutoriais/fixar-projeto.png)
 
-- Agora o projeto **datario** estará aparecendo em sua aba "Explorer". Ao navegar por ele, verá algo semelhante
-  ao seguinte:
+- Depois de alguns segundos o projeto **datario** estará aparecendo em sua aba "Explorer". Ao navegar por ele, verá algo semelhante ao seguinte:
 
-![Dados do datario](../static/img/tutoriais/dados-datario.png)
+![Dados do datario](../static/img/tutoriais/dados-datario.png){ width=90% }
+
+Agora você está pronto para utilizar os dados abertos da Prefeitura do Rio de Janeiro!  :wink:
+
+Se você trabalha para a prefeitura e quer adicionar os demais projetos que tem acesso, basta seguir o mesmo passo mostrado anteriormente e buscar o nome do projeto da sua secretaria ou órgão. Exemplo de projetos internos:
+
+  - rj-cor
+  - rj-escritorio
+  - rj-segovi
+  - rj-sme
 
 ### Fazendo sua primeira query e usando os resultados
-
-=== "Vídeo"
-
-    ![type:video](https://www.youtube.com/embed/-UFJL2sO4PI)
 
 === "Texto"
 
@@ -197,11 +213,10 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
     E é isso! Agora é hora de voar! 🚀
 
-### Navegando pelos dados
-
 === "Vídeo"
 
-    ![type:video](https://www.youtube.com/embed/qepmsnhtPWs)
+    ![type:video](https://www.youtube.com/embed/-UFJL2sO4PI)
+### Navegando pelos dados
 
 === "Texto"
 
@@ -219,6 +234,10 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
     ![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
 
+=== "Vídeo"
+
+    ![type:video](https://www.youtube.com/embed/qepmsnhtPWs)
+
 ## Acessando dados via Python
 
 Então você quer acessar os dados **diretamente** via Python? A gente te dá uma força! 👨‍💻
@@ -229,10 +248,6 @@ Então você quer acessar os dados **diretamente** via Python? A gente te dá um
 - [basedosdados](https://github.com/basedosdados/mais) (instale com `pip install basedosdados`)
 
 ### Fazendo uma query
-
-=== "Vídeo"
-
-    ![type:video](https://www.youtube.com/embed/pKpe2QQQrdI)
 
 === "Texto"
 
@@ -259,6 +274,10 @@ Então você quer acessar os dados **diretamente** via Python? A gente te dá um
     É pura magia 🪄
 
     ![Dataframe](../static/img/tutoriais/resultado-python.png)
+
+=== "Vídeo"
+
+    ![type:video](https://www.youtube.com/embed/pKpe2QQQrdI)
 
 ## Acessando dados via R
 
@@ -294,10 +313,6 @@ Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota
 
 Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.
 
-=== "Vídeo"
-
-    ![type:video](https://www.youtube.com/embed/lE84-6zeyIw)
-
 === "Texto"
 
     ![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
@@ -316,6 +331,10 @@ Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partiç
     ![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
 
     Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
+
+=== "Vídeo"
+
+    ![type:video](https://www.youtube.com/embed/lE84-6zeyIw)
 
 Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!
 
