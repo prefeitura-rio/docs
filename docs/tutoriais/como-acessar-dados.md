@@ -155,7 +155,7 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 
 - Na barra **Explorer**, clique nas três bolinhas verticais e depois em "+ Adicionar dados" para adicionar novos projetos. Para algumas pessoas o botão "+ Adicionar dados" aparerá diretamente.
 
-![Procurando projeto](../static/img/tutoriais/adicionar-dados.png)
+![Procurando projeto](../static/img/tutoriais/adicionar-dados.png){ width=90% }
 
 - Depois, clique em "Fixar um projeto por nome".
 
@@ -164,7 +164,7 @@ Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQu
 - Em seguida, procure pelo projeto **datario**, que se refere aos dados disponibilizados pela equipe
   do Escritório de Dados Rio. Ao encontrar, clique em "Fixar".
 
-![Adicionando datario](../static/img/tutoriais/fixar-projeto.png)
+![Adicionando datario](../static/img/tutoriais/fixar-projeto.png){ width=30% }
 
 - Depois de alguns segundos o projeto **datario** estará aparecendo em sua aba "Explorer". Ao navegar por ele, verá algo semelhante ao seguinte:
 
@@ -186,7 +186,7 @@ Se você trabalha para a prefeitura e quer adicionar os demais projetos que tem 
     - Pode-se fazer uma query nessa tabela clicando em "Query" ou nos três pontinhos verticais e escolhendo
       "Query". Em ambas as formas, será gerada uma query básica para a tabela.
 
-    ![Query basica](../static/img/tutoriais/query-basica.png)
+    ![Query basica](../static/img/tutoriais/query-basica.png){ width=90% }
 
     - Para executar a query, basta clicar em "Run" ou pressionar Ctrl + Enter. Os resultados serão exibidos
       como na imagem acima.
@@ -195,27 +195,32 @@ Se você trabalha para a prefeitura e quer adicionar os demais projetos que tem 
 
     É possível, por exemplo:
 
-    1. Baixar ou salvar os resultados clicando em "Save results".
+    - Baixar ou salvar os resultados clicando em "Save results".
 
-    ![Salvar query](../static/img/tutoriais/salvar-query.png)
+    ![Salvar query](../static/img/tutoriais/salvar-query.png){ width=90% }
 
-    2. Salvar a query ou criar uma view com ela para utilizar depois, clicando em "Save", ao lado de "Run".
+    - Salvar a query ou criar uma view com ela para utilizar depois, clicando em "Save", ao lado de "Run".
 
-    ![Query para view](../static/img/tutoriais/query-para-view.png)
+    ![Query para view](../static/img/tutoriais/query-para-view.png){ width=90% }
 
-    3. Fazer gráficos e dashboards com os resultados, clicando em "Explore data".
+    - Criar um schedule para executar essa mesma query em intervalos de tempo definidos, clicando em "Schedule".
 
-    ![Abrir datastudio](../static/img/tutoriais/abrir-datastudio.png)
+    ![Criar schedule](../static/img/tutoriais/criar-schedule.png){ width=90% }
 
-    4. Criar um schedule para executar essa mesma query em intervalos de tempo definidos, clicando em "Schedule".
-
-    ![Criar schedule](../static/img/tutoriais/criar-schedule.png)
-
-    E é isso! Agora é hora de voar! 🚀
 
 === "Vídeo"
 
     ![type:video](https://www.youtube.com/embed/-UFJL2sO4PI)
+
+### Explorando os dados com Data Studio, Google Sheets e Colab
+
+Após rodarmos uma query no GCP também podemos explorar nossos dados utilizando outras plataformas gratuitas como o Data Studio, Google Planilhas e Colab. Para isso, basta clicar no botão "Explore Data" na parte inferior direita e escolher a melhor forma para você.
+
+Com o Data Studio você consegue criar gráficos e dashboards que atualizarão automaticamente com seus dados. Já com o Google Planilhas também é possível criar gráficos e ainda realizar análises rápidas. Para análises mais aprofundadas e complexas recomendamos o uso do Colab, mas nesse caso será necessário um conhecimento básico de Python.
+
+![Abrir datastudio](../static/img/tutoriais/abrir-datastudio.png){ width=90% }
+
+E é isso! Agora é hora de voar! 🚀
 ### Navegando pelos dados
 
 === "Texto"
@@ -223,16 +228,16 @@ Se você trabalha para a prefeitura e quer adicionar os demais projetos que tem 
     - Aqui, você pode selecionar qualquer tabela, clicar nos pontinhos verticais e "Open". Assim, serão exibidas
       as propriedades dessa tabela. Na aba "Schema", será mostrado o nome de cada coluna, seu tipo e descrição.
 
-    ![Ver tabela](../static/img/tutoriais/ver-tabela.png)
+    ![Ver tabela](../static/img/tutoriais/ver-tabela.png){ width=90% }
 
     - Já na aba "Detalhes", haverá informação sobre o tamanho da tabela, número de linhas, datas de criação e
       atualização, etc.
 
-    ![Ver tabela pt2](../static/img/tutoriais/ver-tabela-2.png)
+    ![Ver tabela pt2](../static/img/tutoriais/ver-tabela-2.png){ width=90% }
 
     - Por fim, na aba "Preview", aparecerão alguns dados contidos nessa tabela.
 
-    ![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
+    ![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png){ width=90% }
 
 === "Vídeo"
 
@@ -264,7 +269,7 @@ Então você quer acessar os dados **diretamente** via Python? A gente te dá um
     **Importante:** note que esse `billing_project_id` deve corresponder ao ID do seu projeto na GCP, NÃO
     ao nome do projeto. No caso da imagem abaixo, seria `"primeiro-projeto-350017"`
 
-    ![ID x nome do projeto](../static/img/tutoriais/id-do-projeto.png)
+    ![ID x nome do projeto](../static/img/tutoriais/id-do-projeto.png){ width=60% }
 
     Quando você executar esse snippet, será solicitada a autenticação com sua conta Google:
 
@@ -289,9 +294,42 @@ A basedosdados possui um guia excelente de como acessar dados do BigQuery via R.
 A documentação oficial da Microsoft possui um guia excelente de como acessar dados do BigQuery via PowerBI.
 Você pode acessá-lo [aqui](https://docs.microsoft.com/pt-br/power-bi/connect-data/desktop-connect-bigquery)!
 
-## Dicas para reduzir o custo de uma query no GCP
+## Acessando dados via Google Sheets/Planilha
 
-**1 - Evite `SELECT *`**
+Para importar toda uma tabela em um Google Sheets você deve, primeiramente, acessar uma planilha e clicar nas opções Data > Data connectors > Connect to BigQuery. 
+
+![Conecta BigQuery](../static/img/tutoriais/conecta-bigquery.png){ width=50% }
+
+Uma nova janela será aberta para que você escolha o projeto, o dataset e a tabela que você quer acessar.
+
+![Escolhe projeto](../static/img/tutoriais/escolhe-projeto.png){ width=30% }
+![Escolhe tabela](../static/img/tutoriais/escolhe-tabela.png){ width=30% }
+
+Feito isso, o Google Sheets irá importar toda a tabela. Tome cuidado com tabelas muito grandes! Se esse for o seu caso recomendamos importar a tabela no python utilizando a biblioteca `basedosdados` mencionada anteriormente.
+
+![Tabela importada](../static/img/tutoriais/tabela-importada.png){ width=80% }
+
+## Acessando dados via Data Studio
+
+Para importar toda uma tabela no Data Studio você deve, primeiramente, acessar o site do [Data Studio](https://datastudio.google.com) e criar um novo report. 
+
+![Abrir Data Studio](../static/img/tutoriais/abrir-datastudio2.png){ width=80% }
+
+Para conectar uma tabela do BigQuery clique no botão correspondente a ele.
+
+![Data Studio](../static/img/tutoriais/acesso-datastudio.png){ width=80% }
+
+Navegue nas opções de projeto, dataset e tabela até encontrar o dado de interesse.
+
+![Data Studio escolhe tabela](../static/img/tutoriais/acesso-datastudio-escolhe-tabela.png){ width=80% }
+
+Prontinho! Agora é só liberar seu lado analytics + criativo para começar suas análises. :stuck_out_tongue_winking_eye:
+
+![Data Studio tabela importada](../static/img/tutoriais/acesso-datastudio-dados-importados.png){ width=80% }
+
+## Dicas para reduzir o custo de uma query no GCP :exploding_head:
+
+**1 - Evite `SELECT *`** :bomb:
 
 Para contornar o uso do `SELECT *` você pode:
 
@@ -306,29 +344,32 @@ Para olhar como são os dados você pode:
 
 Clicar nos pontinhos verticais e "Open". E depois selecionar a aba "Preview" para visualizar algumas linhas dessa tabela.
 
-![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png)
+![Ver tabela pt3](../static/img/tutoriais/ver-tabela-3.png){ width=80% }
+
 Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.
 
-**3 - Filtrar a partição**
+**3 - Filtrar a partição** :boom:
 
 Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.
 
 === "Texto"
 
-    ![Partição da tabela](../static/img/tutoriais/particao-tabela.png)
+    ![Partição da tabela](../static/img/tutoriais/particao-tabela.png){ width=80% }
 
     Como vimos na imagem acima, a tabela `datario.meio_ambiente_clima.quantidade_agua_precipitavel_satelite` é particionada pela coluna `data_particao`. Vamos ver um exemplo de como é importante filtrarmos nossas consultas considerando a coluna de partição:
 
     Suponha que queremos obter todos os valores da quantidade de água precipitável para latitudes menores que -22.0º e considerando apenas dados obtidos à 1h da manhã.
     Se adicionarmos no filtro a nossa coluna de partição, o GCP nos avisa que a query processará 83.24MB.
-    ![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png)
+    
+    ![Partição da tabela 2](../static/img/tutoriais/particao-tabela-2.png){ width=80% }
 
     Se removermos da nossa query o filtro da partição o GCP processará 13.37GB! Bem mais do que a query anterior 🤯!
-    ![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png)
+    ![Partição da tabela 3](../static/img/tutoriais/particao-tabela-3.png){ width=80% }
 
     Você pode estar pensando 🤔: “Claro que a query consumirá mais! Você tem um filtro a menos nessa query.”
     Para rebater essa crítica vamos comparar a query anterior com uma sem filtro nenhum:
-    ![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png)
+
+    ![Partição da tabela 4](../static/img/tutoriais/particao-tabela-4.png){ width=80% }
 
     Nesse caso, o CGP irá processar a mesma quantidade de GB que a query em que não utilizamos a coluna de partição 🤓!
 
@@ -338,7 +379,7 @@ Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partiç
 
 Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!
 
-**4 - JOIN**
+**4 - JOIN** :handshake:
 
 Para melhorar a eficiência dos JOIN podemos:
 
