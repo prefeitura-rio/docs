@@ -12,6 +12,7 @@ nav:
       - Metadados: guia-desenvolvedores/metadados.md
       - Desenvolvimento de pipelines de dados: guia-desenvolvedores/pipelines.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
+      - Compartilhando acesso aos dados: guia-desenvolvedores/compartilhar-acesso.md
     - Sobre:
       - Contato: contato.md
 
