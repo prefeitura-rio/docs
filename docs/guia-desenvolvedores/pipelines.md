@@ -237,15 +237,44 @@ python3 run.py
 
 E pronto! O _Flow_ foi executado com sucesso e um arquivo `report.csv` foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro `n_users` foi passado com o valor 20.
 
-<!-- ## O repositório de pipelines
+## O repositório de pipelines (Misto)
 
+### Estrutura de diretórios (Gabriel)
 
-## Concatenando Flows
+### Adicionando dependências (Paty)
 
-## Adicionando dependências
+## Trabalhando com pipelines na Cloud (Misto)
 
-## Como testar pipelines em diversos ambientes
+### Como nomear _Flows_ (Diego)
 
-## Colocando uma pipeline em produção
+### Desenvolvendo um _Flow_ para a Cloud (Gabriel)
 
-## UI do Prefect -->
+### _Flows_ pré-definidos (Diego + Gabriel)
+
+### Utilizando _Flows_ pré-definidos (Diego)
+
+### Agendamento de _Flows_ (Paty)
+
+### Manutenção de qualidade de código (Gabriel)
+
+pylint + pre-commit
+
+### Constantes globais e locais (Paty)
+
+### Gerenciamento de segredos (Paty)
+
+Vault
+
+### Como testar pipelines em staging (Paty)
+
+## Usando a UI do Prefect (Diego)
+
+### Buscando um _Flow_ (Diego)
+
+### Como executar um _Flow_ (Diego)
+
+### Como alterar parâmetros (Diego)
+
+Prestar atenção aos agents
+
+### Como visualizar logs (Diego)
