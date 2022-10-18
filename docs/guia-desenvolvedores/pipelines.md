@@ -237,13 +237,53 @@ python3 run.py
 
 E pronto! O _Flow_ foi executado com sucesso e um arquivo `report.csv` foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro `n_users` foi passado com o valor 20.
 
-## O repositório de pipelines (Misto)
+## O repositório de pipelines
 
-### Estrutura de diretórios (Gabriel)
+Agora que já vimos como criar um _Flow_ e executá-lo, vamos dar o próximo passo e integrar nosso desenvolvimento ao repositório de pipelines! Lá, temos várias funcionalidades que vão auxiliar o desenvolvimento, integração e garantia de qualidade dos _Flows_.
+
+### Estrutura de diretórios
+
+Todos os diretórios seguem uma estrutura padrão, demonstrada e comentada abaixo:
+
+```
+orgao/                       # diretório raiz para o órgão
+├── projeto1/                # diretório de projeto
+│   ├── __init__.py          # vazio
+│   ├── constants.py         # valores constantes para o projeto
+│   ├── flows.py             # declaração dos flows
+│   ├── schedules.py         # declaração dos schedules
+│   ├── tasks.py             # declaração das tasks
+│   └── utils.py             # funções auxiliares para o projeto
+...
+├── __init__.py              # importa todos os flows de todos os projetos
+├── constants.py             # valores constantes para o órgão
+├── flows.py                 # declaração de flows genéricos do órgão
+├── schedules.py             # declaração de schedules genéricos do órgão
+├── tasks.py                 # declaração de tasks genéricas do órgão
+└── utils.py                 # funções auxiliares para o órgão
+
+orgao2/
+...
+
+utils/
+├── __init__.py
+├── flow1/
+│   ├── __init__.py
+│   ├── flows.py
+│   ├── tasks.py
+│   └── utils.py
+├── flows.py                 # declaração de flows genéricos
+├── tasks.py                 # declaração de tasks genéricas
+└── utils.py                 # funções auxiliares
+
+constants.py                 # valores constantes para todos os órgãos
+```
 
 ### Adicionando dependências (Paty)
 
-## Trabalhando com pipelines na Cloud (Misto)
+## Trabalhando com pipelines na Cloud
+
+Agora que conhecemos o repositório de pipelines, vamos trabalhar com eles na Cloud. Isso envolve várias etapas, que serão detalhadas a seguir.
 
 ### Como nomear _Flows_ (Diego)
 
@@ -278,3 +318,7 @@ Vault
 Prestar atenção aos agents
 
 ### Como visualizar logs (Diego)
+
+```
+
+```
