@@ -1,11 +1,11 @@
 
 
-Agora que já vimos como criar um _Flow_ e executá-lo, vamos dar o próximo passo e integrar nosso desenvolvimento ao repositório de [pipelines](https://github.com/prefeitura-rio/pipelines)!
+Agora que já vimos como criar um _Flow_ e executá-lo, vamos dar o próximo passo e integrar nosso desenvolvimento ao [repositório de pipelines](https://github.com/prefeitura-rio/pipelines)!
 
 
 ## O repositório de pipelines
 
-O repositorio de pipelines possui várias funcionalidades que vão auxiliar o desenvolvimento, integração, garantia de qualidade de código e deploy dos _Flows_.
+O [repositório de pipelines](https://github.com/prefeitura-rio/pipelines) possui várias funcionalidades que vão auxiliar o desenvolvimento, integração, garantia de qualidade de código e deploy dos _Flows_.
 
 ### Estrutura de diretórios
 
