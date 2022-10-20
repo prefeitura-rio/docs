@@ -431,6 +431,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#adicionando-dependencias" class="md-nav__link">
+    Adicionando dependências
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#estrutura-de-diretorios" class="md-nav__link">
     Estrutura de diretórios
   </a>
@@ -438,8 +445,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#adicionando-dependencias-paty" class="md-nav__link">
-    Adicionando dependências (Paty)
+  <a href="#constantes-globais-e-locais" class="md-nav__link">
+    Constantes globais e locais
   </a>
   
 </li>
@@ -458,15 +465,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#como-nomear-flows-diego" class="md-nav__link">
-    Como nomear Flows (Diego)
+  <a href="#como-nomear-flows" class="md-nav__link">
+    Como nomear Flows
   </a>
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#desenvolvendo-um-flow-para-a-cloud" class="md-nav__link">
     Desenvolvendo um Flow para a Cloud
+  </a>
+  
+    <nav class="md-nav" aria-label="Desenvolvendo um Flow para a Cloud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-um-flow-do-zero" class="md-nav__link">
+    Criando um flow do zero
   </a>
   
 </li>
@@ -500,13 +520,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#constantes-globais-e-locais" class="md-nav__link">
-    Constantes globais e locais
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gerenciamento-de-segredos" class="md-nav__link">
     Gerenciamento de segredos
   </a>
@@ -526,37 +539,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usando-a-ui-do-prefect-diego" class="md-nav__link">
-    Usando a UI do Prefect (Diego)
+  <a href="#usando-a-ui-do-prefect" class="md-nav__link">
+    Usando a UI do Prefect
   </a>
   
-    <nav class="md-nav" aria-label="Usando a UI do Prefect (Diego)">
+    <nav class="md-nav" aria-label="Usando a UI do Prefect">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#buscando-um-flow-diego" class="md-nav__link">
-    Buscando um Flow (Diego)
+  <a href="#buscando-um-flow" class="md-nav__link">
+    Buscando um Flow
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#como-executar-um-flow-diego" class="md-nav__link">
-    Como executar um Flow (Diego)
+  <a href="#como-visualizar-um-flow" class="md-nav__link">
+    Como visualizar um Flow
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#como-alterar-parametros-diego" class="md-nav__link">
-    Como alterar parâmetros (Diego)
+  <a href="#como-executar-um-flow" class="md-nav__link">
+    Como executar um Flow
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#como-visualizar-logs-diego" class="md-nav__link">
-    Como visualizar logs (Diego)
+  <a href="#como-alterar-parametros" class="md-nav__link">
+    Como alterar parâmetros
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-visualizar-uma-run" class="md-nav__link">
+    Como visualizar uma Run
   </a>
   
 </li>
@@ -685,7 +705,14 @@
 
 <p>Agora que já vimos como criar um <em>Flow</em> e executá-lo, vamos dar o próximo passo e integrar nosso desenvolvimento ao <a href="https://github.com/prefeitura-rio/pipelines">repositório de pipelines</a>!</p>
 <h2 id="o-repositorio-de-pipelines">O repositório de pipelines</h2>
-<p>O <a href="https://github.com/prefeitura-rio/pipelines">repositório de pipelines</a> possui várias funcionalidades que vão auxiliar o desenvolvimento, integração, garantia de qualidade de código e deploy dos <em>Flows</em>.</p>
+<p>O <a href="https://github.com/prefeitura-rio/pipelines">repositório de pipelines</a> possui várias funcionalidades que vão auxiliar no desenvolvimento, integração, garantia de qualidade de código e deploy dos <em>Flows</em>.</p>
+<h3 id="adicionando-dependencias">Adicionando dependências</h3>
+<p>Para começar, precisamos seguir alguns breves passos.</p>
+<p>1 - Crie uma pasta no seu computador no qual ficarão armazenados todos os repositórios da prefeitura</p>
+<p>2 - Dentro dessa pasta vamos criar um ambiente virtual em python, mais conhecido como venv. Esse ambiente virtual serve para separarmos as bibliotecas e versões dessas que são exclusivas à esse projeto e evita que tenhamos problema de conflito entre elas. Para esse passo é necessário que você acesse essa pasta utilizando um terminal. Agora, basta escrever <code>python3.9 -m venv &lt;nome_da_sua_venv</code> e aguardar a finalização do comando. O python irá criar uma pasta com o nome da sua venv. Toda vez que for rodar e testar suas pipelines, você deve ativar sua venv. Para ativá-la você deve entrar na mesma pasta em que você estava na criação da venv e pelo terminal digitar <code>source &lt;nome_da_sua_venv/bin/activate</code> caso esteja em máquina linux ou mac. No windows, o comando é <code>&lt;nome_da_sua_venv/Scripts/activate</code>. Repare que agora o ínicio da linha do seu terminal terá o nome da sua venv. É assim que você saberá que está com ela ativada. Para desativar, digite <code>deactivate</code> no terminal. Você pode ter quantas venvs quiser no seu computador. Para saber mais, acesse a <a href="https://docs.python.org/pt-br/3/library/venv.html">documentação oficial</a>.</p>
+<p>3 - Se você ainda não realizou o <code>git clone</code> do <a href="https://github.com/prefeitura-rio/pipelines">repositório</a> de <code>pipelines</code> da prefeitura, esse é o momento!</p>
+<p>4 - Antes de começar a criar seu pipeline, verifique que você está na master e utilize o comando <code>git checkout -b staging/&lt;nome_branch&gt;</code> para criar uma nova branch a partir dela. É muito importante que o nome da sua branch inicie com "staging/" para que você consiga testar seu flow na cloud.</p>
+<p>Neste tutorial focaremos em como rodar o prefect usando a cloud. Caso queira rodar local você deve seguir também os passos descritos no README do repositório de pipelines.</p>
 <h3 id="estrutura-de-diretorios">Estrutura de diretórios</h3>
 <p>Todos os diretórios seguem uma estrutura padrão, demonstrada e comentada abaixo:</p>
 <div class="highlight"><pre><span></span><code>orgao/                       # diretório raiz para o órgão
@@ -720,26 +747,36 @@ utils/
 
 constants.py                 # valores constantes para todos os órgãos
 </code></pre></div>
-<h3 id="adicionando-dependencias-paty">Adicionando dependências (Paty)</h3>
-<p>Para começar, precisamos seguir alguns breves passos.</p>
-<p>1 - Crie uma pasta no seu computador no qual ficarão armazenados todos os repositórios da prefeitura</p>
-<p>2 - Dentro dessa pasta vamos criar um ambiente virtual em python, mais conhecido como venv. Esse ambiente virtual serve para separarmos as bibliotecas e versões dessas que são exclusivas à esse projeto e evita que tenhamos problema de conflito entre elas. Para esse passo é necessário que você acesse essa pasta utilizando um terminal. Agora, basta escrever <code>python3.9 -m venv &lt;nome_da_sua_venv</code> e aguardar a finalização do comando. O python irá criar uma pasta com o nome da sua venv. Toda vez que for rodar e testar suas pipelines, você deve ativar sua venv. Para ativá-la você deve entrar na mesma pasta em que você estava na criação da venv e pelo terminal digitar <code>source &lt;nome_da_sua_venv/bin/activate</code> caso esteja em máquina linux ou mac. No windows, você o comando é <code>&lt;nome_da_sua_venv/Scripts/activate</code>. Repare agora que o ínicio da linha do seu terminal terá o nome da sua venv. É assim que você saberá que está com ela ativada. Para desativar, digite <code>deactivate</code> no terminal. Você pode ter quantas venvs quiser no seu computador. para saber mais, acesse a <a href="https://docs.python.org/pt-br/3/library/venv.html">documentação oficial</a>.</p>
-<p>3 - Se você ainda não realizou o <code>git clone</code> do <a href="https://github.com/prefeitura-rio/pipelines">repositório</a> de <code>pipelines</code> da prefeitura, esse é o momento!</p>
-<p>4 - Antes de começar a criar seu pipeline, verifique que você está na master e utilize o comando <code>git checkout -b staging/&lt;nome_branch&gt;</code> para criar uma nova branch a partir dela. É muito importante que o nome da sua branch inicie com "staging/" para que você consiga testar seu flow na cloud.</p>
-<p>Neste tutorial focaremos em como rodar o prefect usando a cloud. Caso queira rodar local você também deve seguir os passos descritos no README do repositório de pipelines.</p>
+<h3 id="constantes-globais-e-locais">Constantes globais e locais <img alt="ℹ" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2139.svg" title=":information_source:" /></h3>
+<p>Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, temos como boa prática um arquivo específico para salvarmos nossas variáveis. Aqui no ED vamos classificar nossos arquivos de constantes em dois tipos: globais e locais.</p>
+<p>As <strong>constantes locais</strong> são todas aquelas que são específicas para um determinado flow (ou projeto). Elas ficam armazenadas em um arquivo <code>constants.py</code> no mesmo diretório do seu <code>flow.py</code> (ou do projeto no qual vocês está trabalhando). Em geral, criamos nesse arquivo uma classe <code>constants</code> que contém o <code>DATASET_ID</code> e <code>TABLE_ID</code> que serão utilizados para gravar os dados finais do flow no GCP, entre outras coisas que você julgar importante.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># pylint: disable=c0103</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constant values for the geolocator project</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PATH_BASE_ENDERECOS</span> <span class="o">=</span> <span class="s2">&quot;/tmp/base_enderecos.csv&quot;</span>
+    <span class="n">DATASET_ID</span> <span class="o">=</span> <span class="s2">&quot;dados_mestres&quot;</span>
+    <span class="n">TABLE_ID</span> <span class="o">=</span> <span class="s2">&quot;enderecos_geolocalizados&quot;</span>
+</code></pre></div>
+<p>Já as <strong>constantes globais</strong> se referem as constantes que são comuns a todos os flows dentro do repositório de <em>pipelines</em>. Nesse arquivo você encontrará os valores de variáveis como os Agents, variáveis do docker, entre outras. Dificilmente você precisará alterar esse arquivo, e quando precisar fazê-lo tome muito cuidado. Uma mudança nele impacta todos os demais flows desse repositório.</p>
 <h2 id="trabalhando-com-pipelines-na-cloud">Trabalhando com pipelines na Cloud</h2>
 <p>Agora que conhecemos o repositório de pipelines, vamos trabalhar com eles na Cloud. Isso envolve várias etapas, que serão detalhadas a seguir.</p>
-<h3 id="como-nomear-flows-diego">Como nomear <em>Flows</em> (Diego)</h3>
+<h3 id="como-nomear-flows">Como nomear <em>Flows</em></h3>
 <p>Um dos primeiros passos no desenvolvimento de uma pipeline é a definição de seu nome. Para mantermos a organização e facilitar a busca das pipelines no prefect definimos algumas regras de nomeação;</p>
 <p>O nome da pipeline deve seguir o modelo: <code>&lt;sigla_orgao_maiuscula&gt;: &lt;descricao_curta&gt; - &lt;descricao_longa&gt;</code></p>
 <ul>
-<li><strong>sigla_orgao_upper</strong>: sigla do orgão em letras maiusculas; EMD, SME, SMS, SEGOVI</li>
-<li><strong>descricao_curta</strong>: Breve descrição da pipiline podendo ser um dataset_id, sistema entre outros. Reservamos <strong>template</strong> para pipelines que podem ser reutilizadas e que normalmente ficam na pasta utils</li>
+<li><strong>sigla_orgao_maiuscula</strong>: sigla do orgão em letras maiúsculas; EMD, SME, SMS, SEGOVI</li>
+<li><strong>descricao_curta</strong>: Breve descrição da pipeline podendo ser um dataset_id, sistema, entre outros. Reservamos <strong>template</strong> para pipelines que podem ser reutilizadas e que normalmente ficam na pasta utils</li>
 <li><strong>descricao_longa</strong>: Descrição mais completa do que a pipeline faz</li>
 </ul>
 <p>Alguns exemplos: <strong>SEGOVI: 1746 - Ingerir tabelas de banco SQL</strong>, <strong>EMD: template - Ingerir tabela de banco SQL</strong>, <strong>EMD: template - Executa DBT model</strong></p>
-<p>Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta <a href="https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils">pipelines/utils</a> e tem seus nomes definidos no arquivo <a href="https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py.">constansts.py</a></p>
-<h3 id="desenvolvendo-um-flow-para-a-cloud">Desenvolvendo um <em>Flow</em> para a Cloud</h3>
+<p>Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta <a href="https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils">pipelines/utils</a> e tem seus nomes definidos no arquivo <a href="https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py">constants.py</a>.</p>
+<h2 id="desenvolvendo-um-flow-para-a-cloud">Desenvolvendo um <em>Flow</em> para a Cloud</h2>
+<p>Nesse tutorial vamos mostrar apenas duas das formas de pipelines que podemos montar: criando seu próprio flow e utilizando flows pré-definidos</p>
+<h3 id="criando-um-flow-do-zero">Criando um flow do zero</h3>
 <p>Agora podemos começar a desenvolver nosso primeiro <em>Flow</em> para a cloud. Para isso, vamos reaproveitar o código implementado no tutorial anterior.</p>
 <p>Seguindo a estrutura de diretórios, podemos criar um novo diretório, chamado <code>formacao</code>, dentro da pasta <code>pipelines</code>. Dentro dele, vamos criar um arquivo <code>__init__.py</code>, para indicar que o diretório se trata de um submódulo do projeto. Então, nesse momento, a estrutura está assim:</p>
 <div class="highlight"><pre><span></span><code>formacao/
@@ -882,7 +919,7 @@ constants.py                 # valores constantes para todos os órgãos
 </ul>
 <p>Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos <em>Flows</em> sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!</p>
 <h3 id="utilizando-flows-pre-definidos-diego">Utilizando <em>Flows</em> pré-definidos (Diego)</h3>
-<p>Uma pratica muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.</p>
+<p>Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.</p>
 <blockquote>
 <p>Importante lembrar de adicionar o novo flow no <code>__init__.py</code> na raiz da pasta do orgão.</p>
 </blockquote>
@@ -1052,48 +1089,84 @@ Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
 <p>Por fim, mas não menos importante, temos também um utilitário customizado desenvolvido pelo Escritório de Dados que realiza a análise de árvore de dependências do código, alertando se as modificações que você introduziu no código podem afetar código de outras pessoas. Um exemplo pode ser visto na imagem abaixo:</p>
 <p><img alt="Exemplo de comentário do utilitário de análise de dependências" src="../../static/img/tutoriais/pipelines/gh-actions-tree.png" /></p>
 <p>Como você pode ver, os usuários afetados por sua modificação são marcados diretamente no comentário.</p>
-<h3 id="constantes-globais-e-locais">Constantes globais e locais <img alt="ℹ" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2139.svg" title=":information_source:" /></h3>
-<p>Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, temos como boa prática um arquivo específico para salvarmos nossas variáveis. Aqui no ED vamos ter dois arquivos de constantes distintos denomidados de constantes globais e locais.</p>
-<p>As <strong>constantes locais</strong> são todas aquelas que são específicas para um determinado flow. Elas ficam armazenadas em um arquivo <code>constants.py</code> no mesmo diretório do seu <code>flow.py</code>. Em geral, criamos nesse arquivo uma classe <code>constants</code> que contém o <code>DATASET_ID</code> e <code>TABLE_ID</code> que serão utilizados para gravar os dados finais do flow, entre outras coisas que você julgar importante.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-
-<span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># pylint: disable=c0103</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constant values for the geolocator project</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">PATH_BASE_ENDERECOS</span> <span class="o">=</span> <span class="s2">&quot;/tmp/base_enderecos.csv&quot;</span>
-    <span class="n">DATASET_ID</span> <span class="o">=</span> <span class="s2">&quot;dados_mestres&quot;</span>
-    <span class="n">TABLE_ID</span> <span class="o">=</span> <span class="s2">&quot;enderecos_geolocalizados&quot;</span>
-</code></pre></div>
-<p>Já as <strong>constantes globais</strong> se referem as constantes que são comuns a todos os flows dentro do repositório de <em>pipelines</em>. Nesse arquivo você encontrará os valores de variáveis como os Agents, variáveis do docker, entre outras. Dificilmente você precisará alterar esse arquivo, e quando precisar fazê-lo tome muito cuidado. Uma mudança nele impacta todos os demais flows desse repositório.</p>
 <h3 id="gerenciamento-de-segredos">Gerenciamento de segredos <img alt="🔐" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f510.svg" title=":closed_lock_with_key:" /></h3>
 <p><img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> NUNCA, JAMAIS E EM HIPÓTESE ALGUMA <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> coloque senhas de acesso diretamente no seu código. Todo o gerenciamento de senhas é feito através do <a href="https://www.vaultproject.io/">Vault</a>. Para adicionar ou remover tokens, passwords, certificados, FTP e API keys peça ajuda ao @pipeliners nos canais do Discord do Escritório de Dados. O acesso ao Vault é restrito por conter muitas informações sensíveis.</p>
 <p>Na imagem abaixo, temos um exemplo de como estão salvas as informações de acesso ao FTP da riomidia e como utilizamos esses dados no python. Nesse exemplo de código, utilizamos a função <code>get_vault_secret</code> para acessar as informações salvas com o nome de "riomidia". Note que as keys utilizadas dentro do dicionário têm os mesmos nomes definidos dentro do Vault.</p>
 <p><img alt="Vault" src="../../static/img/tutoriais/pipelines/vault.png" width="100%" /></p>
 <h3 id="como-testar-pipelines-em-staging">Como testar pipelines em staging <img alt="🔧" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f527.svg" title=":wrench:" /></h3>
 <p>O teste do flow será feito diretamente na cloud utilizando o ambiente de staging. Para isso, é necessário que você esteja em uma branch cujo nome inicia-se com "staging/".</p>
-<p>Crie um Pull Request (PR) e enquanto estiver trabalhando no flow mantenha a tag <strong>[WIP]</strong> (Working in Progress) na frente do nome do seu PR, como no exemplo da figura a seguir.</p>
-<p><img alt="WIP" src="../../static/img/tutoriais/pipelines/wip.png" width="100%" /></p>
-<p>Assim, toda vez que você fizer um push para sua branch remota, o CI/CD do Github irá reconhecer o nome da branch e começará o deployment do seu código para a área de staging.</p>
+<p>Crie um Pull Request (PR) e toda vez que você fizer um push para sua branch remota, o CI/CD do Github irá reconhecer o nome da branch e começará o deployment do seu código para a área de staging.</p>
 <p>Para verificar o andamento do deploy você tem duas opções:</p>
 <ul>
-<li>pode acompanhar pela página de PR através do círculo que aparece na frente do nome do seu PR. <img alt="✔" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2714.svg" title=":heavy_check_mark:" /> significa que o deploy foi finalizado com sucesso, <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> o deploy teve algum problema e <img alt="🟠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e0.svg" title=":orange_circle:" /> que o processo ainda não foi finalizado.</li>
+<li>pode acompanhar pela página de PR através do círculo que aparece na frente do nome do seu PR. ✅ significa que o deploy foi finalizado com sucesso, <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> o deploy teve algum problema e <img alt="🟠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e0.svg" title=":orange_circle:" /> que o processo ainda não foi finalizado.</li>
 </ul>
 <p><img alt="Deploy 1" src="../../static/img/tutoriais/pipelines/build_pr.png" width="90%" /></p>
 <ul>
-<li>ao entrar no PR é possível acompanhar o andamento de cada etapaele tb do deploy. Aqui é possível verificar em qual etapa e qual foi o problema no deploy.</li>
+<li>ao entrar no PR é possível acompanhar o andamento de cada etapa e também do deploy. Aqui é possível verificar em qual etapa e qual foi o problema no deploy.</li>
 </ul>
 <p><img alt="Deploy 2" src="../../static/img/tutoriais/pipelines/build.png" width="90%" /></p>
-<p>Quando a pipeline estiver finalizada e pronta para entrar na master, você precisa tirar o <strong>[WIP]</strong> do título do seu PR e solicitar para alguém aprovar o seu PR. Com a aprovação, basta clicar no botão de merge e o CI/CD do Github começará o processo de deploy no ambiente de prod.</p>
-<h2 id="usando-a-ui-do-prefect-diego">Usando a UI do Prefect (Diego)</h2>
-<h3 id="buscando-um-flow-diego">Buscando um <em>Flow</em> (Diego)</h3>
-<h3 id="como-executar-um-flow-diego">Como executar um <em>Flow</em> (Diego)</h3>
-<h3 id="como-alterar-parametros-diego">Como alterar parâmetros (Diego)</h3>
-<p>Prestar atenção aos agents</p>
-<h3 id="como-visualizar-logs-diego">Como visualizar logs (Diego)</h3>
-<div class="highlight"><pre><span></span><code>
-</code></pre></div>
+<p>Quando a pipeline estiver finalizada e pronta para entrar na master, você precisa solicitar para alguém aprovar o seu PR. Com a aprovação, basta clicar no botão de merge e o CI/CD do Github começará o processo de deploy no ambiente de prod.</p>
+<h2 id="usando-a-ui-do-prefect">Usando a UI do Prefect</h2>
+<p>É na <a href="https://prefect.dados.rio/">UI do Prefect</a> que você conseguirá visualizar como está o andamento dos seus flows. Na imagem abaixo temos a tela de Dashboard do Prefect. Nessa primeira aba, temos uma visão geral de todos os pipelines. A caixa de "Run History" traz nas cores os status dos últimos flows rodados:</p>
+<ul>
+<li><img alt="🟢" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e2.svg" title=":green_circle:" /> sucesso</li>
+<li><img alt="🔴" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f534.svg" title=":red_circle:" /> falha</li>
+<li><img alt="🟡" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e1.svg" title=":yellow_circle:" /> agendados</li>
+<li><img alt="⚫" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/26ab.svg" title=":black_circle:" /> cancelados</li>
+</ul>
+<p>Esse esquema de cores sera o mesmo para qualquer página do Prefect. </p>
+<p><img alt="UI do Prefect" src="../../static/img/tutoriais/pipelines/ui_prefect.png" width="90%" /></p>
+<h3 id="buscando-um-flow">Buscando um <em>Flow</em></h3>
+<p>A aba que mais nos interessa é a de <strong>Flows</strong>. Nela temos uma visualização rápida em formato de tabela das últimas runs de cada um dos pipelines. Na coluna de nome aparece o parâmetro "name" que você colocou quando instânciou o Flow no arquivo flows.py. Na coluna de <strong>Schedule</strong> você pode ligar ou desligar um flow. Se ele estiver desligado, ele não rodará automaticamente. A coluna <strong>Project</strong> indica se esse flow está em prod (main) ou em staging. Os Flows que estão na branch master do Github sempre aparecerão no projeto main, enquanto as branchs que iniciam com "staging/" aparecerão no projeto staging. Para definir quais tipos de projetos visualizar, basta selecionar na caixa superior à direita destacada na figura. A coluna <strong>Run History</strong> apresenta o status das últimas runs de cada Flow.</p>
+<p>Para buscar um flow utilize o campo de pesquisa à direita.</p>
+<p><img alt="UI do Prefect - Flows" src="../../static/img/tutoriais/pipelines/flows.png" width="90%" /></p>
+<h3 id="como-visualizar-um-flow">Como visualizar um Flow</h3>
+<p>Para entrar em um flow específico, basta clicar em seu nome. Agora, é possível ver com mais detalhes as últimas runs e as que estão agendadas.</p>
+<p>Temos quatro ações importantes nessa tela:</p>
+<ul>
+<li>
+<p>Verificar qual versão do flow está rodando</p>
+</li>
+<li>
+<p>Verificar se o Schedule está ligado</p>
+</li>
+<li>
+<p>Executar o Flow</p>
+</li>
+<li>
+<p>Alterar parâmetros internos do Flow</p>
+</li>
+<li>
+<p>Acessar uma run específica: clique na barra referente à ela no "Run History" ou no nome dela em "Activity".</p>
+</li>
+</ul>
+<p><img alt="UI do Prefect - Flow Overwiew" src="../../static/img/tutoriais/pipelines/flow_overview.png" width="90%" /></p>
+<h3 id="como-executar-um-flow">Como executar um <em>Flow</em></h3>
+<p>Para iniciar uma nova run no Flow, aperte o botão <strong>Run</strong> na página do flow. Nessa nova tela é possível:</p>
+<ul>
+<li>
+<p>especificar um nome para a run, </p>
+</li>
+<li>
+<p>preencher quais são os parâmetros específicos para essa run (no caso da imagem podemos especificar apenas o secret_path) e</p>
+</li>
+<li>
+<p>preencher em <strong>Labels</strong> quais são os <strong>Agent</strong> responsáveis por essa run.</p>
+</li>
+</ul>
+<p>Esse último tópico é extremamente importante, pois se adicionar um Agent que não tem permissão de acesso às tabelas a run não irá rodar com sucesso.</p>
+<p><img alt="UI do Prefect - Start Flow" src="../../static/img/tutoriais/pipelines/start_run.png" width="90%" /></p>
+<h3 id="como-alterar-parametros">Como alterar parâmetros</h3>
+<p>Para alterar os parâmetros de todas as próximas runs, entre no botão <img alt="⚙" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2699.svg" title=":gear:" /> <strong>Settings</strong> da página do flow e depois entre na aba <strong>Parameters</strong>.</p>
+<p><img alt="⚠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/26a0.svg" title=":warning:" /> Os parâmetros adicionados aqui funcionarão para as próximas runs que ainda não foram scheduladas. Para que esses parâmetros passem a valer a partir do momento em que você o altera, é necessário DESLIGAR e RELIGAR o scheduler.</p>
+<p><img alt="UI do Prefect - Flow Settings" src="../../static/img/tutoriais/pipelines/settings.png" width="90%" /></p>
+<h3 id="como-visualizar-uma-run">Como visualizar uma Run <img alt="🏃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f3c3.svg" title=":runner:" /></h3>
+<p>Agora você consegue visualizar o status de cada uma das tasks dessa run tanto em um gráfico do tipo Gant (em Timeline) quanto em formato de tabela com a data mais recente primeiro.</p>
+<p><img alt="UI do Prefect - Run Overview" src="../../static/img/tutoriais/pipelines/run_overview.png" width="90%" /></p>
+<p>Na aba "Schematic" temos a representação em fluxo do pipeline e status de cada task.</p>
+<p><img alt="UI do Prefect - Run Schematic" src="../../static/img/tutoriais/pipelines/schematic.png" width="90%" /></p>
+<p>Na aba "Logs" você encontra mais informações sobre essa run específica, além de conseguir visualizar os logs que foram solicitados dentro do código. Essa aba de Logs será uma das mais utilizadas por você a partir de agora <img alt="💚" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f49a.svg" title=":green_heart:" /> .</p>
+<p><img alt="UI do Prefect - Run Logs" src="../../static/img/tutoriais/pipelines/logs.png" width="90%" /></p>
 
               
             </article>
