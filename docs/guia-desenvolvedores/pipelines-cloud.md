@@ -75,10 +75,173 @@ Alguns exemplos: **SEGOVI: 1746 - Ingerir tabelas de banco SQL**, **EMD: templat
 
 Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta [pipelines/utils](https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils) e tem seus nomes definidos no arquivo [constansts.py](https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py).
 
+## Desenvolvendo um _Flow_ para a Cloud
+
+Agora podemos começar a desenvolver nosso primeiro _Flow_ para a cloud. Para isso, vamos reaproveitar o código implementado no tutorial anterior.
+
+Seguindo a estrutura de diretórios, podemos criar um novo diretório, chamado `formacao`, dentro da pasta `pipelines`. Dentro dele, vamos criar um arquivo `__init__.py`, para indicar que o diretório se trata de um submódulo do projeto. Então, nesse momento, a estrutura está assim:
+
+```
+formacao/
+└── __init__.py
+```
+
+Então, vamos criar um novo diretório chamado `exemplo`, dentro do diretório `formacao`. Dentro dele, vamos criar um arquivo `__init__.py`, para indicar que o diretório se trata de um submódulo do projeto. Então, nesse momento, a estrutura está assim:
+
+```
+formacao/
+├── __init__.py
+└── exemplo/
+    └── __init__.py
+```
+
+Dentro do diretório `exemplo`, então, vamos criar nossas _tasks_ e o _Flow_. Para isso, vamos criar um arquivo `tasks.py`, que conterá as _tasks_ que serão utilizadas no _Flow_, e um arquivo `flows.py`, que conterá o _Flow_ em si. Então, a estrutura está assim:
+
+```
+formacao/
+├── __init__.py
+└── exemplo/
+    ├── __init__.py
+    ├── flow.py
+    └── tasks.py
+```
+
+Se você se recorda bem, no tutorial anterior, havíamos criado um arquivo `utils.py` para conter nossa função de log. No entanto, no repositório de pipelines essa função já existe e pode ser importada de `pipelines.utils.utils`. Então, vamos escrever o arquivo `tasks.py` da seguinte forma:
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Tasks for the example flow
+"""
+from io import StringIO
+
+import pandas as pd
+from prefect import task
+import requests
+
+from pipelines.utils.utils import log
+
+@task
+def download_data(n_users: int) -> str:
+    """
+    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.
+
+    Args:
+        n_users (int): número de usuários a serem baixados.
+
+    Returns:
+        str: texto em formato CSV.
+    """
+    response = requests.get(
+        "https://randomuser.me/api/?results={}&format=csv".format(n_users)
+    )
+    log("Dados baixados com sucesso!")
+    return response.text
+
+@task
+def parse_data(data: str) -> pd.DataFrame:
+    """
+    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.
+
+    Args:
+        data (str): texto em formato CSV.
+
+    Returns:
+        pd.DataFrame: DataFrame do Pandas.
+    """
+    df = pd.read_csv(StringIO(data))
+    log("Dados convertidos em DataFrame com sucesso!")
+    return df
+
+@task
+def save_report(dataframe: pd.DataFrame) -> None:
+    """
+    Salva o DataFrame em um arquivo CSV.
+
+    Args:
+        dataframe (pd.DataFrame): DataFrame do Pandas.
+    """
+    dataframe.to_csv("report.csv", index=False)
+    log("Dados salvos em report.csv com sucesso!")
+```
+
+**Obs:** esse `# -*- coding: utf-8 -*-` no início do arquivo é para indicar que o arquivo está em UTF-8. Isso é necessário para que o Python consiga ler corretamente os caracteres especiais, como acentos, caso existam. Isso é uma forma de manter uma boa consistência em nossa base de código, dentre outras boas práticas que são adotadas para esse repositório.
+
+Agora, vamos escrever o arquivo `flows.py` da seguinte forma:
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Example flow
+"""
+from prefect import Parameter
+from prefect.run_configs import KubernetesRun
+from prefect.storage import GCS
+
+from pipelines.constants import constants
+from pipelines.formacao.exemplo.tasks import download_data, parse_data, save_report
+from pipelines.utils.decorators import Flow
+
+with Flow("EMD: formacao - Exemplo de flow do Prefect") as formacao_exemplo_flow:
+    # Parâmetros
+    n_users = Parameter("n_users", default=10)
+
+    # Tasks
+    data = download_data(n_users)
+    dataframe = parse_data(data)
+    save_report(dataframe)
+
+formacao_exemplo_flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
+formacao_exemplo_flow.run_config = KubernetesRun(
+    image=constants.DOCKER_IMAGE.value,
+    labels=[constants.RJ_COR_AGENT_LABEL.value],
+)
+formacao_exemplo_flow.schedule = None
+```
+
+Opa, opa, opa! Bastante coisa nova por aqui, não é mesmo? Vamos entender o que está acontecendo:
+
+- Estamos importando duas coisas novas aqui, o `KubernetesRun` e o `GCS`. O `KubernetesRun` é um _run config_ que indica que o _Flow_ deve ser executado em um cluster Kubernetes (que, em nosso caso, é onde os _agents_ do Prefect estão hospedados. Caso não recorde o que são _agents_, retorne à [Visão geral da infraestrutura](/guia-desenvolvedores/visao-geral-infra/)). O `GCS` é um _storage_ que indica que o _Flow_ deve ser armazenado no Google Cloud Storage. Essas duas coisas são necessárias para que o _Flow_ seja executado em nosso servidor do Prefect, na nuvem.
+
+- Estamos importando, também, um tal de `constants`. Esse é um objeto que contém diversos valores constantes que utilizamos de forma compartilhada em várias pipelines. Nesse caso, em especial, estamos importando para utilizar os valores `GCS_FLOWS_BUCKET`, que é o nome do bucket do GCS onde os _Flows_ são armazenados, o `DOCKER_IMAGE`, que é a imagem Docker que contém o ambiente de execução do Prefect (essa imagem é construída a partir do arquivo `Dockerfile` que está no repositório de pipelines), e o `RJ_COR_AGENT_LABEL`, que é o nome do _label_ que os _agents_ do Prefect devem ter para que o Prefect consiga identificar onde a pipeline deve ser executada.
+
+- Por fim, importamos também o `Flow`, que já conhecíamos do tutorial anterior. Porém, esse é uma versão modificada por nós, do Escritório de Dados, que adiciona algumas funcionalidades que julgamos importantes.
+
+- Após a definição do _Flow_, que foi idêntica à do tutorial anterior, temos que configurar os valores de _storage_, _run config_ e _schedule_. Essas três coisas são necessárias para que o Prefect consiga executar o _Flow_ em nosso servidor do Prefect, na nuvem. Por enquanto, estamos atribuindo o valor nulo para o _schedule_, o que significa que o _Flow_ não será executado periodicamente. Para adicionar um _schedule_, teremos uma seção específica a seguir.
+
+Agora que temos nosso _flow_ definido, precisamos garantir que ele seja encontrado na hora de registrar os _Flows_ no Prefect. Para isso, precisamos adicionar o seguinte no arquivo `pipelines/formacao/__init__.py`:
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Prefect flows for formacao
+"""
+from pipelines.formacao.exemplo.flows import *
+```
+
+E, depois, no arquivo `pipelines/flows.py`, precisamos adicionar, ao final, o seguinte:
+
+```python
+from pipelines.formacao import *
+```
+
+E pronto! Está feito! Agora para registrar os _Flows_ e executá-los, continue lendo.
+
+### _Flows_ pré-definidos
+
+Hoje possuímos diversos _Flows_ pré-definidos, que são _Flows_ que já estão prontos para serem executados. Esses _Flows_ podem ser encontrados no diretório `pipelines/utils` e têm como objetivo introduzir templates de _Flows_ para tarefas que se repetem com frequência. Alguns exemplos de _Flows_ pré-definidos são:
+
+- `dump_datario`: _Flow_ que extrai dados diretamente do [data.rio](https://data.rio) e gera uma tabela no BigQuery.
+- `dump_db`: _Flow_ que extrai dados de um banco de dados SQL (no momento aceita Postgres, MySQL, SQL Server e Oracle) e gera uma tabela no BigQuery.
+- `dump_to_gcs`: _Flow_ que consome uma tabela do BigQuery, gerando um CSV compactado no GCS.
+- `dump_url`: _Flow_ que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.
+- `execute_dbt_model`: _Flow_ que executa um modelo do DBT para materialização de dados no BigQuery.
+
+Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos _Flows_ sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!
 
 ### Utilizando _Flows_ pré-definidos (Diego)
 
-Uma pratica muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.
+Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.
 
 > Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
 
