@@ -1,0 +1,1209 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../static/img/logo.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>Deployment de pipelines na cloud - Escritório de Dados</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Lato";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../static/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#o-repositorio-de-pipelines" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Escritório de Dados" class="md-header__button md-logo" aria-label="Escritório de Dados" data-md-component="logo">
+      
+  <img src="../../static/img/logo_header.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Escritório de Dados
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deployment de pipelines na cloud
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4m0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/prefeitura-rio/docs" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    prefeitura-rio/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Escritório de Dados" class="md-nav__button md-logo" aria-label="Escritório de Dados" data-md-component="logo">
+      
+  <img src="../../static/img/logo_header.png" alt="logo">
+
+    </a>
+    Escritório de Dados
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/prefeitura-rio/docs" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    prefeitura-rio/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Olá!
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          Tutoriais
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutoriais" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutoriais
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutoriais/como-acessar-dados/" class="md-nav__link">
+        Como acessar dados no data lake
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
+        Como configurar a conexão do PowerBI com o BigQuery
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          Guia de desenvolvedores
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guia de desenvolvedores" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Guia de desenvolvedores
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../visao-geral-infra/" class="md-nav__link">
+        Visão geral da infraestrutura
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manual-estilo/" class="md-nav__link">
+        Manual de Estilo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadados/" class="md-nav__link">
+        Metadados
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipelines/" class="md-nav__link">
+        Desenvolvimento de pipelines local
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Deployment de pipelines na cloud
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Deployment de pipelines na cloud
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-repositorio-de-pipelines" class="md-nav__link">
+    O repositório de pipelines
+  </a>
+  
+    <nav class="md-nav" aria-label="O repositório de pipelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-de-diretorios" class="md-nav__link">
+    Estrutura de diretórios
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-dependencias-paty" class="md-nav__link">
+    Adicionando dependências (Paty)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trabalhando-com-pipelines-na-cloud" class="md-nav__link">
+    Trabalhando com pipelines na Cloud
+  </a>
+  
+    <nav class="md-nav" aria-label="Trabalhando com pipelines na Cloud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-nomear-flows-diego" class="md-nav__link">
+    Como nomear Flows (Diego)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desenvolvendo-um-flow-para-a-cloud" class="md-nav__link">
+    Desenvolvendo um Flow para a Cloud
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flows-pre-definidos" class="md-nav__link">
+    Flows pré-definidos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilizando-flows-pre-definidos-diego" class="md-nav__link">
+    Utilizando Flows pré-definidos (Diego)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agendamento-de-flows" class="md-nav__link">
+    Agendamento de Flows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manutencao-de-qualidade-de-codigo" class="md-nav__link">
+    Manutenção de qualidade de código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes-globais-e-locais" class="md-nav__link">
+    Constantes globais e locais
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gerenciamento-de-segredos" class="md-nav__link">
+    Gerenciamento de segredos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-testar-pipelines-em-staging" class="md-nav__link">
+    Como testar pipelines em staging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usando-a-ui-do-prefect-diego" class="md-nav__link">
+    Usando a UI do Prefect (Diego)
+  </a>
+  
+    <nav class="md-nav" aria-label="Usando a UI do Prefect (Diego)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#buscando-um-flow-diego" class="md-nav__link">
+    Buscando um Flow (Diego)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-executar-um-flow-diego" class="md-nav__link">
+    Como executar um Flow (Diego)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-alterar-parametros-diego" class="md-nav__link">
+    Como alterar parâmetros (Diego)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-visualizar-logs-diego" class="md-nav__link">
+    Como visualizar logs (Diego)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dbt/" class="md-nav__link">
+        Publicando dados com DBT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compartilhar-acesso/" class="md-nav__link">
+        Compartilhando acesso aos dados
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_4">
+          Sobre
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Sobre" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Sobre
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contato/" class="md-nav__link">
+        Contato
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/guia-desenvolvedores/pipelines-cloud.md" title="Editar esta página" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Deployment de pipelines na cloud</h1>
+
+<p>Agora que já vimos como criar um <em>Flow</em> e executá-lo, vamos dar o próximo passo e integrar nosso desenvolvimento ao <a href="https://github.com/prefeitura-rio/pipelines">repositório de pipelines</a>!</p>
+<h2 id="o-repositorio-de-pipelines">O repositório de pipelines</h2>
+<p>O <a href="https://github.com/prefeitura-rio/pipelines">repositório de pipelines</a> possui várias funcionalidades que vão auxiliar o desenvolvimento, integração, garantia de qualidade de código e deploy dos <em>Flows</em>.</p>
+<h3 id="estrutura-de-diretorios">Estrutura de diretórios</h3>
+<p>Todos os diretórios seguem uma estrutura padrão, demonstrada e comentada abaixo:</p>
+<div class="highlight"><pre><span></span><code>orgao/                       # diretório raiz para o órgão
+├── projeto1/                # diretório de projeto
+│   ├── __init__.py          # vazio
+│   ├── constants.py         # valores constantes para o projeto
+│   ├── flows.py             # declaração dos flows
+│   ├── schedules.py         # declaração dos schedules
+│   ├── tasks.py             # declaração das tasks
+│   └── utils.py             # funções auxiliares para o projeto
+...
+├── __init__.py              # importa todos os flows de todos os projetos
+├── constants.py             # valores constantes para o órgão
+├── flows.py                 # declaração de flows genéricos do órgão
+├── schedules.py             # declaração de schedules genéricos do órgão
+├── tasks.py                 # declaração de tasks genéricas do órgão
+└── utils.py                 # funções auxiliares para o órgão
+
+orgao2/
+...
+
+utils/
+├── __init__.py
+├── flow1/
+│   ├── __init__.py
+│   ├── flows.py
+│   ├── tasks.py
+│   └── utils.py
+├── flows.py                 # declaração de flows genéricos
+├── tasks.py                 # declaração de tasks genéricas
+└── utils.py                 # funções auxiliares
+
+constants.py                 # valores constantes para todos os órgãos
+</code></pre></div>
+<h3 id="adicionando-dependencias-paty">Adicionando dependências (Paty)</h3>
+<p>Para começar, precisamos seguir alguns breves passos.</p>
+<p>1 - Crie uma pasta no seu computador no qual ficarão armazenados todos os repositórios da prefeitura</p>
+<p>2 - Dentro dessa pasta vamos criar um ambiente virtual em python, mais conhecido como venv. Esse ambiente virtual serve para separarmos as bibliotecas e versões dessas que são exclusivas à esse projeto e evita que tenhamos problema de conflito entre elas. Para esse passo é necessário que você acesse essa pasta utilizando um terminal. Agora, basta escrever <code>python3.9 -m venv &lt;nome_da_sua_venv</code> e aguardar a finalização do comando. O python irá criar uma pasta com o nome da sua venv. Toda vez que for rodar e testar suas pipelines, você deve ativar sua venv. Para ativá-la você deve entrar na mesma pasta em que você estava na criação da venv e pelo terminal digitar <code>source &lt;nome_da_sua_venv/bin/activate</code> caso esteja em máquina linux ou mac. No windows, você o comando é <code>&lt;nome_da_sua_venv/Scripts/activate</code>. Repare agora que o ínicio da linha do seu terminal terá o nome da sua venv. É assim que você saberá que está com ela ativada. Para desativar, digite <code>deactivate</code> no terminal. Você pode ter quantas venvs quiser no seu computador. para saber mais, acesse a <a href="https://docs.python.org/pt-br/3/library/venv.html">documentação oficial</a>.</p>
+<p>3 - Se você ainda não realizou o <code>git clone</code> do <a href="https://github.com/prefeitura-rio/pipelines">repositório</a> de <code>pipelines</code> da prefeitura, esse é o momento!</p>
+<p>4 - Antes de começar a criar seu pipeline, verifique que você está na master e utilize o comando <code>git checkout -b staging/&lt;nome_branch&gt;</code> para criar uma nova branch a partir dela. É muito importante que o nome da sua branch inicie com "staging/" para que você consiga testar seu flow na cloud.</p>
+<p>Neste tutorial focaremos em como rodar o prefect usando a cloud. Caso queira rodar local você também deve seguir os passos descritos no README do repositório de pipelines.</p>
+<h2 id="trabalhando-com-pipelines-na-cloud">Trabalhando com pipelines na Cloud</h2>
+<p>Agora que conhecemos o repositório de pipelines, vamos trabalhar com eles na Cloud. Isso envolve várias etapas, que serão detalhadas a seguir.</p>
+<h3 id="como-nomear-flows-diego">Como nomear <em>Flows</em> (Diego)</h3>
+<p>Um dos primeiros passos no desenvolvimento de uma pipeline é a definição de seu nome. Para mantermos a organização e facilitar a busca das pipelines no prefect definimos algumas regras de nomeação;</p>
+<p>O nome da pipeline deve seguir o modelo: <code>&lt;sigla_orgao_maiuscula&gt;: &lt;descricao_curta&gt; - &lt;descricao_longa&gt;</code></p>
+<ul>
+<li><strong>sigla_orgao_upper</strong>: sigla do orgão em letras maiusculas; EMD, SME, SMS, SEGOVI</li>
+<li><strong>descricao_curta</strong>: Breve descrição da pipiline podendo ser um dataset_id, sistema entre outros. Reservamos <strong>template</strong> para pipelines que podem ser reutilizadas e que normalmente ficam na pasta utils</li>
+<li><strong>descricao_longa</strong>: Descrição mais completa do que a pipeline faz</li>
+</ul>
+<p>Alguns exemplos: <strong>SEGOVI: 1746 - Ingerir tabelas de banco SQL</strong>, <strong>EMD: template - Ingerir tabela de banco SQL</strong>, <strong>EMD: template - Executa DBT model</strong></p>
+<p>Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta <a href="https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils">pipelines/utils</a> e tem seus nomes definidos no arquivo <a href="https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py.">constansts.py</a></p>
+<h3 id="desenvolvendo-um-flow-para-a-cloud">Desenvolvendo um <em>Flow</em> para a Cloud</h3>
+<p>Agora podemos começar a desenvolver nosso primeiro <em>Flow</em> para a cloud. Para isso, vamos reaproveitar o código implementado no tutorial anterior.</p>
+<p>Seguindo a estrutura de diretórios, podemos criar um novo diretório, chamado <code>formacao</code>, dentro da pasta <code>pipelines</code>. Dentro dele, vamos criar um arquivo <code>__init__.py</code>, para indicar que o diretório se trata de um submódulo do projeto. Então, nesse momento, a estrutura está assim:</p>
+<div class="highlight"><pre><span></span><code>formacao/
+└── __init__.py
+</code></pre></div>
+<p>Então, vamos criar um novo diretório chamado <code>exemplo</code>, dentro do diretório <code>formacao</code>. Dentro dele, vamos criar um arquivo <code>__init__.py</code>, para indicar que o diretório se trata de um submódulo do projeto. Então, nesse momento, a estrutura está assim:</p>
+<div class="highlight"><pre><span></span><code>formacao/
+├── __init__.py
+└── exemplo/
+    └── __init__.py
+</code></pre></div>
+<p>Dentro do diretório <code>exemplo</code>, então, vamos criar nossas <em>tasks</em> e o <em>Flow</em>. Para isso, vamos criar um arquivo <code>tasks.py</code>, que conterá as <em>tasks</em> que serão utilizadas no <em>Flow</em>, e um arquivo <code>flows.py</code>, que conterá o <em>Flow</em> em si. Então, a estrutura está assim:</p>
+<div class="highlight"><pre><span></span><code>formacao/
+├── __init__.py
+└── exemplo/
+    ├── __init__.py
+    ├── flow.py
+    └── tasks.py
+</code></pre></div>
+<p>Se você se recorda bem, no tutorial anterior, havíamos criado um arquivo <code>utils.py</code> para conter nossa função de log. No entanto, no repositório de pipelines essa função já existe e pode ser importada de <code>pipelines.utils.utils</code>. Então, vamos escrever o arquivo <code>tasks.py</code> da seguinte forma:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tasks for the example flow</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">log</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_users (int): número de usuários a serem baixados.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: texto em formato CSV.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s2">&quot;https://randomuser.me/api/?results=</span><span class="si">{}</span><span class="s2">&amp;format=csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados baixados com sucesso!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (str): texto em formato CSV.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame do Pandas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados convertidos em DataFrame com sucesso!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pd.DataFrame): DataFrame do Pandas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;report.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados salvos em report.csv com sucesso!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Obs:</strong> esse <code># -*- coding: utf-8 -*-</code> no início do arquivo é para indicar que o arquivo está em UTF-8. Isso é necessário para que o Python consiga ler corretamente os caracteres especiais, como acentos, caso existam. Isso é uma forma de manter uma boa consistência em nossa base de código, dentre outras boas práticas que são adotadas para esse repositório.</p>
+<p>Agora, vamos escrever o arquivo <code>flows.py</code> da seguinte forma:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example flow</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.formacao.exemplo.tasks</span> <span class="kn">import</span> <span class="n">download_data</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">,</span> <span class="n">save_report</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.decorators</span> <span class="kn">import</span> <span class="n">Flow</span>
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;EMD: formacao - Exemplo de flow do Prefect&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">formacao_exemplo_flow</span><span class="p">:</span>
+    <span class="c1"># Parâmetros</span>
+    <span class="n">n_users</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;n_users&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Tasks</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+
+<span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">GCS</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">GCS_FLOWS_BUCKET</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">run_config</span> <span class="o">=</span> <span class="n">KubernetesRun</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DOCKER_IMAGE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">RJ_COR_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Opa, opa, opa! Bastante coisa nova por aqui, não é mesmo? Vamos entender o que está acontecendo:</p>
+<ul>
+<li>
+<p>Estamos importando duas coisas novas aqui, o <code>KubernetesRun</code> e o <code>GCS</code>. O <code>KubernetesRun</code> é um <em>run config</em> que indica que o <em>Flow</em> deve ser executado em um cluster Kubernetes (que, em nosso caso, é onde os <em>agents</em> do Prefect estão hospedados. Caso não recorde o que são <em>agents</em>, retorne à <a href="/guia-desenvolvedores/visao-geral-infra/">Visão geral da infraestrutura</a>). O <code>GCS</code> é um <em>storage</em> que indica que o <em>Flow</em> deve ser armazenado no Google Cloud Storage. Essas duas coisas são necessárias para que o <em>Flow</em> seja executado em nosso servidor do Prefect, na nuvem.</p>
+</li>
+<li>
+<p>Estamos importando, também, um tal de <code>constants</code>. Esse é um objeto que contém diversos valores constantes que utilizamos de forma compartilhada em várias pipelines. Nesse caso, em especial, estamos importando para utilizar os valores <code>GCS_FLOWS_BUCKET</code>, que é o nome do bucket do GCS onde os <em>Flows</em> são armazenados, o <code>DOCKER_IMAGE</code>, que é a imagem Docker que contém o ambiente de execução do Prefect (essa imagem é construída a partir do arquivo <code>Dockerfile</code> que está no repositório de pipelines), e o <code>RJ_COR_AGENT_LABEL</code>, que é o nome do <em>label</em> que os <em>agents</em> do Prefect devem ter para que o Prefect consiga identificar onde a pipeline deve ser executada.</p>
+</li>
+<li>
+<p>Por fim, importamos também o <code>Flow</code>, que já conhecíamos do tutorial anterior. Porém, esse é uma versão modificada por nós, do Escritório de Dados, que adiciona algumas funcionalidades que julgamos importantes.</p>
+</li>
+<li>
+<p>Após a definição do <em>Flow</em>, que foi idêntica à do tutorial anterior, temos que configurar os valores de <em>storage</em>, <em>run config</em> e <em>schedule</em>. Essas três coisas são necessárias para que o Prefect consiga executar o <em>Flow</em> em nosso servidor do Prefect, na nuvem. Por enquanto, estamos atribuindo o valor nulo para o <em>schedule</em>, o que significa que o <em>Flow</em> não será executado periodicamente. Para adicionar um <em>schedule</em>, teremos uma seção específica a seguir.</p>
+</li>
+</ul>
+<p>Agora que temos nosso <em>flow</em> definido, precisamos garantir que ele seja encontrado na hora de registrar os <em>Flows</em> no Prefect. Para isso, precisamos adicionar o seguinte no arquivo <code>pipelines/formacao/__init__.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Prefect flows for formacao</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">pipelines.formacao.exemplo.flows</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+<p>E, depois, no arquivo <code>pipelines/flows.py</code>, precisamos adicionar, ao final, o seguinte:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pipelines.formacao</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+<p>E pronto! Está feito! Agora para registrar os <em>Flows</em> e executá-los, continue lendo.</p>
+<h3 id="flows-pre-definidos"><em>Flows</em> pré-definidos</h3>
+<p>Hoje possuímos diversos <em>Flows</em> pré-definidos, que são <em>Flows</em> que já estão prontos para serem executados. Esses <em>Flows</em> podem ser encontrados no diretório <code>pipelines/utils</code> e têm como objetivo introduzir templates de <em>Flows</em> para tarefas que se repetem com frequência. Alguns exemplos de <em>Flows</em> pré-definidos são:</p>
+<ul>
+<li><code>dump_datario</code>: <em>Flow</em> que extrai dados diretamente do <a href="https://data.rio">data.rio</a> e gera uma tabela no BigQuery.</li>
+<li><code>dump_db</code>: <em>Flow</em> que extrai dados de um banco de dados SQL (no momento aceita Postgres, MySQL, SQL Server e Oracle) e gera uma tabela no BigQuery.</li>
+<li><code>dump_to_gcs</code>: <em>Flow</em> que consome uma tabela do BigQuery, gerando um CSV compactado no GCS.</li>
+<li><code>dump_url</code>: <em>Flow</em> que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.</li>
+<li><code>execute_dbt_model</code>: <em>Flow</em> que executa um modelo do DBT para materialização de dados no BigQuery.</li>
+</ul>
+<p>Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos <em>Flows</em> sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!</p>
+<h3 id="utilizando-flows-pre-definidos-diego">Utilizando <em>Flows</em> pré-definidos (Diego)</h3>
+<p>Uma pratica muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.</p>
+<blockquote>
+<p>Importante lembrar de adicionar o novo flow no <code>__init__.py</code> na raiz da pasta do orgão.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Database dumping flows for formation project</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dump_url_formacao.schedules</span> <span class="kn">import</span> <span class="n">gsheets_one_minute_update_schedule</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.flows</span> <span class="kn">import</span> <span class="n">dump_url_flow</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+
+<span class="n">formacao_gsheets_flow</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dump_url_flow</span><span class="p">)</span>
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Formação GSheets - Ingerir tabelas de URL&quot;</span>
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">GCS</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">GCS_FLOWS_BUCKET</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">run_config</span> <span class="o">=</span> <span class="n">KubernetesRun</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DOCKER_IMAGE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">RJ_ESCRITORIO_DEV_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">formacao_gsheets_flow_parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;test_formacao&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">formacao_gsheets_flow</span> <span class="o">=</span> <span class="n">set_default_parameters</span><span class="p">(</span>
+    <span class="n">formacao_gsheets_flow</span><span class="p">,</span> <span class="n">default_parameters</span><span class="o">=</span><span class="n">formacao_gsheets_flow_parameters</span>
+<span class="p">)</span>
+
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">gsheets_one_minute_update_schedule</span>
+</code></pre></div>
+<p>Abaixo temos um exemplo de scheduler para a pipeline mostrada anteriormente.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Schedules for the database dump pipeline</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.utils</span> <span class="kn">import</span> <span class="n">generate_dump_url_schedules</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+
+<span class="c1">#####################################</span>
+<span class="c1">#</span>
+<span class="c1"># EGPWeb Schedules</span>
+<span class="c1">#</span>
+<span class="c1">#####################################</span>
+
+<span class="n">gsheets_urls</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;test_table&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;dump_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.google.com/spreadsheets/d/1lWbNoBSPDLi7nhZvt1G3vEYBWF460Su8PKALXvQJH5w</span><span class="se">\</span>
+<span class="s2">            /edit#gid=917050709&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url_type&quot;</span><span class="p">:</span> <span class="s2">&quot;google_sheet&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gsheets_sheet_name&quot;</span><span class="p">:</span> <span class="s2">&quot;METAS CONSOLIDADO&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="n">gsheets_clocks</span> <span class="o">=</span> <span class="n">generate_dump_url_schedules</span><span class="p">(</span>
+    <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s2">&quot;America/Sao_Paulo&quot;</span><span class="p">)),</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">RJ_ESCRITORIO_DEV_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;test_dataset_formacao&quot;</span><span class="p">,</span>
+    <span class="n">table_parameters</span><span class="o">=</span><span class="n">gsheets_urls</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">gsheets_one_minute_update_schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span><span class="n">clocks</span><span class="o">=</span><span class="n">untuple</span><span class="p">(</span><span class="n">gsheets_clocks</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="agendamento-de-flows">Agendamento de <em>Flows</em> <img alt="⏰" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/23f0.svg" title=":alarm_clock:" /></h3>
+<p>O prefect nos permite automatizar os horários que nosso flow irá rodar. O agendamento (scheduler) dos pipelines é especificado em um arquivo <code>scheduler.py</code> dentro do diretório relativo a esse flow.</p>
+<p>Os flows têm dois principais tipos de agendamentos possíveis:</p>
+<ul>
+<li>
+<p><code>CronClock</code>, no qual você especifica os dias e horários que o pipeline irá rodar utilizando uma <a href="https://support-acquia.force.com/s/article/360004224494-Cron-time-string-format">string Cron</a>.</p>
+</li>
+<li>
+<p><code>IntervalClock</code>, que faz com que o pipeline rode a cada x segundos.</p>
+</li>
+</ul>
+<p>No código abaixo, temos como exemplo um scheduler baseado no <code>IntervalClock</code> programado para rodar a cada 1 dia e com a data de início da automação para "2021-01-01 04:00:00" no timezone de São Paulo - BR. Assim que você subir esse código no github de staging ou master, o backend do prefect inicializará automaticamente esse flow todos os dias às 04:00 a partir de agora. Isso porque definimos o <code>start_date</code> para uma data do passado. Se quiser que o flow comece a rodar apenas a partir de uma data futura, basta indicá-la nesse campo.</p>
+<p>Toda vez que vamos rodar um flow, precisamos especificar em qual <em>Agent</em> ele irá rodar para que possamos realizar as divisões de custo da infraestrutura. Nesse caso, estamos importando o agente do arquivo <code>constants.py</code></p>
+<p>Por último, podemos definir alguns parâmetros defaults que serão utilizados dentro do flow. Neste caso, mantivemos a materialização das tabelas no BQ com o parâmetro <em>materialize_after_dump</em> e definimos que essa materialização ocorra em ambiente dev utilizando o <em>materialization_mode</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Este é um exemplo de um arquivo schedules.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span> <span class="nn">pendulum</span>
+<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span> <span class="nn">prefect.schedules.clocks</span> <span class="kn">import</span> <span class="n">IntervalClock</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+
+<span class="c1"># define o objeto every_day_at_four_am ao instanciar a classe Schedule</span>
+<span class="n">every_day_at_four_am</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span>
+    <span class="n">clocks</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">IntervalClock</span><span class="p">(</span>
+            <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># aqui definimos que o flow irá rodar a cada 1 dia</span>
+            <span class="n">start_date</span><span class="o">=</span><span class="n">pendulum</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">&quot;America/Sao_Paulo&quot;</span><span class="p">),</span> <span class="c1"># define qual em data o scheduler começa a funcionar, geralmente setamos uma no passado</span>
+            <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">constants</span><span class="o">.</span><span class="n">RJ_ESCRITORIO_DEV_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="c1"># define qual agent o flow deve utilizar</span>
+            <span class="p">],</span>
+            <span class="n">parameter_defaults</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;materialize_after_dump&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># é possível setar parâmetros do flow pelo scheduler</span>
+                <span class="s2">&quot;materialization_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;dev&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Só criar o arquivo <code>schedules.py</code> não fará com que o backend do prefect inicialize a automação do flow. Precisamos indicar para esse determinado flow qual scheduler ele deve utilizar. Isso é feito dentro do arquivo <code>flows.py</code> .</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># importa o objeto every_day_at_four_am do arquivo schedules que se encontra no caminho pipelines.rj_escritorio.geolocator</span>
+<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.geolocator.schedules</span> <span class="kn">import</span> <span class="n">every_day_at_four_am</span>
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span>
+    <span class="s2">&quot;EMD: escritorio - Geolocalizacao de chamados 1746&quot;</span><span class="p">,</span>
+    <span class="n">code_owners</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;paty&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">daily_geolocator_flow</span><span class="p">:</span> <span class="c1"># esse é o nome do nosso flow</span>
+    <span class="n">do_something</span><span class="p">()</span>
+
+<span class="n">daily_geolocator_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">every_day_at_four_am</span> <span class="c1"># atribui o scheduler do flow ao que foi definido no arquivo schedules.py</span>
+</code></pre></div>
+<p>Para saber mais sobre esse tema acesse a documentação oficial do prefect em <a href="https://docs-v1.prefect.io/core/concepts/schedules.html#filters">schedules</a> e <a href="https://docs-v1.prefect.io/api/latest/schedules/clocks.html#clock">clocks</a>.</p>
+<h3 id="manutencao-de-qualidade-de-codigo">Manutenção de qualidade de código</h3>
+<p>Para manter o código limpo, padronizado e compreensível para todos, utilizamos duas ferramentas: o <code>pylint</code> e o <code>pre-commit</code>.</p>
+<p>O <code>pylint</code> é uma ferramenta de análise estática de código que nos ajuda a encontrar erros e padrões de código que podem ser melhorados. Ele é executado automaticamente quando você realiza um commit e, quando encontra algum erro, faz um comentário no seu PR indicando o que precisa ser corrigido. Um exemplo pode ser visto na imagem abaixo:</p>
+<p><img alt="Exemplo de comentário do pylint" src="../../static/img/tutoriais/pipelines/gh-actions-pylint.png" /></p>
+<p>Nessa imagem, você pode notar que ele indica qual o erro encontrado e em qual linha do código ele ocorreu.</p>
+<p>Você também pode executar o <code>pylint</code> localmente, para isso, basta executar o comando <code>pylint pipelines/</code> na raiz do projeto. Ele irá analisar todo o código e indicar os erros encontrados. Um exemplo de saída do comando pode ser visto abaixo:</p>
+<div class="highlight"><pre><span></span><code>************* Module pipelines.formacao.exemplo.tasks
+pipelines/formacao/exemplo/tasks.py:43:4: C0103: Variable name &quot;df&quot; doesn&#39;t conform to snake_case naming style (invalid-name)
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
+</code></pre></div>
+<p>Para saber mais sobre o pylint, acesse a <a href="https://pylint.pycqa.org/en/latest/">documentação oficial</a>.</p>
+<p>O <code>pre-commit</code> é uma ferramenta que permite realizar algumas ações antes do commit ser realizado. Essas ações podem ser configuradas conforme nossa necessidade. Para esse repositório, as ações que selecionamos foram:</p>
+<ul>
+<li><code>check-added-large-files</code>: verifica se algum arquivo foi adicionado ao commit que ultrapasse o tamanho definido no arquivo <code>.gitattributes</code> (nesse caso, 10MB)</li>
+<li><code>detect-private-key</code>: verifica se algum arquivo de chave privada foi adicionado ao commit (evita que chaves privadas sejam adicionadas ao repositório)</li>
+<li><code>fix-byte-order-marker</code>: remove o byte order marker (BOM) de arquivos que possuam esse caractere</li>
+<li><code>fix-encoding-pragma</code>: adiciona o pragma <code># -*- coding: utf-8 -*-</code> nos arquivos que não o possuem</li>
+<li><code>no-commit-to-branch</code>: impede que commits sejam realizados na branch <code>master</code></li>
+<li><code>trailing-whitespace</code>: remove espaços em branco no final das linhas</li>
+<li><code>black</code>: formata o código utilizando o <code>black</code> (para saber mais sobre o <code>black</code>, acesse a <a href="https://black.readthedocs.io/en/stable/">documentação oficial</a>)</li>
+<li><code>flake8</code>: verifica se o código está de acordo com o <code>flake8</code> (para saber mais sobre o <code>flake8</code>, acesse a <a href="https://flake8.pycqa.org/en/latest/">documentação oficial</a>)</li>
+</ul>
+<p>Todas essas ações são realizadas automaticamente quando você realiza um commit (desde que corretamente configurado). De qualquer forma, caso um commit não atenda essas regras, o <code>pre-commit</code> irá fazer as correções que julgar adequadas diretamente no seu PR.</p>
+<p>Para saber mais sobre o <code>pre-commit</code>, acesse a <a href="https://pre-commit.com/">documentação oficial</a>.</p>
+<p>Por fim, mas não menos importante, temos também um utilitário customizado desenvolvido pelo Escritório de Dados que realiza a análise de árvore de dependências do código, alertando se as modificações que você introduziu no código podem afetar código de outras pessoas. Um exemplo pode ser visto na imagem abaixo:</p>
+<p><img alt="Exemplo de comentário do utilitário de análise de dependências" src="../../static/img/tutoriais/pipelines/gh-actions-tree.png" /></p>
+<p>Como você pode ver, os usuários afetados por sua modificação são marcados diretamente no comentário.</p>
+<h3 id="constantes-globais-e-locais">Constantes globais e locais <img alt="ℹ" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2139.svg" title=":information_source:" /></h3>
+<p>Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, temos como boa prática um arquivo específico para salvarmos nossas variáveis. Aqui no ED vamos ter dois arquivos de constantes distintos denomidados de constantes globais e locais.</p>
+<p>As <strong>constantes locais</strong> são todas aquelas que são específicas para um determinado flow. Elas ficam armazenadas em um arquivo <code>constants.py</code> no mesmo diretório do seu <code>flow.py</code>. Em geral, criamos nesse arquivo uma classe <code>constants</code> que contém o <code>DATASET_ID</code> e <code>TABLE_ID</code> que serão utilizados para gravar os dados finais do flow, entre outras coisas que você julgar importante.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># pylint: disable=c0103</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constant values for the geolocator project</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PATH_BASE_ENDERECOS</span> <span class="o">=</span> <span class="s2">&quot;/tmp/base_enderecos.csv&quot;</span>
+    <span class="n">DATASET_ID</span> <span class="o">=</span> <span class="s2">&quot;dados_mestres&quot;</span>
+    <span class="n">TABLE_ID</span> <span class="o">=</span> <span class="s2">&quot;enderecos_geolocalizados&quot;</span>
+</code></pre></div>
+<p>Já as <strong>constantes globais</strong> se referem as constantes que são comuns a todos os flows dentro do repositório de <em>pipelines</em>. Nesse arquivo você encontrará os valores de variáveis como os Agents, variáveis do docker, entre outras. Dificilmente você precisará alterar esse arquivo, e quando precisar fazê-lo tome muito cuidado. Uma mudança nele impacta todos os demais flows desse repositório.</p>
+<h3 id="gerenciamento-de-segredos">Gerenciamento de segredos <img alt="🔐" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f510.svg" title=":closed_lock_with_key:" /></h3>
+<p><img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> NUNCA, JAMAIS E EM HIPÓTESE ALGUMA <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> coloque senhas de acesso diretamente no seu código. Todo o gerenciamento de senhas é feito através do <a href="https://www.vaultproject.io/">Vault</a>. Para adicionar ou remover tokens, passwords, certificados, FTP e API keys peça ajuda ao @pipeliners nos canais do Discord do Escritório de Dados. O acesso ao Vault é restrito por conter muitas informações sensíveis.</p>
+<p>Na imagem abaixo, temos um exemplo de como estão salvas as informações de acesso ao FTP da riomidia e como utilizamos esses dados no python. Nesse exemplo de código, utilizamos a função <code>get_vault_secret</code> para acessar as informações salvas com o nome de "riomidia". Note que as keys utilizadas dentro do dicionário têm os mesmos nomes definidos dentro do Vault.</p>
+<p><img alt="Vault" src="../../static/img/tutoriais/pipelines/vault.png" width="100%" /></p>
+<h3 id="como-testar-pipelines-em-staging">Como testar pipelines em staging <img alt="🔧" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f527.svg" title=":wrench:" /></h3>
+<p>O teste do flow será feito diretamente na cloud utilizando o ambiente de staging. Para isso, é necessário que você esteja em uma branch cujo nome inicia-se com "staging/".</p>
+<p>Crie um Pull Request (PR) e enquanto estiver trabalhando no flow mantenha a tag <strong>[WIP]</strong> (Working in Progress) na frente do nome do seu PR, como no exemplo da figura a seguir.</p>
+<p><img alt="WIP" src="../../static/img/tutoriais/pipelines/wip.png" width="100%" /></p>
+<p>Assim, toda vez que você fizer um push para sua branch remota, o CI/CD do Github irá reconhecer o nome da branch e começará o deployment do seu código para a área de staging.</p>
+<p>Para verificar o andamento do deploy você tem duas opções:</p>
+<ul>
+<li>pode acompanhar pela página de PR através do círculo que aparece na frente do nome do seu PR. <img alt="✔" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2714.svg" title=":heavy_check_mark:" /> significa que o deploy foi finalizado com sucesso, <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> o deploy teve algum problema e <img alt="🟠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e0.svg" title=":orange_circle:" /> que o processo ainda não foi finalizado.</li>
+</ul>
+<p><img alt="Deploy 1" src="../../static/img/tutoriais/pipelines/build_pr.png" width="90%" /></p>
+<ul>
+<li>ao entrar no PR é possível acompanhar o andamento de cada etapaele tb do deploy. Aqui é possível verificar em qual etapa e qual foi o problema no deploy.</li>
+</ul>
+<p><img alt="Deploy 2" src="../../static/img/tutoriais/pipelines/build.png" width="90%" /></p>
+<p>Quando a pipeline estiver finalizada e pronta para entrar na master, você precisa tirar o <strong>[WIP]</strong> do título do seu PR e solicitar para alguém aprovar o seu PR. Com a aprovação, basta clicar no botão de merge e o CI/CD do Github começará o processo de deploy no ambiente de prod.</p>
+<h2 id="usando-a-ui-do-prefect-diego">Usando a UI do Prefect (Diego)</h2>
+<h3 id="buscando-um-flow-diego">Buscando um <em>Flow</em> (Diego)</h3>
+<h3 id="como-executar-um-flow-diego">Como executar um <em>Flow</em> (Diego)</h3>
+<h3 id="como-alterar-parametros-diego">Como alterar parâmetros (Diego)</h3>
+<p>Prestar atenção aos agents</p>
+<h3 id="como-visualizar-logs-diego">Como visualizar logs (Diego)</h3>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+
+              
+            </article>
+            
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Voltar ao topo
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
+      
+        
+        <a href="../pipelines/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Desenvolvimento de pipelines local" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Desenvolvimento de pipelines local
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../dbt/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Publicando dados com DBT" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Próximo
+              </span>
+              Publicando dados com DBT
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/dados_rio" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/Xx8Y6mYaq2" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/prefeitura-rio" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.sections", "navigation.top", "toc.integrate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.config.lang": "pt", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Buscar", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version.title": "Selecione a vers\u00e3o"}, "version": 2.0}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+    
+  </body>
+</html>
