@@ -387,9 +387,48 @@ daily_geolocator_flow.schedule = every_day_at_four_am # atribui o scheduler do f
 
 Para saber mais sobre esse tema acesse a documentação oficial do prefect em [schedules](https://docs-v1.prefect.io/core/concepts/schedules.html#filters) e [clocks](https://docs-v1.prefect.io/api/latest/schedules/clocks.html#clock).
 
-### Manutenção de qualidade de código (Gabriel)
+### Manutenção de qualidade de código
 
-pylint + pre-commit
+Para manter o código limpo, padronizado e compreensível para todos, utilizamos duas ferramentas: o `pylint` e o `pre-commit`.
+
+O `pylint` é uma ferramenta de análise estática de código que nos ajuda a encontrar erros e padrões de código que podem ser melhorados. Ele é executado automaticamente quando você realiza um commit e, quando encontra algum erro, faz um comentário no seu PR indicando o que precisa ser corrigido. Um exemplo pode ser visto na imagem abaixo:
+
+![Exemplo de comentário do pylint](../static/img/tutoriais/pipelines/gh-actions-pylint.png)
+
+Nessa imagem, você pode notar que ele indica qual o erro encontrado e em qual linha do código ele ocorreu.
+
+Você também pode executar o `pylint` localmente, para isso, basta executar o comando `pylint pipelines/` na raiz do projeto. Ele irá analisar todo o código e indicar os erros encontrados. Um exemplo de saída do comando pode ser visto abaixo:
+
+```
+************* Module pipelines.formacao.exemplo.tasks
+pipelines/formacao/exemplo/tasks.py:43:4: C0103: Variable name "df" doesn't conform to snake_case naming style (invalid-name)
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
+```
+
+Para saber mais sobre o pylint, acesse a [documentação oficial](https://pylint.pycqa.org/en/latest/).
+
+O `pre-commit` é uma ferramenta que permite realizar algumas ações antes do commit ser realizado. Essas ações podem ser configuradas conforme nossa necessidade. Para esse repositório, as ações que selecionamos foram:
+
+- `check-added-large-files`: verifica se algum arquivo foi adicionado ao commit que ultrapasse o tamanho definido no arquivo `.gitattributes` (nesse caso, 10MB)
+- `detect-private-key`: verifica se algum arquivo de chave privada foi adicionado ao commit (evita que chaves privadas sejam adicionadas ao repositório)
+- `fix-byte-order-marker`: remove o byte order marker (BOM) de arquivos que possuam esse caractere
+- `fix-encoding-pragma`: adiciona o pragma `# -*- coding: utf-8 -*-` nos arquivos que não o possuem
+- `no-commit-to-branch`: impede que commits sejam realizados na branch `master`
+- `trailing-whitespace`: remove espaços em branco no final das linhas
+- `black`: formata o código utilizando o `black` (para saber mais sobre o `black`, acesse a [documentação oficial](https://black.readthedocs.io/en/stable/))
+- `flake8`: verifica se o código está de acordo com o `flake8` (para saber mais sobre o `flake8`, acesse a [documentação oficial](https://flake8.pycqa.org/en/latest/))
+
+Todas essas ações são realizadas automaticamente quando você realiza um commit (desde que corretamente configurado). De qualquer forma, caso um commit não atenda essas regras, o `pre-commit` irá fazer as correções que julgar adequadas diretamente no seu PR.
+
+Para saber mais sobre o `pre-commit`, acesse a [documentação oficial](https://pre-commit.com/).
+
+Por fim, mas não menos importante, temos também um utilitário customizado desenvolvido pelo Escritório de Dados que realiza a análise de árvore de dependências do código, alertando se as modificações que você introduziu no código podem afetar código de outras pessoas. Um exemplo pode ser visto na imagem abaixo:
+
+![Exemplo de comentário do utilitário de análise de dependências](../static/img/tutoriais/pipelines/gh-actions-tree.png)
+
+Como você pode ver, os usuários afetados por sua modificação são marcados diretamente no comentário.
 
 ### Constantes globais e locais :information_source:
 
