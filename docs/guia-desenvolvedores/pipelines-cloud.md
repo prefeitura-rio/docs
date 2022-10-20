@@ -226,7 +226,17 @@ from pipelines.formacao import *
 
 E pronto! Está feito! Agora para registrar os _Flows_ e executá-los, continue lendo.
 
-### _Flows_ pré-definidos (Diego + Gabriel)
+### _Flows_ pré-definidos
+
+Hoje possuímos diversos _Flows_ pré-definidos, que são _Flows_ que já estão prontos para serem executados. Esses _Flows_ podem ser encontrados no diretório `pipelines/utils` e têm como objetivo introduzir templates de _Flows_ para tarefas que se repetem com frequência. Alguns exemplos de _Flows_ pré-definidos são:
+
+- `dump_datario`: _Flow_ que extrai dados diretamente do [data.rio](https://data.rio) e gera uma tabela no BigQuery.
+- `dump_db`: _Flow_ que extrai dados de um banco de dados SQL (no momento aceita Postgres, MySQL, SQL Server e Oracle) e gera uma tabela no BigQuery.
+- `dump_to_gcs`: _Flow_ que consome uma tabela do BigQuery, gerando um CSV compactado no GCS.
+- `dump_url`: _Flow_ que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.
+- `execute_dbt_model`: _Flow_ que executa um modelo do DBT para materialização de dados no BigQuery.
+
+Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos _Flows_ sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!
 
 ### Utilizando _Flows_ pré-definidos (Diego)
 
