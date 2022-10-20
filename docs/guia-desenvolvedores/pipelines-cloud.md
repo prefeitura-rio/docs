@@ -487,7 +487,7 @@ Para verificar o andamento do deploy você tem duas opções:
 
 ![Deploy 2](../static/img/tutoriais/pipelines/build.png){width=90%}
 
-Quando a pipeline estiver finalizada e pronta para entrar na master, você precisa tirar o **[WIP]** do título do seu PR e solicitar para alguém aprovar o seu PR. Com a aprovação, basta clicar no botão de merge e o CI/CD do Github começará o processo de deploy no ambiente de prod.
+Quando a pipeline estiver finalizada e pronta para entrar na master, você precisa solicitar para alguém aprovar o seu PR. Com a aprovação, basta clicar no botão de merge e o CI/CD do Github começará o processo de deploy no ambiente de prod.
 
 ## Usando a UI do Prefect
 
