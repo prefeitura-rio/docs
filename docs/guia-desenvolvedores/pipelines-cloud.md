@@ -1,5 +1,3 @@
-
-
 Agora que já vimos como criar um _Flow_ e executá-lo, vamos dar o próximo passo e integrar nosso desenvolvimento ao [repositório de pipelines](https://github.com/prefeitura-rio/pipelines)!
 
 
@@ -45,15 +43,15 @@ utils/
 constants.py                 # valores constantes para todos os órgãos
 ```
 
-### Adicionando dependências (Paty)
+### Adicionando dependências
 
-Para começar, precisamos seguir alguns breves passos. 
+Para começar, precisamos seguir alguns breves passos.
 
 1 - Crie uma pasta no seu computador no qual ficarão armazenados todos os repositórios da prefeitura
 
 2 - Dentro dessa pasta vamos criar um ambiente virtual em python, mais conhecido como venv. Esse ambiente virtual serve para separarmos as bibliotecas e versões dessas que são exclusivas à esse projeto e evita que tenhamos problema de conflito entre elas. Para esse passo é necessário que você acesse essa pasta utilizando um terminal. Agora, basta escrever `python3.9 -m venv <nome_da_sua_venv` e aguardar a finalização do comando. O python irá criar uma pasta com o nome da sua venv. Toda vez que for rodar e testar suas pipelines, você deve ativar sua venv. Para ativá-la você deve entrar na mesma pasta em que você estava na criação da venv e pelo terminal digitar `source <nome_da_sua_venv/bin/activate` caso esteja em máquina linux ou mac. No windows, você o comando é `<nome_da_sua_venv/Scripts/activate`. Repare agora que o ínicio da linha do seu terminal terá o nome da sua venv. É assim que você saberá que está com ela ativada. Para desativar, digite `deactivate` no terminal. Você pode ter quantas venvs quiser no seu computador. para saber mais, acesse a [documentação oficial](https://docs.python.org/pt-br/3/library/venv.html).
 
-3 -  Se você ainda não realizou o `git clone` do [repositório](https://github.com/prefeitura-rio/pipelines) de `pipelines` da prefeitura, esse é o momento!
+3 - Se você ainda não realizou o `git clone` do [repositório](https://github.com/prefeitura-rio/pipelines) de `pipelines` da prefeitura, esse é o momento!
 
 4 - Antes de começar a criar seu pipeline, verifique que você está na master e utilize o comando `git checkout -b staging/<nome_branch>` para criar uma nova branch a partir dela. É muito importante que o nome da sua branch inicie com "staging/" para que você consiga testar seu flow na cloud.
 
@@ -75,18 +73,14 @@ O nome da pipeline deve seguir o modelo: `<sigla_orgao_maiuscula>: <descricao_cu
 
 Alguns exemplos: **SEGOVI: 1746 - Ingerir tabelas de banco SQL**, **EMD: template - Ingerir tabela de banco SQL**, **EMD: template - Executa DBT model**
 
-Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta [pipelines/utils](https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils) e tem seus nomes definidos no arquivo [constansts.py](https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py.
-)
-### Desenvolvendo um _Flow_ para a Cloud (Gabriel)
+Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta [pipelines/utils](https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils) e tem seus nomes definidos no arquivo [constansts.py](https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py).
 
-### _Flows_ pré-definidos (Diego + Gabriel)
 
 ### Utilizando _Flows_ pré-definidos (Diego)
 
 Uma pratica muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.
 
->Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
-
+> Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
 
 ```python
 # -*- coding: utf-8 -*-
@@ -178,7 +172,7 @@ gsheets_one_minute_update_schedule = Schedule(clocks=untuple(gsheets_clocks))
 
 O prefect nos permite automatizar os horários que nosso flow irá rodar. O agendamento (scheduler) dos pipelines é especificado em um arquivo `scheduler.py` dentro do diretório relativo a esse flow.
 
-Os flows têm dois principais tipos de agendamentos possíveis: 
+Os flows têm dois principais tipos de agendamentos possíveis:
 
 - `CronClock`, no qual você especifica os dias e horários que o pipeline irá rodar utilizando uma [string Cron](https://support-acquia.force.com/s/article/360004224494-Cron-time-string-format).
 
@@ -186,9 +180,9 @@ Os flows têm dois principais tipos de agendamentos possíveis:
 
 No código abaixo, temos como exemplo um scheduler baseado no `IntervalClock` programado para rodar a cada 1 dia e com a data de início da automação para "2021-01-01 04:00:00" no timezone de São Paulo - BR. Assim que você subir esse código no github de staging ou master, o backend do prefect inicializará automaticamente esse flow todos os dias às 04:00 a partir de agora. Isso porque definimos o `start_date` para uma data do passado. Se quiser que o flow comece a rodar apenas a partir de uma data futura, basta indicá-la nesse campo.
 
-Toda vez que vamos rodar um flow, precisamos especificar em qual *Agent* ele irá rodar para que possamos realizar as divisões de custo da infraestrutura. Nesse caso, estamos importando o agente do arquivo `constants.py`
+Toda vez que vamos rodar um flow, precisamos especificar em qual _Agent_ ele irá rodar para que possamos realizar as divisões de custo da infraestrutura. Nesse caso, estamos importando o agente do arquivo `constants.py`
 
-Por último, podemos definir alguns parâmetros defaults que serão utilizados dentro do flow. Neste caso, mantivemos a materialização das tabelas no BQ com o parâmetro *materialize_after_dump* e definimos que essa materialização ocorra em ambiente dev utilizando o *materialization_mode*.
+Por último, podemos definir alguns parâmetros defaults que serão utilizados dentro do flow. Neste caso, mantivemos a materialização das tabelas no BQ com o parâmetro _materialize_after_dump_ e definimos que essa materialização ocorra em ambiente dev utilizando o _materialization_mode_.
 
 ```python
 # -*- coding: utf-8 -*-
@@ -208,7 +202,7 @@ from pipelines.constants import constants
 every_day_at_four_am = Schedule(
     clocks=[
         IntervalClock(
-            interval=timedelta(days=1), # aqui definimos que o flow irá rodar a cada 1 dia 
+            interval=timedelta(days=1), # aqui definimos que o flow irá rodar a cada 1 dia
             start_date=pendulum.datetime(2021, 1, 1, 4, 0, 0, tz="America/Sao_Paulo"), # define qual em data o scheduler começa a funcionar, geralmente setamos uma no passado
             labels=[
                 constants.RJ_ESCRITORIO_DEV_AGENT_LABEL.value, # define qual agent o flow deve utilizar
@@ -222,9 +216,9 @@ every_day_at_four_am = Schedule(
 )
 ```
 
-Só criar o arquivo `schedules.py` não fará com que o backend do prefect inicialize a automação do flow. Precisamos indicar para esse determinado flow qual scheduler ele deve utilizar. Isso é feito dentro do arquivo `flows.py` . 
+Só criar o arquivo `schedules.py` não fará com que o backend do prefect inicialize a automação do flow. Precisamos indicar para esse determinado flow qual scheduler ele deve utilizar. Isso é feito dentro do arquivo `flows.py` .
 
-``` python
+```python
 # importa o objeto every_day_at_four_am do arquivo schedules que se encontra no caminho pipelines.rj_escritorio.geolocator
 from pipelines.rj_escritorio.geolocator.schedules import every_day_at_four_am
 
@@ -242,9 +236,48 @@ daily_geolocator_flow.schedule = every_day_at_four_am # atribui o scheduler do f
 
 Para saber mais sobre esse tema acesse a documentação oficial do prefect em [schedules](https://docs-v1.prefect.io/core/concepts/schedules.html#filters) e [clocks](https://docs-v1.prefect.io/api/latest/schedules/clocks.html#clock).
 
-### Manutenção de qualidade de código (Gabriel)
+### Manutenção de qualidade de código
 
-pylint + pre-commit
+Para manter o código limpo, padronizado e compreensível para todos, utilizamos duas ferramentas: o `pylint` e o `pre-commit`.
+
+O `pylint` é uma ferramenta de análise estática de código que nos ajuda a encontrar erros e padrões de código que podem ser melhorados. Ele é executado automaticamente quando você realiza um commit e, quando encontra algum erro, faz um comentário no seu PR indicando o que precisa ser corrigido. Um exemplo pode ser visto na imagem abaixo:
+
+![Exemplo de comentário do pylint](../static/img/tutoriais/pipelines/gh-actions-pylint.png)
+
+Nessa imagem, você pode notar que ele indica qual o erro encontrado e em qual linha do código ele ocorreu.
+
+Você também pode executar o `pylint` localmente, para isso, basta executar o comando `pylint pipelines/` na raiz do projeto. Ele irá analisar todo o código e indicar os erros encontrados. Um exemplo de saída do comando pode ser visto abaixo:
+
+```
+************* Module pipelines.formacao.exemplo.tasks
+pipelines/formacao/exemplo/tasks.py:43:4: C0103: Variable name "df" doesn't conform to snake_case naming style (invalid-name)
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
+```
+
+Para saber mais sobre o pylint, acesse a [documentação oficial](https://pylint.pycqa.org/en/latest/).
+
+O `pre-commit` é uma ferramenta que permite realizar algumas ações antes do commit ser realizado. Essas ações podem ser configuradas conforme nossa necessidade. Para esse repositório, as ações que selecionamos foram:
+
+- `check-added-large-files`: verifica se algum arquivo foi adicionado ao commit que ultrapasse o tamanho definido no arquivo `.gitattributes` (nesse caso, 10MB)
+- `detect-private-key`: verifica se algum arquivo de chave privada foi adicionado ao commit (evita que chaves privadas sejam adicionadas ao repositório)
+- `fix-byte-order-marker`: remove o byte order marker (BOM) de arquivos que possuam esse caractere
+- `fix-encoding-pragma`: adiciona o pragma `# -*- coding: utf-8 -*-` nos arquivos que não o possuem
+- `no-commit-to-branch`: impede que commits sejam realizados na branch `master`
+- `trailing-whitespace`: remove espaços em branco no final das linhas
+- `black`: formata o código utilizando o `black` (para saber mais sobre o `black`, acesse a [documentação oficial](https://black.readthedocs.io/en/stable/))
+- `flake8`: verifica se o código está de acordo com o `flake8` (para saber mais sobre o `flake8`, acesse a [documentação oficial](https://flake8.pycqa.org/en/latest/))
+
+Todas essas ações são realizadas automaticamente quando você realiza um commit (desde que corretamente configurado). De qualquer forma, caso um commit não atenda essas regras, o `pre-commit` irá fazer as correções que julgar adequadas diretamente no seu PR.
+
+Para saber mais sobre o `pre-commit`, acesse a [documentação oficial](https://pre-commit.com/).
+
+Por fim, mas não menos importante, temos também um utilitário customizado desenvolvido pelo Escritório de Dados que realiza a análise de árvore de dependências do código, alertando se as modificações que você introduziu no código podem afetar código de outras pessoas. Um exemplo pode ser visto na imagem abaixo:
+
+![Exemplo de comentário do utilitário de análise de dependências](../static/img/tutoriais/pipelines/gh-actions-tree.png)
+
+Como você pode ver, os usuários afetados por sua modificação são marcados diretamente no comentário.
 
 ### Constantes globais e locais :information_source:
 
@@ -252,7 +285,7 @@ Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, t
 
 As **constantes locais** são todas aquelas que são específicas para um determinado flow. Elas ficam armazenadas em um arquivo `constants.py` no mesmo diretório do seu `flow.py`. Em geral, criamos nesse arquivo uma classe `constants` que contém o `DATASET_ID` e `TABLE_ID` que serão utilizados para gravar os dados finais do flow, entre outras coisas que você julgar importante.
 
-``` python
+```python
 from enum import Enum
 
 class constants(Enum):  # pylint: disable=c0103
@@ -265,7 +298,7 @@ class constants(Enum):  # pylint: disable=c0103
     TABLE_ID = "enderecos_geolocalizados"
 ```
 
-Já as **constantes globais** se referem as constantes que são comuns a todos os flows dentro do repositório de *pipelines*. Nesse arquivo você encontrará os valores de variáveis como os Agents, variáveis do docker, entre outras. Dificilmente você precisará alterar esse arquivo, e quando precisar fazê-lo tome muito cuidado. Uma mudança nele impacta todos os demais flows desse repositório.
+Já as **constantes globais** se referem as constantes que são comuns a todos os flows dentro do repositório de _pipelines_. Nesse arquivo você encontrará os valores de variáveis como os Agents, variáveis do docker, entre outras. Dificilmente você precisará alterar esse arquivo, e quando precisar fazê-lo tome muito cuidado. Uma mudança nele impacta todos os demais flows desse repositório.
 
 ### Gerenciamento de segredos :closed_lock_with_key:
 
@@ -277,9 +310,9 @@ Na imagem abaixo, temos um exemplo de como estão salvas as informações de ace
 
 ### Como testar pipelines em staging :wrench:
 
-O teste do flow será feito diretamente na cloud utilizando o ambiente de staging. Para isso, é necessário que você esteja em uma branch cujo nome inicia-se com "staging/". 
+O teste do flow será feito diretamente na cloud utilizando o ambiente de staging. Para isso, é necessário que você esteja em uma branch cujo nome inicia-se com "staging/".
 
-Crie um Pull Request (PR) e toda vez que você fizer um push para sua branch remota, o CI/CD do Github irá reconhecer o nome da branch e começará o deployment do seu código para a área de staging. 
+Crie um Pull Request (PR) e toda vez que você fizer um push para sua branch remota, o CI/CD do Github irá reconhecer o nome da branch e começará o deployment do seu código para a área de staging.
 
 Para verificar o andamento do deploy você tem duas opções:
 
