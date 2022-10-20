@@ -65,11 +65,114 @@ Agora que conhecemos o repositório de pipelines, vamos trabalhar com eles na Cl
 
 ### Como nomear _Flows_ (Diego)
 
+Um dos primeiros passos no desenvolvimento de uma pipeline é a definição de seu nome. Para mantermos a organização e facilitar a busca das pipelines no prefect definimos algumas regras de nomeação;
+
+O nome da pipeline deve seguir o modelo: `<sigla_orgao_maiuscula>: <descricao_curta> - <descricao_longa>`
+
+- **sigla_orgao_upper**: sigla do orgão em letras maiusculas; EMD, SME, SMS, SEGOVI
+- **descricao_curta**: Breve descrição da pipiline podendo ser um dataset_id, sistema entre outros. Reservamos **template** para pipelines que podem ser reutilizadas e que normalmente ficam na pasta utils
+- **descricao_longa**: Descrição mais completa do que a pipeline faz
+
+Alguns exemplos: **SEGOVI: 1746 - Ingerir tabelas de banco SQL**, **EMD: template - Ingerir tabela de banco SQL**, **EMD: template - Executa DBT model**
+
+Normalmente quando queremos reutilizar uma pipeline é necessário que o nome dela seja declarado em um arquivo constants.py que permite referenciar ela em outras partes do código. Podemos ver um exemplo dessa pratica nas pipelines que estão na pasta [pipelines/utils](https://github.com/prefeitura-rio/pipelines/tree/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils) e tem seus nomes definidos no arquivo [constansts.py](https://github.com/prefeitura-rio/pipelines/blob/b944967e5f7953cb9b8ac040bd3ccf22a339ca4d/pipelines/utils/constants.py.
+)
 ### Desenvolvendo um _Flow_ para a Cloud (Gabriel)
 
 ### _Flows_ pré-definidos (Diego + Gabriel)
 
 ### Utilizando _Flows_ pré-definidos (Diego)
+
+Uma pratica muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.
+
+>Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
+
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Database dumping flows for formation project
+"""
+
+from copy import deepcopy
+
+from prefect.run_configs import KubernetesRun
+from prefect.storage import GCS
+
+from pipelines.constants import constants
+
+from pipelines.rj_escritorio.dump_url_formacao.schedules import gsheets_one_minute_update_schedule
+from pipelines.utils.dump_url.flows import dump_url_flow
+from pipelines.utils.utils import set_default_parameters
+
+formacao_gsheets_flow = deepcopy(dump_url_flow)
+formacao_gsheets_flow.name = "EMD: Formação GSheets - Ingerir tabelas de URL"
+formacao_gsheets_flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
+formacao_gsheets_flow.run_config = KubernetesRun(
+    image=constants.DOCKER_IMAGE.value,
+    labels=[
+        constants.RJ_ESCRITORIO_DEV_AGENT_LABEL.value,
+    ],
+)
+
+formacao_gsheets_flow_parameters = {
+    "dataset_id": "test_formacao",
+}
+formacao_gsheets_flow = set_default_parameters(
+    formacao_gsheets_flow, default_parameters=formacao_gsheets_flow_parameters
+)
+
+formacao_gsheets_flow.schedule = gsheets_one_minute_update_schedule
+
+```
+
+Abaixo temos um exemplo de scheduler para a pipeline mostrada anteriormente.
+
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Schedules for the database dump pipeline
+"""
+
+from datetime import datetime, timedelta
+
+import pytz
+from prefect.schedules import Schedule
+from pipelines.constants import constants
+from pipelines.utils.dump_url.utils import generate_dump_url_schedules
+from pipelines.utils.utils import untuple_clocks as untuple
+
+#####################################
+#
+# EGPWeb Schedules
+#
+#####################################
+
+gsheets_urls = {
+    "test_table": {
+        "dump_mode": "overwrite",
+        "url": "https://docs.google.com/spreadsheets/d/1lWbNoBSPDLi7nhZvt1G3vEYBWF460Su8PKALXvQJH5w\
+            /edit#gid=917050709",
+        "url_type": "google_sheet",
+        "gsheets_sheet_name": "METAS CONSOLIDADO",
+    },
+}
+
+
+gsheets_clocks = generate_dump_url_schedules(
+    interval=timedelta(minutes=1),
+    start_date=datetime(2022, 10, 21, 15, 0, tzinfo=pytz.timezone("America/Sao_Paulo")),
+    labels=[
+        constants.RJ_ESCRITORIO_DEV_AGENT_LABEL.value,
+    ],
+    dataset_id="test_dataset_formacao",
+    table_parameters=gsheets_urls,
+)
+
+gsheets_one_minute_update_schedule = Schedule(clocks=untuple(gsheets_clocks))
+
+```
 
 ### Agendamento de _Flows_ :alarm_clock:
 
