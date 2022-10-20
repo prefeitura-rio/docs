@@ -208,9 +208,23 @@ Opa, opa, opa! Bastante coisa nova por aqui, não é mesmo? Vamos entender o que
 
 - Após a definição do _Flow_, que foi idêntica à do tutorial anterior, temos que configurar os valores de _storage_, _run config_ e _schedule_. Essas três coisas são necessárias para que o Prefect consiga executar o _Flow_ em nosso servidor do Prefect, na nuvem. Por enquanto, estamos atribuindo o valor nulo para o _schedule_, o que significa que o _Flow_ não será executado periodicamente. Para adicionar um _schedule_, teremos uma seção específica a seguir.
 
-Agora que temos nosso _flow_ definido, ...
+Agora que temos nosso _flow_ definido, precisamos garantir que ele seja encontrado na hora de registrar os _Flows_ no Prefect. Para isso, precisamos adicionar o seguinte no arquivo `pipelines/formacao/__init__.py`:
 
-IMPORTAR NOS `__init__.py`
+```python
+# -*- coding: utf-8 -*-
+"""
+Prefect flows for formacao
+"""
+from pipelines.formacao.exemplo.flows import *
+```
+
+E, depois, no arquivo `pipelines/flows.py`, precisamos adicionar, ao final, o seguinte:
+
+```python
+from pipelines.formacao import *
+```
+
+E pronto! Está feito! Agora para registrar os _Flows_ e executá-los, continue lendo.
 
 ### _Flows_ pré-definidos (Diego + Gabriel)
 
