@@ -236,16 +236,3 @@ python3 run.py
 ```
 
 E pronto! O _Flow_ foi executado com sucesso e um arquivo `report.csv` foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro `n_users` foi passado com o valor 20.
-
-<!-- ## O repositório de pipelines
-
-
-## Concatenando Flows
-
-## Adicionando dependências
-
-## Como testar pipelines em diversos ambientes
-
-## Colocando uma pipeline em produção
-
-## UI do Prefect -->
