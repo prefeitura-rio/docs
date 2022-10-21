@@ -499,8 +499,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#utilizando-flows-pre-definidos-diego" class="md-nav__link">
-    Utilizando Flows pré-definidos (Diego)
+  <a href="#utilizando-flows-pre-definidos" class="md-nav__link">
+    Utilizando Flows pré-definidos
   </a>
   
 </li>
@@ -918,8 +918,9 @@ constants.py                 # valores constantes para todos os órgãos
 <li><code>execute_dbt_model</code>: <em>Flow</em> que executa um modelo do DBT para materialização de dados no BigQuery.</li>
 </ul>
 <p>Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos <em>Flows</em> sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!</p>
-<h3 id="utilizando-flows-pre-definidos-diego">Utilizando <em>Flows</em> pré-definidos (Diego)</h3>
-<p>Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.</p>
+<h3 id="utilizando-flows-pre-definidos">Utilizando <em>Flows</em> pré-definidos</h3>
+<p>Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. </p>
+<p>Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler. No exemplo abaixo vamos reutilizar uma adaptação do <a href="https://github.com/prefeitura-rio/pipelines/tree/staging/dump_url_formacao/pipelines/utils/dump_url_formacao"><em>Flow</em></a> que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.</p>
 <blockquote>
 <p>Importante lembrar de adicionar o novo flow no <code>__init__.py</code> na raiz da pasta do orgão.</p>
 </blockquote>
