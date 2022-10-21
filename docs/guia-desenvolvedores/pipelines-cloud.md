@@ -267,9 +267,11 @@ Hoje possuímos diversos _Flows_ pré-definidos, que são _Flows_ que já estão
 
 Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos _Flows_ sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!
 
-### Utilizando _Flows_ pré-definidos (Diego)
+### Utilizando _Flows_ pré-definidos
 
-Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler como no exemplo abaixo.
+Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. 
+
+Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler. No exemplo abaixo vamos reutilizar uma adaptação do [_Flow_](https://github.com/prefeitura-rio/pipelines/tree/staging/dump_url_formacao/pipelines/utils/dump_url_formacao) que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.
 
 > Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
 
