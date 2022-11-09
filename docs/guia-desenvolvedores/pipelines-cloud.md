@@ -271,7 +271,11 @@ Esses são somente alguns exemplos do que existe hoje lá e a tendência é que 
 
 Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. 
 
-Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler. No exemplo abaixo vamos reutilizar uma adaptação do [_Flow_](https://github.com/prefeitura-rio/pipelines/tree/staging/dump_url_formacao/pipelines/utils/dump_url_formacao) que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.
+Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o [**deepcopy**](https://docs.python.org/3/library/copy.html) e seguir o template padrão para nomeação, definição de agent e scheduler. 
+
+#### Obtendo dados de URL
+
+No exemplo abaixo vamos reutilizar uma adaptação do [_Flow_](https://github.com/prefeitura-rio/pipelines/tree/staging/dump_url_formacao/pipelines/utils/dump_url_formacao) que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.
 
 > Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
 
@@ -322,7 +326,6 @@ formacao_gsheets_flow.schedule = gsheets_one_minute_update_schedule
 
 Abaixo temos um exemplo de scheduler para a pipeline mostrada anteriormente.
 
-
 ```python
 # -*- coding: utf-8 -*-
 """
@@ -367,6 +370,120 @@ gsheets_clocks = generate_dump_url_schedules(
 gsheets_one_minute_update_schedule = Schedule(clocks=untuple(gsheets_clocks))
 
 ```
+
+#### Obtendo dados de Base SQL
+
+De maneira semelhante ao exemplo anterior, a pipeline abaixo também consulta dados de uma origem e gera uma tabela no BigQuery, com a diferença de que extrai dados de um banco de dados SQL (Postgres, MySQL, SQL Server ou Oracle).
+
+> Importante lembrar de adicionar o novo flow no `__init__.py` na raiz da pasta do orgão.
+
+Abaixo temos o arquivo `schedule.py`, onde definimos os parâmetros específicos das tabelas SQL além do agendamento da pipeline.
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Schedules for the database dump pipeline
+"""
+from datetime import datetime, timedelta
+
+import pytz
+from prefect.schedules import Schedule
+from pipelines.constants import constants
+from pipelines.utils.dump_db.utils import generate_dump_db_schedules
+from pipelines.utils.utils import untuple_clocks as untuple
+
+#####################################
+#
+# Example Shedule
+#
+#####################################
+
+example_queries = {
+    "chance": {
+        "dump_mode": "overwrite",
+        "execute_query": "SELECT * FROM EGPWEB_PRD.dbo.VW_CHANCE;",
+    },
+    "comentario": {
+        "dump_mode": "overwrite",
+        "execute_query": "SELECT * FROM EGPWEB_PRD.dbo.VW_Comentario;",
+    },
+}
+
+example_clocks = generate_dump_db_schedules(
+    interval=timedelta(days=7),
+    start_date=datetime(2022, 11, 4, 16, 0, tzinfo=pytz.timezone("America/Sao_Paulo")),
+    labels=[
+        constants.RJ_SMFP_AGENT_LABEL.value,
+    ],
+    db_database="EGPWEB_PRD",
+    db_host="10.2.221.101",
+    db_port="1433",
+    db_type="sql_server",
+    dataset_id="planejamento_gestao_acordo_resultados",
+    vault_secret_path="egpweb-prod",
+    table_parameters=example_queries,
+)
+
+example_update_schedule = Schedule(clocks=untuple(example_clocks))
+```
+
+A variável `example_queries` é um dicionário em que as chaves são os `table_id` das tabelas e como 
+valores tem-se outro dicionário com parâmetros específicos de cada tabela e seus respectivos valores.
+
+Sobre os parâmetros utilizados:
+
+- `dump_mode`: indica a maneira em que os dados serão adicionados à tabela no BigQuery (`overwrite` é usado para sobrescrever os dados enquando `append` adiciona linhas no final da tabela). Nesse caso, utilizamos `overwrite`.
+- `execute_query`: é a query que será executada no banco de dados de origem.
+
+No exemplo acima, utilizamos a função `generate_dump_db_schedules`, que é uma função facilitadora, localizada no repositório `pipelines.utils.dump_db.utils`. Essa função define o _schedule_ de todas as tabelas incluídas em `example_queries`, de modo que uma rode logo após o término da outra. 
+
+Além dos parâmetros de data de início, intervalo entre execuções e o agente prefect que vai executar essa pipeline, essa função recebe `db_database`, `db_host`, `db_port`, `db_type`, `dataset_id` e `vault_secret_path`, que são parâmetros comuns de todas as tabelas dentro de `example_queries` (para que não seja necessário adicionar esses parâmetros várias vezes, uma para cada tabela, dentro de `example_queries`, podemos adicioná-los uma vez só, dentro de `generate_dump_db_schedules`). 
+
+Os parâmetros `db_database`, `db_host`, `db_port` e `db_type` auxiliam no acesso às tabelas na base de dados SQL original e variam conforme a base utilizada. O `vault_secret_path` é o caminho no _Vault_ (compartimento de credenciais utilizado pelo Escritório de Dados) em que as credenciais para acessar a base de dados da pipeline exemplo (no nosso caso, EGPWeb).
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Database example dumping flow for infra training
+"""
+from copy import deepcopy
+
+from prefect.run_configs import KubernetesRun
+from prefect.storage import GCS
+
+from pipelines.constants import constants
+
+from pipelines.rj_escritorio.dump_db_formacao.schedules import example_update_schedule
+from pipelines.utils.dump_db_formacao.flows import dump_sql_flow
+from pipelines.utils.utils import set_default_parameters
+
+example_sql_flow = deepcopy(dump_sql_flow)
+example_sql_flow.name = "EMD: Formação DataBase - Ingerir tabelas de banco SQL"
+example_sql_flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
+example_sql_flow.run_config = KubernetesRun(
+    image=constants.DOCKER_IMAGE.value,
+    labels=[
+        constants.RJ_SMFP_AGENT_LABEL.value,
+    ],
+)
+
+example_default_parameters = {
+    "db_database": "EGPWEB_PRD",
+    "db_host": "10.2.221.101",
+    "db_port": "1433",
+    "db_type": "sql_server",
+    "vault_secret_path": "egpweb-prod",
+    "dataset_id": "planejamento_gestao_acordo_resultados",
+}
+
+example_sql_flow = set_default_parameters(
+    example_sql_flow, default_parameters=example_default_parameters
+)
+
+example_sql_flow.schedule = example_update_schedule
+```
+
+Acima temos o arquivo `flows.py` dessa pipeline. O único elemento novo nesse arquivo é a função `set_default_parameters`, que guarda valores pré-definidos para determinados parâmetros, de forma que eles fiquem já preenchidos na _UI do Prefect_. Isso é particularmente útil no caso em que se deseje rodar uma pipeline diretamente da _UI_, sem ter que esperar pelo horário agendado. Nesse caso, todos os parâmetros (`db_database`, `db_host`, ...) teriam que ser preenchidos manualmente na _UI_, porém como já definimos valores padrões em `example_default_parameters` e `set_default_parameters`, esses já estarão preenchidos e o trabalho para executar essa pipeline é reduzido.
 
 ### Agendamento de _Flows_ :alarm_clock:
 
