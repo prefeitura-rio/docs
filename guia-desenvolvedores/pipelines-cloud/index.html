@@ -503,6 +503,26 @@
     Utilizando Flows pré-definidos
   </a>
   
+    <nav class="md-nav" aria-label="Utilizando Flows pré-definidos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtendo-dados-de-url" class="md-nav__link">
+    Obtendo dados de URL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtendo-dados-de-base-sql" class="md-nav__link">
+    Obtendo dados de Base SQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -920,7 +940,9 @@ constants.py                 # valores constantes para todos os órgãos
 <p>Esses são somente alguns exemplos do que existe hoje lá e a tendência é que novos <em>Flows</em> sejam adicionados ao longo do tempo. Para saber mais sobre cada um deles e os parâmetros utilizados, entre em contato com o time do Escritório de Dados, será um prazer ajudar você!</p>
 <h3 id="utilizando-flows-pre-definidos">Utilizando <em>Flows</em> pré-definidos</h3>
 <p>Uma prática muito importante quando estamos em um repositório colaborativo é a de reutilização de código. Sempre que possivel optamos por criar pipelines, tasks ou funções de forma modular para evitarmos a repetição do mesmo código em diferentes arquivos do repositório. </p>
-<p>Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler. No exemplo abaixo vamos reutilizar uma adaptação do <a href="https://github.com/prefeitura-rio/pipelines/tree/staging/dump_url_formacao/pipelines/utils/dump_url_formacao"><em>Flow</em></a> que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.</p>
+<p>Para reutilizar uma pipeline pré definida precisamos importar a pipeline original e fazer o <a href="https://docs.python.org/3/library/copy.html"><strong>deepcopy</strong></a> e seguir o template padrão para nomeação, definição de agent e scheduler. </p>
+<h4 id="obtendo-dados-de-url">Obtendo dados de URL</h4>
+<p>No exemplo abaixo vamos reutilizar uma adaptação do <a href="https://github.com/prefeitura-rio/pipelines/tree/staging/dump_url_formacao/pipelines/utils/dump_url_formacao"><em>Flow</em></a> que extrai dados de uma URL (pode ser um arquivo CSV, uma tabela no Google Sheets ou um arquivo no Google Drive) e gera uma tabela no BigQuery.</p>
 <blockquote>
 <p>Importante lembrar de adicionar o novo flow no <code>__init__.py</code> na raiz da pasta do orgão.</p>
 </blockquote>
@@ -1009,6 +1031,109 @@ constants.py                 # valores constantes para todos os órgãos
 
 <span class="n">gsheets_one_minute_update_schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span><span class="n">clocks</span><span class="o">=</span><span class="n">untuple</span><span class="p">(</span><span class="n">gsheets_clocks</span><span class="p">))</span>
 </code></pre></div>
+<h4 id="obtendo-dados-de-base-sql">Obtendo dados de Base SQL</h4>
+<p>De maneira semelhante ao exemplo anterior, a pipeline abaixo também consulta dados de uma origem e gera uma tabela no BigQuery, com a diferença de que extrai dados de um banco de dados SQL (Postgres, MySQL, SQL Server ou Oracle).</p>
+<blockquote>
+<p>Importante lembrar de adicionar o novo flow no <code>__init__.py</code> na raiz da pasta do orgão.</p>
+</blockquote>
+<p>Abaixo temos o arquivo <code>schedule.py</code>, onde definimos os parâmetros específicos das tabelas SQL além do agendamento da pipeline.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Schedules for the database dump pipeline</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_db.utils</span> <span class="kn">import</span> <span class="n">generate_dump_db_schedules</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+
+<span class="c1">#####################################</span>
+<span class="c1">#</span>
+<span class="c1"># Example Shedule</span>
+<span class="c1">#</span>
+<span class="c1">#####################################</span>
+
+<span class="n">example_queries</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;chance&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;dump_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;execute_query&quot;</span><span class="p">:</span> <span class="s2">&quot;SELECT * FROM EGPWEB_PRD.dbo.VW_CHANCE;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;comentario&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;dump_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;execute_query&quot;</span><span class="p">:</span> <span class="s2">&quot;SELECT * FROM EGPWEB_PRD.dbo.VW_Comentario;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">example_clocks</span> <span class="o">=</span> <span class="n">generate_dump_db_schedules</span><span class="p">(</span>
+    <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s2">&quot;America/Sao_Paulo&quot;</span><span class="p">)),</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">RJ_SMFP_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">db_database</span><span class="o">=</span><span class="s2">&quot;EGPWEB_PRD&quot;</span><span class="p">,</span>
+    <span class="n">db_host</span><span class="o">=</span><span class="s2">&quot;10.2.221.101&quot;</span><span class="p">,</span>
+    <span class="n">db_port</span><span class="o">=</span><span class="s2">&quot;1433&quot;</span><span class="p">,</span>
+    <span class="n">db_type</span><span class="o">=</span><span class="s2">&quot;sql_server&quot;</span><span class="p">,</span>
+    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;planejamento_gestao_acordo_resultados&quot;</span><span class="p">,</span>
+    <span class="n">vault_secret_path</span><span class="o">=</span><span class="s2">&quot;egpweb-prod&quot;</span><span class="p">,</span>
+    <span class="n">table_parameters</span><span class="o">=</span><span class="n">example_queries</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">example_update_schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span><span class="n">clocks</span><span class="o">=</span><span class="n">untuple</span><span class="p">(</span><span class="n">example_clocks</span><span class="p">))</span>
+</code></pre></div>
+<p>A variável <code>example_queries</code> é um dicionário em que as chaves são os <code>table_id</code> das tabelas e como 
+valores tem-se outro dicionário com parâmetros específicos de cada tabela e seus respectivos valores.</p>
+<p>Sobre os parâmetros utilizados:</p>
+<ul>
+<li><code>dump_mode</code>: indica a maneira em que os dados serão adicionados à tabela no BigQuery (<code>overwrite</code> é usado para sobrescrever os dados enquando <code>append</code> adiciona linhas no final da tabela). Nesse caso, utilizamos <code>overwrite</code>.</li>
+<li><code>execute_query</code>: é a query que será executada no banco de dados de origem.</li>
+</ul>
+<p>No exemplo acima, utilizamos a função <code>generate_dump_db_schedules</code>, que é uma função facilitadora, localizada no repositório <code>pipelines.utils.dump_db.utils</code>. Essa função define o <em>schedule</em> de todas as tabelas incluídas em <code>example_queries</code>, de modo que uma rode logo após o término da outra. </p>
+<p>Além dos parâmetros de data de início, intervalo entre execuções e o agente prefect que vai executar essa pipeline, essa função recebe <code>db_database</code>, <code>db_host</code>, <code>db_port</code>, <code>db_type</code>, <code>dataset_id</code> e <code>vault_secret_path</code>, que são parâmetros comuns de todas as tabelas dentro de <code>example_queries</code> (para que não seja necessário adicionar esses parâmetros várias vezes, uma para cada tabela, dentro de <code>example_queries</code>, podemos adicioná-los uma vez só, dentro de <code>generate_dump_db_schedules</code>). </p>
+<p>Os parâmetros <code>db_database</code>, <code>db_host</code>, <code>db_port</code> e <code>db_type</code> auxiliam no acesso às tabelas na base de dados SQL original e variam conforme a base utilizada. O <code>vault_secret_path</code> é o caminho no <em>Vault</em> (compartimento de credenciais utilizado pelo Escritório de Dados) em que as credenciais para acessar a base de dados da pipeline exemplo (no nosso caso, EGPWeb).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Database example dumping flow for infra training</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dump_db_formacao.schedules</span> <span class="kn">import</span> <span class="n">example_update_schedule</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_db_formacao.flows</span> <span class="kn">import</span> <span class="n">dump_sql_flow</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+
+<span class="n">example_sql_flow</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dump_sql_flow</span><span class="p">)</span>
+<span class="n">example_sql_flow</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Formação DataBase - Ingerir tabelas de banco SQL&quot;</span>
+<span class="n">example_sql_flow</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">GCS</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">GCS_FLOWS_BUCKET</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">example_sql_flow</span><span class="o">.</span><span class="n">run_config</span> <span class="o">=</span> <span class="n">KubernetesRun</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DOCKER_IMAGE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">RJ_SMFP_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">example_default_parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;db_database&quot;</span><span class="p">:</span> <span class="s2">&quot;EGPWEB_PRD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;db_host&quot;</span><span class="p">:</span> <span class="s2">&quot;10.2.221.101&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;db_port&quot;</span><span class="p">:</span> <span class="s2">&quot;1433&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;db_type&quot;</span><span class="p">:</span> <span class="s2">&quot;sql_server&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vault_secret_path&quot;</span><span class="p">:</span> <span class="s2">&quot;egpweb-prod&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;planejamento_gestao_acordo_resultados&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">example_sql_flow</span> <span class="o">=</span> <span class="n">set_default_parameters</span><span class="p">(</span>
+    <span class="n">example_sql_flow</span><span class="p">,</span> <span class="n">default_parameters</span><span class="o">=</span><span class="n">example_default_parameters</span>
+<span class="p">)</span>
+
+<span class="n">example_sql_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">example_update_schedule</span>
+</code></pre></div>
+<p>Acima temos o arquivo <code>flows.py</code> dessa pipeline. O único elemento novo nesse arquivo é a função <code>set_default_parameters</code>, que guarda valores pré-definidos para determinados parâmetros, de forma que eles fiquem já preenchidos na <em>UI do Prefect</em>. Isso é particularmente útil no caso em que se deseje rodar uma pipeline diretamente da <em>UI</em>, sem ter que esperar pelo horário agendado. Nesse caso, todos os parâmetros (<code>db_database</code>, <code>db_host</code>, ...) teriam que ser preenchidos manualmente na <em>UI</em>, porém como já definimos valores padrões em <code>example_default_parameters</code> e <code>set_default_parameters</code>, esses já estarão preenchidos e o trabalho para executar essa pipeline é reduzido.</p>
 <h3 id="agendamento-de-flows">Agendamento de <em>Flows</em> <img alt="⏰" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/23f0.svg" title=":alarm_clock:" /></h3>
 <p>O prefect nos permite automatizar os horários que nosso flow irá rodar. O agendamento (scheduler) dos pipelines é especificado em um arquivo <code>scheduler.py</code> dentro do diretório relativo a esse flow.</p>
 <p>Os flows têm dois principais tipos de agendamentos possíveis:</p>
