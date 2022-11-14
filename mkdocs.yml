@@ -12,8 +12,8 @@ nav:
       - Metadados: guia-desenvolvedores/metadados.md
       - Desenvolvimento de pipelines local: guia-desenvolvedores/pipelines.md
       - Deployment de pipelines na cloud: guia-desenvolvedores/pipelines-cloud.md
-
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
+      
       - Compartilhando acesso aos dados: guia-desenvolvedores/compartilhar-acesso.md
     - Sobre:
       - Contato: contato.md
