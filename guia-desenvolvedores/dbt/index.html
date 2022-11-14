@@ -568,7 +568,103 @@
   <h1>Publicando dados com DBT</h1>
 
 <h2 id="o-que-e-o-dbt-e-para-que-serve">O que é o DBT e para que serve?</h2>
+<p>Em um <em>pipeline</em> ELT, os dados brutos são extraídos (<em>extract</em>) de uma fonte e carregados (<em>load</em>) em uma <em>data warehouse</em> (no nosso caso: o <em>BigQuery Storage</em>).   Em seguida, os dados brutos são transformados em tabelas utilizáveis, usando consultas <strong>SQL</strong> executadas sobre os dados estocados nessa <em>data warehouse</em>.</p>
+<p>O <strong>dbt</strong> (<em>Data Build Tool</em>) é uma ferramenta de linha de comando que oferece uma maneira fácil para que analistas e engenheiros de dados criem, transformem e validem os dados em um <em>data warehouse</em> de maneira mais eficiente. O <strong>dbt</strong> faz o T nos processos ELT (Extrair, Carregar, Transformar) ilustrados na figura abaixo.</p>
+<p><img alt="Fluxo de Dados com DBT" src="../../static/img/tutoriais/dbt/fluxo_dbt.png" /></p>
+<p>Em <strong>dbt</strong>, trabalhamos com modelos, que é um arquivo <strong>SQL</strong> com uma instrução <code>select</code>. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações. </p>
+<p>Fazendo um paralelo com o processo de ELT do Escritório de Dados: utilizamos <em>pipelines</em> como <code>dump_db</code> ou <code>dump_url</code> para extrair os dados de uma base <strong>SQL</strong> ou uma planilha Google e subir esses dados no <em>Google Cloud Storage</em>. Após esse passo, os dados já estão disponíveis para consulta, visualização, construção de dashboards e todas as funções e facilitadores do <em>BigQuery</em> podem ser aplicadas nos dados. Porém, na grande maioria das vezes, os dados brutos, diretos da fonte de dados original, precisam ser tratados antes de serem efetivamente utilizados.</p>
+<p>Alguns exemplos de tratamento comumente feitos são:</p>
+<ul>
+<li>Tipagem de colunas (<code>FLOAT64</code>, <code>STRING</code>, <code>GEOMETRY</code>, <code>INT64</code>, etc.).</li>
+<li>(Re)nomeação de colunas.</li>
+<li>Mapeamento de <em>seed values</em> (troca de <code>id_bairro</code> por <code>nome_bairro</code> ou vice-versa).</li>
+<li>Criação de novas colunas a partir dos próprios dados brutos.</li>
+<li>Complementação de dados a partir de outras bases que estão no mesmo <em>data warehouse</em> (<em>Google Cloud Storage</em>). </li>
+</ul>
 <h2 id="escrevendo-seu-primeiro-modelo-dbt">Escrevendo seu primeiro modelo DBT</h2>
+<p>O primeiro passo para escrever um modelo <strong>dbt</strong> é identificar qual o <em>project_id</em> em que as tabelas tratadas serão materializadas. Na maioria dos casos, será o mesmo <em>project_id</em> em que os dados brutos foram armazenados em <em>staging</em>. Uma vez identificado o <em>project_id</em>, deve-se clonar o repositório de nome <code>queries-</code> + <code>'project_id'</code>, onde o modelo será construído. (Exemplos de repositórios: <code>queries-rj-smfp</code>, <code>queries-datario</code>, <code>queries-rj-sme</code>, etc.).</p>
+<p>Uma vez que o repositório foi clonado e se está em uma nova <em>branch</em>, deve-se criar uma nova pasta dentro do diretório <code>queries-(...).models</code> com um nome breve que identifique as tabelas que serão materializadas. Exemplos: <code>dashboard_metas</code>, <code>educacao_basica_avaliacao</code>, ou o próprio <em>dataset_id</em> das tabelas que serão materializadas. Aqui, utilizarei <code>exemplo_formacao_infra</code>.</p>
+<p>Dentro dessa pasta, ficam os modelos de dados, que nada mais são que arquivos <strong>SQL</strong> com uma instrução <code>select</code>. Além disso, os nomes dos modelos criados pelo <strong>dbt</strong> são os próprios nomes dos arquivos, então nomeie os arquivos cuidadosamente. Seguem abaixo 2 arquivos, <code>elementos.sql</code> e <code>paises_americanos.sql</code>, como exemplos de modelos.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">elementos.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">paises_americanos.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;00&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">pais</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">capital</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span><span class="w"></span>
+</code></pre></div>
+<p>No modelo <code>elementos</code>, foi realizada uma tipagem nas colunas de data e numero, além de uma renomeação das colunas de inglês para português. No modelo <code>paises_americanos</code>, foi utilizada a função <code>LPAD</code> para que todos os <em>id_pais</em> ficassem com tamanho 2, além da criação de uma nova coluna de <em>id_continente</em>.</p>
+<p>Note que as <em>queries</em> acima rodam no próprio console do <em>BigQuery</em>, inclusive, foram desenvolvidas e testadas lá. Lembre-se de testar seu código <strong>SQL</strong> antes de subir um <em>pull request</em> com um novo modelo.</p>
+<p>Uma vez criados os modelos, é necessário criar o arquivo <code>schema.yml</code>, que contém seus metadados, como a descrição do modelo (tabela), o nome das colunas e suas descrições. Segue abaixo o <code>schema.yml</code> para os modelos criados acima:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">schema.yml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="n">models</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elementos</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;**Descrição**: Tabelas com os 4 elementos da natureza, seus números e datas aleatórias.\ </span>
+<span class="ss">    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\ </span>
+<span class="ss">    **Frequência de atualização**: Não possui&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="k">Data</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">os</span><span class="w"> </span><span class="n">dados</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="n">foram</span><span class="w"> </span><span class="n">inseridos</span><span class="p">.</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">numero</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">elemento</span><span class="p">.</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elemento</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">inglês</span><span class="p">.</span><span class="w"></span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">paises_americanos</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;**Descrição**: Tabelas com todos os países da América e informações sobre eles. \</span>
+<span class="ss">    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\</span>
+<span class="ss">    **Frequência de atualização**: Não possui&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">id_pais</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">id_continente</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">qual</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">país</span><span class="w"> </span><span class="n">pertence</span><span class="p">.</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">pais</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">capital</span><span class="w"></span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Capital</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
+</code></pre></div>
+<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com <code>models:</code> e o <code>project_id</code> do seu projeto, é ali que deve-se adicionar o nome da pasta que os novos modelos foram criados (nesse caso, <code>exemplo_formacao_infra</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">dbt_project.yml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">(...)</span><span class="w"></span>
+<span class="n">models</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="o">+</span><span class="n">persist_docs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
+<span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">exemplo_formacao_infra</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
+<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">exemplo_formacao_infra</span><span class="w"></span>
+</code></pre></div>
+<p>E é isso! Se você chegou até aqui você já criou seu primeiro modelo <strong>dbt</strong>.</p>
 <h2 id="parametrizando-queries">Parametrizando queries</h2>
 <h2 id="integrando-com-as-pipelines-do-prefect">Integrando com as pipelines do Prefect</h2>
 
