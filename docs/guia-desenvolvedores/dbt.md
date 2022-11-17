@@ -5,7 +5,7 @@ O **dbt** (_Data Build Tool_) é uma ferramenta de linha de comando que oferece 
 
 ![Fluxo de Dados com DBT](../static/img/tutoriais/dbt/fluxo_dbt.png)
 
-Em **dbt**, trabalhamos com modelos, que é um arquivo **SQL** com uma instrução `select`. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações. 
+No **dbt**, trabalhamos com modelos, que nada mais é que um arquivo **SQL** com uma instrução `select`. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações. 
 
 Fazendo um paralelo com o processo de ELT do Escritório de Dados: utilizamos _pipelines_ como `dump_db` ou `dump_url` para extrair os dados de uma base **SQL** ou uma planilha Google e subir esses dados no _Google Cloud Storage_. Após esse passo, os dados já estão disponíveis para consulta, visualização, construção de dashboards e todas as funções e facilitadores do _BigQuery_ podem ser aplicadas nos dados. Porém, na grande maioria das vezes, os dados brutos, diretos da fonte de dados original, precisam ser tratados antes de serem efetivamente utilizados.
 
@@ -51,7 +51,7 @@ SELECT
 FROM `rj-escritorio-dev.test_formacao_staging.test_table`
 ```
 
-No modelo `elementos`, foi realizada uma tipagem nas colunas de data e numero, além de uma renomeação das colunas de inglês para português. No modelo `paises_americanos`, foi utilizada a função `LPAD` para que todos os *id_pais* ficassem com tamanho 2, além da criação de uma nova coluna de *id_continente*.
+No modelo `elementos`, foi realizada uma tipagem nas colunas de data e número, além de uma renomeação das colunas de inglês para português. No modelo `paises_americanos`, foi utilizada a função `LPAD` para que todos os *id_pais* ficassem com tamanho 2, além da criação de uma nova coluna de *id_continente*.
 
 Note que as _queries_ acima rodam no próprio console do _BigQuery_, inclusive, foram desenvolvidas e testadas lá. Lembre-se de testar seu código **SQL** antes de subir um _pull request_ com um novo modelo.
 
@@ -88,8 +88,10 @@ models :
         description: Capital do país.
 ```
 
-Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com `models:` e o `project_id` do seu projeto, é ali que deve-se adicionar o nome da pasta que os novos modelos foram criados (nesse caso, `exemplo_formacao_infra`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
+🚨🚨 **Atenção** 🚨🚨: Essas descrições têm que ser exatamente as mesmas que foram preenchidas no arquivo de arquitetura e no [meta.dados.rio](meta.dados.rio/).
 
+Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com as keyas `models:` e `project_id:` do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, `exemplo_formacao_infra`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
+ 
 === "dbt_project.yml"
 
 ```sql
@@ -104,8 +106,296 @@ models:
       +schema: exemplo_formacao_infra
 ```
 
+🚨🚨 **Atenção** 🚨🚨: A identação de cada uma das partes desses arquivos é fundamental para o correto funcionamento do DBT. Mantenha sempre o padrão de identação.
+
 E é isso! Se você chegou até aqui você já criou seu primeiro modelo **dbt**.
+
+Para se aprofundar mais sobre esse tema, acesse a documentação oficial do [DBT](https://docs.getdbt.com/reference/model-configs.).
 
 ## Parametrizando queries
 
 ## Integrando com as pipelines do Prefect
+
+Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso `flows.py`. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero.
+
+### DBT para Flows pré-definidos
+
+Vamos reutilizar os códigos da aula anterior que extrai informações e um google sheets:
+
+=== "flows.py"
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Database dumping flows for formation project
+"""
+
+from copy import deepcopy
+
+from prefect.run_configs import KubernetesRun
+from prefect.storage import GCS
+
+from pipelines.constants import constants
+
+from pipelines.rj_escritorio.dump_db_formacao.schedules import gsheets_one_minute_update_schedule
+from pipelines.utils.dump_url.flows import dump_url_flow  # alterado
+from pipelines.utils.utils import set_default_parameters
+
+formacao_gsheets_flow = deepcopy(dump_url_flow)
+formacao_gsheets_flow.name = "EMD: Formação GSheets - Ingerir tabelas de URL"
+formacao_gsheets_flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
+formacao_gsheets_flow.run_config = KubernetesRun(
+    image=constants.DOCKER_IMAGE.value,
+    labels=[
+        constants.RJ_ESCRITORIO_DEV_AGENT_LABEL.value,
+    ],
+)
+
+formacao_gsheets_flow_parameters = {
+    "dataset_id": "test_formacao",
+    "dump_mode": "overwrite",
+    "url": "https://docs.google.com/spreadsheets/d/1uF-Gt5AyZmxCQQEaebvWF4ddRHeVuL6ANuoaY_-uAXE\
+        /edit#gid=0",
+    "url_type": "google_sheet",
+    "gsheets_sheet_name": "sheet_1",
+    "table_id": "test_table",
+}
+
+formacao_gsheets_flow = set_default_parameters(
+    formacao_gsheets_flow, default_parameters=formacao_gsheets_flow_parameters
+)
+
+formacao_gsheets_flow.schedule = gsheets_one_minute_update_schedule
+
+```
+
+Dentro do `flows.py` precisamos apenas alterar a origem do flow que estamos copiando.
+
+=== "schedule.py"
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Schedules for the database dump pipeline
+"""
+
+from datetime import datetime, timedelta
+
+import pytz
+from prefect.schedules import Schedule
+from pipelines.constants import constants
+from pipelines.utils.dump_url.utils import generate_dump_url_schedules
+from pipelines.utils.utils import untuple_clocks as untuple
+
+#####################################
+#
+# EGPWeb Schedules
+#
+#####################################
+
+gsheets_urls = {
+    "test_table": {
+        "url": "https://docs.google.com/spreadsheets/d/1uF-Gt5AyZmxCQQEaebvWF4ddRHeVuL6ANuoaY_-uAXE\
+            /edit#gid=0",
+        "url_type": "google_sheet",
+        "gsheets_sheet_name": "sheet_1",
+        "dump_mode": "overwrite", # alterado
+        "materialize_after_dump": True, # alterado
+        "materialization_mode": "dev", # alterado
+        "materialize_to_datario": True, # alterado
+        "dump_to_gcs": True, # alterado
+    },
+}
+
+
+gsheets_clocks = generate_dump_url_schedules(
+    interval=timedelta(minutes=1),
+    start_date=datetime(2022, 10, 21, 15, 0, tzinfo=pytz.timezone("America/Sao_Paulo")),
+    labels=[
+        constants.RJ_ESCRITORIO_DEV_AGENT_LABEL.value,
+    ],
+    dataset_id="test_dataset_formacao",
+    table_parameters=gsheets_urls,
+)
+
+gsheets_one_minute_update_schedule = Schedule(clocks=untuple(gsheets_clocks))
+
+```
+
+Agora temos 5 novas chaves dentro do nosso dicionário de parâmetros no arquivo `schedule.py`:
+
+- **dump_mode**: ["overwrite", "append"] Define se os novos dados substituirão os dados anteriores no GCP (overwrite) ou se serão adicionados (append) aos que já existem no GCP;
+
+- **materialize_after_dump**: [True, False] Define se os dados serão materializados no BQ (BigQuery) do próprio projeto utilizando o DBT;
+
+- **materialization_mode**: ["dev", "prod"] Define se a materialização acontecerá em ambiente de desenvolvimento ou produção;
+
+- **materialize_to_datario**: [True, False] Define se os dados serão materializados no datario utilizando o DBT.
+
+- **dump_to_gcs**: [True, False] Define se os dados serão salvos em um csv no Google Cloud Storage;
+
+
+### DBT para Flows iniciados do zero
+
+=== "flows.py"
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Example flow
+"""
+from prefect import case, Parameter # adicionado
+from prefect.run_configs import KubernetesRun
+from prefect.storage import GCS
+from prefect.tasks.prefect import create_flow_run, wait_for_flow_run # adicionado
+
+from pipelines.formacao.exemplo.constants import (
+    constants as formacao_constants,
+)
+
+from pipelines.constants import constants
+from pipelines.formacao.exemplo.tasks import download_data, parse_data, save_report
+from pipelines.utils.constants import constants as utils_constants # adicionado
+from pipelines.utils.decorators import Flow
+from pipelines.utils.dump_db.constants import constants as dump_db_constants # adicionado
+from pipelines.utils.dump_to_gcs.constants import constants as dump_to_gcs_constants # adicionado
+from pipelines.utils.tasks import ( # adicionado
+    create_table_and_upload_to_gcs,
+    get_current_flow_labels,
+)
+
+with Flow("EMD: formacao - Exemplo de flow do Prefect") as formacao_exemplo_flow:
+    # Parâmetros
+    n_users = Parameter("n_users", default=10)
+
+    # Parâmetros para a Materialização
+    materialize_after_dump = Parameter(
+        "materialize_after_dump", default=False, required=False
+    )
+    materialize_to_datario = Parameter(
+        "materialize_to_datario", default=False, required=False
+    )
+    materialization_mode = Parameter("mode", default="dev", required=False)
+
+    # Parâmetros para salvar dados no GCS
+    dataset_id = formacao_constants.DATASET_ID.value
+    table_id = formacao_constants.TABLE_ID.value
+    dump_mode = "append"
+
+    # Dump to GCS after? Should only dump to GCS if materializing to datario
+    dump_to_gcs = Parameter("dump_to_gcs", default=False, required=False)
+
+    maximum_bytes_processed = Parameter(
+        "maximum_bytes_processed",
+        required=False,
+        default=dump_to_gcs_constants.MAX_BYTES_PROCESSED_PER_TABLE.value,
+    )
+
+    # Cria fluxo das Tasks
+    data = download_data(n_users)
+    dataframe = parse_data(data)
+    save_report(dataframe)
+
+    
+    # Create table in BigQuery
+    upload_table = create_table_and_upload_to_gcs(
+        data_path=PATH,
+        dataset_id=dataset_id,
+        table_id=table_id,
+        dump_mode=DUMP_MODE,
+        wait=PATH,
+    )
+
+    # Trigger DBT flow run
+    with case(materialize_after_dump, True):
+        current_flow_labels = get_current_flow_labels()
+        materialization_flow = create_flow_run(
+            flow_name=utils_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value,
+            project_name=constants.PREFECT_DEFAULT_PROJECT.value,
+            parameters={
+                "dataset_id": dataset_id,
+                "table_id": table_id,
+                "mode": materialization_mode,
+                "materialize_to_datario": materialize_to_datario,
+            },
+            labels=current_flow_labels,
+            run_name=f"Materialize {dataset_id}.{table_id}",
+        )
+
+        materialization_flow.set_upstream(upload_table)
+
+        wait_for_materialization = wait_for_flow_run(
+            materialization_flow,
+            stream_states=True,
+            stream_logs=True,
+            raise_final_state=True,
+        )
+
+        wait_for_materialization.max_retries = (
+            dump_db_constants.WAIT_FOR_MATERIALIZATION_RETRY_ATTEMPTS.value
+        )
+        wait_for_materialization.retry_delay = timedelta(
+            seconds=dump_db_constants.WAIT_FOR_MATERIALIZATION_RETRY_INTERVAL.value
+        )
+
+        with case(DUMP_TO_GCS, True):
+            # Trigger Dump to GCS flow run with project id as datario
+            dump_to_gcs_flow = create_flow_run(
+                flow_name=utils_constants.FLOW_DUMP_TO_GCS_NAME.value,
+                project_name=constants.PREFECT_DEFAULT_PROJECT.value,
+                parameters={
+                    "project_id": "datario",
+                    "dataset_id": dataset_id,
+                    "table_id": table_id,
+                    "maximum_bytes_processed": MAXIMUM_BYTES_PROCESSED,
+                },
+                labels=[
+                    "datario",
+                ],
+                run_name=f"Dump to GCS {dataset_id}.{table_id}",
+            )
+            dump_to_gcs_flow.set_upstream(wait_for_materialization)
+
+            wait_for_dump_to_gcs = wait_for_flow_run(
+                dump_to_gcs_flow,
+                stream_states=True,
+                stream_logs=True,
+                raise_final_state=True,
+            )
+
+
+formacao_exemplo_flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
+formacao_exemplo_flow.run_config = KubernetesRun(
+    image=constants.DOCKER_IMAGE.value,
+    labels=[constants.RJ_COR_AGENT_LABEL.value],
+)
+formacao_exemplo_flow.schedule = None
+```
+
+=== "constants.py"
+
+```python
+# -*- coding: utf-8 -*-
+"""
+Constant values for the satelite tables
+"""
+
+from enum import Enum
+
+
+class constants(Enum):
+    """
+    Constant values for the satelite project
+    """
+
+    DATASET_ID = "test_formacao"
+    TABLE_ID = "test_table"
+```
+
+Modificações que precisamos fazer no arquivo `flows.py`:
+
+- especificar um caminho no qual o dado será salvo localmente antes de ser enviado ao GCP
+
+- fazer o upload os dados no GCP utilizando o método `create_table_and_upload_to_gcs` e o caminho especificado anteriormente
+
+- adicionar a condicional pronta (`with case`) que verificará se os dados serão materializados 
