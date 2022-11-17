@@ -1,11 +1,12 @@
 ## O que é o DBT e para que serve?
-Em um _pipeline_ ELT, os dados brutos são extraídos (_extract_) de uma fonte e carregados (_load_) em uma _data warehouse_ (no nosso caso: o _BigQuery Storage_).   Em seguida, os dados brutos são transformados em tabelas utilizáveis, usando consultas **SQL** executadas sobre os dados estocados nessa _data warehouse_.
+
+Em um _pipeline_ ELT, os dados brutos são extraídos (_extract_) de uma fonte e carregados (_load_) em uma _data warehouse_ (no nosso caso: o _BigQuery Storage_). Em seguida, os dados brutos são transformados em tabelas utilizáveis, usando consultas **SQL** executadas sobre os dados estocados nessa _data warehouse_.
 
 O **dbt** (_Data Build Tool_) é uma ferramenta de linha de comando que oferece uma maneira fácil para que analistas e engenheiros de dados criem, transformem e validem os dados em um _data warehouse_ de maneira mais eficiente. O **dbt** faz o T nos processos ELT (Extrair, Carregar, Transformar) ilustrados na figura abaixo.
 
 ![Fluxo de Dados com DBT](../static/img/tutoriais/dbt/fluxo_dbt.png)
 
-No **dbt**, trabalhamos com modelos, que nada mais é que um arquivo **SQL** com uma instrução `select`. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações. 
+No **dbt**, trabalhamos com modelos, que nada mais é que um arquivo **SQL** com uma instrução `select`. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações.
 
 Fazendo um paralelo com o processo de ELT do Escritório de Dados: utilizamos _pipelines_ como `dump_db` ou `dump_url` para extrair os dados de uma base **SQL** ou uma planilha Google e subir esses dados no _Google Cloud Storage_. Após esse passo, os dados já estão disponíveis para consulta, visualização, construção de dashboards e todas as funções e facilitadores do _BigQuery_ podem ser aplicadas nos dados. Porém, na grande maioria das vezes, os dados brutos, diretos da fonte de dados original, precisam ser tratados antes de serem efetivamente utilizados.
 
@@ -15,20 +16,20 @@ Alguns exemplos de tratamento comumente feitos são:
 - (Re)nomeação de colunas.
 - Mapeamento de _seed values_ (troca de `id_bairro` por `nome_bairro` ou vice-versa).
 - Criação de novas colunas a partir dos próprios dados brutos.
-- Complementação de dados a partir de outras bases que estão no mesmo _data warehouse_ (_Google Cloud Storage_). 
+- Complementação de dados a partir de outras bases que estão no mesmo _data warehouse_ (_Google Cloud Storage_).
 
 ## Escrevendo seu primeiro modelo DBT
 
 O primeiro passo para escrever um modelo **dbt** é identificar qual o _project_id_ em que as tabelas tratadas serão materializadas. Na maioria dos casos, será o mesmo _project_id_ em que os dados brutos foram armazenados em _staging_. Uma vez identificado o _project_id_, deve-se clonar o repositório de nome `queries-` + `'project_id'`, onde o modelo será construído. (Exemplos de repositórios: `queries-rj-smfp`, `queries-datario`, `queries-rj-sme`, etc.).
 
-Uma vez que o repositório foi clonado e se está em uma nova _branch_, deve-se criar uma nova pasta dentro do diretório `queries-(...).models` com um nome breve que identifique as tabelas que serão materializadas. Exemplos: `dashboard_metas`, `educacao_basica_avaliacao`, ou o próprio *dataset_id* das tabelas que serão materializadas. Aqui, utilizarei `test_formacao`.
+Uma vez que o repositório foi clonado e se está em uma nova _branch_, deve-se criar uma nova pasta dentro do diretório `queries-(...).models` com um nome breve que identifique as tabelas que serão materializadas. Exemplos: `dashboard_metas`, `educacao_basica_avaliacao`, ou o próprio _dataset_id_ das tabelas que serão materializadas. Aqui, utilizarei `test_formacao`.
 
 Dentro dessa pasta, ficam os modelos de dados, que nada mais são que arquivos **SQL** com uma instrução `select`. Além disso, os nomes dos modelos criados pelo **dbt** são os próprios nomes dos arquivos, então nomeie os arquivos cuidadosamente. Seguem abaixo 2 arquivos, `elementos.sql` e `paises_americanos.sql`, como exemplos de modelos.
 
 === "elementos.sql"
 
 ```sql
-SELECT 
+SELECT
   SAFE_CAST(data as DATE) as data,
   SAFE_CAST(number as INT64) as numero,
   element as elemento
@@ -40,7 +41,7 @@ FROM `rj-escritorio-dev.test_formacao_staging.test_table_2`
 ```sql
 SELECT
   LPAD(id_pais, 2, '0') as id_pais,
-  CASE 
+  CASE
     WHEN continente = 'América do Sul' THEN '01'
     WHEN continente = 'América Central' THEN '02'
     WHEN continente = 'América do Norte' THEN '03'
@@ -51,7 +52,7 @@ SELECT
 FROM `rj-escritorio-dev.test_formacao_staging.test_table`
 ```
 
-No modelo `elementos`, foi realizada uma tipagem nas colunas de data e número, além de uma renomeação das colunas de inglês para português. No modelo `paises_americanos`, foi utilizada a função `LPAD` para que todos os *id_pais* ficassem com tamanho 2, além da criação de uma nova coluna de *id_continente*.
+No modelo `elementos`, foi realizada uma tipagem nas colunas de data e número, além de uma renomeação das colunas de inglês para português. No modelo `paises_americanos`, foi utilizada a função `LPAD` para que todos os _id_pais_ ficassem com tamanho 2, além da criação de uma nova coluna de _id_continente_.
 
 Note que as _queries_ acima rodam no próprio console do _BigQuery_, inclusive, foram desenvolvidas e testadas lá. Lembre-se de testar seu código **SQL** antes de subir um _pull request_ com um novo modelo.
 
@@ -63,8 +64,8 @@ Uma vez criados os modelos, é necessário criar o arquivo `schema.yml`, que con
 version: 2
 models :
   - name: elementos
-    description: "**Descrição**: Tabelas com os 4 elementos da natureza, seus números e datas aleatórias.\ 
-    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\ 
+    description: "**Descrição**: Tabelas com os 4 elementos da natureza, seus números e datas aleatórias.\
+    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\
     **Frequência de atualização**: Não possui"
     columns:
       - name: data
@@ -88,14 +89,10 @@ models :
         description: Capital do país.
 ```
 
-<<<<<<< HEAD
 🚨🚨 **Atenção** 🚨🚨: Essas descrições têm que ser exatamente as mesmas que foram preenchidas no arquivo de arquitetura e no [meta.dados.rio](meta.dados.rio/).
-=======
-Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com `models:` e o `project_id` do seu projeto, é ali que deve-se adicionar o nome da pasta que os novos modelos foram criados (nesse caso, `test_formacao`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
->>>>>>> master
 
-Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com as keyas `models:` e `project_id:` do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, `exemplo_formacao_infra`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
- 
+Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com as keys `models:` e `project_id:` do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, `exemplo_formacao_infra`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
+
 === "dbt_project.yml"
 
 ```sql
@@ -126,7 +123,7 @@ Em muitos casos, existem parâmetros relevantes para o funcionamento das queries
 
 - Uma query está filtrada para pegar registros dos últimos 3 anos, mas agora houve uma mudança e é necessário pegar dados dos últimos 5 anos, então você tem que substituir esse valor todas as vezes em que ele foi referenciado.
 
-Os casos acima são exemplos de _hard code_, que significa que uma informação relevante para o funcionamento do sistema foi colocado no código. Isso resulta em muito trabalho pra fazer alterações, dificultando a reprodução do código e até a própria (re)utilização do mesmo por outras pessoas. 
+Os casos acima são exemplos de _hard code_, que significa que uma informação relevante para o funcionamento do sistema foi colocado no código. Isso resulta em muito trabalho pra fazer alterações, dificultando a reprodução do código e até a própria (re)utilização do mesmo por outras pessoas.
 
 Felizmente, o **dbt** tem uma solução pra esse problema! É possível declarar variáveis no arquivo `dbt_project.yml` e se referenciar à elas dentro das queries, de modo que quando algum valor dessas variáveis mudar, tudo que precisa ser feito é alterar esse valor uma única vez.
 
@@ -155,7 +152,7 @@ Depois, incluímos essas variáveis dentro da query, referenciando-as com `{{var
 === "elementos.sql"
 
 ```sql
-SELECT 
+SELECT
   SAFE_CAST(data as DATE) as data,
   SAFE_CAST(number as INT64) as numero,
   element as elemento,
@@ -168,7 +165,7 @@ WHERE data < "{{var('ELEMENTOS_DATA_INICIAL')}}"
 ```sql
 SELECT
   LPAD(id_pais, 2, '0') as id_pais,
-  CASE 
+  CASE
     WHEN continente = 'América do Sul' THEN '01'
     WHEN continente = 'América Central' THEN '02'
     WHEN continente = 'América do Norte' THEN '03'
@@ -176,10 +173,10 @@ SELECT
   END as id_continente,
   pais,
   capital,
-  CASE 
-    WHEN STARTS_WITH(capital, "{{var('PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL')}}") 
+  CASE
+    WHEN STARTS_WITH(capital, "{{var('PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL')}}")
       THEN CONCAT("Começa com ", "{{var('PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL')}}")
-    ELSE CONCAT("Não começa com ", "{{var('PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL')}}") 
+    ELSE CONCAT("Não começa com ", "{{var('PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL')}}")
     END indicador_capital_com_{{var('PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL')}}
 FROM `rj-escritorio-dev.test_formacao_staging.test_table`
 ```
@@ -195,7 +192,7 @@ WITH select_paises AS (
   FROM {{ ref('paises_americanos') }}
 )
 
-SELECT 
+SELECT
   SAFE_CAST(data as DATE) as data,
   SAFE_CAST(number as INT64) as numero,
   element as elemento,
@@ -203,7 +200,7 @@ FROM `rj-escritorio-dev.test_formacao_staging.test_table_2`
 WHERE data < "{{var('ELEMENTOS_DATA_INICIAL')}}"
 ```
 
-O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros `upstream` e `downstream`, que veremos mais abaixo. 
+O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros `upstream` e `downstream`, que veremos mais abaixo.
 
 ## Integrando com as pipelines do Prefect
 
@@ -325,7 +322,6 @@ Agora temos 5 novas chaves dentro do nosso dicionário de parâmetros no arquivo
 
 - **dump_to_gcs**: [True, False] Define se os dados serão salvos em um csv no Google Cloud Storage;
 
-
 ### DBT para Flows iniciados do zero
 
 === "flows.py"
@@ -387,7 +383,7 @@ with Flow("EMD: formacao - Exemplo de flow do Prefect") as formacao_exemplo_flow
     dataframe = parse_data(data)
     save_report(dataframe)
 
-    
+
     # Create table in BigQuery
     upload_table = create_table_and_upload_to_gcs(
         data_path=PATH,
@@ -489,4 +485,4 @@ Modificações que precisamos fazer no arquivo `flows.py`:
 
 - fazer o upload os dados no GCP utilizando o método `create_table_and_upload_to_gcs` e o caminho especificado anteriormente
 
-- adicionar a condicional pronta (`with case`) que verificará se os dados serão materializados 
+- adicionar a condicional pronta (`with case`) que verificará se os dados serão materializados
