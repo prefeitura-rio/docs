@@ -583,7 +583,7 @@
 </ul>
 <h2 id="escrevendo-seu-primeiro-modelo-dbt">Escrevendo seu primeiro modelo DBT</h2>
 <p>O primeiro passo para escrever um modelo <strong>dbt</strong> é identificar qual o <em>project_id</em> em que as tabelas tratadas serão materializadas. Na maioria dos casos, será o mesmo <em>project_id</em> em que os dados brutos foram armazenados em <em>staging</em>. Uma vez identificado o <em>project_id</em>, deve-se clonar o repositório de nome <code>queries-</code> + <code>'project_id'</code>, onde o modelo será construído. (Exemplos de repositórios: <code>queries-rj-smfp</code>, <code>queries-datario</code>, <code>queries-rj-sme</code>, etc.).</p>
-<p>Uma vez que o repositório foi clonado e se está em uma nova <em>branch</em>, deve-se criar uma nova pasta dentro do diretório <code>queries-(...).models</code> com um nome breve que identifique as tabelas que serão materializadas. Exemplos: <code>dashboard_metas</code>, <code>educacao_basica_avaliacao</code>, ou o próprio <em>dataset_id</em> das tabelas que serão materializadas. Aqui, utilizarei <code>exemplo_formacao_infra</code>.</p>
+<p>Uma vez que o repositório foi clonado e se está em uma nova <em>branch</em>, deve-se criar uma nova pasta dentro do diretório <code>queries-(...).models</code> com um nome breve que identifique as tabelas que serão materializadas. Exemplos: <code>dashboard_metas</code>, <code>educacao_basica_avaliacao</code>, ou o próprio <em>dataset_id</em> das tabelas que serão materializadas. Aqui, utilizarei <code>test_formacao</code>.</p>
 <p>Dentro dessa pasta, ficam os modelos de dados, que nada mais são que arquivos <strong>SQL</strong> com uma instrução <code>select</code>. Além disso, os nomes dos modelos criados pelo <strong>dbt</strong> são os próprios nomes dos arquivos, então nomeie os arquivos cuidadosamente. Seguem abaixo 2 arquivos, <code>elementos.sql</code> e <code>paises_americanos.sql</code>, como exemplos de modelos.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">elementos.sql</label></div>
 <div class="tabbed-content">
@@ -648,7 +648,7 @@
 <span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">capital</span><span class="w"></span>
 <span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Capital</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
 </code></pre></div>
-<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com <code>models:</code> e o <code>project_id</code> do seu projeto, é ali que deve-se adicionar o nome da pasta que os novos modelos foram criados (nesse caso, <code>exemplo_formacao_infra</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
+<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com <code>models:</code> e o <code>project_id</code> do seu projeto, é ali que deve-se adicionar o nome da pasta que os novos modelos foram criados (nesse caso, <code>test_formacao</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">dbt_project.yml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
@@ -660,12 +660,101 @@
 <span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
 <span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
 <span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">exemplo_formacao_infra</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">test_formacao</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
-<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">exemplo_formacao_infra</span><span class="w"></span>
+<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span><span class="w"></span>
 </code></pre></div>
 <p>E é isso! Se você chegou até aqui você já criou seu primeiro modelo <strong>dbt</strong>.</p>
 <h2 id="parametrizando-queries">Parametrizando queries</h2>
+<p>Em muitos casos, existem parâmetros relevantes para o funcionamento das queries cuja mudança vai alterar drasticamente o resultado, como:</p>
+<ul>
+<li>
+<p>Você coloca a taxa de imposto de algo e o governo muda esse valor, a única forma de mudar isso é mudar o código, achar todas as ocorrências desse valor na sua query e alterar um por um;</p>
+</li>
+<li>
+<p>Uma função trabalha com 10 itens em algo que ela recebe, mas em algum momento há uma mudança e vem 12 itens que você deveria avaliar, então é necessário repensar todas as lógicas realizadas e fazer as substituições;</p>
+</li>
+<li>
+<p>Uma query está filtrada para pegar registros dos últimos 3 anos, mas agora houve uma mudança e é necessário pegar dados dos últimos 5 anos, então você tem que substituir esse valor todas as vezes em que ele foi referenciado.</p>
+</li>
+</ul>
+<p>Os casos acima são exemplos de <em>hard code</em>, que significa que uma informação relevante para o funcionamento do sistema foi colocado no código. Isso resulta em muito trabalho pra fazer alterações, dificultando a reprodução do código e até a própria (re)utilização do mesmo por outras pessoas. </p>
+<p>Felizmente, o <strong>dbt</strong> tem uma solução pra esse problema! É possível declarar variáveis no arquivo <code>dbt_project.yml</code> e se referenciar à elas dentro das queries, de modo que quando algum valor dessas variáveis mudar, tudo que precisa ser feito é alterar esse valor uma única vez.</p>
+<p>Continuando o exemplo que foi feito acima, suponhamos que seja necessário selecionar elementos da natureza, no modelo <code>elementos.sql</code> que foram declarados antes de uma certa data, e além disso, que queiramos criar uma nova coluna que indica se um país americano tem a capital que inicia com determinada letra, no modelo <code>paises_americanos.sql</code>. O primeiro passo é declarar os valores dessas variáveis dentro do arquivo <code>dbt_project.yml</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">dbt_project.yml</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">(...)</span><span class="w"></span>
+<span class="n">vars</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">ELEMENTOS_DATA_INICIAL</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;2022-01-03&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="n">PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;B&quot;</span><span class="w"></span>
+
+<span class="n">models</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="o">+</span><span class="n">persist_docs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
+<span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">test_formacao</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
+<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span><span class="w"></span>
+</code></pre></div>
+<p>Depois, incluímos essas variáveis dentro da query, referenciando-as com <code>{{var('NOME_DA_VARIAVEL')}}</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">elementos.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span><span class="w"></span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">paises_americanos.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;00&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">pais</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">capital</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">STARTS_WITH</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">      </span><span class="k">THEN</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Não começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">indicador_capital_com_</span><span class="err">{{</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;</span><span class="p">)</span><span class="err">}}</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span><span class="w"></span>
+</code></pre></div>
+<p>Ainda sobre parametrização de queries, uma outra possibilidade é a de referenciar outros modelos(queries) dentro de um modelo. Por exemplo, caso dentro do modelo <code>elementos.sql</code>, eu deseje fazer um <code>SELECT</code> no modelo <code>paises_americanos.sql</code>, isso é possível, basta referenciar esse modelo na forma <code>{{ ref('NOME_DO_MODELO') }}</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">elementos.sql</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">select_paises</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="o">*</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;paises_americanos&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span><span class="w"></span>
+</code></pre></div>
+<p>O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros <code>upstream</code> e <code>downstream</code>, que veremos mais abaixo. </p>
 <h2 id="integrando-com-as-pipelines-do-prefect">Integrando com as pipelines do Prefect</h2>
 
               
