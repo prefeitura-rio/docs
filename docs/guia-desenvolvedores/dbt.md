@@ -328,25 +328,32 @@ Agora temos 5 novas chaves dentro do nosso dicionário de parâmetros no arquivo
 
 ```python
 # -*- coding: utf-8 -*-
+# pylint: disable=C0103
 """
 Example flow
 """
-from prefect import case, Parameter # adicionado
+from datetime import timedelta
+
+from prefect import case, Parameter  # adicionado
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
-from prefect.tasks.prefect import create_flow_run, wait_for_flow_run # adicionado
+from prefect.tasks.prefect import create_flow_run, wait_for_flow_run  # adicionado
 
-from pipelines.formacao.exemplo.constants import (
+from pipelines.formacao.flow_do_zero.constants import (  # adicionado
     constants as formacao_constants,
 )
 
 from pipelines.constants import constants
-from pipelines.formacao.exemplo.tasks import download_data, parse_data, save_report
-from pipelines.utils.constants import constants as utils_constants # adicionado
+from pipelines.formacao.flow_do_zero.tasks import download_data, parse_data, save_report
+from pipelines.utils.constants import constants as utils_constants  # adicionado
 from pipelines.utils.decorators import Flow
-from pipelines.utils.dump_db.constants import constants as dump_db_constants # adicionado
-from pipelines.utils.dump_to_gcs.constants import constants as dump_to_gcs_constants # adicionado
-from pipelines.utils.tasks import ( # adicionado
+from pipelines.utils.dump_db.constants import (
+    constants as dump_db_constants,
+)  # adicionado
+from pipelines.utils.dump_to_gcs.constants import (
+    constants as dump_to_gcs_constants,
+)  # adicionado
+from pipelines.utils.tasks import (  # adicionado
     create_table_and_upload_to_gcs,
     get_current_flow_labels,
 )
@@ -381,16 +388,15 @@ with Flow("EMD: formacao - Exemplo de flow do Prefect") as formacao_exemplo_flow
     # Cria fluxo das Tasks
     data = download_data(n_users)
     dataframe = parse_data(data)
-    save_report(dataframe)
-
+    save_path = save_report(dataframe)
 
     # Create table in BigQuery
     upload_table = create_table_and_upload_to_gcs(
-        data_path=PATH,
+        data_path=save_path,
         dataset_id=dataset_id,
         table_id=table_id,
-        dump_mode=DUMP_MODE,
-        wait=PATH,
+        dump_mode=dump_mode,
+        wait=save_path,
     )
 
     # Trigger DBT flow run
@@ -425,7 +431,7 @@ with Flow("EMD: formacao - Exemplo de flow do Prefect") as formacao_exemplo_flow
             seconds=dump_db_constants.WAIT_FOR_MATERIALIZATION_RETRY_INTERVAL.value
         )
 
-        with case(DUMP_TO_GCS, True):
+        with case(dump_to_gcs, True):
             # Trigger Dump to GCS flow run with project id as datario
             dump_to_gcs_flow = create_flow_run(
                 flow_name=utils_constants.FLOW_DUMP_TO_GCS_NAME.value,
@@ -434,7 +440,7 @@ with Flow("EMD: formacao - Exemplo de flow do Prefect") as formacao_exemplo_flow
                     "project_id": "datario",
                     "dataset_id": dataset_id,
                     "table_id": table_id,
-                    "maximum_bytes_processed": MAXIMUM_BYTES_PROCESSED,
+                    "maximum_bytes_processed": maximum_bytes_processed,
                 },
                 labels=[
                     "datario",
@@ -457,6 +463,83 @@ formacao_exemplo_flow.run_config = KubernetesRun(
     labels=[constants.RJ_COR_AGENT_LABEL.value],
 )
 formacao_exemplo_flow.schedule = None
+
+```
+
+=== "tasks.py"
+
+```python
+# -*- coding: utf-8 -*-
+# pylint: disable=C0103
+"""
+Tasks for the example flow
+"""
+
+from io import StringIO
+import os
+
+from pathlib import Path
+import pandas as pd
+from prefect import task
+import requests
+
+from pipelines.utils.utils import log
+
+
+@task
+def download_data(n_users: int) -> str:
+    """
+    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.
+
+    Args:
+        n_users (int): número de usuários a serem baixados.
+
+    Returns:
+        str: texto em formato CSV.
+    """
+    response = requests.get(
+        "https://randomuser.me/api/?results={}&format=csv".format(n_users)
+    )
+    log("Dados baixados com sucesso!")
+    return response.text
+
+
+@task
+def parse_data(data: str) -> pd.DataFrame:
+    """
+    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.
+
+    Args:
+        data (str): texto em formato CSV.
+
+    Returns:
+        pd.DataFrame: DataFrame do Pandas.
+    """
+    dfr = pd.read_csv(StringIO(data))
+    log("Dados convertidos em DataFrame com sucesso!")
+    dfr.columns = [i.replace(".", "_") for i in dfr.columns]
+    log(f">>>>> {dfr.columns}")
+    return dfr
+
+
+@task
+def save_report(dataframe: pd.DataFrame) -> None:
+    """
+    Salva o DataFrame em um arquivo CSV.
+
+    Args:
+        dataframe (pd.DataFrame): DataFrame do Pandas.
+    """
+
+    save_path = os.path.join(os.getcwd(), "temp")
+
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+
+    dataframe.to_csv(Path(save_path, "report.csv"), index=False)
+
+    log("Dados salvos em report.csv com sucesso!")
+    return save_path
 ```
 
 === "constants.py"
