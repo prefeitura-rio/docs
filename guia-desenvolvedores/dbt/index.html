@@ -462,6 +462,26 @@
     Integrando com as pipelines do Prefect
   </a>
   
+    <nav class="md-nav" aria-label="Integrando com as pipelines do Prefect">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dbt-para-flows-pre-definidos" class="md-nav__link">
+    DBT para Flows pré-definidos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbt-para-flows-iniciados-do-zero" class="md-nav__link">
+    DBT para Flows iniciados do zero
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -568,10 +588,10 @@
   <h1>Publicando dados com DBT</h1>
 
 <h2 id="o-que-e-o-dbt-e-para-que-serve">O que é o DBT e para que serve?</h2>
-<p>Em um <em>pipeline</em> ELT, os dados brutos são extraídos (<em>extract</em>) de uma fonte e carregados (<em>load</em>) em uma <em>data warehouse</em> (no nosso caso: o <em>BigQuery Storage</em>).   Em seguida, os dados brutos são transformados em tabelas utilizáveis, usando consultas <strong>SQL</strong> executadas sobre os dados estocados nessa <em>data warehouse</em>.</p>
+<p>Em um <em>pipeline</em> ELT, os dados brutos são extraídos (<em>extract</em>) de uma fonte e carregados (<em>load</em>) em uma <em>data warehouse</em> (no nosso caso: o <em>BigQuery Storage</em>). Em seguida, os dados brutos são transformados em tabelas utilizáveis, usando consultas <strong>SQL</strong> executadas sobre os dados estocados nessa <em>data warehouse</em>.</p>
 <p>O <strong>dbt</strong> (<em>Data Build Tool</em>) é uma ferramenta de linha de comando que oferece uma maneira fácil para que analistas e engenheiros de dados criem, transformem e validem os dados em um <em>data warehouse</em> de maneira mais eficiente. O <strong>dbt</strong> faz o T nos processos ELT (Extrair, Carregar, Transformar) ilustrados na figura abaixo.</p>
 <p><img alt="Fluxo de Dados com DBT" src="../../static/img/tutoriais/dbt/fluxo_dbt.png" /></p>
-<p>Em <strong>dbt</strong>, trabalhamos com modelos, que é um arquivo <strong>SQL</strong> com uma instrução <code>select</code>. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações. </p>
+<p>No <strong>dbt</strong>, trabalhamos com modelos, que nada mais é que um arquivo <strong>SQL</strong> com uma instrução <code>select</code>. Esses modelos podem depender de outros modelos, ter testes definidos neles e podem ser criados como tabelas ou visualizações.</p>
 <p>Fazendo um paralelo com o processo de ELT do Escritório de Dados: utilizamos <em>pipelines</em> como <code>dump_db</code> ou <code>dump_url</code> para extrair os dados de uma base <strong>SQL</strong> ou uma planilha Google e subir esses dados no <em>Google Cloud Storage</em>. Após esse passo, os dados já estão disponíveis para consulta, visualização, construção de dashboards e todas as funções e facilitadores do <em>BigQuery</em> podem ser aplicadas nos dados. Porém, na grande maioria das vezes, os dados brutos, diretos da fonte de dados original, precisam ser tratados antes de serem efetivamente utilizados.</p>
 <p>Alguns exemplos de tratamento comumente feitos são:</p>
 <ul>
@@ -579,7 +599,7 @@
 <li>(Re)nomeação de colunas.</li>
 <li>Mapeamento de <em>seed values</em> (troca de <code>id_bairro</code> por <code>nome_bairro</code> ou vice-versa).</li>
 <li>Criação de novas colunas a partir dos próprios dados brutos.</li>
-<li>Complementação de dados a partir de outras bases que estão no mesmo <em>data warehouse</em> (<em>Google Cloud Storage</em>). </li>
+<li>Complementação de dados a partir de outras bases que estão no mesmo <em>data warehouse</em> (<em>Google Cloud Storage</em>).</li>
 </ul>
 <h2 id="escrevendo-seu-primeiro-modelo-dbt">Escrevendo seu primeiro modelo DBT</h2>
 <p>O primeiro passo para escrever um modelo <strong>dbt</strong> é identificar qual o <em>project_id</em> em que as tabelas tratadas serão materializadas. Na maioria dos casos, será o mesmo <em>project_id</em> em que os dados brutos foram armazenados em <em>staging</em>. Uma vez identificado o <em>project_id</em>, deve-se clonar o repositório de nome <code>queries-</code> + <code>'project_id'</code>, onde o modelo será construído. (Exemplos de repositórios: <code>queries-rj-smfp</code>, <code>queries-datario</code>, <code>queries-rj-sme</code>, etc.).</p>
@@ -590,7 +610,7 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
 <span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="w"></span>
@@ -603,7 +623,7 @@
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
 <span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span><span class="w"></span>
@@ -613,7 +633,7 @@
 <span class="w">  </span><span class="n">capital</span><span class="w"></span>
 <span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span><span class="w"></span>
 </code></pre></div>
-<p>No modelo <code>elementos</code>, foi realizada uma tipagem nas colunas de data e numero, além de uma renomeação das colunas de inglês para português. No modelo <code>paises_americanos</code>, foi utilizada a função <code>LPAD</code> para que todos os <em>id_pais</em> ficassem com tamanho 2, além da criação de uma nova coluna de <em>id_continente</em>.</p>
+<p>No modelo <code>elementos</code>, foi realizada uma tipagem nas colunas de data e número, além de uma renomeação das colunas de inglês para português. No modelo <code>paises_americanos</code>, foi utilizada a função <code>LPAD</code> para que todos os <em>id_pais</em> ficassem com tamanho 2, além da criação de uma nova coluna de <em>id_continente</em>.</p>
 <p>Note que as <em>queries</em> acima rodam no próprio console do <em>BigQuery</em>, inclusive, foram desenvolvidas e testadas lá. Lembre-se de testar seu código <strong>SQL</strong> antes de subir um <em>pull request</em> com um novo modelo.</p>
 <p>Uma vez criados os modelos, é necessário criar o arquivo <code>schema.yml</code>, que contém seus metadados, como a descrição do modelo (tabela), o nome das colunas e suas descrições. Segue abaixo o <code>schema.yml</code> para os modelos criados acima:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">schema.yml</label></div>
@@ -624,8 +644,8 @@
 <div class="highlight"><pre><span></span><code><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
 <span class="n">models</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elementos</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;**Descrição**: Tabelas com os 4 elementos da natureza, seus números e datas aleatórias.\ </span>
-<span class="ss">    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\ </span>
+<span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;**Descrição**: Tabelas com os 4 elementos da natureza, seus números e datas aleatórias.\</span>
+<span class="ss">    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\</span>
 <span class="ss">    **Frequência de atualização**: Não possui&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
@@ -648,7 +668,8 @@
 <span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">capital</span><span class="w"></span>
 <span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Capital</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
 </code></pre></div>
-<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com <code>models:</code> e o <code>project_id</code> do seu projeto, é ali que deve-se adicionar o nome da pasta que os novos modelos foram criados (nesse caso, <code>test_formacao</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
+<p>🚨🚨 <strong>Atenção</strong> 🚨🚨: Essas descrições têm que ser exatamente as mesmas que foram preenchidas no arquivo de arquitetura e no <a href="meta.dados.rio/">meta.dados.rio</a>.</p>
+<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com as keys <code>models:</code> e <code>project_id:</code> do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, <code>exemplo_formacao_infra</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">dbt_project.yml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
@@ -664,7 +685,9 @@
 <span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
 <span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span><span class="w"></span>
 </code></pre></div>
+<p>🚨🚨 <strong>Atenção</strong> 🚨🚨: A identação de cada uma das partes desses arquivos é fundamental para o correto funcionamento do DBT. Mantenha sempre o padrão de identação.</p>
 <p>E é isso! Se você chegou até aqui você já criou seu primeiro modelo <strong>dbt</strong>.</p>
+<p>Para se aprofundar mais sobre esse tema, acesse a documentação oficial do <a href="https://docs.getdbt.com/reference/model-configs.">DBT</a>.</p>
 <h2 id="parametrizando-queries">Parametrizando queries</h2>
 <p>Em muitos casos, existem parâmetros relevantes para o funcionamento das queries cuja mudança vai alterar drasticamente o resultado, como:</p>
 <ul>
@@ -678,7 +701,7 @@
 <p>Uma query está filtrada para pegar registros dos últimos 3 anos, mas agora houve uma mudança e é necessário pegar dados dos últimos 5 anos, então você tem que substituir esse valor todas as vezes em que ele foi referenciado.</p>
 </li>
 </ul>
-<p>Os casos acima são exemplos de <em>hard code</em>, que significa que uma informação relevante para o funcionamento do sistema foi colocado no código. Isso resulta em muito trabalho pra fazer alterações, dificultando a reprodução do código e até a própria (re)utilização do mesmo por outras pessoas. </p>
+<p>Os casos acima são exemplos de <em>hard code</em>, que significa que uma informação relevante para o funcionamento do sistema foi colocado no código. Isso resulta em muito trabalho pra fazer alterações, dificultando a reprodução do código e até a própria (re)utilização do mesmo por outras pessoas.</p>
 <p>Felizmente, o <strong>dbt</strong> tem uma solução pra esse problema! É possível declarar variáveis no arquivo <code>dbt_project.yml</code> e se referenciar à elas dentro das queries, de modo que quando algum valor dessas variáveis mudar, tudo que precisa ser feito é alterar esse valor uma única vez.</p>
 <p>Continuando o exemplo que foi feito acima, suponhamos que seja necessário selecionar elementos da natureza, no modelo <code>elementos.sql</code> que foram declarados antes de uma certa data, e além disso, que queiramos criar uma nova coluna que indica se um país americano tem a capital que inicia com determinada letra, no modelo <code>paises_americanos.sql</code>. O primeiro passo é declarar os valores dessas variáveis dentro do arquivo <code>dbt_project.yml</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">dbt_project.yml</label></div>
@@ -706,7 +729,7 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
 <span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"></span>
@@ -720,7 +743,7 @@
 </div>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
 <span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span><span class="w"></span>
@@ -728,10 +751,10 @@
 <span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">pais</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">capital</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">CASE</span><span class="w"> </span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">STARTS_WITH</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">  </span><span class="k">CASE</span><span class="w"></span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">STARTS_WITH</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="k">THEN</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Não começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Não começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">indicador_capital_com_</span><span class="err">{{</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;</span><span class="p">)</span><span class="err">}}</span><span class="w"></span>
 <span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span><span class="w"></span>
 </code></pre></div>
@@ -747,15 +770,388 @@
 <span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;paises_americanos&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"></span>
 <span class="p">)</span><span class="w"></span>
 
-<span class="k">SELECT</span><span class="w"> </span>
+<span class="k">SELECT</span><span class="w"></span>
 <span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"></span>
 <span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
 <span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span><span class="w"></span>
 </code></pre></div>
-<p>O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros <code>upstream</code> e <code>downstream</code>, que veremos mais abaixo. </p>
+<p>O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros <code>upstream</code> e <code>downstream</code>, que veremos mais abaixo.</p>
 <h2 id="integrando-com-as-pipelines-do-prefect">Integrando com as pipelines do Prefect</h2>
+<p>Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso <code>flows.py</code>. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero.</p>
+<h3 id="dbt-para-flows-pre-definidos">DBT para Flows pré-definidos</h3>
+<p>Vamos reutilizar os códigos da aula anterior que extrai informações e um google sheets:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">flows.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Database dumping flows for formation project</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dump_db_formacao.schedules</span> <span class="kn">import</span> <span class="n">gsheets_one_minute_update_schedule</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.flows</span> <span class="kn">import</span> <span class="n">dump_url_flow</span>  <span class="c1"># alterado</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+
+<span class="n">formacao_gsheets_flow</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dump_url_flow</span><span class="p">)</span>
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Formação GSheets - Ingerir tabelas de URL&quot;</span>
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">GCS</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">GCS_FLOWS_BUCKET</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">run_config</span> <span class="o">=</span> <span class="n">KubernetesRun</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DOCKER_IMAGE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">RJ_ESCRITORIO_DEV_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">formacao_gsheets_flow_parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;test_formacao&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dump_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.google.com/spreadsheets/d/1uF-Gt5AyZmxCQQEaebvWF4ddRHeVuL6ANuoaY_-uAXE</span><span class="se">\</span>
+<span class="s2">        /edit#gid=0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;url_type&quot;</span><span class="p">:</span> <span class="s2">&quot;google_sheet&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;gsheets_sheet_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sheet_1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;table_id&quot;</span><span class="p">:</span> <span class="s2">&quot;test_table&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">formacao_gsheets_flow</span> <span class="o">=</span> <span class="n">set_default_parameters</span><span class="p">(</span>
+    <span class="n">formacao_gsheets_flow</span><span class="p">,</span> <span class="n">default_parameters</span><span class="o">=</span><span class="n">formacao_gsheets_flow_parameters</span>
+<span class="p">)</span>
+
+<span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">gsheets_one_minute_update_schedule</span>
+</code></pre></div>
+<p>Dentro do <code>flows.py</code> precisamos apenas alterar a origem do flow que estamos copiando.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">schedule.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Schedules for the database dump pipeline</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.utils</span> <span class="kn">import</span> <span class="n">generate_dump_url_schedules</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+
+<span class="c1">#####################################</span>
+<span class="c1">#</span>
+<span class="c1"># EGPWeb Schedules</span>
+<span class="c1">#</span>
+<span class="c1">#####################################</span>
+
+<span class="n">gsheets_urls</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;test_table&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.google.com/spreadsheets/d/1uF-Gt5AyZmxCQQEaebvWF4ddRHeVuL6ANuoaY_-uAXE</span><span class="se">\</span>
+<span class="s2">            /edit#gid=0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url_type&quot;</span><span class="p">:</span> <span class="s2">&quot;google_sheet&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gsheets_sheet_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sheet_1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dump_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;overwrite&quot;</span><span class="p">,</span> <span class="c1"># alterado</span>
+        <span class="s2">&quot;materialize_after_dump&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># alterado</span>
+        <span class="s2">&quot;materialization_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="c1"># alterado</span>
+        <span class="s2">&quot;materialize_to_datario&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># alterado</span>
+        <span class="s2">&quot;dump_to_gcs&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># alterado</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="n">gsheets_clocks</span> <span class="o">=</span> <span class="n">generate_dump_url_schedules</span><span class="p">(</span>
+    <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s2">&quot;America/Sao_Paulo&quot;</span><span class="p">)),</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">RJ_ESCRITORIO_DEV_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;test_dataset_formacao&quot;</span><span class="p">,</span>
+    <span class="n">table_parameters</span><span class="o">=</span><span class="n">gsheets_urls</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">gsheets_one_minute_update_schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span><span class="n">clocks</span><span class="o">=</span><span class="n">untuple</span><span class="p">(</span><span class="n">gsheets_clocks</span><span class="p">))</span>
+</code></pre></div>
+<p>Agora temos 5 novas chaves dentro do nosso dicionário de parâmetros no arquivo <code>schedule.py</code>:</p>
+<ul>
+<li>
+<p><strong>dump_mode</strong>: ["overwrite", "append"] Define se os novos dados substituirão os dados anteriores no GCP (overwrite) ou se serão adicionados (append) aos que já existem no GCP;</p>
+</li>
+<li>
+<p><strong>materialize_after_dump</strong>: [True, False] Define se os dados serão materializados no BQ (BigQuery) do próprio projeto utilizando o DBT;</p>
+</li>
+<li>
+<p><strong>materialization_mode</strong>: ["dev", "prod"] Define se a materialização acontecerá em ambiente de desenvolvimento ou produção;</p>
+</li>
+<li>
+<p><strong>materialize_to_datario</strong>: [True, False] Define se os dados serão materializados no datario utilizando o DBT.</p>
+</li>
+<li>
+<p><strong>dump_to_gcs</strong>: [True, False] Define se os dados serão salvos em um csv no Google Cloud Storage;</p>
+</li>
+</ul>
+<h3 id="dbt-para-flows-iniciados-do-zero">DBT para Flows iniciados do zero</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">flows.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=C0103</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Example flow</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">case</span><span class="p">,</span> <span class="n">Parameter</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span> <span class="nn">prefect.tasks.prefect</span> <span class="kn">import</span> <span class="n">create_flow_run</span><span class="p">,</span> <span class="n">wait_for_flow_run</span>  <span class="c1"># adicionado</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.formacao.flow_do_zero.constants</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># adicionado</span>
+    <span class="n">constants</span> <span class="k">as</span> <span class="n">formacao_constants</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.formacao.flow_do_zero.tasks</span> <span class="kn">import</span> <span class="n">download_data</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">,</span> <span class="n">save_report</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.constants</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">utils_constants</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.decorators</span> <span class="kn">import</span> <span class="n">Flow</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_db.constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">constants</span> <span class="k">as</span> <span class="n">dump_db_constants</span><span class="p">,</span>
+<span class="p">)</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.dump_to_gcs.constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">constants</span> <span class="k">as</span> <span class="n">dump_to_gcs_constants</span><span class="p">,</span>
+<span class="p">)</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.tasks</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># adicionado</span>
+    <span class="n">create_table_and_upload_to_gcs</span><span class="p">,</span>
+    <span class="n">get_current_flow_labels</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;EMD: formacao - Exemplo de flow do Prefect&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">formacao_exemplo_flow</span><span class="p">:</span>
+    <span class="c1"># Parâmetros</span>
+    <span class="n">n_users</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;n_users&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Parâmetros para a Materialização</span>
+    <span class="n">materialize_after_dump</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+        <span class="s2">&quot;materialize_after_dump&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">materialize_to_datario</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+        <span class="s2">&quot;materialize_to_datario&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">materialization_mode</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Parâmetros para salvar dados no GCS</span>
+    <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">formacao_constants</span><span class="o">.</span><span class="n">DATASET_ID</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">table_id</span> <span class="o">=</span> <span class="n">formacao_constants</span><span class="o">.</span><span class="n">TABLE_ID</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">dump_mode</span> <span class="o">=</span> <span class="s2">&quot;append&quot;</span>
+
+    <span class="c1"># Dump to GCS after? Should only dump to GCS if materializing to datario</span>
+    <span class="n">dump_to_gcs</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;dump_to_gcs&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">maximum_bytes_processed</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+        <span class="s2">&quot;maximum_bytes_processed&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="n">dump_to_gcs_constants</span><span class="o">.</span><span class="n">MAX_BYTES_PROCESSED_PER_TABLE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Cria fluxo das Tasks</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
+    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">save_path</span> <span class="o">=</span> <span class="n">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
+
+    <span class="c1"># Create table in BigQuery</span>
+    <span class="n">upload_table</span> <span class="o">=</span> <span class="n">create_table_and_upload_to_gcs</span><span class="p">(</span>
+        <span class="n">data_path</span><span class="o">=</span><span class="n">save_path</span><span class="p">,</span>
+        <span class="n">dataset_id</span><span class="o">=</span><span class="n">dataset_id</span><span class="p">,</span>
+        <span class="n">table_id</span><span class="o">=</span><span class="n">table_id</span><span class="p">,</span>
+        <span class="n">dump_mode</span><span class="o">=</span><span class="n">dump_mode</span><span class="p">,</span>
+        <span class="n">wait</span><span class="o">=</span><span class="n">save_path</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Trigger DBT flow run</span>
+    <span class="k">with</span> <span class="n">case</span><span class="p">(</span><span class="n">materialize_after_dump</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="n">current_flow_labels</span> <span class="o">=</span> <span class="n">get_current_flow_labels</span><span class="p">()</span>
+        <span class="n">materialization_flow</span> <span class="o">=</span> <span class="n">create_flow_run</span><span class="p">(</span>
+            <span class="n">flow_name</span><span class="o">=</span><span class="n">utils_constants</span><span class="o">.</span><span class="n">FLOW_EXECUTE_DBT_MODEL_NAME</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">project_name</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">PREFECT_DEFAULT_PROJECT</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+                <span class="s2">&quot;table_id&quot;</span><span class="p">:</span> <span class="n">table_id</span><span class="p">,</span>
+                <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">materialization_mode</span><span class="p">,</span>
+                <span class="s2">&quot;materialize_to_datario&quot;</span><span class="p">:</span> <span class="n">materialize_to_datario</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">labels</span><span class="o">=</span><span class="n">current_flow_labels</span><span class="p">,</span>
+            <span class="n">run_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Materialize </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">materialization_flow</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">upload_table</span><span class="p">)</span>
+
+        <span class="n">wait_for_materialization</span> <span class="o">=</span> <span class="n">wait_for_flow_run</span><span class="p">(</span>
+            <span class="n">materialization_flow</span><span class="p">,</span>
+            <span class="n">stream_states</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">stream_logs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">raise_final_state</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">wait_for_materialization</span><span class="o">.</span><span class="n">max_retries</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">dump_db_constants</span><span class="o">.</span><span class="n">WAIT_FOR_MATERIALIZATION_RETRY_ATTEMPTS</span><span class="o">.</span><span class="n">value</span>
+        <span class="p">)</span>
+        <span class="n">wait_for_materialization</span><span class="o">.</span><span class="n">retry_delay</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span>
+            <span class="n">seconds</span><span class="o">=</span><span class="n">dump_db_constants</span><span class="o">.</span><span class="n">WAIT_FOR_MATERIALIZATION_RETRY_INTERVAL</span><span class="o">.</span><span class="n">value</span>
+        <span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">case</span><span class="p">(</span><span class="n">dump_to_gcs</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="c1"># Trigger Dump to GCS flow run with project id as datario</span>
+            <span class="n">dump_to_gcs_flow</span> <span class="o">=</span> <span class="n">create_flow_run</span><span class="p">(</span>
+                <span class="n">flow_name</span><span class="o">=</span><span class="n">utils_constants</span><span class="o">.</span><span class="n">FLOW_DUMP_TO_GCS_NAME</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">project_name</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">PREFECT_DEFAULT_PROJECT</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;project_id&quot;</span><span class="p">:</span> <span class="s2">&quot;datario&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+                    <span class="s2">&quot;table_id&quot;</span><span class="p">:</span> <span class="n">table_id</span><span class="p">,</span>
+                    <span class="s2">&quot;maximum_bytes_processed&quot;</span><span class="p">:</span> <span class="n">maximum_bytes_processed</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+                    <span class="s2">&quot;datario&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="n">run_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Dump to GCS </span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">table_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">dump_to_gcs_flow</span><span class="o">.</span><span class="n">set_upstream</span><span class="p">(</span><span class="n">wait_for_materialization</span><span class="p">)</span>
+
+            <span class="n">wait_for_dump_to_gcs</span> <span class="o">=</span> <span class="n">wait_for_flow_run</span><span class="p">(</span>
+                <span class="n">dump_to_gcs_flow</span><span class="p">,</span>
+                <span class="n">stream_states</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">stream_logs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">raise_final_state</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+
+
+<span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">GCS</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">GCS_FLOWS_BUCKET</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">run_config</span> <span class="o">=</span> <span class="n">KubernetesRun</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DOCKER_IMAGE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">RJ_COR_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">tasks.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># pylint: disable=C0103</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Tasks for the example flow</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">log</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n_users (int): número de usuários a serem baixados.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: texto em formato CSV.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s2">&quot;https://randomuser.me/api/?results=</span><span class="si">{}</span><span class="s2">&amp;format=csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados baixados com sucesso!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (str): texto em formato CSV.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame do Pandas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dfr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados convertidos em DataFrame com sucesso!&quot;</span><span class="p">)</span>
+    <span class="n">dfr</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dfr</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt;&gt;&gt; </span><span class="si">{</span><span class="n">dfr</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dfr</span>
+
+
+<span class="nd">@task</span>
+<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataframe (pd.DataFrame): DataFrame do Pandas.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">save_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;temp&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+
+    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="s2">&quot;report.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados salvos em report.csv com sucesso!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">save_path</span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">constants.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Constant values for the satelite tables</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+
+<span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constant values for the satelite project</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">DATASET_ID</span> <span class="o">=</span> <span class="s2">&quot;test_formacao&quot;</span>
+    <span class="n">TABLE_ID</span> <span class="o">=</span> <span class="s2">&quot;test_table&quot;</span>
+</code></pre></div>
+<p>Modificações que precisamos fazer no arquivo <code>flows.py</code>:</p>
+<ul>
+<li>
+<p>especificar um caminho no qual o dado será salvo localmente antes de ser enviado ao GCP</p>
+</li>
+<li>
+<p>fazer o upload os dados no GCP utilizando o método <code>create_table_and_upload_to_gcs</code> e o caminho especificado anteriormente</p>
+</li>
+<li>
+<p>adicionar a condicional pronta (<code>with case</code>) que verificará se os dados serão materializados</p>
+</li>
+</ul>
 
               
             </article>
