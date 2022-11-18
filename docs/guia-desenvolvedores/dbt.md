@@ -204,7 +204,9 @@ O caso acima é especialmente útil quando um modelo depende de outro pra ser ex
 
 ## Integrando com as pipelines do Prefect
 
-Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso `flows.py`. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero. No caso de flows pré-definidos, podemos fazer o `deepcopy` de um flow cuja única função é realizar a materialização de dados via DBT ou podemos complementar um flow pré-definido que tem mais funções (como acessar bancos de dados da prefeitura ou planilhas do google sheets) com a parte de materialização de dados via DBT.
+Para realizarmos a materialização dos dados via DBT, precisamos adicionar essa etapa no nosso arquivo `flows.py`. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero. 
+
+No caso de flows pré-definidos, podemos fazer o `deepcopy` de um flow cuja única função é realizar a materialização de dados via DBT ou podemos complementar um flow pré-definido que tem mais funções com a parte de materialização de dados via DBT.
 
 ### DBT através de um Flow pré-definido específico
 
@@ -300,7 +302,7 @@ No `schedules.py` acima, dentro de `parameter_default`, temos `"mode": "dev"`, i
 
 ### DBT como complementação de outros Flows pré-definidos
 
-Vamos reutilizar os códigos da aula anterior que extrai informações e um google sheets:
+Vamos reutilizar os códigos da aula anterior que extrai informações de um google sheets:
 
 === "flows.py"
 
