@@ -91,7 +91,7 @@ models :
 
 🚨🚨 **Atenção** 🚨🚨: Essas descrições têm que ser exatamente as mesmas que foram preenchidas no arquivo de arquitetura e no [meta.dados.rio](meta.dados.rio/).
 
-Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com as keys `models:` e `project_id:` do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, `exemplo_formacao_infra`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
+Após criar os modelos e o arquivo _schema_, o último passo é alterar o arquivo `dbt_project.yml`, que fica na base do repositório. No final do arquivo há um trecho com as keys `models:` e `project_id:` do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, `test_formacao`) e o tipo de materialização para os modelos daquela pasta (_view_, _table_ or _incremental_). Nesse caso, utilizaremos _table_. (Aqui tem um [exemplo](https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml) desse arquivo totalmente preenchido).
 
 === "dbt_project.yml"
 
@@ -204,9 +204,101 @@ O caso acima é especialmente útil quando um modelo depende de outro pra ser ex
 
 ## Integrando com as pipelines do Prefect
 
-Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso `flows.py`. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero.
+Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso `flows.py`. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero. No caso de flows pré-definidos, podemos fazer o `deepcopy` de um flow cuja única função é realizar a materialização de dados via DBT ou podemos complementar um flow pré-definido que tem mais funções (como acessar bancos de dados da prefeitura ou planilhas do google sheets) com a parte de materialização de dados via DBT.
 
-### DBT para Flows pré-definidos
+### DBT através de um Flow pré-definido específico
+
+Similarmente aos flows _templates_ `dump_db` e `dump_url`, existe um flow pré-definido chamado `utils_run_dbt_model_flow` que faz a materialização de modelos DBT. A estrutura dos arquivos `flows.py` e `schedules.py` para essa pipeline é a mesma utilizada na maioria dos flows pré-definidos, sendo que as mudanças necessárias são mudar os caminhos dos arquivos e alterar parâmetros específicos dos seus modelos. Os arquivos utilizados na pipeline pra materializar os modelos **elementos** e **paises_americanos** seguem abaixo.
+
+=== "flows.py"
+
+```python
+# -*- coding: utf-8 -*-
+"""
+DBT-related flows.
+"""
+
+from copy import deepcopy
+
+from prefect.run_configs import KubernetesRun
+from prefect.storage import GCS
+
+from pipelines.constants import constants
+from pipelines.rj_escritorio.dbt_example.schedules import (
+    example_dbt_tables_schedule,
+)
+from pipelines.utils.execute_dbt_model.flows import utils_run_dbt_model_flow
+from pipelines.utils.utils import set_default_parameters
+
+dbt_example_formacao_infra = deepcopy(utils_run_dbt_model_flow)
+dbt_example_formacao_infra.name = "EMD: Exemplo Formação DBT - Materializar tabelas"
+dbt_example_formacao_infra.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
+dbt_example_formacao_infra.run_config = KubernetesRun(
+    image=constants.DOCKER_IMAGE.value
+)
+
+dbt_example_default_parameters = {
+    "dataset_id": "test_formacao",
+}
+dbt_example_formacao_infra = set_default_parameters(
+    dbt_example_formacao_infra,
+    default_parameters=dbt_example_default_parameters,
+)
+
+dbt_example_formacao_infra.schedule = example_dbt_tables_schedule
+```
+
+=== "schedules.py"
+```python
+# -*- coding: utf-8 -*-
+"""
+Schedules for dbt example
+"""
+
+from datetime import datetime, timedelta
+
+from prefect.schedules import Schedule
+from prefect.schedules.clocks import IntervalClock
+import pytz
+
+from pipelines.constants import constants
+from pipelines.utils.utils import untuple_clocks as untuple
+
+#####################################
+#
+# Example DBT Schedule for Formação Infra
+#
+#####################################
+
+example_dbt_tables = {
+    "elementos": "elementos",
+    "paises_americanos": "paises_americanos",
+}
+
+example_dbt_clocks = [
+    IntervalClock(
+        interval=timedelta(days=1),
+        start_date=datetime(
+            2022, 11, 17, 17, 30, tzinfo=pytz.timezone("America/Sao_Paulo")
+        )
+        + timedelta(minutes=3 * count),
+        labels=[
+            constants.RJ_ESCRITORIO_DEV_AGENT_LABEL.value,
+        ],
+        parameter_defaults={
+            "dataset_id": "test_formacao",
+            "table_id": table_id,
+            "mode": "dev",
+        },
+    )
+    for count, (_, table_id) in enumerate(example_dbt_tables.items())
+]
+example_dbt_tables_schedule = Schedule(clocks=untuple(example_dbt_clocks))
+```
+
+No `schedules.py` acima, dentro de `parameter_default`, temos `"mode": "dev"`, isso acontece porque a pipeline acima foi executada dentro do projeto `rj-escritorio-dev`. Porém, caso o projeto em que se queira executar a pipeline não tenha _dev_ no nome, o modo de execução será _prod_ (`"mode": "prod"`).
+
+### DBT como complementação de outros Flows pré-definidos
 
 Vamos reutilizar os códigos da aula anterior que extrai informações e um google sheets:
 
