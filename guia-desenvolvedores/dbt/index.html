@@ -466,8 +466,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dbt-para-flows-pre-definidos" class="md-nav__link">
-    DBT para Flows pré-definidos
+  <a href="#dbt-atraves-de-um-flow-pre-definido-especifico" class="md-nav__link">
+    DBT através de um Flow pré-definido específico
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbt-como-complementacao-de-outros-flows-pre-definidos" class="md-nav__link">
+    DBT como complementação de outros Flows pré-definidos
   </a>
   
 </li>
@@ -669,7 +676,7 @@
 <span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Capital</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
 </code></pre></div>
 <p>🚨🚨 <strong>Atenção</strong> 🚨🚨: Essas descrições têm que ser exatamente as mesmas que foram preenchidas no arquivo de arquitetura e no <a href="meta.dados.rio/">meta.dados.rio</a>.</p>
-<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com as keys <code>models:</code> e <code>project_id:</code> do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, <code>exemplo_formacao_infra</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
+<p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com as keys <code>models:</code> e <code>project_id:</code> do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, <code>test_formacao</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">dbt_project.yml</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
@@ -779,10 +786,102 @@
 </code></pre></div>
 <p>O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros <code>upstream</code> e <code>downstream</code>, que veremos mais abaixo.</p>
 <h2 id="integrando-com-as-pipelines-do-prefect">Integrando com as pipelines do Prefect</h2>
-<p>Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso <code>flows.py</code>. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero.</p>
-<h3 id="dbt-para-flows-pre-definidos">DBT para Flows pré-definidos</h3>
-<p>Vamos reutilizar os códigos da aula anterior que extrai informações e um google sheets:</p>
+<p>Para adicionarmos essa parte de materialização dos dados via DBT precisamos adicionar essa etapa no nosso <code>flows.py</code>. Isso vai depender se nossa pipeline foi criada através de um flow pré-definido (como no caso de flows que acessam os bancos de dados da prefeitura ou planilhas do google sheets) ou se a iniciamos do zero. No caso de flows pré-definidos, podemos fazer o <code>deepcopy</code> de um flow cuja única função é realizar a materialização de dados via DBT ou podemos complementar um flow pré-definido que tem mais funções (como acessar bancos de dados da prefeitura ou planilhas do google sheets) com a parte de materialização de dados via DBT.</p>
+<h3 id="dbt-atraves-de-um-flow-pre-definido-especifico">DBT através de um Flow pré-definido específico</h3>
+<p>Similarmente aos flows <em>templates</em> <code>dump_db</code> e <code>dump_url</code>, existe um flow pré-definido chamado <code>utils_run_dbt_model_flow</code> que faz a materialização de modelos DBT. A estrutura dos arquivos <code>flows.py</code> e <code>schedules.py</code> para essa pipeline é a mesma utilizada na maioria dos flows pré-definidos, sendo que as mudanças necessárias são mudar os caminhos dos arquivos e alterar parâmetros específicos dos seus modelos. Os arquivos utilizados na pipeline pra materializar os modelos <strong>elementos</strong> e <strong>paises_americanos</strong> seguem abaixo.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">flows.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">DBT-related flows.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dbt_example.schedules</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">example_dbt_tables_schedule</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.execute_dbt_model.flows</span> <span class="kn">import</span> <span class="n">utils_run_dbt_model_flow</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+
+<span class="n">dbt_example_formacao_infra</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">utils_run_dbt_model_flow</span><span class="p">)</span>
+<span class="n">dbt_example_formacao_infra</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Exemplo Formação DBT - Materializar tabelas&quot;</span>
+<span class="n">dbt_example_formacao_infra</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">GCS</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">GCS_FLOWS_BUCKET</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">dbt_example_formacao_infra</span><span class="o">.</span><span class="n">run_config</span> <span class="o">=</span> <span class="n">KubernetesRun</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DOCKER_IMAGE</span><span class="o">.</span><span class="n">value</span>
+<span class="p">)</span>
+
+<span class="n">dbt_example_default_parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;test_formacao&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">dbt_example_formacao_infra</span> <span class="o">=</span> <span class="n">set_default_parameters</span><span class="p">(</span>
+    <span class="n">dbt_example_formacao_infra</span><span class="p">,</span>
+    <span class="n">default_parameters</span><span class="o">=</span><span class="n">dbt_example_default_parameters</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">dbt_example_formacao_infra</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">example_dbt_tables_schedule</span>
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">schedules.py</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Schedules for dbt example</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span> <span class="nn">prefect.schedules.clocks</span> <span class="kn">import</span> <span class="n">IntervalClock</span>
+<span class="kn">import</span> <span class="nn">pytz</span>
+
+<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+
+<span class="c1">#####################################</span>
+<span class="c1">#</span>
+<span class="c1"># Example DBT Schedule for Formação Infra</span>
+<span class="c1">#</span>
+<span class="c1">#####################################</span>
+
+<span class="n">example_dbt_tables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;elementos&quot;</span><span class="p">:</span> <span class="s2">&quot;elementos&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;paises_americanos&quot;</span><span class="p">:</span> <span class="s2">&quot;paises_americanos&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">example_dbt_clocks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">IntervalClock</span><span class="p">(</span>
+        <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">start_date</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span>
+            <span class="mi">2022</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s2">&quot;America/Sao_Paulo&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">3</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">constants</span><span class="o">.</span><span class="n">RJ_ESCRITORIO_DEV_AGENT_LABEL</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">parameter_defaults</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;dataset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;test_formacao&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;table_id&quot;</span><span class="p">:</span> <span class="n">table_id</span><span class="p">,</span>
+            <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;dev&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">table_id</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">example_dbt_tables</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="p">]</span>
+<span class="n">example_dbt_tables_schedule</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span><span class="n">clocks</span><span class="o">=</span><span class="n">untuple</span><span class="p">(</span><span class="n">example_dbt_clocks</span><span class="p">))</span>
+</code></pre></div>
+<p>No <code>schedules.py</code> acima, dentro de <code>parameter_default</code>, temos <code>"mode": "dev"</code>, isso acontece porque a pipeline acima foi executada dentro do projeto <code>rj-escritorio-dev</code>. Porém, caso o projeto em que se queira executar a pipeline não tenha <em>dev</em> no nome, o modo de execução será <em>prod</em> (<code>"mode": "prod"</code>).</p>
+<h3 id="dbt-como-complementacao-de-outros-flows-pre-definidos">DBT como complementação de outros Flows pré-definidos</h3>
+<p>Vamos reutilizar os códigos da aula anterior que extrai informações e um google sheets:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">flows.py</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -830,7 +929,7 @@
 <span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">gsheets_one_minute_update_schedule</span>
 </code></pre></div>
 <p>Dentro do <code>flows.py</code> precisamos apenas alterar a origem do flow que estamos copiando.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">schedule.py</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">schedule.py</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -900,7 +999,7 @@
 </li>
 </ul>
 <h3 id="dbt-para-flows-iniciados-do-zero">DBT para Flows iniciados do zero</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">flows.py</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">flows.py</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -1042,7 +1141,7 @@
 <span class="p">)</span>
 <span class="n">formacao_exemplo_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">tasks.py</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">tasks.py</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -1119,7 +1218,7 @@
     <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados salvos em report.csv com sucesso!&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">save_path</span>
 </code></pre></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">constants.py</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">constants.py</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
