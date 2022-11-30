@@ -10,7 +10,8 @@ nav:
       - Visão geral da infraestrutura: guia-desenvolvedores/visao-geral-infra.md
       - Manual de Estilo: guia-desenvolvedores/manual-estilo.md
       - Metadados: guia-desenvolvedores/metadados.md
-      - Desenvolvimento de pipelines de dados: guia-desenvolvedores/pipelines.md
+      - Desenvolvimento de pipelines local: guia-desenvolvedores/pipelines.md
+      - Deployment de pipelines na cloud: guia-desenvolvedores/pipelines-cloud.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
     - Governança:
       - Compartilhamento de Dataset e Tabelas: governanca/governanca.md
@@ -63,12 +64,11 @@ markdown_extensions:
   - pymdownx.details
   - mkdocs_click
   - attr_list
+  - pymdownx.superfences
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.tabbed:
       alternate_style: true
-  - pymdownx.superfences
-
 extra_css:
 - static/css/custom.css
