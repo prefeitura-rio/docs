@@ -14,7 +14,7 @@ nav:
       - Deployment de pipelines na cloud: guia-desenvolvedores/pipelines-cloud.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
     - Governança:
-      - Compartilhamento de Dataset e Tabelas: governanca/governanca.md
+      - Governança de Acessos e Compartilhamento no Datalake: governanca/governanca.md
     - Sobre:
       - Contato: contato.md
 
