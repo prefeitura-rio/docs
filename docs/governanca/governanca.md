@@ -1,9 +1,10 @@
-Acesso ao dalake
+## Governança de Acessos e Compartilhamento no Datalake
 
-## Compartilhamento de Dataset e tabelas entre órgãos 
 
-### Compartilhamento com entidades externas
+### 1. Definições Gerais
 
-### Acordos de cooperação 
+### 2. Definição dos papéis de acesso
 
-## Nível de acessos 
+### 3. Compartimentação do projeto e definindo acesso aos dados
+#### 3.1 Criando grupos e sub-grupos
+ 
