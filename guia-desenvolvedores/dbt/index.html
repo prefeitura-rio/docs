@@ -491,6 +491,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#dbt-alias" class="md-nav__link">
+    DBT Alias
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1251,6 +1258,25 @@
 <p>adicionar a condicional pronta (<code>with case</code>) que verificará se os dados serão materializados</p>
 </li>
 </ul>
+<h2 id="dbt-alias">DBT Alias</h2>
+<p>Uma limitação importante nos modelos DBT é que não é possível criar modelos com o mesmo nome. Como, por <em>default</em>, o nome das tabelas é o nome do arquivo do modelo, isso implica que, em um <em>Data Lake</em> que tenha nomes de tabelas duplicados, a materialização do DBT vai falhar. Nesses casos, o DBT gera um erro como esse:</p>
+<div class="highlight"><pre><span></span><code>Exception: Error running sync command: RPC server failed to compile project, call the <span class="s2">&quot;status&quot;</span> method <span class="k">for</span> compile status: Compilation Error
+  dbt found two resources with the name <span class="s2">&quot;cargo&quot;</span>. Since these resources have the same name,
+  dbt will be unable to find the correct resource when ref<span class="o">(</span><span class="s2">&quot;cargo&quot;</span><span class="o">)</span> is used. To fix this,
+  change the name of one of these resources:
+  - model.rj-smfp.cargo <span class="o">(</span>models/recursos_humanos_ergon/cargo.sql<span class="o">)</span>
+  - model.rj-smfp.cargo <span class="o">(</span>models/recursos_humanos_ergon_comlurb/cargo.sql<span class="o">)</span>
+</code></pre></div>
+<p>Para evitar esse problema usamos um recurso do DBT chamado <code>alias</code>. Para criar um alias de uma tabela, basta incluir a seguinte linha no topo do arquivo SQL do modelo DBT:</p>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="k">alias</span><span class="o">=</span><span class="s1">&#39;cargo&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">schema</span><span class="o">=</span><span class="s1">&#39;recursos_humanos_ergon_comlurb&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="p">...</span><span class="w"></span>
+</code></pre></div>
+<p>O nome dos arquivos SQL, porém, devem permanecer únicos. Na <strong>BD</strong> adotamos a convenção de dar o nome desses arquivos no seguinte formato <code>dataset_id__table_id</code>.
+É importante notar que esse é o nome que dever ser utilizado na hora de rodar o modelo DBT:</p>
+<div class="highlight"><pre><span></span><code>dbt run -s `dataset_id__table_id`
+</code></pre></div>
+<p>Para mais detalhes, ver documentação pertinente: <a href="https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-custom-aliases">DBT alias</a></p>
 
               
             </article>
