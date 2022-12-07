@@ -684,7 +684,7 @@ SELECT *
 FROM ...
 ```
 
-O nome dos arquivos SQL, porém, devem permanecer únicos. Na **BD** adotamos a convenção de dar o nome desses arquivos no seguinte formato `dataset_id__table_id`.
+O nome dos arquivos SQL, porém, devem permanecer únicos. Adotamos a convenção de dar o nome desses arquivos no seguinte formato `dataset_id__table_id`.
 É importante notar que esse é o nome que dever ser utilizado na hora de rodar o modelo DBT:
 
 ```
