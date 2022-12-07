@@ -167,5 +167,5 @@ Selecione a tabela que deseja compartilhar para proceder a abertura da mesma.
 
 ![imagem](../static/img/governanca/comparttabela.png)
 
-Em seguida, selecione “+compartilhar”, então surgirá uma aba no lado direito para informar o e-mail do solicitante e atribuir o papel de uso. Este processo se repete como apresentado anteriormente.
+Em seguida, selecione “+compartilhar”, então surgirá uma aba no lado direito para informar o e-mail do solicitante e atribuir o papel de uso. Este processo se repete como apresentado anteriormente. 
 
