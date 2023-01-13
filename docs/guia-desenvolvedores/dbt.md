@@ -691,4 +691,6 @@ O nome dos arquivos SQL, porém, devem permanecer únicos. Adotamos a convençã
 dbt run -s `dataset_id__table_id`
 ```
 
+Para utilizar em uma `pipeline` utilize o parâmetro `dbt_alias` no flow `EMD: template - Executa DBT model`
+
 Para mais detalhes, ver documentação pertinente: [DBT alias](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-custom-aliases)
