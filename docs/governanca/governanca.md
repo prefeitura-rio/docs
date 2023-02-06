@@ -118,11 +118,11 @@ Ao acessá-la, deve clicar em “Permitir acesso”, no topo esquerdo e preenche
 
 #### Configurando a permissão por grupo
 
-A concessão de acesso com as devidas permissões a usuários deve ser atribuída pela inserção do técnico no grupo pertinente ao nível de permissão que lhe foi permitido.Para isso, os grupos devem estar configurados para exercer o papel correspondente, conforme descrito no item 2.Sendo assim, deve seguir as orientações abaixo.
+A concessão de acesso com as devidas permissões a usuários deve ser atribuída pela inserção do técnico no grupo pertinente ao nível de permissão que lhe foi permitido.Para isso, os grupos devem estar configurados para exercer o papel correspondente, conforme descrito no item 2. Sendo assim, deve seguir as orientações abaixo.
 
 1. Na barra de pesquisa do GCP procure por “Resource Manage”, acessando a tela, aparecerá o projeto do órgão correspondente ao administrador.
 
-2. Para prosseguir tenha o e-mail do grupo que deseja conceder permissão de acesso, de acordo com o nível.É possível encontrá-lo no painel de administrador.
+2. Para prosseguir tenha o e-mail do grupo que deseja conceder permissão de acesso, de acordo com o nível. É possível encontrá-lo no painel de administrador.
 
 3. Selecione o projeto que deseja conceder e em seguida clique em “Adicionar Principal” que abrirá uma aba ao lado direito para realizar a configuração.
 
@@ -136,18 +136,18 @@ A concessão de acesso com as devidas permissões a usuários deve ser atribuíd
 
 ![imagem](../static/img/governanca/atribuirpapel.png)
 
-Destacamos que os papéis devem ser concedidos seguindo a hierarquia apresentada no item 2.De modo que:
+Destacamos que os papéis devem ser concedidos seguindo a hierarquia apresentada no item 2. De modo que:
 
-__Administrador__:
+- __Administrador__:
      Receberá papel “Base”,  “Administrador”, “Editor” e “Leitor”.
 
-__Editor__:
+- __Editor__:
      Receberá papel “Base”, “Editor” e “Leitor”
 
-__Leitor__:
+- __Leitor__:
      Receberá papel “Base” e “Leitor”.
 
-6. No caso dessas múltiplas concessões de configuração, deve agir da seguinte maneira, conforme imagem abaixo ilustra.
+1. No caso dessas múltiplas concessões de configuração, deve agir da seguinte maneira, conforme imagem abaixo ilustra.
 
 ![imagem](../static/img/governanca/multconces.png)
 Clicando em “+ Adicionar outro Papel” uma nova caixa surgirá, possibilitando a inserção de um novo papel.Então, o processo de inclusão de papéis se repetirá até que atenda a necessidade da configuração.
@@ -157,7 +157,10 @@ Clicando em “+ Adicionar outro Papel” uma nova caixa surgirá, possibilitand
 Para compartilhar Dataset (conjunto de dados) selecione o dataset desejado, dentro do respectivo projeto.
 ![imagem](../static/img/governanca/compartdataset.png)
 
-Há duas opções para iniciar o compartilhamento:1) nos três pontos ao lado do nome do dataset, você pode clicar e selecionar “compartilhar”.2) Com o dataset selecionado e aparecendo ao lado direito, conforme imagem acima, você pode clicar em “+compartilhamento”.
+Há duas opções para iniciar o compartilhamento:
+
+1. nos três pontos ao lado do nome do dataset, você pode clicar e selecionar “compartilhar”.
+2. Com o dataset selecionado e aparecendo ao lado direito, conforme imagem acima, você pode clicar em “+compartilhamento”.
 
 Em seguida selecione “Permissões”.Feito isso aparecerá uma aba ao lado direito para a concessão do nível de acesso permitido que você poderá disponibilizar ao solicitante.
 
@@ -167,7 +170,7 @@ Em “Adicionar Principal” deverá informar o e-mail do usuário solicitante.E
 
 ![imagem](../static/img/governanca/addpapeldataset.png)
 
-A atribuição de papéis deverá seguir a orientação exposta no item 6.1.1 (E).
+A atribuição de papéis deverá seguir a orientação exposta no item 5. de Configurando a permissão por grupo.
 
 ### Tabelas
 
