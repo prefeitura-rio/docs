@@ -13,7 +13,7 @@
     
     
       
-        <title>Como configurar a conexão do PowerBI com o BigQuery - Escritório de Dados</title>
+        <title>Governança de Acessos e Compartilhamento no Datalake - Escritório de Dados</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#restricoes-e-premissas" class="md-skip">
+        <a href="#definicoes-gerais" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Como configurar a conexão do PowerBI com o BigQuery
+              Governança de Acessos e Compartilhamento no Datalake
             
           </span>
         </div>
@@ -246,14 +246,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
       
       
       
@@ -276,7 +274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../como-acessar-dados/" class="md-nav__link">
+      <a href="../../tutoriais/como-acessar-dados/" class="md-nav__link">
         Como acessar dados no data lake
       </a>
     </li>
@@ -288,62 +286,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Como configurar a conexão do PowerBI com o BigQuery
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
         Como configurar a conexão do PowerBI com o BigQuery
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Índice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#restricoes-e-premissas" class="md-nav__link">
-    Restrições e premissas
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configurando-as-variaveis-de-ambiente" class="md-nav__link">
-    Configurando as variáveis de ambiente
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#observacoes-finais" class="md-nav__link">
-    Observações finais
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -477,12 +424,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" checked>
       
       
       
@@ -503,11 +452,163 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../governanca/governanca/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Governança de Acessos e Compartilhamento no Datalake
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Governança de Acessos e Compartilhamento no Datalake
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definicoes-gerais" class="md-nav__link">
+    Definições Gerais
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-dos-papeis-de-acesso" class="md-nav__link">
+    Definição dos papéis de acesso
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compartimentacao-do-projeto-e-definindo-acesso-aos-dados" class="md-nav__link">
+    Compartimentação do projeto e definindo acesso aos dados
+  </a>
+  
+    <nav class="md-nav" aria-label="Compartimentação do projeto e definindo acesso aos dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-grupos-e-sub-grupos" class="md-nav__link">
+    Criando grupos e sub-grupos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-o-grupo" class="md-nav__link">
+    Configurando o grupo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inserindo-usuarios-em-seus-respectivos-grupos" class="md-nav__link">
+    Inserindo usuários em seus respectivos grupos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compartilhamento-de-dados-com-atores-externos" class="md-nav__link">
+    Compartilhamento de Dados com atores externos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compartilhamento-de-dados-com-atores-internos" class="md-nav__link">
+    Compartilhamento de Dados com atores internos
+  </a>
+  
+    <nav class="md-nav" aria-label="Compartilhamento de Dados com atores internos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consideracoes" class="md-nav__link">
+    Considerações
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-compartilhar-projetos-datasets-e-tabelas" class="md-nav__link">
+    Como compartilhar Projetos, Datasets e Tabelas
+  </a>
+  
+    <nav class="md-nav" aria-label="Como compartilhar Projetos, Datasets e Tabelas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#projetos" class="md-nav__link">
+    Projetos
+  </a>
+  
+    <nav class="md-nav" aria-label="Projetos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configurando-a-permissao-por-grupo" class="md-nav__link">
+    Configurando a permissão por grupo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datasets" class="md-nav__link">
+    Datasets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabelas" class="md-nav__link">
+    Tabelas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -585,42 +686,179 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/tutoriais/como-configurar-conexao-powerbi-bigquery.md" title="Editar esta página" class="md-content__button md-icon">
+  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/governanca/governanca.md" title="Editar esta página" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Como configurar a conexão do PowerBI com o BigQuery</h1>
+  <h1>Governança de Acessos e Compartilhamento no Datalake</h1>
 
-<p>Tendo problemas em se conectar ao BigQuery via PowerBI? Vamos tentar ajudar!</p>
-<h2 id="restricoes-e-premissas">Restrições e premissas</h2>
-<p>Esse guia contempla somente o caso onde o usuário está tentando se conectar a partir da rede de computadores da Prefeitura do Rio. Se esse não for o seu caso, mas ainda estiver com problemas, <a href="/contato"><strong>entre em contato conosco</strong></a>, será um prazer te ajudar.</p>
-<p>Também, o guia foi focado no sistema operacional Windows. Caso precise da descrição desses passos para outros sistemas operacionais, <a href="https://iplanrio.prefeitura.rio/"><strong>entre em contato com a IPLANRIO</strong></a>, que desenvolveu essa solução.</p>
-<h2 id="configurando-as-variaveis-de-ambiente">Configurando as variáveis de ambiente</h2>
-<p>Os passos necessários são os seguintes:</p>
+<h2 id="definicoes-gerais">Definições Gerais</h2>
 <ul>
-<li>Clicar na lupa da barra de tarefas</li>
-<li>Buscar por "Environment" ou "editar as variáveis de ambiente do sistema" e clicar no ícone que aparecer</li>
-<li>Clicar em "Novo" na seção da janela descrita como "Variáveis de usuário para..."</li>
-<li>Adicionar as seguintes variáveis:</li>
+<li>Todo órgão terá um ponto focal para ser o contato com o ED,  preferencialmente, quem for o responsável pela área de dados no órgão.</li>
+<li>Este ponto focal será o Administrador da Pasta e/ou do Projeto.</li>
+<li>O ponto focal será responsável pelo compartilhamento dos dados, quando solicitado por algum ator interno ou externo.</li>
+<li>Ele indicará os usuários conforme o nível de permissão de acesso (Editor ou Leitor).</li>
+<li>O ponto focal também será responsável por conceder o nível de acesso.</li>
+<li>O papel de editor será responsável pela edição necessária nas tabelas que o leitor (analista) julgar pertinente.</li>
 </ul>
-<div class="highlight"><pre><span></span><code> - Nome da variável: http_proxy
-   Valor da variável: http://proxy.rio.rj.gov.br:8080
-
- - Nome da variável: https_proxy
-   Valor da variável: http://proxy.rio.rj.gov.br:8080
-</code></pre></div>
+<h2 id="definicao-dos-papeis-de-acesso">Definição dos papéis de acesso</h2>
 <ul>
-<li>Atente-se para eventuais erros de digitação!</li>
+<li>Trata-se do nível de permissão concedida aos usuários, divididos em três níveis:administrador, editor, leitor e base.</li>
 </ul>
-<p>Ao final, a tela deverá se assemelhar à seguinte:</p>
-<p><img alt="Tela de configuração de variáveis de ambiente" src="../../static/img/tutoriais/powerbi-bigquery.png" /></p>
-<h2 id="observacoes-finais">Observações finais</h2>
-<p>As variáveis atribuídas via Domínio serão identificadas na seção "Variáveis do sistema", que abrangerá
-qualquer usuário da máquina caso ela seja compartilhada. Caso a máquina que não esteja no domínio RIO
-também seja compartilhada, as variáveis também deverão ser criadas manualmente na seção "Variáveis do
-sistema" e não em "Variáveis de usuário".</p>
+<p><img alt="imagem" src="../../static/img/governanca/papeisdeacesso.png" /></p>
+<p>O papel base foi criado para visualização da existência das bases de dados. Com ele, pode-se listar as bases existentes, mas não pode consultar, ler os dados.
+O ponto focal, automaticamente, terá seu acesso definido como <strong>Administrador</strong>. Portanto, definirá qual papel os técnicos de seu órgão poderão exercer.</p>
+<h2 id="compartimentacao-do-projeto-e-definindo-acesso-aos-dados">Compartimentação do projeto e definindo acesso aos dados</h2>
+<p>Em caso de órgãos que contenham unidades administrativas (sub-órgãos) com bases de dados próprias, projetos específicos, e independência relativa à gestão de dados, o acesso, assim como a divisão do Projeto na GCP ocorrerá da seguinte maneira:</p>
+<p>O acesso será por grupos distintos, restringindo acesso apenas ao sub-órgão pertinente do usuário. A inserção do usuário ao sub-grupo acontecerá no momento da concessão da credencial de acesso ao Datalake.</p>
+<p><strong>Ex.:</strong></p>
+<p><strong>Projeto:</strong> SMFP</p>
+<p><strong>Dataset’s:</strong>  RH e EGP</p>
+<p><strong>Acesso:</strong> Grupo Leitor RH e Grupo Leitor EGP</p>
+<h3 id="criando-grupos-e-sub-grupos">Criando grupos e sub-grupos</h3>
+<p>Em <em>admin.google.com/ac/groups</em>, como na imagem abaixo, clique em Grupos que abrirá o painel central com a lista de grupos existentes.
+ <img alt="imagem" src="../../static/img/governanca/criandogrupo.png" />
+ Em seguida, clique no botão Criar grupo e preencha o formulário que abrirá, como mostra a imagem abaixo.
+  <img alt="imagem" src="../../static/img/governanca/configgrupo.png" /></p>
+<ul>
+<li>
+<p>Para a criação de grupos, recomendamos padrão de formulação de nome do grupo e e-mail.</p>
+</li>
+<li>
+<p>Para o nome do grupo sugere-se a sigla do órgão (ex.:SMFP) seguido do papel atribuído às funções do grupo (ex.:SMFP - LEITOR).</p>
+</li>
+<li>
+<p>Enquanto para o e-mail, também devemos seguir a ordem de rj-(sigla do órgão)-(função do papel atribuído). Como, por exemplo:rj-smfp-leitor@dados.rio. A descrição do grupo segue livre.</p>
+</li>
+</ul>
+<h3 id="configurando-o-grupo">Configurando o grupo</h3>
+<p>Após o preenchimento do formulário da etapa anterior, basta clicar em “Próxima”, para seguir a página seguinte de configuração, conforme imagem abaixo. Nesta etapa realizaremos a configuração do grupo será autorizar que todos da organização vejam o grupo, peçam acesso, interaja com outros participantes etc.</p>
+<p>Neste caso, selecionamos a opção “Restrito” e desmarcamos a caixa referente ao “Externo”.</p>
+<p><img alt="imagem" src="../../static/img/governanca/confignivelgrupo.png" /></p>
+<h3 id="inserindo-usuarios-em-seus-respectivos-grupos">Inserindo usuários em seus respectivos grupos</h3>
+<p>Após a criação dos grupos segundo o nível de permissão de uso, retorno para a tela da lista de grupos, clicando em Grupos, como destaque em vermelho na imagem abaixo.
+ <img alt="imagem" src="../../static/img/governanca/adduser.png" /></p>
+<p>Em seguida, encontre o grupo de seu desejo para adicionar usuários conforme o perfil. Com a seta do mouse em cima da linha do grupo, surgirá opções para clicar, clique em Adicionar participantes, assim abrirá a tela abaixo.</p>
+<p>Agora, basta adicionar o e-mail do usuário (domínio @dados.rio). Para encontrar o e-mail dos usuários clique em Usuários no canto esquerdo da tela, então surgirá a lista de usuários cadastrados com o domínio @dados.rio. Copie o e-mail desejado e preencha o campo da tela a seguir.</p>
+<p>Repita o processo para cada usuário que deseja adicionar ao grupo.</p>
+<p><img alt="imagem" src="../../static/img/governanca/adduser2.png" /></p>
+<h2 id="compartilhamento-de-dados-com-atores-externos">Compartilhamento de Dados com atores externos</h2>
+<p>Em caso de compartilhamento de bases com atores externos (universidades, pesquisadores, iniciativa priva, startups etc)
+ <img alt="imagem" src="../../static/img/governanca/compartilhamentoatorexterno.png" /></p>
+<ol>
+<li>
+<p>O solicitante deverá se manifestar oficialmente sobre o interesse em determinada base de dados.</p>
+</li>
+<li>
+<p>Sua manifestação deverá conter:Tema, Objetivo, Justificativa, Possíveis produtos (análises, solução, software etc).</p>
+</li>
+<li>
+<p>O concedente deverá ter acordo de compartilhamento padrão assinado, conforme modelo aprovado pela PGM.</p>
+</li>
+<li>
+<p>Também deverá constar um Plano de Trabalho com os elementos pertinentes.</p>
+</li>
+<li>
+<p>Após a deliberação sobre o compartilhamento dos dados, o modo de compartilhar, em caso de ser pela plataforma BigQuery, seguirá o mesmo modo que o compartilhamento entre órgãos e usuários internos. Entretanto, o usuário deverá possuir uma conta Google (um gmail, por exemplo) para acessar e o custo de processamento será de sua responsabilidade.</p>
+</li>
+</ol>
+<h2 id="compartilhamento-de-dados-com-atores-internos">Compartilhamento de Dados com atores internos</h2>
+<p>O compartilhamento de dados entre usuários e/ou órgãos municipais é de responsabilidade legal do solicitante e concedente.
+Recomendamos que ao compartilhar dados com atores internos ou externos, seja concedido o papel de leitor.
+ <img alt="imagem" src="../../static/img/governanca/compartilhamentoatorinterno.png" /></p>
+<h3 id="consideracoes">Considerações</h3>
+<p>Para acessar dados não-públicos de outro órgão, o solicitante deverá:</p>
+<ol>
+<li>
+<p>Solicitar formalmente ao órgão proprietário dos dados.</p>
+</li>
+<li>
+<p>Se deferido, o concedente deverá notificar ao Escritório de Dados.</p>
+</li>
+<li>
+<p>Deverá ser celebrado entre os órgãos o Acordo de Cooperação Padrão (PADM) com o Plano de Trabalho.</p>
+</li>
+<li>
+<p>E o Gestor dos Dados (Papel de Administrador) compartilhará os dados via BigQuery.</p>
+</li>
+</ol>
+<h2 id="como-compartilhar-projetos-datasets-e-tabelas">Como compartilhar Projetos, Datasets e Tabelas</h2>
+<p>É importante ressaltar que no compartilhamento de cada elemento (projeto, dataset e tabela) você deverá conceder um papel ao usuário e para todos os elementos, obrigatoriamente, deverá considerar o nível Base, onde apenas a visualização do elemento será possível, sem mais qualquer outra opção de uso.</p>
+<p>Somente o usuário com permissão de Administrador poderá realizar compartilhamento de projeto, dataset e tabelas.</p>
+<p><strong>Nota:</strong> Os papéis são complementares. Nesse sentido, ao atribuir um papel de nível maior, deve-se atribuir também todos os inferiores a ele. Exemplo:ao conceder o papel de “Editor” a um usuário, deve-se também conceder os papéis de “Leitor” e “Base”, pois são níveis inferiores.</p>
+<h3 id="projetos">Projetos</h3>
+<p>Para compartilhar um Projeto (e consequentemente todos os recursos que estão contidos nele), basta acessar a página do IAM (Identity and Access Management) do Projeto em questão, disponível pelo seguinte modelo de link:<a href="https://console.cloud.google.com/iam-admin/iam?project=NOME_DO_PROJETO.">https://console.cloud.google.com/iam-admin/iam?project=NOME_DO_PROJETO.</a></p>
+<p>Ao acessá-la, deve clicar em “Permitir acesso”, no topo esquerdo e preencher:</p>
+<ul>
+<li>
+<p>Novas principais:identidade do(s) usuário(s) (pode ser Gmail ou identidade @dados.rio)</p>
+</li>
+<li>
+<p>Papéis:selecionar os desejados</p>
+</li>
+</ul>
+<h4 id="configurando-a-permissao-por-grupo">Configurando a permissão por grupo</h4>
+<p>A concessão de acesso com as devidas permissões a usuários deve ser atribuída pela inserção do técnico no grupo pertinente ao nível de permissão que lhe foi permitido. Para isso, os grupos devem estar configurados para exercer o papel correspondente, conforme descrito no item 2. Sendo assim, deve seguir as orientações abaixo.</p>
+<ol>
+<li>
+<p>Na barra de pesquisa do GCP procure por “Resource Manage”, acessando a tela, aparecerá o projeto do órgão correspondente ao administrador.</p>
+</li>
+<li>
+<p>Para prosseguir tenha o e-mail do grupo que deseja conceder permissão de acesso, de acordo com o nível. É possível encontrá-lo no painel de administrador.</p>
+</li>
+<li>
+<p>Selecione o projeto que deseja conceder e em seguida clique em “Adicionar Principal” que abrirá uma aba ao lado direito para realizar a configuração.</p>
+</li>
+</ol>
+<p><img alt="imagem" src="../../static/img/governanca/permgrupo.png" /></p>
+<ol>
+<li>Em “Adicionar Participantes” insira o e-mail do grupo que deseja configurar acesso.</li>
+</ol>
+<p><img alt="imagem" src="../../static/img/governanca/addparticipante.png" /></p>
+<ol>
+<li>O passo seguinte devemos ter atenção, pois é neste momento que atribuirá o devido papel ao grupo. Em “Atribuir papeis”, abra a caixa suspensa e selecione, em “Acesso rápido” o papel que deseja atribuir. A imagem abaixo ilustra o que se relata.</li>
+</ol>
+<p><img alt="imagem" src="../../static/img/governanca/atribuirpapel.png" /></p>
+<p>Destacamos que os papéis devem ser concedidos seguindo a hierarquia apresentada no item 2. De modo que:</p>
+<ul>
+<li>
+<p><strong>Administrador</strong>:
+     Receberá papel “Base”,  “Administrador”, “Editor” e “Leitor”.</p>
+</li>
+<li>
+<p><strong>Editor</strong>:
+     Receberá papel “Base”, “Editor” e “Leitor”</p>
+</li>
+<li>
+<p><strong>Leitor</strong>:
+     Receberá papel “Base” e “Leitor”.</p>
+</li>
+<li>
+<p>No caso dessas múltiplas concessões de configuração, deve agir da seguinte maneira, conforme imagem abaixo ilustra.</p>
+</li>
+</ul>
+<p><img alt="imagem" src="../../static/img/governanca/multconces.png" />
+Clicando em “+ Adicionar outro Papel” uma nova caixa surgirá, possibilitando a inserção de um novo papel. Então, o processo de inclusão de papéis se repetirá até que atenda a necessidade da configuração.</p>
+<h3 id="datasets">Datasets</h3>
+<p>Para compartilhar Dataset (conjunto de dados) selecione o dataset desejado, dentro do respectivo projeto.
+<img alt="imagem" src="../../static/img/governanca/compartdataset.png" /></p>
+<p>Há duas opções para iniciar o compartilhamento:</p>
+<ol>
+<li>nos três pontos ao lado do nome do dataset, você pode clicar e selecionar “compartilhar”.</li>
+<li>Com o dataset selecionado e aparecendo ao lado direito, conforme imagem acima, você pode clicar em “+compartilhamento”.</li>
+</ol>
+<p>Em seguida selecione “Permissões”. Feito isso aparecerá uma aba ao lado direito para a concessão do nível de acesso permitido que você poderá disponibilizar ao solicitante.</p>
+<p><img alt="imagem" src="../../static/img/governanca/permdataset.png" /></p>
+<p>Em “Adicionar Principal” deverá informar o e-mail do usuário solicitante.E posterior a isso, deverá atribuir o papel concedido.</p>
+<p><img alt="imagem" src="../../static/img/governanca/addpapeldataset.png" /></p>
+<p>A atribuição de papéis deverá seguir a orientação exposta no item 5. de Configurando a permissão por grupo.</p>
+<h3 id="tabelas">Tabelas</h3>
+<p>Para o compartilhamento de Tabelas, o procedimento é similar ao de Dataset, porém deve ser feita para cada tabela compartilhada.</p>
+<p>Selecione a tabela que deseja compartilhar para proceder a abertura da mesma.</p>
+<p><img alt="imagem" src="../../static/img/governanca/comparttabela.png" /></p>
+<p>Em seguida, selecione “+compartilhar”, então surgirá uma aba no lado direito para informar o e-mail do solicitante e atribuir o papel de uso.Este processo se repete como apresentado anteriormente.</p>
 
               
             </article>
@@ -643,7 +881,7 @@ sistema" e não em "Variáveis de usuário".</p>
     <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
       
         
-        <a href="../como-acessar-dados/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Como acessar dados no data lake" rel="prev">
+        <a href="../../guia-desenvolvedores/dbt/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Publicando dados com DBT" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -652,20 +890,20 @@ sistema" e não em "Variáveis de usuário".</p>
               <span class="md-footer__direction">
                 Anterior
               </span>
-              Como acessar dados no data lake
+              Publicando dados com DBT
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../guia-desenvolvedores/visao-geral-infra/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Visão geral da infraestrutura" rel="next">
+        <a href="../../contato/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Contato" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Próximo
               </span>
-              Visão geral da infraestrutura
+              Contato
             </div>
           </div>
           <div class="md-footer__button md-icon">
