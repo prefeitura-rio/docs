@@ -64,7 +64,7 @@ constants.py                 # valores constantes para todos os órgãos
 
 Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, temos como boa prática um arquivo específico para salvarmos nossas variáveis. Aqui no ED vamos classificar nossos arquivos de constantes em dois tipos: globais e locais.
 
-As **constantes locais** são todas aquelas que são específicas para um determinado flow (ou projeto). Elas ficam armazenadas em um arquivo `constants.py` no mesmo diretório do seu `flow.py` (ou do projeto no qual vocês está trabalhando). Em geral, criamos nesse arquivo uma classe `constants` que contém o `DATASET_ID` e `TABLE_ID` que serão utilizados para gravar os dados finais do flow no GCP, entre outras coisas que você julgar importante.
+As **constantes locais** são todas aquelas que são específicas para um determinado flow (ou projeto). Elas ficam armazenadas em um arquivo `constants.py` no mesmo diretório do seu `flows.py` (ou do projeto no qual vocês está trabalhando). Em geral, criamos nesse arquivo uma classe `constants` que contém o `DATASET_ID` e `TABLE_ID` que serão utilizados para gravar os dados finais do flow no GCP, entre outras coisas que você julgar importante.
 
 ```python
 from enum import Enum
@@ -130,7 +130,7 @@ formacao/
 ├── __init__.py
 └── exemplo/
     ├── __init__.py
-    ├── flow.py
+    ├── flows.py
     └── tasks.py
 ```
 
