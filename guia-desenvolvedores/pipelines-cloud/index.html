@@ -802,7 +802,7 @@ constants.py                 # valores constantes para todos os órgãos
 </code></pre></div>
 <h3 id="constantes-globais-e-locais">Constantes globais e locais <img alt="ℹ" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2139.svg" title=":information_source:" /></h3>
 <p>Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, temos como boa prática um arquivo específico para salvarmos nossas variáveis. Aqui no ED vamos classificar nossos arquivos de constantes em dois tipos: globais e locais.</p>
-<p>As <strong>constantes locais</strong> são todas aquelas que são específicas para um determinado flow (ou projeto). Elas ficam armazenadas em um arquivo <code>constants.py</code> no mesmo diretório do seu <code>flow.py</code> (ou do projeto no qual vocês está trabalhando). Em geral, criamos nesse arquivo uma classe <code>constants</code> que contém o <code>DATASET_ID</code> e <code>TABLE_ID</code> que serão utilizados para gravar os dados finais do flow no GCP, entre outras coisas que você julgar importante.</p>
+<p>As <strong>constantes locais</strong> são todas aquelas que são específicas para um determinado flow (ou projeto). Elas ficam armazenadas em um arquivo <code>constants.py</code> no mesmo diretório do seu <code>flows.py</code> (ou do projeto no qual vocês está trabalhando). Em geral, criamos nesse arquivo uma classe <code>constants</code> que contém o <code>DATASET_ID</code> e <code>TABLE_ID</code> que serão utilizados para gravar os dados finais do flow no GCP, entre outras coisas que você julgar importante.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># pylint: disable=c0103</span>
@@ -846,7 +846,7 @@ constants.py                 # valores constantes para todos os órgãos
 ├── __init__.py
 └── exemplo/
     ├── __init__.py
-    ├── flow.py
+    ├── flows.py
     └── tasks.py
 </code></pre></div>
 <p>Se você se recorda bem, no tutorial anterior, havíamos criado um arquivo <code>utils.py</code> para conter nossa função de log. No entanto, no repositório de pipelines essa função já existe e pode ser importada de <code>pipelines.utils.utils</code>. Então, vamos escrever o arquivo <code>tasks.py</code> da seguinte forma:</p>
