@@ -29,7 +29,9 @@ Saiba por que e como separar o processo de ETL (Extract, Transform, Load) em tab
 
 ### Criando Tabelas no BigQuery Dataform
 
-Para começar, você precisa configurar seu ambiente Dataform e usar a interface gráfica para criar tabelas. Aqui estão os passos:
+O Dataform é uma poderosa ferramenta de automação e gerenciamento de transformações de dados que se integra perfeitamente com o BigQuery,. Com o Dataform, você pode criar, testar e agendar transformações de dados de forma eficiente e confiável.
+
+Esta ferramenta permite que você defina modelos de dados e fluxos de trabalho, simplificando o processo de transformação de dados em projetos de desenvolvimento e produção. Para obter informações detalhadas sobre como usar o Dataform em conjunto com o BigQuery, consulte a [documentação oficial do Google Cloud](https://cloud.google.com/dataform/docs/overview). 
 
 1. **Definindo um Projeto Dataform**:
    - Na interface gráfica do Dataform, crie um novo projeto Dataform para o seu projeto de dados.
