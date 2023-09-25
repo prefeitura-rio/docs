@@ -1,6 +1,7 @@
-# Documentação de Governança, Desenvolvimento e Produção de Dados
+# Desenvolvimento e Produção de Analises com BigQuery
 
-## Governança
+
+## Conseitos basicos do BigQuery
 
 ### Organização de Datasets
 
@@ -10,8 +11,6 @@ Nesta seção, exploramos as melhores práticas para organizar datasets em proje
 
 Saiba como importar dados de suporte diretamente do Google Sheets para seus projetos de dados.
 
-## Desenvolvimento
-
 ### Desenvolvimento de Pipelines no BigQuery (BQ)
 
 Aqui, abordamos o processo de desenvolver pipelines de dados no BigQuery, incluindo boas práticas e exemplos.
@@ -19,11 +18,6 @@ Aqui, abordamos o processo de desenvolver pipelines de dados no BigQuery, inclui
 ### Uso de Views
 
 Descubra como criar e usar views no BigQuery para simplificar consultas e melhorar a reutilização de código.
-
-### Separação do Processo em Tabelas
-
-Saiba por que e como separar o processo de ETL (Extract, Transform, Load) em tabelas distintas para maior flexibilidade e escalabilidade.
-
 
 ## Automatização com BigQuery Dataform
 
