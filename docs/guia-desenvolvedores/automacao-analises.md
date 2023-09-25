@@ -44,43 +44,79 @@ Uma maneira eficaz de trazer dados de fontes externas para o BigQuery é por mei
 4. É importante que a tabela no google sheets seja pública ou que os usuarios tenham permissão de visualização para executar queries na tabela criada.![Query](../static/img/automacao-analises/create_table_google_sheets_query.png)
 
 
+## Guia de Automação com BigQuery Dataform
 
-## Automação com BigQuery Dataform
+O BigQuery Dataform é uma ferramenta poderosa que simplifica a automação de transformações de dados no Google BigQuery. Neste guia, vamos abordar as etapas essenciais para configurar o BigQuery Dataform e automatizar tarefas de gerenciamento de dados.
 
-### Criando Tabelas no BigQuery Dataform
 
-O BigQuery Dataform permite automatizar transformações de dados. Suponha que você deseje criar uma tabela de vendas agregadas. No Dataform:
+### Configuração do Repositório
 
-1. **Definindo um Projeto Dataform**:
-   - Crie um projeto chamado `projeto_vendas` com as configurações necessárias.
+Antes de começar, é fundamental configurar um repositório para seus projetos de dados no BigQuery Dataform. Aqui estão as etapas:
 
-2. **Criando Modelos**:
-   - Crie um modelo chamado `vendas_agregadas.sql` com a seguinte consulta:
-   
-   ```sql
-   SELECT EXTRACT(MONTH FROM data) AS mes, produto, SUM(receita) AS receita
-   FROM `projeto_desenvolvimento.raw_data.vendas`
-   GROUP BY mes, produto
-   ```
+1. Comece criando um repositório no BigQuery Dataform. O repositório é o local onde você gerenciará seus projetos de dados e deve seguir o padrão, `rj-orgao-dataform`; `rj-smfp-dataform`.
 
-3. **Definindo Dependências**:
-   - Configure a dependência deste modelo em relação aos dados brutos.
+2. Crie um projeto no Github com o mesmo nome do repositorio do dataform, `rj-orgao-dataform`; `rj-smfp-dataform`.
+    
+      2.1. No seu perfil do Github selecione a opção **settings** e selecione o menu **developer settings**, selecione a opção **Fine-grainted tokens** em **Personal Acess Tokens**
+      2.2. Crie um novo token seguindo o mesmo padrao de nomeação do repositorio (`rj-orgao-dataform`; `rj-smfp-dataform`). Defina a data de data de expiração para o maior valor possivel, selecione a organização de interesse e de permissão apenas para o repositorio desejado. Em permissões de acesso **read and write** para **Content**. ![dataform github](../static/img/automacao-analises/dataform_github_config.png)
+      2.3. Salve o token gerado. Vá até o **Secret Manager do Google Cloud** e crie um novo secret com o mesmo nome do repositorio, cole o valor do token no campo **secret value** e clique em criar novo secret.
+      ![dataform_gcp_github_secret](../static/img/automacao-analises/dataform_gcp_github_secret.png)
 
-4. **Compilando e Executando**:
-   - Compile o modelo e execute-o para criar a tabela no BigQuery.
+3. No repositorio do Dataform vá até **Settings** e clique em **Edit Git Connections** . Selecione a opção **HTTP** e cole a URL do repositorio do Github acompanhado de **.git**, coloque o nome da branch como **master** (em alguns casos pode ser **main**) e selecione o secret criado na etapa anterior. Copie a conta de servico default fornecida pelo Dataform na parte inferior da janela, no exemplo da imagem é **service-681461412723@gcp-sa-dataform.iam.gserviceaccount.com**
+      . ![dataform_github_connection](../static/img/automacao-analises/dataform_git_connections.png)
 
-### Criando um Fluxo de Trabalho (Workflow)
+4. Vá até o **Resource Manager do Google Cloud** e de acesso para a conta de serviço default fornecida pelo dataform para o projeto de prod (**rj-smfp**) e dev (**rj-smfp-dev**) com a permissões abaixo:
+      - Dataform Service Agent 
+      - EDRio - Infra - Conta de Serviço
+      - Secret Manager Secret Accessor
 
-Com o Dataform, você pode automatizar a execução de modelos em uma sequência específica. Por exemplo, crie um fluxo de trabalho para consolidar vendas diárias e, em seguida, as vendas mensais:
+### Criação de Modelos
 
-1. **Criando Tarefas**:
-   - Crie tarefas "vendas_diarias" e "vendas_mensais" que representam a compilação e execução dos modelos correspondentes.
+A criação de modelos de dados é o cerne do BigQuery Dataform. Aqui estão os passos para criar modelos:
 
-2. **Configurando Dependências**:
-   - Configure a dependência "vendas_mensais" em relação à tarefa "vendas_diarias" para garantir a ordem correta de execução.
+#### Criação de um Novo Modelo
 
-3. **Executando o Fluxo de Trabalho**:
-   - Inicie o fluxo de trabalho para automatizar o processo de ETL.
+Dentro da interface do BigQuery Dataform, crie um novo modelo para representar a transformação desejada nos dados.
+
+![Criação de Modelo](link_para_imagem_da_criacao_de_modelo)
+
+#### Definição do Modelo
+
+Use a interface para definir seu modelo, escrevendo consultas SQL para realizar as transformações necessárias nos dados.
+
+![Definição do Modelo](link_para_imagem_da_definicao_de_modelo)
+
+### Definição de Dependências
+
+Configure dependências entre modelos para garantir a ordem correta de execução.
+
+![Definição de Dependências](link_para_imagem_da_definicao_de_dependencias)
+
+### Scheduler de Workflows
+
+Além da criação de modelos individuais, o BigQuery Dataform permite a criação de fluxos de trabalho para automatizar a execução de modelos em uma sequência específica. Veja como fazer isso:
+
+### Criação de Tarefas
+
+Crie tarefas que representem as ações que deseja executar, como compilar, testar e publicar modelos.
+
+![Criação de Tarefas](link_para_imagem_da_criacao_de_tarefas)
+
+#### Configuração de Dependências
+
+Configure as dependências entre as tarefas para garantir a ordem correta de execução.
+
+![Configuração de Dependências](link_para_imagem_da_configuracao_de_dependencias)
+
+#### Execução do Fluxo de Trabalho
+
+Inicie o fluxo de trabalho, que executará as tarefas na ordem especificada, automatizando o processo de ETL.
+
+![Execução do Fluxo de Trabalho](link_para_imagem_da_execucao_do_fluxo_de_trabalho)
+
+Com esses passos, você pode aproveitar ao máximo o BigQuery Dataform para automatizar a transformação de dados e a criação de modelos no BigQuery. Simplifique o gerenciamento de dados em seus projetos de desenvolvimento e produção.
+
+
 
 ## Conectando com o Produto Final
 
