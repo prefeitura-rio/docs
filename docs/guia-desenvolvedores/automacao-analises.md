@@ -70,43 +70,40 @@ Antes de começar, é fundamental configurar um repositório para seus projetos 
       - EDRio - Infra - Conta de Serviço
       - Secret Manager Secret Accessor
 
+
+Essa integração permite o controle de versões dos modelos desenvolvidos no Dataform em ambientes de desenvolvimentos que são branchs do repositório do github.
+
 ### Criação de Modelos
 
-A criação de modelos de dados é o cerne do BigQuery Dataform. Aqui estão os passos para criar modelos:
+#### Configuração ambiente desenvolvimento
+
+No Dataform, você interage com o código do fluxo de trabalho SQL em um espaço de trabalho de desenvolvimento. Um espaço de trabalho de desenvolvimento é sua própria cópia editável de um repositório. Em um espaço de trabalho, você cria, edita ou exclui o conteúdo do repositório sem afetar outros que trabalham no mesmo repositório e, em seguida, confirma e envia as alterações para o repositório.
+
+É possível desenvolver seu fluxo de trabalho SQL com o núcleo do Dataform ou JavaScript. O Dataform compila seu código em consultas SQL em tempo real.
+
+1. O primeiro passo para criação de modelos é a criação de um ambiente de desenvolvimento. Vá até a interfacie do Dataform selecione o repositorio e crie um ambiente de desenvolvimento caso necessario, de algum nome descritivo ex: `dashboard_ergon_suggc`. 
+
+2. Entre no ambiente de trabalho e inicialize o ambiente caso seja necessario. 
+   ![dataform_ambiente_desenvolvimento](../static/img/automacao-analises/dataform_ambiente_desenvolvimento.png)
+
+Para entender a estrutura de um ambiente no Dataform, é importante conhecer os principais componentes e conceitos envolvidos;
+
+- A pasta **definitions** é o coração do ambiente do Dataform. Ela contém os arquivos que definem as transformações de dados e as operações que desejamos automatizar. 
+
+- Os arquivos com a extensão **.sqlx** contêm código SQL que descreve as transformações de dados que você deseja aplicar. Esses arquivos são escritos no formato SQLX, que é uma extensão do SQL padrão e suporta recursos adicionais, como a definição de modelos, testes e documentação.
+
+- Explicar confg {}
+
+- O arquivo **dataform.json** é o arquivo de configuração do seu projeto Dataform. Ele contém informações sobre como os modelos são construídos, quais tarefas devem ser executadas e como as dependências entre modelos são gerenciadas. É onde você especifica configurações como o esquema padrão do BigQuery, conexões de banco de dados e programação de tarefas.
 
 #### Criação de um Novo Modelo
 
-Dentro da interface do BigQuery Dataform, crie um novo modelo para representar a transformação desejada nos dados.
+Para criação de um novo modelo primeiro iremos definir um padrao de estrutura e organização de pastas dentro da pasta **definitions**. Os modelos criados no ambiente devem ser savos dentro de uma pasta com o mesmo nome do ambiente, dessa forma isolamos projetos, dashboard e analises de outros ambientes, seguindo o exemplo amterior teriamos `definitions/dashboard_ergon_suggc`. Dentro dessa pasta podemos organizar nossas queries da forma que melhor nos atender.![dataform_ambiente_desenvolvimento_diretorios](../static/img/automacao-analises/dataform_ambiente_desenvolvimento_diretorios.png)
 
-![Criação de Modelo](link_para_imagem_da_criacao_de_modelo)
 
-#### Definição do Modelo
+No exemplo da imagem criamos uma tabela filtrada que servira de fonte para as demais agregaçoes. Dessa forma iremos consultar apenas a tabela filtrada e não todo conjunto de dados gerando redução de custos
+![dataform_ambiente_desenvolvimento_modelo](../static/img/automacao-analises/dataform_ambiente_desenvolvimento_modelo.png)
 
-Use a interface para definir seu modelo, escrevendo consultas SQL para realizar as transformações necessárias nos dados.
-
-![Definição do Modelo](link_para_imagem_da_definicao_de_modelo)
-
-### Definição de Dependências
-
-Configure dependências entre modelos para garantir a ordem correta de execução.
-
-![Definição de Dependências](link_para_imagem_da_definicao_de_dependencias)
-
-### Scheduler de Workflows
-
-Além da criação de modelos individuais, o BigQuery Dataform permite a criação de fluxos de trabalho para automatizar a execução de modelos em uma sequência específica. Veja como fazer isso:
-
-### Criação de Tarefas
-
-Crie tarefas que representem as ações que deseja executar, como compilar, testar e publicar modelos.
-
-![Criação de Tarefas](link_para_imagem_da_criacao_de_tarefas)
-
-#### Configuração de Dependências
-
-Configure as dependências entre as tarefas para garantir a ordem correta de execução.
-
-![Configuração de Dependências](link_para_imagem_da_configuracao_de_dependencias)
 
 #### Execução do Fluxo de Trabalho
 
