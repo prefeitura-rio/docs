@@ -13,7 +13,7 @@
     
     
       
-        <title>Desenvolvimento de pipelines local - Escritório de Dados</title>
+        <title>Automação de analises no BigQuery - Escritório de Dados</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#como-o-prefect-funciona" class="md-skip">
+        <a href="#organizacao-de-datasets-e-tabelas" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Desenvolvimento de pipelines local
+              Automação de analises no BigQuery
             
           </span>
         </div>
@@ -377,103 +377,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Desenvolvimento de pipelines local
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../pipelines/" class="md-nav__link">
         Desenvolvimento de pipelines local
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Índice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#como-o-prefect-funciona" class="md-nav__link">
-    Como o Prefect funciona?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#desenvolvendo-seu-primeiro-flow" class="md-nav__link">
-    Desenvolvendo seu primeiro Flow
-  </a>
-  
-    <nav class="md-nav" aria-label="Desenvolvendo seu primeiro Flow">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#preparando-o-ambiente" class="md-nav__link">
-    Preparando o ambiente
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#criando-funcoes-auxiliares" class="md-nav__link">
-    Criando funções auxiliares
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#criando-tasks" class="md-nav__link">
-    Criando tasks
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#definindo-o-flow" class="md-nav__link">
-    Definindo o Flow
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#executando" class="md-nav__link">
-    Executando
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#executando-com-parametros" class="md-nav__link">
-    Executando com parâmetros
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -511,11 +419,170 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../automacao-analises/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Automação de analises no BigQuery
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Automação de analises no BigQuery
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#organizacao-de-datasets-e-tabelas" class="md-nav__link">
+    Organização de Datasets e Tabelas
+  </a>
+  
+    <nav class="md-nav" aria-label="Organização de Datasets e Tabelas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#projetos-de-desenvolvimento" class="md-nav__link">
+    Projetos de Desenvolvimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomenclatura-de-datasets-e-tabelas" class="md-nav__link">
+    Nomenclatura de Datasets e Tabelas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-tabelas-no-bigquery" class="md-nav__link">
+    Tipos de Tabelas no BigQuery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importacao-de-dados-do-google-sheets" class="md-nav__link">
+    Importação de Dados do Google Sheets
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guia-de-automacao-com-bigquery-dataform" class="md-nav__link">
+    Guia de Automação com BigQuery Dataform
+  </a>
+  
+    <nav class="md-nav" aria-label="Guia de Automação com BigQuery Dataform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-do-repositorio" class="md-nav__link">
+    Configuração do Repositório
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criacao-de-modelos" class="md-nav__link">
+    Criação de Modelos
+  </a>
+  
+    <nav class="md-nav" aria-label="Criação de Modelos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-ambiente-desenvolvimento" class="md-nav__link">
+    Configuração ambiente desenvolvimento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criacao-de-um-novo-modelo" class="md-nav__link">
+    Criação de um Novo Modelo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execucao-do-fluxo-de-trabalho" class="md-nav__link">
+    Execução do Fluxo de Trabalho
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectando-com-o-produto-final" class="md-nav__link">
+    Conectando com o Produto Final
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectando com o Produto Final">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integracao-com-looker-studio" class="md-nav__link">
+    Integração com Looker Studio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracao-com-google-sheets" class="md-nav__link">
+    Integração com Google Sheets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracao-com-python-notebook" class="md-nav__link">
+    Integração com Python Notebook
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -640,189 +707,155 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/guia-desenvolvedores/pipelines.md" title="Editar esta página" class="md-content__button md-icon">
+  <a href="https://github.com/prefeitura-rio/docs/edit/master/docs/guia-desenvolvedores/automacao-analises.md" title="Editar esta página" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>Desenvolvimento de pipelines local</h1>
+  <h1>Automação de analises no BigQuery</h1>
 
-<p>Como você deve se recordar, no capítulo sobre <a href="/guia-desenvolvedores/visao-geral-infra">Visão geral da infraestrutura</a>, comentamos sobre o Prefect, que é a ferramenta que utilizamos para automatizar os processos de ETL (Extração, Transformação e Carga de Dados). Neste capítulo, vamos aprofundar um pouco sobre o funcionamento do Prefect e desenvolver uma pipeline de exemplo.</p>
-<h2 id="como-o-prefect-funciona">Como o Prefect funciona?</h2>
-<p>O Prefect trabalha em um <strong>modelo híbrido</strong>: a <strong>orquestração</strong> de tarefas é feita em um servidor, os <strong>códigos</strong> das tarefas são armazenados em outro e a <strong>execução</strong> é feita em um terceiro. Essa arquitetura permite a descentralização completa das execuções em diferentes centros de custo, além de permitir uma maior privacidade e segurança de todos os servidores envolvidos. Para entender melhor como isso funciona, traduzimos e adaptamos <a href="https://www.prefect.io/why-prefect/hybrid-model/">um texto extraído do site oficial do Prefect</a>, que mostra os passos de desenvolvimento com Prefect:</p>
-<p><img alt="Passo 1: Construir seu Flow" src="../../static/img/tutoriais/pipelines/step1.png" /></p>
-<p><strong>Passo 1: Construir seu <em>Flow</em></strong>: uma pipeline, no Prefect, recebe o nome de <em>Flow</em>. Você deve utilizar o pacote Python <code>prefect</code> (em nosso caso, na versão 0.15.9) para desenvolver seu fluxo de trabalho. Depois de desenvolver, você pode executá-lo e testá-lo em sua máquina.</p>
-<p><img alt="Passo 2: Registrar seu Flow" src="../../static/img/tutoriais/pipelines/step2.png" /></p>
-<p><strong>Passo 2: Registrar seu <em>Flow</em></strong>: esse passo consiste em armazenar seu código em um repositório de objetos, em nosso caso o Google Cloud Storage, de forma que ele possa ser acessado posteriormente. Depois de armazená-lo, sabendo sua localização, você envia esse metadado para o servidor do Prefect (registra o <em>Flow</em>). Isso permite que você possa localizá-lo na interface web do Prefect e inspecioná-lo.</p>
-<p><em>Obs.:</em> no caso das pipelines desenvolvidas em nosso repositório no GitHub, esse processo de registrar <em>Flows</em> é automatizado.</p>
-<p><img alt="Passo 3: Executar um Agent" src="../../static/img/tutoriais/pipelines/step3.png" /></p>
-<p><strong>Passo 3: Executar um agente</strong>: agentes do Prefect são processos que se comunicam com o servidor do Prefect, procurando por cargas de trabalho agendada. Quando ele encontra, lança sua execução. Agentes podem ser executados em qualquer lugar, o que permite que as cargas de trabalho sejam lançadas em diferentes centros de custo.</p>
-<p><em>Obs.:</em> para a Prefeitura do Rio, já existem diversos agentes registrados, esse passo não será necessário.</p>
-<p><img alt="Passo 4: Agendar cargas de trabalho" src="../../static/img/tutoriais/pipelines/step4.png" /></p>
-<p><strong>Passo 4: Agendar cargas de trabalho</strong>: você pode agendar cargas de trabalho para serem executadas em um determinado horário, ou com certa recorrência. Você pode fazer isso através do próprio código, em Python (recomendado para manter consistência), ou através da interface web do Prefect.</p>
-<p><img alt="Passo 5: Executar o _Flow_" src="../../static/img/tutoriais/pipelines/step5.png" /></p>
-<p><strong>Passo 5: Executar o <em>Flow</em></strong>: o agente do Prefect encontrará a carga de trabalho agendada e a executará. Dessa forma, a carga de trabalho será executada onde o agente estiver rodando. Ao mesmo tempo, todo o processo de execução e logs poderão ser acompanhados através da interface web do Prefect, já que o agente os comunica ao servidor.</p>
-<p><img alt="Passo 6: Monitorar e gerenciar" src="../../static/img/tutoriais/pipelines/step6.png" /></p>
-<p><strong>Passo 6: Monitorar e gerenciar</strong>: você pode monitorar e gerenciar as cargas de trabalho através da interface web do Prefect. Você pode ver o status de cada carga de trabalho, visualizar os logs, inspecionar o código, etc. de quaisquer cargas de trabalho, seja em execução ou já finalizadas.</p>
-<h2 id="desenvolvendo-seu-primeiro-flow">Desenvolvendo seu primeiro Flow</h2>
-<p>Aqui, vamos tratar do desenvolvimento de uma pipeline de exemplo, que consiste em:</p>
+<h2 id="organizacao-de-datasets-e-tabelas">Organização de Datasets e Tabelas</h2>
+<p>A organização eficiente dos datasets e tabelas no BigQuery é fundamental para manter um ambiente de dados limpo e gerenciável. Durante o desenvolvimento de uma nova análise ou dashboard, é recomendável seguir um conjunto de práticas específicas para garantir a clareza e a organização dos dados.</p>
+<h3 id="projetos-de-desenvolvimento">Projetos de Desenvolvimento</h3>
+<p>Durante o desenvolvimento de análises e dashboards, recomenda-se a utilização de um projeto de desenvolvimento específico. Por exemplo, para o projeto de produção <code>rj-smfp</code> utilize o projeto de desenvolvimento <code>rj-smfp-dev</code>. Isso ajuda a separar claramente os ambientes de produção e desenvolvimento.</p>
+<h3 id="nomenclatura-de-datasets-e-tabelas">Nomenclatura de Datasets e Tabelas</h3>
+<p>A estrutura de nomeação de datasets e tabelas deve seguir boas práticas para facilitar a identificação e a compreensão dos dados. A seguir, estão algumas diretrizes para nomear datasets e tabelas:</p>
+<ul>
+<li>Use todas as letras minúsculas (inclusive siglas), sem acentos, conectadas por underscores (_).</li>
+<li>Evite abreviações e inclusão de conectores como "de", "da", "dos", "e", "a", "em", etc.</li>
+<li>Ao criar datasets destinados a análises ou dashboards, mantenha o nome original do dataset e acrescente o sufixo dashboard ou analise, juntamente com a identificação do órgão responsável. Por exemplo para um dashboard relacionado ao sistema ERGON feito pela SUBGCC; as tabelas se encontram no dataset_id: <code>recursos_humanos_ergon</code>, os dados relevantes para esse dashboard devem ser armazenados no dataset_id <code>recursos_humanos_ergon_dashboard_subgcc</code>.</li>
+<li>Utilize nomes de datasets e tabelas descritivos para refletir claramente o conteúdo ou finalidade dos dados.</li>
+</ul>
+<h3 id="tipos-de-tabelas-no-bigquery">Tipos de Tabelas no BigQuery</h3>
+<p>O BigQuery oferece três tipos diferentes de tabelas, cada uma com suas características:</p>
 <ol>
-<li>Baixar dados de uma API;</li>
-<li>Converter esses dados em um formato tabular;</li>
-<li>Armazenar esses dados em um arquivo CSV.</li>
+<li>
+<p><strong>Tabelas Externas</strong>: Tabelas externas funcionam de forma semelhante a tabelas normais do BigQuery. Os detalhes sobre a estrutura da tabela, como as colunas e os tipos de dados, são armazenados no BigQuery. No entanto, os dados em si permanecem na fonte externa. Isso pode incluir fontes como <strong>Google Cloud Storage (GCS)</strong>, <strong>Google Sheets</strong>, <strong>Google Drive</strong> e outras. Para saber mais, consulte <a href="https://cloud.google.com/bigquery/docs/external-data-sources">como consultar fontes de dados externas</a>.</p>
+</li>
+<li>
+<p><strong>Tabelas Nativas</strong>: Tabelas nativas contêm os dados diretamente dentro do BigQuery. Essas tabelas oferecem alta velocidade de consulta, mas possuem um limite de 4 mil partições, o que pode ser um fator limitante para conjuntos de dados muito grandes.</p>
+</li>
+<li>
+<p><strong>Views (Visualizações)</strong>: Uma view é uma tabela virtual criada a partir de uma consulta SQL. Ela não armazena dados fisicamente, mas, em vez disso, fornece uma maneira conveniente de organizar e acessar dados de outras tabelas. Para obter mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/views">como criar visualizações</a>.</p>
+</li>
 </ol>
-<p><strong>Obs:</strong> esse exemplo tratará exclusivamente de uma execução local, em sua máquina, sem interações com o servidor do Prefect ou mecanismos de armazenamento, como o Google Cloud Storage. Abaixo, nessa mesma página, haverão exemplos mais complexos.</p>
-<h3 id="preparando-o-ambiente">Preparando o ambiente</h3>
-<p>Requisitos:</p>
+<p>Esses três tipos de tabelas oferecem flexibilidade para lidar com uma variedade de cenários de armazenamento e consulta de dados no BigQuery. A escolha do tipo de tabela depende das necessidades específicas do seu projeto e da fonte dos dados que você está gerenciando.</p>
+<h3 id="importacao-de-dados-do-google-sheets">Importação de Dados do Google Sheets</h3>
+<p>Uma maneira eficaz de trazer dados de fontes externas para o BigQuery é por meio da importação de dados do Google Sheets. Essa integração permite que você trabalhe com dados de planilhas do Google diretamente no ambiente do BigQuery.</p>
+<ol>
+<li>
+<p>Nas opções do dataset clique em criar nova tabela</p>
+</li>
+<li>
+<p>Na página de configuração da nova tabela, escolha a opção Drive como origem dos dados, indique a URL da tabela no google sheets e selecione o formato Google Sheet em seguida defina um nome para sua tabela. No final você deve ter algo como na imagem abaixo: <img alt="Criar Tabela" src="../../static/img/automacao-analises/create_table_google_sheets_config.png" /></p>
+</li>
+<li>
+<p>Voce pode definir o Schema manualmente ou utilizar a função de auto deteção. Na seção de opções avançadas indique a linha que represente o header da tabela para que ele não seja interpretado como um dado: <img alt="Schema" src="../../static/img/automacao-analises/create_table_google_sheets_config_schema.png" /></p>
+</li>
+<li>
+<p>É importante que a tabela no google sheets seja pública ou que os usuarios tenham permissão de visualização para executar queries na tabela criada.<img alt="Query" src="../../static/img/automacao-analises/create_table_google_sheets_query.png" /></p>
+</li>
+</ol>
+<h2 id="guia-de-automacao-com-bigquery-dataform">Guia de Automação com BigQuery Dataform</h2>
+<p>O BigQuery Dataform é uma ferramenta poderosa que simplifica a automação de transformações de dados no Google BigQuery. Neste guia, vamos abordar as etapas essenciais para configurar o BigQuery Dataform e automatizar tarefas de gerenciamento de dados.</p>
+<h3 id="configuracao-do-repositorio">Configuração do Repositório</h3>
+<p>Antes de começar, é fundamental configurar um repositório para seus projetos de dados no BigQuery Dataform. Aqui estão as etapas:</p>
+<ol>
+<li>
+<p>Comece criando um repositório no BigQuery Dataform. O repositório é o local onde você gerenciará seus projetos de dados e deve seguir o padrão, <code>rj-orgao-dataform</code>; <code>rj-smfp-dataform</code>.</p>
+</li>
+<li>
+<p>Crie um projeto no Github com o mesmo nome do repositorio do dataform, <code>rj-orgao-dataform</code>; <code>rj-smfp-dataform</code>.</p>
+<p>2.1. No seu perfil do Github selecione a opção <strong>settings</strong> e selecione o menu <strong>developer settings</strong>, selecione a opção <strong>Fine-grainted tokens</strong> em <strong>Personal Acess Tokens</strong>
+  2.2. Crie um novo token seguindo o mesmo padrao de nomeação do repositorio (<code>rj-orgao-dataform</code>; <code>rj-smfp-dataform</code>). Defina a data de data de expiração para o maior valor possivel, selecione a organização de interesse e de permissão apenas para o repositorio desejado. Em permissões de acesso <strong>read and write</strong> para <strong>Content</strong>. <img alt="dataform github" src="../../static/img/automacao-analises/dataform_github_config.png" />
+  2.3. Salve o token gerado. Vá até o <strong>Secret Manager do Google Cloud</strong> e crie um novo secret com o mesmo nome do repositorio, cole o valor do token no campo <strong>secret value</strong> e clique em criar novo secret.
+  <img alt="dataform_gcp_github_secret" src="../../static/img/automacao-analises/dataform_gcp_github_secret.png" /></p>
+</li>
+<li>
+<p>No repositorio do Dataform vá até <strong>Settings</strong> e clique em <strong>Edit Git Connections</strong> . Selecione a opção <strong>HTTP</strong> e cole a URL do repositorio do Github acompanhado de <strong>.git</strong>, coloque o nome da branch como <strong>master</strong> (em alguns casos pode ser <strong>main</strong>) e selecione o secret criado na etapa anterior. Copie a conta de servico default fornecida pelo Dataform na parte inferior da janela, no exemplo da imagem é <strong>service-681461412723@gcp-sa-dataform.iam.gserviceaccount.com</strong>
+      . <img alt="dataform_github_connection" src="../../static/img/automacao-analises/dataform_git_connections.png" /></p>
+</li>
+<li>
+<p>Vá até o <strong>Resource Manager do Google Cloud</strong> e de acesso para a conta de serviço default fornecida pelo dataform para o projeto de prod (<strong>rj-smfp</strong>) e dev (<strong>rj-smfp-dev</strong>) com a permissões abaixo:</p>
 <ul>
-<li>Python 3.9, pois a versão deve coincidir com a que usamos</li>
-<li><code>pip</code>, para instalar dependências</li>
+<li>Dataform Service Agent </li>
+<li>EDRio - Infra - Conta de Serviço</li>
+<li>Secret Manager Secret Accessor</li>
 </ul>
-<p>A primeira boa prática é criar um arquivo <code>requirements.txt</code> para armazenar as dependências do seu projeto. Nesse arquivo, você deve colocar todas as bibliotecas que serão utilizadas no desenvolvimento do seu <em>Flow</em>. O que vamos usar, por exemplo, é o seguinte:</p>
-<div class="highlight"><pre><span></span><code>prefect==0.15.9
-requests
-pandas
-</code></pre></div>
-<p>Note que o único pacote que tem sua versão especificada é o Prefect, pois a versão dele deve corresponder à que usamos em nossos servidores.</p>
-<p>Em seguida, para instalar as dependências declaradas nesse arquivo, você deve executar o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
-</code></pre></div>
-<p>E pronto, você já tem tudo o que precisa para começar a desenvolver seu <em>Flow</em>. Caso, no futuro, você deseje adicionar novas dependências, basta adicionar no arquivo <code>requirements.txt</code> e executar o comando acima novamente.</p>
-<p>Para manter um padrão de desenvolvimento, devemos criar os seguintes arquivos:</p>
+</li>
+</ol>
+<p>Essa integração permite o controle de versões dos modelos desenvolvidos no Dataform em ambientes de desenvolvimentos que são branchs do repositório do github.</p>
+<h3 id="criacao-de-modelos">Criação de Modelos</h3>
+<h4 id="configuracao-ambiente-desenvolvimento">Configuração ambiente desenvolvimento</h4>
+<p>No Dataform, você interage com o código do fluxo de trabalho SQL em um espaço de trabalho de desenvolvimento. Um espaço de trabalho de desenvolvimento é sua própria cópia editável de um repositório. Em um espaço de trabalho, você cria, edita ou exclui o conteúdo do repositório sem afetar outros que trabalham no mesmo repositório e, em seguida, confirma e envia as alterações para o repositório.</p>
+<p>É possível desenvolver seu fluxo de trabalho SQL com o núcleo do Dataform ou JavaScript. O Dataform compila seu código em consultas SQL em tempo real.</p>
+<ol>
+<li>
+<p>O primeiro passo para criação de modelos é a criação de um ambiente de desenvolvimento. Vá até a interfacie do Dataform selecione o repositorio e crie um ambiente de desenvolvimento caso necessario, de algum nome descritivo ex: <code>dashboard_ergon_suggc</code>. </p>
+</li>
+<li>
+<p>Entre no ambiente de trabalho e inicialize o ambiente caso seja necessario. 
+   <img alt="dataform_ambiente_desenvolvimento" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento.png" /></p>
+</li>
+</ol>
+<p>Para entender a estrutura de um ambiente no Dataform, é importante conhecer os principais componentes e conceitos envolvidos;</p>
 <ul>
-<li><code>tasks.py</code>: arquivo que conterá as funções que serão utilizadas no <em>Flow</em>.</li>
-<li><code>flows.py</code>: arquivo que conterá o <em>Flow</em> propriamente dito.</li>
-<li><code>utils.py</code>: arquivo que conterá funções auxiliares, como por exemplo, funções para imprimir logs.</li>
+<li>
+<p>A pasta <strong>definitions</strong> é o coração do ambiente do Dataform. Ela contém os arquivos que definem as transformações de dados e as operações que desejamos automatizar. </p>
+</li>
+<li>
+<p>Os arquivos com a extensão <strong>.sqlx</strong> contêm código SQL que descreve as transformações de dados que você deseja aplicar. Esses arquivos são escritos no formato SQLX, que é uma extensão do SQL padrão e suporta recursos adicionais, como a definição de modelos, testes e documentação.</p>
+</li>
+<li>
+<p>Explicar confg {}</p>
+</li>
+<li>
+<p>O arquivo <strong>dataform.json</strong> é o arquivo de configuração do seu projeto Dataform. Ele contém informações sobre como os modelos são construídos, quais tarefas devem ser executadas e como as dependências entre modelos são gerenciadas. É onde você especifica configurações como o esquema padrão do BigQuery, conexões de banco de dados e programação de tarefas.</p>
+</li>
 </ul>
-<h3 id="criando-funcoes-auxiliares">Criando funções auxiliares</h3>
-<p>Começando então no arquivo <code>utils.py</code>, vamos criar uma função que imprime logs no console. Essa função será útil para acompanhar o andamento do <em>Flow</em>. Como é uma função que envolve conhecer o Prefect um pouquinho mais a fundo, vamos explicar o que ela faz.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">prefect</span>
+<h4 id="criacao-de-um-novo-modelo">Criação de um Novo Modelo</h4>
+<p>Para criação de um novo modelo primeiro iremos definir um padrao de estrutura e organização de pastas dentro da pasta <strong>definitions</strong>. Os modelos criados no ambiente devem ser savos dentro de uma pasta com o mesmo nome do ambiente, dessa forma isolamos projetos, dashboard e analises de outros ambientes, seguindo o exemplo amterior teriamos <code>definitions/dashboard_ergon_suggc</code>. Dentro dessa pasta podemos organizar nossas queries da forma que melhor nos atender.<img alt="dataform_ambiente_desenvolvimento_diretorios" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_diretorios.png" /></p>
+<p>No exemplo da imagem criamos uma tabela filtrada que servira de fonte para as demais agregaçoes. Dessa forma iremos consultar apenas a tabela filtrada e não todo conjunto de dados gerando redução de custos
+<img alt="dataform_ambiente_desenvolvimento_modelo" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_modelo.png" /></p>
+<h4 id="execucao-do-fluxo-de-trabalho">Execução do Fluxo de Trabalho</h4>
+<p>Inicie o fluxo de trabalho, que executará as tarefas na ordem especificada, automatizando o processo de ETL.</p>
+<p><img alt="Execução do Fluxo de Trabalho" src="link_para_imagem_da_execucao_do_fluxo_de_trabalho" /></p>
+<p>Com esses passos, você pode aproveitar ao máximo o BigQuery Dataform para automatizar a transformação de dados e a criação de modelos no BigQuery. Simplifique o gerenciamento de dados em seus projetos de desenvolvimento e produção.</p>
+<h2 id="conectando-com-o-produto-final">Conectando com o Produto Final</h2>
+<h3 id="integracao-com-looker-studio">Integração com Looker Studio</h3>
+<p>Integrar o BigQuery com o Looker Studio permite criar painéis de controle interativos. Exemplo:</p>
+<ol>
+<li>No Looker, conecte-se ao BigQuery como fonte de dados.</li>
+<li>Crie um modelo no Looker com as métricas desejadas.</li>
+<li>Crie um painel de controle com base no modelo para visualizar os dados em tempo real.</li>
+</ol>
+<h3 id="integracao-com-google-sheets">Integração com Google Sheets</h3>
+<p>Para compartilhar dados do BigQuery no Google Sheets, siga as etapas:</p>
+<ol>
+<li>No Google Sheets, use a função <code>GOOGLECLOCK</code> para acessar os dados do BigQuery.</li>
+<li>Configure as credenciais e permissões necessárias para acessar os dados.</li>
+<li>Atualize automaticamente os dados no Google Sheets conforme os dados do BigQuery mudam.</li>
+</ol>
+<h3 id="integracao-com-python-notebook">Integração com Python Notebook</h3>
+<p>Conectar o BigQuery a um notebook Python é útil para análises avançadas. Exemplo de configuração:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
 
-<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Logs a message&quot;&quot;&quot;</span>
-    <span class="n">prefect</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Configurar credenciais</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">from_service_account_json</span><span class="p">(</span><span class="s1">&#39;seu-arquivo-de-credenciais.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># Consulta ao BigQuery</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT produto, AVG(receita) AS receita_media</span>
+<span class="s2">FROM `projeto_desenvolvimento.processed_data.vendas_consolidadas`</span>
+<span class="s2">GROUP BY produto</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+
+<span class="c1"># Análise e visualização com Pandas e Matplotlib</span>
 </code></pre></div>
-<p>A função <code>log</code> recebe uma mensagem e a imprime no console. Ela faz isso através do objeto <code>prefect.context.logger</code>, que é um objeto que contém o logger do Prefect. Esse logger é um objeto que está dentro do <code>prefect.context</code>, esse que contém informações sobre o <em>Flow</em> e a execução atual, como por exemplo, o nome do <em>Flow</em> e o ID da execução atual. Por isso, é importante que essa função seja chamada dentro de um <em>Flow</em>, pois ela depende do objeto <code>prefect.context</code> para funcionar.</p>
-<h3 id="criando-tasks">Criando <em>tasks</em></h3>
-<p>Aqui é onde vamos criar as funções que implementam os passos da nossa pipeline. Essas funções serão chamadas de <em>tasks</em>. Então, abrindo o arquivo <code>tasks.py</code>, vamos criar as seguintes funções:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
-
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">log</span>
-
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        n_users (int): número de usuários a serem baixados.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        str: texto em formato CSV.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-        <span class="s2">&quot;https://randomuser.me/api/?results=</span><span class="si">{}</span><span class="s2">&amp;format=csv&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados baixados com sucesso!&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
-
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        data (str): texto em formato CSV.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        pd.DataFrame: DataFrame do Pandas.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados convertidos em DataFrame com sucesso!&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
-
-<span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        dataframe (pd.DataFrame): DataFrame do Pandas.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dataframe</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;report.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">log</span><span class="p">(</span><span class="s2">&quot;Dados salvos em report.csv com sucesso!&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Como as funções estão comentadas, não há muito o que explicar. Mas vale ressaltar que elas são decoradas com o <code>@task</code>, que é um decorator do Prefect. Esse decorator é necessário para que o Prefect reconheça as funções como <em>tasks</em>.</p>
-<h3 id="definindo-o-flow">Definindo o <em>Flow</em></h3>
-<p>Agora, vamos criar o <em>Flow</em> propriamente dito. Aqui vamos definir como as <em>tasks</em> interagem entre si e os parâmetros que elas recebem. Para isso, abra o arquivo <code>flows.py</code> e crie a seguinte função:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Parameter</span>
-
-<span class="kn">from</span> <span class="nn">tasks</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">download_data</span><span class="p">,</span>
-    <span class="n">parse_data</span><span class="p">,</span>
-    <span class="n">save_report</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;Users report&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flow</span><span class="p">:</span>
-
-    <span class="c1"># Parâmetros</span>
-    <span class="n">n_users</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s2">&quot;n_users&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-    <span class="c1"># Tasks</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">)</span>
-    <span class="n">dataframe</span> <span class="o">=</span> <span class="n">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span>
-</code></pre></div>
-<p>Aqui, criamos um <em>Flow</em> chamado <code>Users report</code> com o seguinte parâmetro:</p>
-<ul>
-<li><code>n_users</code>: número de usuários a serem baixados.</li>
-</ul>
-<p>Observe que foi configurado um valor padrão para esse parâmetro, que é 10. Isso significa que, caso o parâmetro não seja passado na hora de executar o <em>Flow</em>, ele será executado com o valor padrão.</p>
-<p>Além disso, inserimos as três <em>tasks</em> que criamos anteriormente. Observe que a <em>task</em> <code>download_data</code> recebe o parâmetro <code>n_users</code> como argumento. Isso significa que, quando a <em>task</em> for executada, ela receberá o valor do parâmetro <code>n_users</code> como argumento. Depois disso, a <em>task</em> <code>parse_data</code> recebe o retorno da <em>task</em> <code>download_data</code> como argumento, fazendo com que o dado baixado seja passado a ela, para converter em um DataFrame. Por fim, a <em>task</em> <code>save_report</code> recebe o retorno da <em>task</em> <code>parse_data</code> como argumento, fazendo com que o DataFrame seja salvo em um arquivo CSV.</p>
-<h3 id="executando">Executando</h3>
-<p>Ufa! Com tudo pronto, vamos executar o <em>Flow</em>! Para facilitar a execução, vamos criar um arquivo <code>run.py</code> e colocar o seguinte código nele:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flows</span> <span class="kn">import</span> <span class="n">flow</span>
-
-<span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</code></pre></div>
-<p>Depois, podemos executar o <em>Flow</em> com o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>python3 run.py
-</code></pre></div>
-<p>A saída deve ser semelhante ao seguinte:</p>
-<div class="highlight"><pre><span></span><code>[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Beginning Flow run for &#39;Users report&#39;
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;n_users&#39;: Starting task run...
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;n_users&#39;: Finished task run for task with final state: &#39;Success&#39;
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;download_data&#39;: Starting task run...
-[2022-10-05 14:40:40-0300] INFO - prefect.download_data |
-Dados baixados com sucesso!
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;download_data&#39;: Finished task run for task with final state: &#39;Success&#39;
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;parse_data&#39;: Starting task run...
-[2022-10-05 14:40:40-0300] INFO - prefect.parse_data |
-Dados convertidos em DataFrame com sucesso!
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;parse_data&#39;: Finished task run for task with final state: &#39;Success&#39;
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;save_report&#39;: Starting task run...
-[2022-10-05 14:40:40-0300] INFO - prefect.save_report |
-Dados salvos em report.csv com sucesso!
-[2022-10-05 14:40:40-0300] INFO - prefect.TaskRunner | Task &#39;save_report&#39;: Finished task run for task with final state: &#39;Success&#39;
-[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
-</code></pre></div>
-<p>Observe que um arquivo chamado <code>report.csv</code> foi criado. Esse arquivo contém os dados baixados e convertidos em um DataFrame.</p>
-<p>Observe também que as mensagens de log foram impressas na saída. Isso acontece porque, como vimos anteriormente, as funções <code>log</code> são decoradas com o <code>@task</code>, que é um decorator do Prefect. Isso faz com que o Prefect reconheça as funções como <em>tasks</em> e, por isso, as mensagens de log são impressas na saída.</p>
-<h3 id="executando-com-parametros">Executando com parâmetros</h3>
-<p>Agora, vamos executar o <em>Flow</em> passando um valor para o parâmetro <code>n_users</code>. Para isso, vamos modificar o arquivo <code>run.py</code> para o seguinte:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flows</span> <span class="kn">import</span> <span class="n">flow</span>
-
-<span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_users</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-</code></pre></div>
-<p>Novamente, podemos executar o <em>Flow</em> com o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>python3 run.py
-</code></pre></div>
-<p>E pronto! O <em>Flow</em> foi executado com sucesso e um arquivo <code>report.csv</code> foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro <code>n_users</code> foi passado com o valor 20.</p>
+<p>Isso permite executar consultas e análises mais avançadas usando Python. Certifique-se de ter as bibliotecas necessárias instaladas e configuradas para autenticação no BigQuery.</p>
 
               
             </article>
@@ -845,7 +878,7 @@ Dados salvos em report.csv com sucesso!
     <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
       
         
-        <a href="../metadados/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Metadados" rel="prev">
+        <a href="../dbt/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Publicando dados com DBT" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -854,20 +887,20 @@ Dados salvos em report.csv com sucesso!
               <span class="md-footer__direction">
                 Anterior
               </span>
-              Metadados
+              Publicando dados com DBT
             </div>
           </div>
         </a>
       
       
         
-        <a href="../pipelines-cloud/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Deployment de pipelines na cloud" rel="next">
+        <a href="../../governanca/governanca/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Governança de Acessos e Compartilhamento no Datalake" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Próximo
               </span>
-              Deployment de pipelines na cloud
+              Governança de Acessos e Compartilhamento no Datalake
             </div>
           </div>
           <div class="md-footer__button md-icon">
