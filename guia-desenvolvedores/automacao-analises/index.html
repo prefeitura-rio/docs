@@ -459,8 +459,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#projetos-de-desenvolvimento" class="md-nav__link">
-    Projetos de Desenvolvimento
+  <a href="#separacao-de-ambientes" class="md-nav__link">
+    Separação de ambientes
   </a>
   
 </li>
@@ -479,9 +479,22 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importacao-de-dados-de-apoio" class="md-nav__link">
+    Importação de Dados de Apoio
+  </a>
+  
+    <nav class="md-nav" aria-label="Importação de Dados de Apoio">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#importacao-de-dados-do-google-sheets" class="md-nav__link">
-    Importação de Dados do Google Sheets
+  <a href="#sheets" class="md-nav__link">
+    Sheets
   </a>
   
 </li>
@@ -717,7 +730,7 @@
 
 <h2 id="organizacao-de-datasets-e-tabelas">Organização de Datasets e Tabelas</h2>
 <p>A organização eficiente dos datasets e tabelas no BigQuery é fundamental para manter um ambiente de dados limpo e gerenciável. Durante o desenvolvimento de uma nova análise ou dashboard, é recomendável seguir um conjunto de práticas específicas para garantir a clareza e a organização dos dados.</p>
-<h3 id="projetos-de-desenvolvimento">Projetos de Desenvolvimento</h3>
+<h3 id="separacao-de-ambientes">Separação de ambientes</h3>
 <p>Durante o desenvolvimento de análises e dashboards, recomenda-se a utilização de um projeto de desenvolvimento específico. Por exemplo, para o projeto de produção <code>rj-smfp</code>, utilize o projeto de desenvolvimento <code>rj-smfp-dev</code>. Isso ajuda a separar claramente os ambientes de produção e desenvolvimento.</p>
 <h3 id="nomenclatura-de-datasets-e-tabelas">Nomenclatura de Datasets e Tabelas</h3>
 <p>A estrutura de nomeação de datasets e tabelas deve seguir boas práticas para facilitar a identificação e a compreensão dos dados. A seguir, estão algumas diretrizes para nomear datasets e tabelas:</p>
@@ -727,6 +740,42 @@
 <li>Ao criar datasets destinados a análises ou dashboards, mantenha o nome original do dataset e acrescente o sufixo "dashboard" ou "analise," juntamente com a identificação do órgão responsável. Por exemplo, para um dashboard relacionado ao sistema ERGON feito pela SUBGCC, as tabelas se encontram no dataset_id: <code>recursos_humanos_ergon</code>, os dados relevantes para esse dashboard devem ser armazenados no dataset_id <code>recursos_humanos_ergon_dashboard_subgcc</code>.</li>
 <li>Utilize nomes de datasets e tabelas descritivos para refletir claramente o conteúdo ou finalidade dos dados.</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th><strong>Regra</strong></th>
+<th><strong>Exemplos Bons</strong></th>
+<th><strong>Exemplos Ruins</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Use todas as letras minúsculas.</td>
+<td><code>empresa.funcionarios</code></td>
+<td><code>Empresa.Funcionários</code></td>
+</tr>
+<tr>
+<td>Conecte as palavras com underscores (_).</td>
+<td><code>vendas.historico_vendas</code></td>
+<td><code>vendas.historicovendas</code></td>
+</tr>
+<tr>
+<td>Evite abreviações e conectores como "de", "da", etc.</td>
+<td><code>clientes.informacoes_cliente</code></td>
+<td><code>clientes.inf_do_cliente</code></td>
+</tr>
+<tr>
+<td>Mantenha o nome original ao criar datasets para análises e adicione os sufixos adequados.</td>
+<td><code>recursos_humanos_ergon_dashboard_subgcc.funcionarios</code></td>
+<td><code>rh_dash_subgcc.func</code></td>
+</tr>
+<tr>
+<td>Utilize nomes de datasets e tabelas que refletem claramente o conteúdo ou finalidade dos dados.</td>
+<td><code>fornecedores.pagamentos_fornecedores</code></td>
+<td><code>fornecedores.tabela_123</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="tipos-de-tabelas-no-bigquery">Tipos de Tabelas no BigQuery</h3>
 <p>O BigQuery oferece três tipos diferentes de tabelas, cada uma com suas características:</p>
 <ol>
@@ -741,7 +790,9 @@
 </li>
 </ol>
 <p>Esses três tipos de tabelas oferecem flexibilidade para lidar com uma variedade de cenários de armazenamento e consulta de dados no BigQuery. A escolha do tipo de tabela depende das necessidades específicas do seu projeto e da fonte dos dados que você está gerenciando.</p>
-<h3 id="importacao-de-dados-do-google-sheets">Importação de Dados do Google Sheets</h3>
+<h2 id="importacao-de-dados-de-apoio">Importação de Dados de Apoio</h2>
+<p>Muitas vezes, precisamos trazer outros dados para apoiar as análises. Eles normalmente são pequenos, podem mudar constantemente e são construídos manualmente. Um bom exemplo são tabelas de categorias ou de-para. Essa seção vai ter mostrar como subir esses dados no BigQuery sem precisar construir uma pipeline no Prefect ou DBT.</p>
+<h3 id="sheets">Sheets</h3>
 <p>Uma maneira eficaz de trazer dados de fontes externas para o BigQuery é por meio da importação de dados do Google Sheets. Essa integração permite que você trabalhe com dados de planilhas do Google diretamente no ambiente do BigQuery.</p>
 <ol>
 <li>
@@ -755,6 +806,9 @@
 </li>
 <li>
 <p>É importante que a tabela no Google Sheets seja pública ou que os usuários tenham permissão de visualização para executar consultas na tabela criada. <img alt="Consulta" src="../../static/img/automacao-analises/create_table_google_sheets_query.png" /></p>
+</li>
+<li>
+<p>Lembre-se, é uma boa prática adicionar descrição para os dados que foram adicionados dessa maneira. Assim, você garante que outras pessoas conseguirão usar os dados. Para isso, basta editar o esquema da tabela.</p>
 </li>
 </ol>
 <h2 id="guia-de-automacao-com-bigquery-dataform">Guia de Automação com BigQuery Dataform</h2>
