@@ -13,7 +13,7 @@ nav:
       - Desenvolvimento de pipelines local: guia-desenvolvedores/pipelines.md
       - Deployment de pipelines na cloud: guia-desenvolvedores/pipelines-cloud.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
-      - Automação de analises no BigQuery: guia-desenvolvedores/automacao-analises.md
+      - Como desenvolver pipelines no BigQuery: guia-desenvolvedores/automacao-analises.md
 
     - Governança:
       - Governança de Acessos e Compartilhamento no Datalake: governanca/governanca.md
