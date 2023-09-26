@@ -84,15 +84,15 @@ No Dataform, você interage com o código do fluxo de trabalho SQL em um espaço
 
 3. Caso o ambiente já exista, **SEMPRE** realize o **Pull from remote branch** antes de iniciar qualquer edição. Entre as opções estão:
 
-   - **Pull from remote branch** (Puxar da branch remota): Essa opção é utilizada para "puxar" as últimas atualizações do ambiente de desenvolvimento. É como atualizar seu trabalho com o que outras pessoas fizeram.
+      - **Pull from remote branch** (Puxar da branch remota): Essa opção é utilizada para "puxar" as últimas atualizações do ambiente de desenvolvimento. É como atualizar seu trabalho com o que outras pessoas fizeram.
 
-   - **Pull from default branch** (Puxar da branch padrão): Similar ao primeiro, mas específico para a branch principal do projeto.
+      - **Pull from default branch** (Puxar da branch padrão): Similar ao primeiro, mas específico para a branch principal do projeto.
 
-   - **Push to remote branch** (Enviar para branch remota): Essa opção é utilizada para "empurrar" suas alterações para a branch do ambiente de desenvolvimento.
+      - **Push to remote branch** (Enviar para branch remota): Essa opção é utilizada para "empurrar" suas alterações para a branch do ambiente de desenvolvimento.
 
-   - **Push to default branch** (Enviar para a branch padrão): Essa é a mesma ideia do anterior, mas específica para a branch principal do projeto.
+      - **Push to default branch** (Enviar para a branch padrão): Essa é a mesma ideia do anterior, mas específica para a branch principal do projeto.
 
-   - **Revert to last commit** (Reverter para o último commit): Desfaz todas as edições até o último commit.
+      - **Revert to last commit** (Reverter para o último commit): Desfaz todas as edições até o último commit.
 
 ![dataform git pull](../static/img/automacao-analises/dataform_git_pull.png)
 
