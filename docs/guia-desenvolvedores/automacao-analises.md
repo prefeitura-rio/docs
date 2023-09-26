@@ -1,8 +1,10 @@
+
+
 ## Organização de Datasets e Tabelas
 
 A organização eficiente dos datasets e tabelas no BigQuery é fundamental para manter um ambiente de dados limpo e gerenciável. Durante o desenvolvimento de uma nova análise ou dashboard, é recomendável seguir um conjunto de práticas específicas para garantir a clareza e a organização dos dados.
 
-### Projetos de Desenvolvimento
+### Separação de ambientes
 
 Durante o desenvolvimento de análises e dashboards, recomenda-se a utilização de um projeto de desenvolvimento específico. Por exemplo, para o projeto de produção `rj-smfp`, utilize o projeto de desenvolvimento `rj-smfp-dev`. Isso ajuda a separar claramente os ambientes de produção e desenvolvimento.
 
@@ -14,6 +16,15 @@ A estrutura de nomeação de datasets e tabelas deve seguir boas práticas para 
 - Evite abreviações e inclusão de conectores como "de", "da", "dos", "e", "a", "em", etc.
 - Ao criar datasets destinados a análises ou dashboards, mantenha o nome original do dataset e acrescente o sufixo "dashboard" ou "analise," juntamente com a identificação do órgão responsável. Por exemplo, para um dashboard relacionado ao sistema ERGON feito pela SUBGCC, as tabelas se encontram no dataset_id: `recursos_humanos_ergon`, os dados relevantes para esse dashboard devem ser armazenados no dataset_id `recursos_humanos_ergon_dashboard_subgcc`.
 - Utilize nomes de datasets e tabelas descritivos para refletir claramente o conteúdo ou finalidade dos dados.
+
+
+| **Regra**                                                                                                    | **Exemplos Bons**                                                      | **Exemplos Ruins**                           |
+|---------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|----------------------------------------------|
+| Use todas as letras minúsculas.                                                                              | `empresa.funcionarios`                                                 | `Empresa.Funcionários`                       |
+| Conecte as palavras com underscores (_).                                                                      | `vendas.historico_vendas`                                              | `vendas.historicovendas`                    |
+| Evite abreviações e conectores como "de", "da", etc.                                                         | `clientes.informacoes_cliente`                                         | `clientes.inf_do_cliente`                    |
+| Mantenha o nome original ao criar datasets para análises e adicione os sufixos adequados.                    | `recursos_humanos_ergon_dashboard_subgcc.funcionarios`                              | `rh_dash_subgcc.func`                       |
+| Utilize nomes de datasets e tabelas que refletem claramente o conteúdo ou finalidade dos dados.               | `fornecedores.pagamentos_fornecedores`                                 | `fornecedores.tabela_123`                    |
 
 
 ### Tipos de Tabelas no BigQuery
@@ -29,8 +40,11 @@ O BigQuery oferece três tipos diferentes de tabelas, cada uma com suas caracter
 Esses três tipos de tabelas oferecem flexibilidade para lidar com uma variedade de cenários de armazenamento e consulta de dados no BigQuery. A escolha do tipo de tabela depende das necessidades específicas do seu projeto e da fonte dos dados que você está gerenciando.
 
 
-### Importação de Dados do Google Sheets
+## Importação de Dados de Apoio
 
+Muitas vezes, precisamos trazer outros dados para apoiar as análises. Eles normalmente são pequenos, podem mudar constantemente e são construídos manualmente. Um bom exemplo são tabelas de categorias ou de-para. Essa seção vai ter mostrar como subir esses dados no BigQuery sem precisar construir uma pipeline no Prefect ou DBT.
+
+### Sheets
 Uma maneira eficaz de trazer dados de fontes externas para o BigQuery é por meio da importação de dados do Google Sheets. Essa integração permite que você trabalhe com dados de planilhas do Google diretamente no ambiente do BigQuery.
 
 1. Nas opções do dataset, clique em "Criar nova tabela".
@@ -40,6 +54,8 @@ Uma maneira eficaz de trazer dados de fontes externas para o BigQuery é por mei
 3. Você pode definir o esquema manualmente ou utilizar a função de autodetecção. Na seção de opções avançadas, indique a linha que representa o cabeçalho da tabela para que ele não seja interpretado como um dado: ![Esquema](../static/img/automacao-analises/create_table_google_sheets_config_schema.png)
 
 4. É importante que a tabela no Google Sheets seja pública ou que os usuários tenham permissão de visualização para executar consultas na tabela criada. ![Consulta](../static/img/automacao-analises/create_table_google_sheets_query.png)
+
+5. Lembre-se, é uma boa prática adicionar descrição para os dados que foram adicionados dessa maneira. Assim, você garante que outras pessoas conseguirão usar os dados. Para isso, basta editar o esquema da tabela.
 
 
 ## Guia de Automação com BigQuery Dataform
