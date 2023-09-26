@@ -568,8 +568,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#integracao-com-python-notebook" class="md-nav__link">
-    Integração com Python Notebook
+  <a href="#integracao-com-python-e-r" class="md-nav__link">
+    Integração com Python e R
   </a>
   
 </li>
@@ -758,7 +758,8 @@
 </li>
 </ol>
 <h2 id="guia-de-automacao-com-bigquery-dataform">Guia de Automação com BigQuery Dataform</h2>
-<p>O BigQuery Dataform é uma ferramenta poderosa que simplifica a automação de transformações de dados no Google BigQuery. Neste guia, vamos abordar as etapas essenciais para configurar o BigQuery Dataform e automatizar tarefas de gerenciamento de dados.</p>
+<p>O BigQuery Dataform é uma ferramenta poderosa que simplifica a automação de transformações de dados no Google BigQuery. Neste guia, vamos abordar as etapas essenciais para configurar o BigQuery Dataform e automatizar tarefas de gerenciamento de dados. Essa é uma versão simplificada da documentação, para mais detalhes consulte a <a href="https://cloud.google.com/dataform/docs/overview?hl=pt-br">documentacao oficial do Dataform
+</a></p>
 <h3 id="configuracao-do-repositorio">Configuração do Repositório</h3>
 <p>Antes de começar, é fundamental configurar um repositório para seus projetos de dados no BigQuery Dataform. Aqui estão as etapas:</p>
 <ol>
@@ -798,7 +799,26 @@
 <p>Entre no ambiente de trabalho e inicialize o ambiente caso seja necessario. 
    <img alt="dataform_ambiente_desenvolvimento" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento.png" /></p>
 </li>
+<li>
+<p>Caso o ambiente já exista <strong>SEMPRE</strong> realize o <strong>Pull from remote branch</strong> antes de iniciar qualquer edição. Entre as opções estão:</p>
+<ul>
+<li><strong>Pull from remote branch</strong> (Puxar de branch remota): Essa opção é utilizada para "puxar" as últimas atualizações do ambiente de desenvolvimento. É como atualizar seu trabalho com o que outras pessoas fizeram.</li>
+</ul>
+</li>
+<li>
+<p>Pull from default branch (Puxar da branch padrão): Similar ao primeiro, mas específico para a branch principal do projeto.</p>
+</li>
+<li>
+<p>Push to remote branch (Enviar para branch remota): Essa opção é utilizada para "empurra" suas alterações para a branch do ambiente de desenvolvimento.</p>
+</li>
+<li>
+<p>Push to default branch (Enviar para a branch padrão): Essa é a mesma ideia do anterior, mas específica para a branch principal do projeto.</p>
+</li>
+<li>
+<p><strong>Revert to last commit:</strong> (Reverter para o último commit): Desfaz todas as edições até o ultimo commit.</p>
+</li>
 </ol>
+<p><img alt="dataform_git_pull" src="../../static/img/automacao-analises/dataform_git_pull.png" /></p>
 <p>Para entender a estrutura de um ambiente no Dataform, é importante conhecer os principais componentes e conceitos envolvidos;</p>
 <ul>
 <li>
@@ -808,54 +828,63 @@
 <p>Os arquivos com a extensão <strong>.sqlx</strong> contêm código SQL que descreve as transformações de dados que você deseja aplicar. Esses arquivos são escritos no formato SQLX, que é uma extensão do SQL padrão e suporta recursos adicionais, como a definição de modelos, testes e documentação.</p>
 </li>
 <li>
-<p>Explicar confg {}</p>
+<p>Arquivos <strong>.sqlx</strong> suportam configuracoes especificas como o tipo de tabela a ser criado, em qual dataset sera salvo, nome da tabela entre outras, para informacoes detalhadas consulte a <a href="https://cloud.google.com/dataform/docs/reference/dataform-core-reference?hl=pt-br#columns-descriptor">documentacao oficial</a>, segue um exemplo de config que deve ser colocado no inicio do arquivo:
+      <div class="highlight"><pre><span></span><code><span class="n">config</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">   </span><span class="k">type</span><span class="p">:</span><span class="ss">&quot;table&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="n">name</span><span class="p">:</span><span class="ss">&quot;fita_banco_filtered&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="k">schema</span><span class="p">:</span><span class="ss">&quot;dashboard_ergon_subgcc&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="n">description</span><span class="p">:</span><span class="ss">&quot;Fonte filtrada para o ano de 2023.&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">ano</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Ano da folha&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="n">mes</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Mês da folha&quot;</span><span class="w"></span>
+<span class="w">   </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div></p>
 </li>
 <li>
-<p>O arquivo <strong>dataform.json</strong> é o arquivo de configuração do seu projeto Dataform. Ele contém informações sobre como os modelos são construídos, quais tarefas devem ser executadas e como as dependências entre modelos são gerenciadas. É onde você especifica configurações como o esquema padrão do BigQuery, conexões de banco de dados e programação de tarefas.</p>
+<p>O arquivo <strong>dataform.json</strong> é o arquivo de configuração do seu projeto Dataform. Ele contém informações sobre como os modelos são construídos, quais tarefas devem ser executadas e como as dependências entre modelos são gerenciadas. É onde você especifica configurações como o esquema padrão do BigQuery, conexões de banco de dados e programação de tarefas. Para mais informações acesse a <a href="https://cloud.google.com/dataform/docs/configure-dataform?hl=pt-br">documentação oficial</a></p>
 </li>
 </ul>
 <h4 id="criacao-de-um-novo-modelo">Criação de um Novo Modelo</h4>
-<p>Para criação de um novo modelo primeiro iremos definir um padrao de estrutura e organização de pastas dentro da pasta <strong>definitions</strong>. Os modelos criados no ambiente devem ser savos dentro de uma pasta com o mesmo nome do ambiente, dessa forma isolamos projetos, dashboard e analises de outros ambientes, seguindo o exemplo amterior teriamos <code>definitions/dashboard_ergon_suggc</code>. Dentro dessa pasta podemos organizar nossas queries da forma que melhor nos atender.<img alt="dataform_ambiente_desenvolvimento_diretorios" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_diretorios.png" /></p>
-<p>No exemplo da imagem criamos uma tabela filtrada que servira de fonte para as demais agregaçoes. Dessa forma iremos consultar apenas a tabela filtrada e não todo conjunto de dados gerando redução de custos
+<p>Para criação de um novo modelo primeiro iremos definir um padrao de estrutura e organização de pastas dentro da pasta <strong>definitions</strong>. Os modelos criados no ambiente devem ser savos dentro de uma pasta com o mesmo nome do ambiente, dessa forma isolamos projetos, dashboard e analises de outros ambientes, seguindo o exemplo amterior teriamos <code>definitions/dashboard_ergon_suggc</code>. Dentro dessa pasta podemos organizar nossas queries da forma que melhor nos atender.</p>
+<p>No exemplo da imagem criamos uma tabela filtrada que servira de fonte para as demais agregaçoes, observe que o nome do arquivo e o nome da tabela no config devem ser iguais. Dessa forma iremos consultar apenas a tabela filtrada e não todo conjunto de dados, gerando redução de custos. Também é possivel executar a query na opção <strong>Run</strong>
 <img alt="dataform_ambiente_desenvolvimento_modelo" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_modelo.png" /></p>
+<p>Ao criarmos um modelo podemos fazer uma referencia direta a ele em outro modelo utilizando o metodo <code>${ref("nome_do_modelo_referenciado")}</code>. Dessa forma adicionamos o modelo referenciado como uma dependência do novo modelo criado, <strong>é importante que o nome dos modelos sejam unicos</strong>. Segue um exemplo para tabela de agregacao <code>pagamentos_ano_mes</code> que referencia o modelo <code>fita_banco_filtered</code>
+<img alt="dataform_ambiente_desenvolvimento_modelo_ref" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_modelo_ref.png" /></p>
+<p>Na aba <strong>Compiled Graph</strong> é possivel visualizar o grafo de dependencias dos modelos do ambiente de desenvolvimento. Tambem é possivel executar um modelo e suas dependencias na opção <strong>Start Execution</strong>
+<img alt="dataform_ambiente_desenvolvimento_graph" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_modelo_graph.png" /></p>
+<p>Ao finalizar as edições SEMPRE sincronize suas modificações com o repositorio do Github. Clique na opção <strong>Git Commit</strong> selecione todos os arquivos e escreva alguma menssagem que descrevam a alteração realizada e finalize o commit. 
+<img alt="dataform_ambiente_desenvolvimento_graph" src="../../static/img/automacao-analises/dataform_git_commit.png" /></p>
+<p>Finalize a sincronização clicando em <strong>Push to default branch</strong></p>
+<p><img alt="dataform_ambiente_desenvolvimento_graph" src="../../static/img/automacao-analises/dataform_git_push.png" /></p>
 <h4 id="execucao-do-fluxo-de-trabalho">Execução do Fluxo de Trabalho</h4>
-<p>Inicie o fluxo de trabalho, que executará as tarefas na ordem especificada, automatizando o processo de ETL.</p>
-<p><img alt="Execução do Fluxo de Trabalho" src="link_para_imagem_da_execucao_do_fluxo_de_trabalho" /></p>
-<p>Com esses passos, você pode aproveitar ao máximo o BigQuery Dataform para automatizar a transformação de dados e a criação de modelos no BigQuery. Simplifique o gerenciamento de dados em seus projetos de desenvolvimento e produção.</p>
+<p>Agora que temos um fluxo de execução de modelos definido, podemos automatizar sua execução com agendamentos. </p>
+<p>Primeiramente devemos criar o <strong>Release Configuration</strong>. Dentro do repositorio do Dataform selecione a aba <strong>Release Configuration</strong>, e clique em <strong>New Release Configuration</strong>. </p>
+<p>Preencha os campos como na imagem abaixo, utilizando o nome do ambiente de desenvolvimento acompanhado da frequencia de atualização para o <strong>Relese ID</strong>, no campo <strong>Git Commitish</strong> coloque o nome do ambiente de desenvolvimento que contem os modelos a serem executados, selecione a frequencia de atualização e timezone desejadas. </p>
+<p>Na seção <strong>Compilation variables</strong>  é possivel definir o projeto que as tabelas/views seram criadas e sulfixos para o nome das tabelas e datasets. Enquanto estiver na etapa de desenvolvimento é indicado utilizar o projeto <code>rj-orgao-dev</code>, ao finalizar o desenvolvimento esse parametro pode ser alterado para o projeto de produção <code>rj-orgao</code>.</p>
+<p><img alt="dataform_release_configuration" src="../../static/img/automacao-analises/dataform_release_configuration.png" /></p>
+<p>Com o <strong>Release Configuration</strong> criado pdoemos criar o agendador para executar nossos fluxos de modelos.. Dentro do repositorio do Dataform selecione a aba <strong>Workflow Configuration</strong>, e clique em <strong>New Workflow Configuration</strong> </p>
+<p>Preencha os campos como na imagem abaixo, para o campo <strong>Configuration ID</strong> utilizando o nome do ambiente de desenvolvimento acompanhado da frequencia de atualização, no campo <strong>Relese Configuration</strong> selecione o relese que deve ter o mesmo nome do  <strong>Configuration ID</strong>, no campo <strong>Service Account</strong> selecione a conta de servico padrao criada pelo Dataform, selecione a frequencia de atualização (lembre-se de colocar o inicio da execução alguns minutos apos o definido no  <strong>Release Configuration</strong>) e timezone desejadas.</p>
+<p><img alt="dataform_workflow_configuration" src="../../static/img/automacao-analises/dataform_workflow_configuration.png" /> </p>
+<p>Na seção de seleção dos modelos, selecione os modelos a serem executados e suas dependencias. </p>
+<p><img alt="dataform_workflow_configuration" src="../../static/img/automacao-analises/dataform_workflow_configuration_models.png" /> </p>
 <h2 id="conectando-com-o-produto-final">Conectando com o Produto Final</h2>
 <h3 id="integracao-com-looker-studio">Integração com Looker Studio</h3>
 <p>Integrar o BigQuery com o Looker Studio permite criar painéis de controle interativos. Exemplo:</p>
-<ol>
-<li>No Looker, conecte-se ao BigQuery como fonte de dados.</li>
-<li>Crie um modelo no Looker com as métricas desejadas.</li>
-<li>Crie um painel de controle com base no modelo para visualizar os dados em tempo real.</li>
-</ol>
 <h3 id="integracao-com-google-sheets">Integração com Google Sheets</h3>
 <p>Para compartilhar dados do BigQuery no Google Sheets, siga as etapas:</p>
-<ol>
-<li>No Google Sheets, use a função <code>GOOGLECLOCK</code> para acessar os dados do BigQuery.</li>
-<li>Configure as credenciais e permissões necessárias para acessar os dados.</li>
-<li>Atualize automaticamente os dados no Google Sheets conforme os dados do BigQuery mudam.</li>
-</ol>
-<h3 id="integracao-com-python-notebook">Integração com Python Notebook</h3>
-<p>Conectar o BigQuery a um notebook Python é útil para análises avançadas. Exemplo de configuração:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
-
-<span class="c1"># Configurar credenciais</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">from_service_account_json</span><span class="p">(</span><span class="s1">&#39;seu-arquivo-de-credenciais.json&#39;</span><span class="p">)</span>
+<h3 id="integracao-com-python-e-r">Integração com Python e R</h3>
+<p>Conectar o BigQuery ao Python ou R podemos utilizar o pacote <code>basedosdados</code> da desenvolvido pela ONG <a href="http://basedosdados.org">Base dos Dados</a>. Para mais detalhes acesse a <a href="https://basedosdados.github.io/mais/access_data_packages/">documentação oficial do pacote</a>, segue um exemplo para python:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">basedosdados</span> <span class="k">as</span> <span class="nn">bd</span>
 
 <span class="c1"># Consulta ao BigQuery</span>
 <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">SELECT produto, AVG(receita) AS receita_media</span>
-<span class="s2">FROM `projeto_desenvolvimento.processed_data.vendas_consolidadas`</span>
-<span class="s2">GROUP BY produto</span>
+<span class="s2">SELECT </span>
+<span class="s2">   *</span>
+<span class="s2">FROM `rj-smfp.dashboard_ergon_subgcc.pagamentos_ano_mes`</span>
 <span class="s2">&quot;&quot;&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
-
-<span class="c1"># Análise e visualização com Pandas e Matplotlib</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">billing_project_id</span><span class="o">=</span><span class="s2">&quot;SEU_PROJECT_ID&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>Isso permite executar consultas e análises mais avançadas usando Python. Certifique-se de ter as bibliotecas necessárias instaladas e configuradas para autenticação no BigQuery.</p>
 
               
             </article>
