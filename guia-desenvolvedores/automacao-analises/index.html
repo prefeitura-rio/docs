@@ -466,15 +466,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nomenclatura-de-datasets-e-tabelas" class="md-nav__link">
-    Nomenclatura de Datasets e Tabelas
+  <a href="#tipos-de-tabelas-no-bigquery" class="md-nav__link">
+    Tipos de Tabelas no BigQuery
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tipos-de-tabelas-no-bigquery" class="md-nav__link">
-    Tipos de Tabelas no BigQuery
+  <a href="#nomenclatura-de-datasets-e-tabelas" class="md-nav__link">
+    Nomenclatura de Datasets e Tabelas
   </a>
   
 </li>
@@ -493,8 +493,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sheets" class="md-nav__link">
-    Sheets
+  <a href="#google-sheets" class="md-nav__link">
+    Google Sheets
   </a>
   
 </li>
@@ -519,12 +519,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#criacao-de-modelos" class="md-nav__link">
     Criação de Modelos
   </a>
@@ -550,6 +545,11 @@
   <a href="#execucao-do-fluxo-de-trabalho" class="md-nav__link">
     Execução do Fluxo de Trabalho
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -728,10 +728,25 @@
 
   <h1>Como desenvolver pipelines no BigQuery</h1>
 
+<p>Neste guia, iremos abordar a importância da organização eficiente de datasets e tabelas no BigQuery, destacando práticas essenciais, tipos de tabelas disponíveis e diretrizes de nomenclatura. Também exploraremos a importação de dados de apoio, com foco na integração com o Google Sheets, e discutiremos como automatizar tarefas de gerenciamento de dados usando o BigQuery Dataform. Além disso, veremos como conectar o BigQuery com produtos finais, como o Looker Studio, Google Sheets e linguagens como Python e R.</p>
 <h2 id="organizacao-de-datasets-e-tabelas">Organização de Datasets e Tabelas</h2>
 <p>A organização eficiente dos datasets e tabelas no BigQuery é fundamental para manter um ambiente de dados limpo e gerenciável. Durante o desenvolvimento de uma nova análise ou dashboard, é recomendável seguir um conjunto de práticas específicas para garantir a clareza e a organização dos dados.</p>
 <h3 id="separacao-de-ambientes">Separação de ambientes</h3>
-<p>Durante o desenvolvimento de análises e dashboards, recomenda-se a utilização de um projeto de desenvolvimento específico. Por exemplo, para o projeto de produção <code>rj-smfp</code>, utilize o projeto de desenvolvimento <code>rj-smfp-dev</code>. Isso ajuda a separar claramente os ambientes de produção e desenvolvimento.</p>
+<p>Durante o desenvolvimento de análises e dashboards, recomenda-se a utilização de um projeto de desenvolvimento específico no formato <code>rj-orgao-dev</code>. Por exemplo, para o projeto de produção <code>rj-smfp</code>, utilize o projeto de desenvolvimento <code>rj-smfp-dev</code>. Isso ajuda a separar claramente os ambientes de produção e desenvolvimento.</p>
+<h3 id="tipos-de-tabelas-no-bigquery">Tipos de Tabelas no BigQuery</h3>
+<p>O BigQuery oferece três tipos diferentes de tabelas, cada uma com suas características:</p>
+<ol>
+<li>
+<p><strong>Tabelas Externas</strong>: Tabelas externas funcionam de forma semelhante a tabelas normais do BigQuery. Os detalhes sobre a estrutura da tabela, como as colunas e os tipos de dados, são armazenados no BigQuery. No entanto, os dados em si permanecem na fonte externa. Isso pode incluir fontes como <strong>Google Cloud Storage (GCS)</strong>, <strong>Google Sheets</strong>, <strong>Google Drive</strong> e outras. Para saber mais, consulte <a href="https://cloud.google.com/bigquery/docs/external-data-sources">como consultar fontes de dados externas</a>.</p>
+</li>
+<li>
+<p><strong>Tabelas Nativas</strong>: Tabelas nativas contêm os dados diretamente dentro do BigQuery. Essas tabelas oferecem alta velocidade de consulta, mas possuem um limite de 4 mil partições, o que pode ser um fator limitante para conjuntos de dados muito grandes.</p>
+</li>
+<li>
+<p><strong>Views (Visualizações)</strong>: Uma view é uma tabela virtual criada a partir de uma consulta SQL. Ela não armazena dados fisicamente, mas, em vez disso, fornece uma maneira conveniente de organizar e acessar dados de outras tabelas. Para obter mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/views">como criar visualizações</a>.</p>
+</li>
+</ol>
+<p>Esses três tipos de tabelas oferecem flexibilidade para lidar com uma variedade de cenários de armazenamento e consulta de dados no BigQuery. A escolha do tipo de tabela depende das necessidades específicas do seu projeto e da fonte dos dados que você está gerenciando.</p>
 <h3 id="nomenclatura-de-datasets-e-tabelas">Nomenclatura de Datasets e Tabelas</h3>
 <p>A estrutura de nomeação de datasets e tabelas deve seguir boas práticas para facilitar a identificação e a compreensão dos dados. A seguir, estão algumas diretrizes para nomear datasets e tabelas:</p>
 <ul>
@@ -776,23 +791,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="tipos-de-tabelas-no-bigquery">Tipos de Tabelas no BigQuery</h3>
-<p>O BigQuery oferece três tipos diferentes de tabelas, cada uma com suas características:</p>
-<ol>
-<li>
-<p><strong>Tabelas Externas</strong>: Tabelas externas funcionam de forma semelhante a tabelas normais do BigQuery. Os detalhes sobre a estrutura da tabela, como as colunas e os tipos de dados, são armazenados no BigQuery. No entanto, os dados em si permanecem na fonte externa. Isso pode incluir fontes como <strong>Google Cloud Storage (GCS)</strong>, <strong>Google Sheets</strong>, <strong>Google Drive</strong> e outras. Para saber mais, consulte <a href="https://cloud.google.com/bigquery/docs/external-data-sources">como consultar fontes de dados externas</a>.</p>
-</li>
-<li>
-<p><strong>Tabelas Nativas</strong>: Tabelas nativas contêm os dados diretamente dentro do BigQuery. Essas tabelas oferecem alta velocidade de consulta, mas possuem um limite de 4 mil partições, o que pode ser um fator limitante para conjuntos de dados muito grandes.</p>
-</li>
-<li>
-<p><strong>Views (Visualizações)</strong>: Uma view é uma tabela virtual criada a partir de uma consulta SQL. Ela não armazena dados fisicamente, mas, em vez disso, fornece uma maneira conveniente de organizar e acessar dados de outras tabelas. Para obter mais informações, consulte <a href="https://cloud.google.com/bigquery/docs/views">como criar visualizações</a>.</p>
-</li>
-</ol>
-<p>Esses três tipos de tabelas oferecem flexibilidade para lidar com uma variedade de cenários de armazenamento e consulta de dados no BigQuery. A escolha do tipo de tabela depende das necessidades específicas do seu projeto e da fonte dos dados que você está gerenciando.</p>
 <h2 id="importacao-de-dados-de-apoio">Importação de Dados de Apoio</h2>
 <p>Muitas vezes, precisamos trazer outros dados para apoiar as análises. Eles normalmente são pequenos, podem mudar constantemente e são construídos manualmente. Um bom exemplo são tabelas de categorias ou de-para. Essa seção vai ter mostrar como subir esses dados no BigQuery sem precisar construir uma pipeline no Prefect ou DBT.</p>
-<h3 id="sheets">Sheets</h3>
+<h3 id="google-sheets">Google Sheets</h3>
 <p>Uma maneira eficaz de trazer dados de fontes externas para o BigQuery é por meio da importação de dados do Google Sheets. Essa integração permite que você trabalhe com dados de planilhas do Google diretamente no ambiente do BigQuery.</p>
 <ol>
 <li>
@@ -838,7 +839,7 @@
 </li>
 </ol>
 <p>Essa integração permite o controle de versões dos modelos desenvolvidos no Dataform em ambientes de desenvolvimento que são branches do repositório do Github.</p>
-<h2 id="criacao-de-modelos">Criação de Modelos</h2>
+<h3 id="criacao-de-modelos">Criação de Modelos</h3>
 <h4 id="configuracao-do-ambiente-de-desenvolvimento">Configuração do ambiente de desenvolvimento</h4>
 <p>No Dataform, você interage com o código do fluxo de trabalho SQL em um espaço de trabalho de desenvolvimento. Um espaço de trabalho de desenvolvimento é sua própria cópia editável de um repositório. Em um espaço de trabalho, você cria, edita ou exclui o conteúdo do repositório sem afetar outros que trabalham no mesmo repositório e, em seguida, confirma e envia as alterações para o repositório.</p>
 <p>É possível desenvolver seu fluxo de trabalho SQL com o núcleo do Dataform ou JavaScript. O Dataform compila seu código em consultas SQL em tempo real.</p>
@@ -909,8 +910,8 @@
 <img alt="dataform ambiente de desenvolvimento graph" src="../../static/img/automacao-analises/dataform_ambiente_desenvolvimento_modelo_graph.png" /></p>
 <p>Ao finalizar as edições, <strong>SEMPRE</strong> sincronize suas modificações com o repositório do Github. Clique na opção <strong>Git Commit</strong>, selecione todos os arquivos e escreva alguma mensagem que descreva a alteração realizada e finalize o commit.
 <img alt="dataform ambiente de desenvolvimento graph" src="../../static/img/automacao-analises/dataform_git_commit.png" /></p>
-<p>Finalize a sincronização clicando em <strong>Push to default branch</strong>.
-<img alt="dataform ambiente de desenvolvimento graph" src="../../static/img/automacao-analises/dataform_git_push.png" /></p>
+<p>Finalize a sincronização clicando em <strong>Push to default branch</strong>.</p>
+<p><img alt="dataform ambiente de desenvolvimento graph" src="../../static/img/automacao-analises/dataform_git_push.png" /></p>
 <h4 id="execucao-do-fluxo-de-trabalho">Execução do Fluxo de Trabalho</h4>
 <p>Agora que temos um fluxo de execução de modelos definido, podemos automatizar sua execução com agendamentos.</p>
 <p>Primeiramente, devemos criar o <strong>Release Configuration</strong>. Dentro do repositório do Dataform, selecione a aba <strong>Release Configuration</strong> e clique em <strong>New Release Configuration</strong>.</p>
@@ -924,9 +925,9 @@
 <p><img alt="dataform_workflow_configuration" src="../../static/img/automacao-analises/dataform_workflow_configuration_models.png" /></p>
 <h2 id="conectando-com-o-produto-final">Conectando com o Produto Final</h2>
 <h3 id="integracao-com-looker-studio">Integração com Looker Studio</h3>
-<p>Integrar o BigQuery com o Looker Studio permite criar painéis de controle interativos. Exemplo:</p>
+<p>Integrar o BigQuery com o Looker Studio permite criar painéis de controle interativos. </p>
 <h3 id="integracao-com-google-sheets">Integração com Google Sheets</h3>
-<p>Para compartilhar dados do BigQuery no Google Sheets, siga as etapas:</p>
+<p>Para compartilhar dados do BigQuery no Google Sheets.</p>
 <h3 id="integracao-com-python-e-r">Integração com Python e R</h3>
 <p>Para conectar o BigQuery ao Python ou R, você pode utilizar o pacote <code>basedosdados</code> desenvolvido pela ONG <a href="http://basedosdados.org">Base dos Dados</a>. Para mais detalhes, acesse a <a href="https://basedosdados.github.io/mais/access_data_packages/">documentação oficial do pacote</a>. Abaixo, segue um exemplo para Python:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">basedosdados</span> <span class="k">as</span> <span class="nn">bd</span>
