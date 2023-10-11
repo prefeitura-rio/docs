@@ -9,8 +9,8 @@
     --md-primary-fg-color:          #247a7a; /* Header background color */
     --md-primary-fg-color--dark:    #247a7a; /* Mobile navbar background color */
     --md-primary-bg-color:          #f5f5f5; /* Header text color */
-    --md-code-bg-color:             #2A2A2A; /* Code background color */
-    --md-code-fg-color:             #69bebe; /* Code text color */
+    --md-code-bg-color:             #ede6e6; /* Code background color */
+    --md-code-fg-color:             #000000; /* Code text color */
     --md-code-hl-color:             #FFFF00; /* Code highlight color */
     --md-code-hl-number-color:      #d52a2a; /* Code highlight number color */
     --md-code-hl-special-color:     #db1457; /* Code highlight special color */
@@ -43,7 +43,7 @@
     --md-primary-fg-color--dark:    #247a7a; /* Mobile navbar background color */
     --md-primary-bg-color:          #FAFAFA; /* Header text color */
     --md-code-bg-color:             #2A2A2A; /* Code background color */
-    --md-code-fg-color:             #69bebe; /* Code text color */
+    --md-code-fg-color:             #91baba; /* Code text color */
     --md-code-hl-color:             #FFFF00; /* Code highlight color */
     --md-code-hl-number-color:      #d52a2a; /* Code highlight number color */
     --md-code-hl-special-color:     #db1457; /* Code highlight special color */
