@@ -14,6 +14,7 @@ nav:
       - Deployment de pipelines na cloud: guia-desenvolvedores/pipelines-cloud.md
       - Publicando dados com DBT: guia-desenvolvedores/dbt.md
       - Como desenvolver pipelines no BigQuery: guia-desenvolvedores/automacao-analises.md
+      - Prefeitura-rio: guia-desenvolvedores/prefeitura-rio.md
 
     - Governança:
       - Governança de Acessos e Compartilhamento no Datalake: governanca/governanca.md
