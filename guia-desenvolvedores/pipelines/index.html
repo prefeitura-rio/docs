@@ -282,20 +282,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
-        Como configurar a conexão do PowerBI com o BigQuery
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -700,7 +686,7 @@ pandas
 </code></pre></div>
 <p>Note que o único pacote que tem sua versão especificada é o Prefect, pois a versão dele deve corresponder à que usamos em nossos servidores.</p>
 <p>Em seguida, para instalar as dependências declaradas nesse arquivo, você deve executar o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div>
 <p>E pronto, você já tem tudo o que precisa para começar a desenvolver seu <em>Flow</em>. Caso, no futuro, você deseje adicionar novas dependências, basta adicionar no arquivo <code>requirements.txt</code> e executar o comando acima novamente.</p>
 <p>Para manter um padrão de desenvolvimento, devemos criar os seguintes arquivos:</p>
@@ -711,26 +697,26 @@ pandas
 </ul>
 <h3 id="criando-funcoes-auxiliares">Criando funções auxiliares</h3>
 <p>Começando então no arquivo <code>utils.py</code>, vamos criar uma função que imprime logs no console. Essa função será útil para acompanhar o andamento do <em>Flow</em>. Como é uma função que envolve conhecer o Prefect um pouquinho mais a fundo, vamos explicar o que ela faz.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">prefect</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">prefect</span>
 
-<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Logs a message&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Logs a message&quot;&quot;&quot;</span>
     <span class="n">prefect</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>A função <code>log</code> recebe uma mensagem e a imprime no console. Ela faz isso através do objeto <code>prefect.context.logger</code>, que é um objeto que contém o logger do Prefect. Esse logger é um objeto que está dentro do <code>prefect.context</code>, esse que contém informações sobre o <em>Flow</em> e a execução atual, como por exemplo, o nome do <em>Flow</em> e o ID da execução atual. Por isso, é importante que essa função seja chamada dentro de um <em>Flow</em>, pois ela depende do objeto <code>prefect.context</code> para funcionar.</p>
 <h3 id="criando-tasks">Criando <em>tasks</em></h3>
 <p>Aqui é onde vamos criar as funções que implementam os passos da nossa pipeline. Essas funções serão chamadas de <em>tasks</em>. Então, abrindo o arquivo <code>tasks.py</code>, vamos criar as seguintes funções:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span>
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
 
 <span class="sd">    Args:</span>
@@ -746,8 +732,8 @@ pandas
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
 
 <span class="sd">    Args:</span>
@@ -761,8 +747,8 @@ pandas
     <span class="k">return</span> <span class="n">df</span>
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
 
 <span class="sd">    Args:</span>
@@ -774,9 +760,9 @@ pandas
 <p>Como as funções estão comentadas, não há muito o que explicar. Mas vale ressaltar que elas são decoradas com o <code>@task</code>, que é um decorator do Prefect. Esse decorator é necessário para que o Prefect reconheça as funções como <em>tasks</em>.</p>
 <h3 id="definindo-o-flow">Definindo o <em>Flow</em></h3>
 <p>Agora, vamos criar o <em>Flow</em> propriamente dito. Aqui vamos definir como as <em>tasks</em> interagem entre si e os parâmetros que elas recebem. Para isso, abra o arquivo <code>flows.py</code> e crie a seguinte função:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Parameter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Parameter</span>
 
-<span class="kn">from</span> <span class="nn">tasks</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tasks</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">download_data</span><span class="p">,</span>
     <span class="n">parse_data</span><span class="p">,</span>
     <span class="n">save_report</span><span class="p">,</span>
@@ -800,12 +786,12 @@ pandas
 <p>Além disso, inserimos as três <em>tasks</em> que criamos anteriormente. Observe que a <em>task</em> <code>download_data</code> recebe o parâmetro <code>n_users</code> como argumento. Isso significa que, quando a <em>task</em> for executada, ela receberá o valor do parâmetro <code>n_users</code> como argumento. Depois disso, a <em>task</em> <code>parse_data</code> recebe o retorno da <em>task</em> <code>download_data</code> como argumento, fazendo com que o dado baixado seja passado a ela, para converter em um DataFrame. Por fim, a <em>task</em> <code>save_report</code> recebe o retorno da <em>task</em> <code>parse_data</code> como argumento, fazendo com que o DataFrame seja salvo em um arquivo CSV.</p>
 <h3 id="executando">Executando</h3>
 <p>Ufa! Com tudo pronto, vamos executar o <em>Flow</em>! Para facilitar a execução, vamos criar um arquivo <code>run.py</code> e colocar o seguinte código nele:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flows</span> <span class="kn">import</span> <span class="n">flow</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flows</span><span class="w"> </span><span class="kn">import</span> <span class="n">flow</span>
 
 <span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div>
 <p>Depois, podemos executar o <em>Flow</em> com o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>python3 run.py
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>run.py
 </code></pre></div>
 <p>A saída deve ser semelhante ao seguinte:</p>
 <div class="highlight"><pre><span></span><code>[2022-10-05 14:40:40-0300] INFO - prefect.FlowRunner | Beginning Flow run for &#39;Users report&#39;
@@ -829,12 +815,12 @@ Dados salvos em report.csv com sucesso!
 <p>Observe também que as mensagens de log foram impressas na saída. Isso acontece porque, como vimos anteriormente, as funções <code>log</code> são decoradas com o <code>@task</code>, que é um decorator do Prefect. Isso faz com que o Prefect reconheça as funções como <em>tasks</em> e, por isso, as mensagens de log são impressas na saída.</p>
 <h3 id="executando-com-parametros">Executando com parâmetros</h3>
 <p>Agora, vamos executar o <em>Flow</em> passando um valor para o parâmetro <code>n_users</code>. Para isso, vamos modificar o arquivo <code>run.py</code> para o seguinte:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flows</span> <span class="kn">import</span> <span class="n">flow</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flows</span><span class="w"> </span><span class="kn">import</span> <span class="n">flow</span>
 
 <span class="n">flow</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_users</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </code></pre></div>
 <p>Novamente, podemos executar o <em>Flow</em> com o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>python3 run.py
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>run.py
 </code></pre></div>
 <p>E pronto! O <em>Flow</em> foi executado com sucesso e um arquivo <code>report.csv</code> foi criado. Observe que, dessa vez, o arquivo contém 20 linhas, pois o parâmetro <code>n_users</code> foi passado com o valor 20.</p>
 

@@ -282,20 +282,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
-        Como configurar a conexão do PowerBI com o BigQuery
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -828,13 +814,13 @@ utils/
 
 constants.py                 # valores constantes para todos os órgãos
 </code></pre></div>
-<h3 id="constantes-globais-e-locais">Constantes globais e locais <img alt="ℹ" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2139.svg" title=":information_source:" /></h3>
+<h3 id="constantes-globais-e-locais">Constantes globais e locais <img alt="ℹ" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2139.svg" title=":information_source:" /></h3>
 <p>Para facilitar a troca de certos parâmetros e o reaproveitamento de códigos, temos como boa prática um arquivo específico para salvarmos nossas variáveis. Aqui no ED vamos classificar nossos arquivos de constantes em dois tipos: globais e locais.</p>
 <p>As <strong>constantes locais</strong> são todas aquelas que são específicas para um determinado flow (ou projeto). Elas ficam armazenadas em um arquivo <code>constants.py</code> no mesmo diretório do seu <code>flows.py</code> (ou do projeto no qual vocês está trabalhando). Em geral, criamos nesse arquivo uma classe <code>constants</code> que contém o <code>DATASET_ID</code> e <code>TABLE_ID</code> que serão utilizados para gravar os dados finais do flow no GCP, entre outras coisas que você julgar importante.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 
-<span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># pylint: disable=c0103</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>  <span class="c1"># pylint: disable=c0103</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constant values for the geolocator project</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -882,17 +868,17 @@ constants.py                 # valores constantes para todos os órgãos
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Tasks for the example flow</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span>
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
 
 <span class="sd">    Args:</span>
@@ -908,8 +894,8 @@ constants.py                 # valores constantes para todos os órgãos
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
 
 <span class="sd">    Args:</span>
@@ -923,8 +909,8 @@ constants.py                 # valores constantes para todos os órgãos
     <span class="k">return</span> <span class="n">df</span>
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
 
 <span class="sd">    Args:</span>
@@ -939,13 +925,13 @@ constants.py                 # valores constantes para todos os órgãos
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example flow</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">Parameter</span>
-<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
-<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parameter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.run_configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCS</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.formacao.exemplo.tasks</span> <span class="kn">import</span> <span class="n">download_data</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">,</span> <span class="n">save_report</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.decorators</span> <span class="kn">import</span> <span class="n">Flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.formacao.exemplo.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_data</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">,</span> <span class="n">save_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flow</span>
 
 <span class="k">with</span> <span class="n">Flow</span><span class="p">(</span><span class="s2">&quot;EMD: formacao - Exemplo de flow do Prefect&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">formacao_exemplo_flow</span><span class="p">:</span>
     <span class="c1"># Parâmetros</span>
@@ -983,10 +969,10 @@ constants.py                 # valores constantes para todos os órgãos
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Prefect flows for formacao</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">pipelines.formacao.exemplo.flows</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.formacao.exemplo.flows</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
 <p>E, depois, no arquivo <code>pipelines/flows.py</code>, precisamos adicionar, ao final, o seguinte:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pipelines.formacao</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.formacao</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 </code></pre></div>
 <p>E pronto! Está feito! Agora para registrar os <em>Flows</em> e executá-los, continue lendo.</p>
 <h3 id="flows-pre-definidos"><em>Flows</em> pré-definidos</h3>
@@ -1012,16 +998,16 @@ constants.py                 # valores constantes para todos os órgãos
 <span class="sd">Database dumping flows for formation project</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
-<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
-<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.run_configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCS</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dump_url_formacao.schedules</span> <span class="kn">import</span> <span class="n">gsheets_one_minute_update_schedule</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url_formacao.flows</span> <span class="kn">import</span> <span class="n">dump_url_flow</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.rj_escritorio.dump_url_formacao.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">gsheets_one_minute_update_schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_url_formacao.flows</span><span class="w"> </span><span class="kn">import</span> <span class="n">dump_url_flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_default_parameters</span>
 
 <span class="n">formacao_gsheets_flow</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dump_url_flow</span><span class="p">)</span>
 <span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Formação GSheets - Ingerir tabelas de URL&quot;</span>
@@ -1055,13 +1041,13 @@ constants.py                 # valores constantes para todos os órgãos
 <span class="sd">Schedules for the database dump pipeline</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-<span class="kn">import</span> <span class="nn">pytz</span>
-<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.utils</span> <span class="kn">import</span> <span class="n">generate_dump_url_schedules</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_url.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_dump_url_schedules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
 
 <span class="c1">#####################################</span>
 <span class="c1">#</span>
@@ -1102,13 +1088,13 @@ constants.py                 # valores constantes para todos os órgãos
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Schedules for the database dump pipeline</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-<span class="kn">import</span> <span class="nn">pytz</span>
-<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_db.utils</span> <span class="kn">import</span> <span class="n">generate_dump_db_schedules</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_db.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_dump_db_schedules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
 
 <span class="c1">#####################################</span>
 <span class="c1">#</span>
@@ -1158,16 +1144,16 @@ valores tem-se outro dicionário com parâmetros específicos de cada tabela e s
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Database example dumping flow for infra training</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
-<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
-<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.run_configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCS</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dump_db_formacao.schedules</span> <span class="kn">import</span> <span class="n">example_update_schedule</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_db_formacao.flows</span> <span class="kn">import</span> <span class="n">dump_sql_flow</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.rj_escritorio.dump_db_formacao.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">example_update_schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_db_formacao.flows</span><span class="w"> </span><span class="kn">import</span> <span class="n">dump_sql_flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_default_parameters</span>
 
 <span class="n">example_sql_flow</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dump_sql_flow</span><span class="p">)</span>
 <span class="n">example_sql_flow</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Formação DataBase - Ingerir tabelas de banco SQL&quot;</span>
@@ -1195,7 +1181,7 @@ valores tem-se outro dicionário com parâmetros específicos de cada tabela e s
 <span class="n">example_sql_flow</span><span class="o">.</span><span class="n">schedule</span> <span class="o">=</span> <span class="n">example_update_schedule</span>
 </code></pre></div>
 <p>Acima temos o arquivo <code>flows.py</code> dessa pipeline. O único elemento novo nesse arquivo é a função <code>set_default_parameters</code>, que guarda valores pré-definidos para determinados parâmetros, de forma que eles fiquem já preenchidos na <em>UI do Prefect</em>. Isso é particularmente útil no caso em que se deseje rodar uma pipeline diretamente da <em>UI</em>, sem ter que esperar pelo horário agendado. Nesse caso, todos os parâmetros (<code>db_database</code>, <code>db_host</code>, ...) teriam que ser preenchidos manualmente na <em>UI</em>, porém como já definimos valores padrões em <code>example_default_parameters</code> e <code>set_default_parameters</code>, esses já estarão preenchidos e o trabalho para executar essa pipeline é reduzido.</p>
-<h3 id="agendamento-de-flows">Agendamento de <em>Flows</em> <img alt="⏰" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/23f0.svg" title=":alarm_clock:" /></h3>
+<h3 id="agendamento-de-flows">Agendamento de <em>Flows</em> <img alt="⏰" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/23f0.svg" title=":alarm_clock:" /></h3>
 <p>O prefect nos permite automatizar os horários que nosso flow irá rodar. O agendamento (scheduler) dos pipelines é especificado em um arquivo <code>scheduler.py</code> dentro do diretório relativo a esse flow.</p>
 <p>Os flows têm dois principais tipos de agendamentos possíveis:</p>
 <ul>
@@ -1214,13 +1200,13 @@ valores tem-se outro dicionário com parâmetros específicos de cada tabela e s
 <span class="sd">Este é um exemplo de um arquivo schedules.py</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
 
-<span class="kn">import</span> <span class="nn">pendulum</span>
-<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
-<span class="kn">from</span> <span class="nn">prefect.schedules.clocks</span> <span class="kn">import</span> <span class="n">IntervalClock</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pendulum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules.clocks</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntervalClock</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
 
 <span class="c1"># define o objeto every_day_at_four_am ao instanciar a classe Schedule</span>
 <span class="n">every_day_at_four_am</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span>
@@ -1241,7 +1227,7 @@ valores tem-se outro dicionário com parâmetros específicos de cada tabela e s
 </code></pre></div>
 <p>Só criar o arquivo <code>schedules.py</code> não fará com que o backend do prefect inicialize a automação do flow. Precisamos indicar para esse determinado flow qual scheduler ele deve utilizar. Isso é feito dentro do arquivo <code>flows.py</code> .</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># importa o objeto every_day_at_four_am do arquivo schedules que se encontra no caminho pipelines.rj_escritorio.geolocator</span>
-<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.geolocator.schedules</span> <span class="kn">import</span> <span class="n">every_day_at_four_am</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.rj_escritorio.geolocator.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">every_day_at_four_am</span>
 
 <span class="k">with</span> <span class="n">Flow</span><span class="p">(</span>
     <span class="s2">&quot;EMD: escritorio - Geolocalizacao de chamados 1746&quot;</span><span class="p">,</span>
@@ -1283,16 +1269,16 @@ Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
 <p>Por fim, mas não menos importante, temos também um utilitário customizado desenvolvido pelo Escritório de Dados que realiza a análise de árvore de dependências do código, alertando se as modificações que você introduziu no código podem afetar código de outras pessoas. Um exemplo pode ser visto na imagem abaixo:</p>
 <p><img alt="Exemplo de comentário do utilitário de análise de dependências" src="../../static/img/tutoriais/pipelines/gh-actions-tree.png" /></p>
 <p>Como você pode ver, os usuários afetados por sua modificação são marcados diretamente no comentário.</p>
-<h3 id="gerenciamento-de-segredos">Gerenciamento de segredos <img alt="🔐" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f510.svg" title=":closed_lock_with_key:" /></h3>
-<p><img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> NUNCA, JAMAIS E EM HIPÓTESE ALGUMA <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> coloque senhas de acesso diretamente no seu código. Todo o gerenciamento de senhas é feito através do <a href="https://www.vaultproject.io/">Vault</a>. Para adicionar ou remover tokens, passwords, certificados, FTP e API keys peça ajuda ao @pipeliners nos canais do Discord do Escritório de Dados. O acesso ao Vault é restrito por conter muitas informações sensíveis.</p>
+<h3 id="gerenciamento-de-segredos">Gerenciamento de segredos <img alt="🔐" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f510.svg" title=":closed_lock_with_key:" /></h3>
+<p><img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> NUNCA, JAMAIS E EM HIPÓTESE ALGUMA <img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> <img alt="☠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2620.svg" title=":skull_and_crossbones:" /> <img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> coloque senhas de acesso diretamente no seu código. Todo o gerenciamento de senhas é feito através do <a href="https://www.vaultproject.io/">Vault</a>. Para adicionar ou remover tokens, passwords, certificados, FTP e API keys peça ajuda ao @pipeliners nos canais do Discord do Escritório de Dados. O acesso ao Vault é restrito por conter muitas informações sensíveis.</p>
 <p>Na imagem abaixo, temos um exemplo de como estão salvas as informações de acesso ao FTP da riomidia e como utilizamos esses dados no python. Nesse exemplo de código, utilizamos a função <code>get_vault_secret</code> para acessar as informações salvas com o nome de "riomidia". Note que as keys utilizadas dentro do dicionário têm os mesmos nomes definidos dentro do Vault.</p>
 <p><img alt="Vault" src="../../static/img/tutoriais/pipelines/vault.png" width="100%" /></p>
-<h3 id="como-testar-pipelines-em-staging">Como testar pipelines em staging <img alt="🔧" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f527.svg" title=":wrench:" /></h3>
+<h3 id="como-testar-pipelines-em-staging">Como testar pipelines em staging <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f527.svg" title=":wrench:" /></h3>
 <p>O teste do flow será feito diretamente na cloud utilizando o ambiente de staging. Para isso, é necessário que você esteja em uma branch cujo nome inicia-se com "staging/".</p>
 <p>Crie um Pull Request (PR) e toda vez que você fizer um push para sua branch remota, o CI/CD do Github irá reconhecer o nome da branch e começará o deployment do seu código para a área de staging.</p>
 <p>Para verificar o andamento do deploy você tem duas opções:</p>
 <ul>
-<li>pode acompanhar pela página de PR através do círculo que aparece na frente do nome do seu PR. ✅ significa que o deploy foi finalizado com sucesso, <img alt="❌" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/274c.svg" title=":x:" /> o deploy teve algum problema e <img alt="🟠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e0.svg" title=":orange_circle:" /> que o processo ainda não foi finalizado.</li>
+<li>pode acompanhar pela página de PR através do círculo que aparece na frente do nome do seu PR. ✅ significa que o deploy foi finalizado com sucesso, <img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/274c.svg" title=":x:" /> o deploy teve algum problema e <img alt="🟠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f7e0.svg" title=":orange_circle:" /> que o processo ainda não foi finalizado.</li>
 </ul>
 <p><img alt="Deploy 1" src="../../static/img/tutoriais/pipelines/build_pr.png" width="90%" /></p>
 <ul>
@@ -1303,10 +1289,10 @@ Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
 <h2 id="usando-a-ui-do-prefect">Usando a UI do Prefect</h2>
 <p>É na <a href="https://prefect.dados.rio/">UI do Prefect</a> que você conseguirá visualizar como está o andamento dos seus flows. Na imagem abaixo temos a tela de Dashboard do Prefect. Nessa primeira aba, temos uma visão geral de todos os pipelines. A caixa de "Run History" traz nas cores os status dos últimos flows rodados:</p>
 <ul>
-<li><img alt="🟢" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e2.svg" title=":green_circle:" /> sucesso</li>
-<li><img alt="🔴" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f534.svg" title=":red_circle:" /> falha</li>
-<li><img alt="🟡" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f7e1.svg" title=":yellow_circle:" /> agendados</li>
-<li><img alt="⚫" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/26ab.svg" title=":black_circle:" /> cancelados</li>
+<li><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f7e2.svg" title=":green_circle:" /> sucesso</li>
+<li><img alt="🔴" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f534.svg" title=":red_circle:" /> falha</li>
+<li><img alt="🟡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f7e1.svg" title=":yellow_circle:" /> agendados</li>
+<li><img alt="⚫" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26ab.svg" title=":black_circle:" /> cancelados</li>
 </ul>
 <p>Esse esquema de cores sera o mesmo para qualquer página do Prefect. </p>
 <p><img alt="UI do Prefect" src="../../static/img/tutoriais/pipelines/ui_prefect.png" width="90%" /></p>
@@ -1351,15 +1337,15 @@ Your code has been rated at 10.00/10 (previous run: 10.00/10, -0.00)
 <p>Esse último tópico é extremamente importante, pois se adicionar um Agent que não tem permissão de acesso às tabelas a run não irá rodar com sucesso.</p>
 <p><img alt="UI do Prefect - Start Flow" src="../../static/img/tutoriais/pipelines/start_run.png" width="90%" /></p>
 <h3 id="como-alterar-parametros">Como alterar parâmetros</h3>
-<p>Para alterar os parâmetros de todas as próximas runs, entre no botão <img alt="⚙" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2699.svg" title=":gear:" /> <strong>Settings</strong> da página do flow e depois entre na aba <strong>Parameters</strong>.</p>
-<p><img alt="⚠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/26a0.svg" title=":warning:" /> Os parâmetros adicionados aqui funcionarão para as próximas runs que ainda não foram scheduladas. Para que esses parâmetros passem a valer a partir do momento em que você o altera, é necessário DESLIGAR e RELIGAR o scheduler.</p>
+<p>Para alterar os parâmetros de todas as próximas runs, entre no botão <img alt="⚙" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2699.svg" title=":gear:" /> <strong>Settings</strong> da página do flow e depois entre na aba <strong>Parameters</strong>.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> Os parâmetros adicionados aqui funcionarão para as próximas runs que ainda não foram scheduladas. Para que esses parâmetros passem a valer a partir do momento em que você o altera, é necessário DESLIGAR e RELIGAR o scheduler.</p>
 <p><img alt="UI do Prefect - Flow Settings" src="../../static/img/tutoriais/pipelines/settings.png" width="90%" /></p>
-<h3 id="como-visualizar-uma-run">Como visualizar uma Run <img alt="🏃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f3c3.svg" title=":runner:" /></h3>
+<h3 id="como-visualizar-uma-run">Como visualizar uma Run <img alt="🏃" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f3c3.svg" title=":runner:" /></h3>
 <p>Agora você consegue visualizar o status de cada uma das tasks dessa run tanto em um gráfico do tipo Gant (em Timeline) quanto em formato de tabela com a data mais recente primeiro.</p>
 <p><img alt="UI do Prefect - Run Overview" src="../../static/img/tutoriais/pipelines/run_overview.png" width="90%" /></p>
 <p>Na aba "Schematic" temos a representação em fluxo do pipeline e status de cada task.</p>
 <p><img alt="UI do Prefect - Run Schematic" src="../../static/img/tutoriais/pipelines/schematic.png" width="90%" /></p>
-<p>Na aba "Logs" você encontra mais informações sobre essa run específica, além de conseguir visualizar os logs que foram solicitados dentro do código. Essa aba de Logs será uma das mais utilizadas por você a partir de agora <img alt="💚" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f49a.svg" title=":green_heart:" /> .</p>
+<p>Na aba "Logs" você encontra mais informações sobre essa run específica, além de conseguir visualizar os logs que foram solicitados dentro do código. Essa aba de Logs será uma das mais utilizadas por você a partir de agora <img alt="💚" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f49a.svg" title=":green_heart:" /> .</p>
 <p><img alt="UI do Prefect - Run Logs" src="../../static/img/tutoriais/pipelines/logs.png" width="90%" /></p>
 
               

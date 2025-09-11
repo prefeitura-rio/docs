@@ -282,20 +282,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
-        Como configurar a conexão do PowerBI com o BigQuery
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -685,28 +671,28 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span>
+<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span>
 </code></pre></div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">paises_americanos.sql</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">CASE</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;00&#39;</span><span class="w"></span>
-<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">pais</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">capital</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span>
+<span class="w">  </span><span class="k">CASE</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;00&#39;</span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span>
+<span class="w">  </span><span class="n">pais</span><span class="p">,</span>
+<span class="w">  </span><span class="n">capital</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span>
 </code></pre></div>
 <p>No modelo <code>elementos</code>, foi realizada uma tipagem nas colunas de data e número, além de uma renomeação das colunas de inglês para português. No modelo <code>paises_americanos</code>, foi utilizada a função <code>LPAD</code> para que todos os <em>id_pais</em> ficassem com tamanho 2, além da criação de uma nova coluna de <em>id_continente</em>.</p>
 <p>Note que as <em>queries</em> acima rodam no próprio console do <em>BigQuery</em>, inclusive, foram desenvolvidas e testadas lá. Lembre-se de testar seu código <strong>SQL</strong> antes de subir um <em>pull request</em> com um novo modelo.</p>
@@ -716,32 +702,32 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="n">models</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elementos</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">models</span><span class="w"> </span><span class="p">:</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elementos</span>
 <span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;**Descrição**: Tabelas com os 4 elementos da natureza, seus números e datas aleatórias.\</span>
 <span class="ss">    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\</span>
-<span class="ss">    **Frequência de atualização**: Não possui&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="k">Data</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">os</span><span class="w"> </span><span class="n">dados</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="n">foram</span><span class="w"> </span><span class="n">inseridos</span><span class="p">.</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">numero</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">elemento</span><span class="p">.</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elemento</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">inglês</span><span class="p">.</span><span class="w"></span>
-<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">paises_americanos</span><span class="w"></span>
+<span class="ss">    **Frequência de atualização**: Não possui&quot;</span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="k">data</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="k">Data</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">os</span><span class="w"> </span><span class="n">dados</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="n">foram</span><span class="w"> </span><span class="n">inseridos</span><span class="p">.</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">numero</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">elemento</span><span class="p">.</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">elemento</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">inglês</span><span class="p">.</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">paises_americanos</span>
 <span class="w">    </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;**Descrição**: Tabelas com todos os países da América e informações sobre eles. \</span>
 <span class="ss">    Utilizado como exemplo para a Formação Infra 2022 do Escritório de Dados do Rio de Janeiro\n\</span>
-<span class="ss">    **Frequência de atualização**: Não possui&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">id_pais</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">id_continente</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">qual</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">país</span><span class="w"> </span><span class="n">pertence</span><span class="p">.</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">pais</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">capital</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Capital</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span><span class="w"></span>
+<span class="ss">    **Frequência de atualização**: Não possui&quot;</span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">id_pais</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">id_continente</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">qual</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">país</span><span class="w"> </span><span class="n">pertence</span><span class="p">.</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">pais</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">capital</span>
+<span class="w">        </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="n">Capital</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">país</span><span class="p">.</span>
 </code></pre></div>
 <p>🚨🚨 <strong>Atenção</strong> 🚨🚨: Essas descrições têm que ser exatamente as mesmas que foram preenchidas no arquivo de arquitetura e no <a href="meta.dados.rio/">meta.dados.rio</a>.</p>
 <p>Após criar os modelos e o arquivo <em>schema</em>, o último passo é alterar o arquivo <code>dbt_project.yml</code>, que fica na base do repositório. No final do arquivo há um trecho com as keys <code>models:</code> e <code>project_id:</code> do seu projeto no qual são definidos os modelos (queries) que o dbt deverá executar. É nessa parte que deve-se adicionar o nome da pasta que você criou com os novos modelos (nesse caso, <code>test_formacao</code>) e o tipo de materialização para os modelos daquela pasta (<em>view</em>, <em>table</em> or <em>incremental</em>). Nesse caso, utilizaremos <em>table</em>. (Aqui tem um <a href="https://github.com/prefeitura-rio/queries-rj-smfp/blob/master/dbt_project.yml">exemplo</a> desse arquivo totalmente preenchido).</p>
@@ -750,15 +736,15 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="p">(...)</span><span class="w"></span>
-<span class="n">models</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="o">+</span><span class="n">persist_docs</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
-<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
-<span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">test_formacao</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
-<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(...)</span>
+<span class="n">models</span><span class="p">:</span>
+<span class="w">  </span><span class="o">+</span><span class="n">persist_docs</span><span class="p">:</span>
+<span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span>
+<span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span>
+<span class="w">    </span><span class="n">test_formacao</span><span class="p">:</span>
+<span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span>
+<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span>
 </code></pre></div>
 <p>🚨🚨 <strong>Atenção</strong> 🚨🚨: A identação de cada uma das partes desses arquivos é fundamental para o correto funcionamento do DBT. Mantenha sempre o padrão de identação.</p>
 <p>E é isso! Se você chegou até aqui você já criou seu primeiro modelo <strong>dbt</strong>.</p>
@@ -784,19 +770,19 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="p">(...)</span><span class="w"></span>
-<span class="n">vars</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="n">ELEMENTOS_DATA_INICIAL</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;2022-01-03&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="n">PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;B&quot;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(...)</span>
+<span class="n">vars</span><span class="p">:</span>
+<span class="w">  </span><span class="n">ELEMENTOS_DATA_INICIAL</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;2022-01-03&quot;</span>
+<span class="w">  </span><span class="n">PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;B&quot;</span>
 
-<span class="n">models</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="o">+</span><span class="n">persist_docs</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
-<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
-<span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">test_formacao</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span><span class="w"></span>
-<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span><span class="w"></span>
+<span class="n">models</span><span class="p">:</span>
+<span class="w">  </span><span class="o">+</span><span class="n">persist_docs</span><span class="p">:</span>
+<span class="w">    </span><span class="n">relation</span><span class="p">:</span><span class="w"> </span><span class="k">true</span>
+<span class="w">    </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="k">true</span>
+<span class="w">  </span><span class="n">rj_escritorio</span><span class="p">:</span>
+<span class="w">    </span><span class="n">test_formacao</span><span class="p">:</span>
+<span class="w">      </span><span class="o">+</span><span class="n">materialized</span><span class="p">:</span><span class="w"> </span><span class="k">table</span>
+<span class="w">      </span><span class="o">+</span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="n">test_formacao</span>
 </code></pre></div>
 <p>Depois, incluímos essas variáveis dentro da query, referenciando-as com <code>{{var('NOME_DA_VARIAVEL')}}</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">elementos.sql</label></div>
@@ -804,34 +790,34 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span>
+<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span>
 </code></pre></div>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">paises_americanos.sql</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">CASE</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;00&#39;</span><span class="w"></span>
-<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">pais</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">capital</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">CASE</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">STARTS_WITH</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="k">THEN</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Não começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">indicador_capital_com_</span><span class="err">{{</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;</span><span class="p">)</span><span class="err">}}</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">LPAD</span><span class="p">(</span><span class="n">id_pais</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_pais</span><span class="p">,</span>
+<span class="w">  </span><span class="k">CASE</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Sul&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;01&#39;</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América Central&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;02&#39;</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">continente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;América do Norte&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;03&#39;</span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;00&#39;</span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id_continente</span><span class="p">,</span>
+<span class="w">  </span><span class="n">pais</span><span class="p">,</span>
+<span class="w">  </span><span class="n">capital</span><span class="p">,</span>
+<span class="w">  </span><span class="k">CASE</span>
+<span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">STARTS_WITH</span><span class="p">(</span><span class="n">capital</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="k">THEN</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="ss">&quot;Não começa com &quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;)}}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">indicador_capital_com_</span><span class="err">{{</span><span class="n">var</span><span class="p">(</span><span class="s1">&#39;PAISES_AMERICANOS_LETRA_INICIAL_CAPITAL&#39;</span><span class="p">)</span><span class="err">}}</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table</span><span class="o">`</span>
 </code></pre></div>
 <p>Ainda sobre parametrização de queries, uma outra possibilidade é a de referenciar outros modelos(queries) dentro de um modelo. Por exemplo, caso dentro do modelo <code>elementos.sql</code>, eu deseje fazer um <code>SELECT</code> no modelo <code>paises_americanos.sql</code>, isso é possível, basta referenciar esse modelo na forma <code>{{ ref('NOME_DO_MODELO') }}</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">elementos.sql</label></div>
@@ -839,18 +825,18 @@
 <div class="tabbed-block"></div>
 </div>
 </div>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">select_paises</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="o">*</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;paises_americanos&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">select_paises</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="o">*</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="err">{{</span><span class="w"> </span><span class="k">ref</span><span class="p">(</span><span class="s1">&#39;paises_americanos&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="p">)</span>
 
-<span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span><span class="w"></span>
+<span class="k">SELECT</span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="k">data</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">DATE</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">data</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SAFE_CAST</span><span class="p">(</span><span class="nb">number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">INT64</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">numero</span><span class="p">,</span>
+<span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">elemento</span><span class="p">,</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">rj</span><span class="o">-</span><span class="n">escritorio</span><span class="o">-</span><span class="n">dev</span><span class="p">.</span><span class="n">test_formacao_staging</span><span class="p">.</span><span class="n">test_table_2</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="ss">&quot;{{var(&#39;ELEMENTOS_DATA_INICIAL&#39;)}}&quot;</span>
 </code></pre></div>
 <p>O caso acima é especialmente útil quando um modelo depende de outro pra ser executado corretamente. Nesse caso, é necessário que a query do modelo dependente seja executada depois da query do modelo indepentende. Isso é possível de configurar em uma pipeline do prefect através dos parâmetros <code>upstream</code> e <code>downstream</code>, que veremos mais abaixo.</p>
 <h2 id="integrando-com-as-pipelines-do-prefect">Integrando com as pipelines do Prefect</h2>
@@ -867,17 +853,17 @@
 <span class="sd">DBT-related flows.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
-<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
-<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.run_configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCS</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dbt_example.schedules</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.rj_escritorio.dbt_example.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">example_dbt_tables_schedule</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.execute_dbt_model.flows</span> <span class="kn">import</span> <span class="n">utils_run_dbt_model_flow</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.execute_dbt_model.flows</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils_run_dbt_model_flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_default_parameters</span>
 
 <span class="n">dbt_example_formacao_infra</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">utils_run_dbt_model_flow</span><span class="p">)</span>
 <span class="n">dbt_example_formacao_infra</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Exemplo Formação DBT - Materializar tabelas&quot;</span>
@@ -906,14 +892,14 @@
 <span class="sd">Schedules for dbt example</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
-<span class="kn">from</span> <span class="nn">prefect.schedules.clocks</span> <span class="kn">import</span> <span class="n">IntervalClock</span>
-<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules.clocks</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntervalClock</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
 
 <span class="c1">#####################################</span>
 <span class="c1">#</span>
@@ -959,16 +945,16 @@
 <span class="sd">Database dumping flows for formation project</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
-<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
-<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.run_configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCS</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.rj_escritorio.dump_db_formacao.schedules</span> <span class="kn">import</span> <span class="n">gsheets_one_minute_update_schedule</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.flows</span> <span class="kn">import</span> <span class="n">dump_url_flow</span>  <span class="c1"># alterado</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">set_default_parameters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.rj_escritorio.dump_db_formacao.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">gsheets_one_minute_update_schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_url.flows</span><span class="w"> </span><span class="kn">import</span> <span class="n">dump_url_flow</span>  <span class="c1"># alterado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_default_parameters</span>
 
 <span class="n">formacao_gsheets_flow</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dump_url_flow</span><span class="p">)</span>
 <span class="n">formacao_gsheets_flow</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;EMD: Formação GSheets - Ingerir tabelas de URL&quot;</span>
@@ -1007,13 +993,13 @@
 <span class="sd">Schedules for the database dump pipeline</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-<span class="kn">import</span> <span class="nn">pytz</span>
-<span class="kn">from</span> <span class="nn">prefect.schedules</span> <span class="kn">import</span> <span class="n">Schedule</span>
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_url.utils</span> <span class="kn">import</span> <span class="n">generate_dump_url_schedules</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytz</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.schedules</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schedule</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_url.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_dump_url_schedules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">untuple_clocks</span> <span class="k">as</span> <span class="n">untuple</span>
 
 <span class="c1">#####################################</span>
 <span class="c1">#</span>
@@ -1077,28 +1063,28 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Example flow</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
 
-<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">case</span><span class="p">,</span> <span class="n">Parameter</span>  <span class="c1"># adicionado</span>
-<span class="kn">from</span> <span class="nn">prefect.run_configs</span> <span class="kn">import</span> <span class="n">KubernetesRun</span>
-<span class="kn">from</span> <span class="nn">prefect.storage</span> <span class="kn">import</span> <span class="n">GCS</span>
-<span class="kn">from</span> <span class="nn">prefect.tasks.prefect</span> <span class="kn">import</span> <span class="n">create_flow_run</span><span class="p">,</span> <span class="n">wait_for_flow_run</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">case</span><span class="p">,</span> <span class="n">Parameter</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.run_configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">KubernetesRun</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">GCS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect.tasks.prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_flow_run</span><span class="p">,</span> <span class="n">wait_for_flow_run</span>  <span class="c1"># adicionado</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.formacao.flow_do_zero.constants</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.formacao.flow_do_zero.constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># adicionado</span>
     <span class="n">constants</span> <span class="k">as</span> <span class="n">formacao_constants</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.constants</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">from</span> <span class="nn">pipelines.formacao.flow_do_zero.tasks</span> <span class="kn">import</span> <span class="n">download_data</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">,</span> <span class="n">save_report</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.constants</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">utils_constants</span>  <span class="c1"># adicionado</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.decorators</span> <span class="kn">import</span> <span class="n">Flow</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_db.constants</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.formacao.flow_do_zero.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_data</span><span class="p">,</span> <span class="n">parse_data</span><span class="p">,</span> <span class="n">save_report</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">utils_constants</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_db.constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">constants</span> <span class="k">as</span> <span class="n">dump_db_constants</span><span class="p">,</span>
 <span class="p">)</span>  <span class="c1"># adicionado</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.dump_to_gcs.constants</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.dump_to_gcs.constants</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">constants</span> <span class="k">as</span> <span class="n">dump_to_gcs_constants</span><span class="p">,</span>
 <span class="p">)</span>  <span class="c1"># adicionado</span>
-<span class="kn">from</span> <span class="nn">pipelines.utils.tasks</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># adicionado</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># adicionado</span>
     <span class="n">create_table_and_upload_to_gcs</span><span class="p">,</span>
     <span class="n">get_current_flow_labels</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1220,20 +1206,20 @@
 <span class="sd">Tasks for the example flow</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">task</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prefect</span><span class="w"> </span><span class="kn">import</span> <span class="n">task</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-<span class="kn">from</span> <span class="nn">pipelines.utils.utils</span> <span class="kn">import</span> <span class="n">log</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pipelines.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span>
 
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_data</span><span class="p">(</span><span class="n">n_users</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Baixa dados da API https://randomuser.me e retorna um texto em formato CSV.</span>
 
 <span class="sd">    Args:</span>
@@ -1250,8 +1236,8 @@
 
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transforma os dados em formato CSV em um DataFrame do Pandas, para facilitar sua manipulação.</span>
 
 <span class="sd">    Args:</span>
@@ -1268,8 +1254,8 @@
 
 
 <span class="nd">@task</span>
-<span class="k">def</span> <span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_report</span><span class="p">(</span><span class="n">dataframe</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Salva o DataFrame em um arquivo CSV.</span>
 
 <span class="sd">    Args:</span>
@@ -1296,11 +1282,11 @@
 <span class="sd">Constant values for the satelite tables</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
 
 
-<span class="k">class</span> <span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">constants</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constant values for the satelite project</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1321,17 +1307,17 @@
 </ul>
 <h2 id="dbt-alias">DBT Alias</h2>
 <p>Uma limitação importante nos modelos DBT é que não é possível criar modelos com o mesmo nome. Como, por <em>default</em>, o nome das tabelas é o nome do arquivo do modelo, isso implica que, em um <em>Data Lake</em> que tenha nomes de tabelas duplicados, a materialização do DBT vai falhar. Nesses casos, o DBT gera um erro como esse:</p>
-<div class="highlight"><pre><span></span><code>Exception: Error running sync command: RPC server failed to compile project, call the <span class="s2">&quot;status&quot;</span> method <span class="k">for</span> compile status: Compilation Error
-  dbt found two resources with the name <span class="s2">&quot;cargo&quot;</span>. Since these resources have the same name,
-  dbt will be unable to find the correct resource when ref<span class="o">(</span><span class="s2">&quot;cargo&quot;</span><span class="o">)</span> is used. To fix this,
-  change the name of one of these resources:
-  - model.rj-smfp.cargo <span class="o">(</span>models/recursos_humanos_ergon/cargo.sql<span class="o">)</span>
-  - model.rj-smfp.cargo <span class="o">(</span>models/recursos_humanos_ergon_comlurb/cargo.sql<span class="o">)</span>
+<div class="highlight"><pre><span></span><code>Exception:<span class="w"> </span>Error<span class="w"> </span>running<span class="w"> </span>sync<span class="w"> </span>command:<span class="w"> </span>RPC<span class="w"> </span>server<span class="w"> </span>failed<span class="w"> </span>to<span class="w"> </span>compile<span class="w"> </span>project,<span class="w"> </span>call<span class="w"> </span>the<span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="w"> </span>method<span class="w"> </span><span class="k">for</span><span class="w"> </span>compile<span class="w"> </span>status:<span class="w"> </span>Compilation<span class="w"> </span>Error
+<span class="w">  </span>dbt<span class="w"> </span>found<span class="w"> </span>two<span class="w"> </span>resources<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>name<span class="w"> </span><span class="s2">&quot;cargo&quot;</span>.<span class="w"> </span>Since<span class="w"> </span>these<span class="w"> </span>resources<span class="w"> </span>have<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>name,
+<span class="w">  </span>dbt<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>unable<span class="w"> </span>to<span class="w"> </span>find<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>resource<span class="w"> </span>when<span class="w"> </span>ref<span class="o">(</span><span class="s2">&quot;cargo&quot;</span><span class="o">)</span><span class="w"> </span>is<span class="w"> </span>used.<span class="w"> </span>To<span class="w"> </span>fix<span class="w"> </span>this,
+<span class="w">  </span>change<span class="w"> </span>the<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>these<span class="w"> </span>resources:
+<span class="w">  </span>-<span class="w"> </span>model.rj-smfp.cargo<span class="w"> </span><span class="o">(</span>models/recursos_humanos_ergon/cargo.sql<span class="o">)</span>
+<span class="w">  </span>-<span class="w"> </span>model.rj-smfp.cargo<span class="w"> </span><span class="o">(</span>models/recursos_humanos_ergon_comlurb/cargo.sql<span class="o">)</span>
 </code></pre></div>
 <p>Para evitar esse problema usamos um recurso do DBT chamado <code>alias</code>. Para criar um alias de uma tabela, basta incluir a seguinte linha no topo do arquivo SQL do modelo DBT:</p>
-<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="k">alias</span><span class="o">=</span><span class="s1">&#39;cargo&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">schema</span><span class="o">=</span><span class="s1">&#39;recursos_humanos_ergon_comlurb&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span><span class="w"></span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="p">...</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="err">{{</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="k">alias</span><span class="o">=</span><span class="s1">&#39;cargo&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">schema</span><span class="o">=</span><span class="s1">&#39;recursos_humanos_ergon_comlurb&#39;</span><span class="p">)</span><span class="w"> </span><span class="err">}}</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="p">...</span>
 </code></pre></div>
 <p>O nome dos arquivos SQL, porém, devem permanecer únicos. Adotamos a convenção de dar o nome desses arquivos no seguinte formato <code>dataset_id__table_id</code>.
 É importante notar que esse é o nome que dever ser utilizado na hora de rodar o modelo DBT:</p>

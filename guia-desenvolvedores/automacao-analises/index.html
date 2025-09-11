@@ -282,20 +282,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
-        Como configurar a conexão do PowerBI com o BigQuery
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -897,16 +883,16 @@
 </li>
 <li>
 <p>Arquivos <strong>.sqlx</strong> suportam configurações específicas, como o tipo de tabela a ser criado, em qual dataset será salvo, nome da tabela, entre outras. Para informações detalhadas, consulte a <a href="https://cloud.google.com/dataform/docs/reference/dataform-core-reference?hl=pt-br#columns-descriptor">documentação oficial</a>. Segue um exemplo de configuração que deve ser colocada no início do arquivo:</p>
-<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">   </span><span class="k">type</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;fita_banco_filtered&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;dashboard_ergon_subgcc&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Fonte filtrada para o ano de 2023.&quot;</span><span class="w"></span>
-<span class="w">   </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">ano</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Ano da folha&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="n">mes</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Mês da folha&quot;</span><span class="w"></span>
-<span class="w">   </span><span class="err">}</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">config</span><span class="w"> </span><span class="err">{</span>
+<span class="w">   </span><span class="k">type</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;fita_banco_filtered&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="k">schema</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;dashboard_ergon_subgcc&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Fonte filtrada para o ano de 2023.&quot;</span>
+<span class="w">   </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="err">{</span>
+<span class="w">      </span><span class="n">ano</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Ano da folha&quot;</span>
+<span class="w">      </span><span class="n">mes</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;Mês da folha&quot;</span>
+<span class="w">   </span><span class="err">}</span>
+<span class="err">}</span>
 </code></pre></div>
 </li>
 <li>
@@ -944,7 +930,7 @@
 <p>Para compartilhar dados do BigQuery no Google Sheets.</p>
 <h3 id="integracao-com-python-e-r">Integração com Python e R</h3>
 <p>Para conectar o BigQuery ao Python ou R, você pode utilizar o pacote <code>basedosdados</code> desenvolvido pela ONG <a href="http://basedosdados.org">Base dos Dados</a>. Para mais detalhes, acesse a <a href="https://basedosdados.github.io/mais/access_data_packages/">documentação oficial do pacote</a>. Abaixo, segue um exemplo para Python:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">basedosdados</span> <span class="k">as</span> <span class="nn">bd</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">basedosdados</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
 
 <span class="c1"># Consulta ao BigQuery</span>
 <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>

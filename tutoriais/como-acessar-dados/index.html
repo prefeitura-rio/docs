@@ -505,20 +505,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
-        Como configurar a conexão do PowerBI com o BigQuery
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -911,7 +897,7 @@ encontrar os dados do datalake!</p>
 <p><img alt="Selecionando projeto criado" src="../../static/img/tutoriais/selecionar-projeto-criado.png" /></p>
 <p>Parabéns! Você já pode usar o Google BigQuery! 🎉</p>
 <h2 id="acessando-dados-via-bigquery">Acessando dados via BigQuery</h2>
-<p>Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQuery. Vamos lá! <img alt="😃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f603.svg" title=":smiley:" /></p>
+<p>Com sua conta da GCP devidamente configurada, você pode acessar dados via BigQuery. Vamos lá! <img alt="😃" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f603.svg" title=":smiley:" /></p>
 <h3 id="adicionando-o-projeto-do-escritorio-de-dados">Adicionando o projeto do Escritório de Dados</h3>
 <ul>
 <li>No <a href="https://console.cloud.google.com/">GCP Console</a>, verifique se você está com o projeto correto selecionado e,
@@ -945,7 +931,7 @@ encontrar os dados do datalake!</p>
 <li>Depois de alguns segundos o projeto <strong>datario</strong> estará aparecendo em sua aba "Explorer". Ao navegar por ele, verá algo semelhante ao seguinte:</li>
 </ul>
 <p><img alt="Dados do datario" src="../../static/img/tutoriais/dados-datario.png" width="90%" /></p>
-<p>Agora você está pronto para utilizar os dados abertos da Prefeitura do Rio de Janeiro!  <img alt="😉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f609.svg" title=":wink:" /></p>
+<p>Agora você está pronto para utilizar os dados abertos da Prefeitura do Rio de Janeiro!  <img alt="😉" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f609.svg" title=":wink:" /></p>
 <p>Se você trabalha para a prefeitura e quer adicionar os demais projetos que tem acesso, basta seguir o mesmo passo mostrado anteriormente e buscar o nome do projeto da sua secretaria ou órgão. Exemplo de projetos internos:</p>
 <ul>
 <li>rj-cor</li>
@@ -1028,7 +1014,7 @@ encontrar os dados do datalake!</p>
 <div class="tabbed-block">
 <p>A seguir, vamos consultar dados da maneira mais simples possível. Se liga só nesse snippet curtinho
 mas SUPER poderoso 💪:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">basedosdados</span> <span class="k">as</span> <span class="nn">bd</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">basedosdados</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bd</span>
 
 <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM `datario.educacao_basica.aluno` LIMIT 10&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">billing_project_id</span><span class="o">=</span><span class="s2">&quot;&lt;id-do-seu-projeto&gt;&quot;</span><span class="p">)</span>
@@ -1068,10 +1054,10 @@ Você pode acessá-lo <a href="https://docs.microsoft.com/pt-br/power-bi/connect
 <p><img alt="Data Studio" src="../../static/img/tutoriais/acesso-datastudio.png" width="80%" /></p>
 <p>Navegue nas opções de projeto, dataset e tabela até encontrar o dado de interesse.</p>
 <p><img alt="Data Studio escolhe tabela" src="../../static/img/tutoriais/acesso-datastudio-escolhe-tabela.png" width="80%" /></p>
-<p>Prontinho! Agora é só liberar seu lado analytics + criativo para começar suas análises. <img alt="😜" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f61c.svg" title=":stuck_out_tongue_winking_eye:" /></p>
+<p>Prontinho! Agora é só liberar seu lado analytics + criativo para começar suas análises. <img alt="😜" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f61c.svg" title=":stuck_out_tongue_winking_eye:" /></p>
 <p><img alt="Data Studio tabela importada" src="../../static/img/tutoriais/acesso-datastudio-dados-importados.png" width="80%" /></p>
-<h2 id="dicas-para-reduzir-o-custo-de-uma-query-no-gcp">Dicas para reduzir o custo de uma query no GCP <img alt="🤯" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f92f.svg" title=":exploding_head:" /></h2>
-<p><strong>1 - Evite <code>SELECT *</code></strong> <img alt="💣" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f4a3.svg" title=":bomb:" /></p>
+<h2 id="dicas-para-reduzir-o-custo-de-uma-query-no-gcp">Dicas para reduzir o custo de uma query no GCP <img alt="🤯" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f92f.svg" title=":exploding_head:" /></h2>
+<p><strong>1 - Evite <code>SELECT *</code></strong> <img alt="💣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a3.svg" title=":bomb:" /></p>
 <p>Para contornar o uso do <code>SELECT *</code> você pode:</p>
 <ul>
 <li>Escrever apenas os nomes das colunas que deseja como retorno.
@@ -1084,7 +1070,7 @@ Você pode acessá-lo <a href="https://docs.microsoft.com/pt-br/power-bi/connect
 <p>Clicar nos pontinhos verticais e "Open". E depois selecionar a aba "Preview" para visualizar algumas linhas dessa tabela.</p>
 <p><img alt="Ver tabela pt3" src="../../static/img/tutoriais/ver-tabela-3.png" width="80%" /></p>
 <p>Dessa forma, você consegue visualizar dados gratuitamente e sem afetar sua cota mensal 🤩.</p>
-<p><strong>3 - Filtrar a partição</strong> <img alt="💥" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f4a5.svg" title=":boom:" /></p>
+<p><strong>3 - Filtrar a partição</strong> <img alt="💥" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a5.svg" title=":boom:" /></p>
 <p>Se a tabela for particionada, opte por filtrá-la utilizando a coluna de partição. Você pode descobrir se a tabela é particionada seguindo o mesmo passo anterior, mas selecionando a aba "Detalhes" e procurando o termo “Particionada no campo “.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Texto</label><label for="__tabbed_6_2">Vídeo</label></div>
 <div class="tabbed-content">
@@ -1107,7 +1093,7 @@ Para rebater essa crítica vamos comparar a query anterior com uma sem filtro ne
 </div>
 </div>
 <p>Então lembre-se: sempre use a coluna de partição quando sua tabela permitir 😉!</p>
-<p><strong>4 - JOIN</strong> <img alt="🤝" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f91d.svg" title=":handshake:" /></p>
+<p><strong>4 - JOIN</strong> <img alt="🤝" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f91d.svg" title=":handshake:" /></p>
 <p>Para melhorar a eficiência dos JOIN podemos:</p>
 <ul>
 <li>reduzir a quantidade de dados das tabelas antes de uma cláusula JOIN. Quanto antes reduzirmos a quantidade de dados, menos processamento iremos exigir.</li>
@@ -1159,13 +1145,13 @@ Para rebater essa crítica vamos comparar a query anterior com uma sem filtro ne
       
       
         
-        <a href="../como-configurar-conexao-powerbi-bigquery/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Como configurar a conexão do PowerBI com o BigQuery" rel="next">
+        <a href="../../guia-desenvolvedores/visao-geral-infra/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Visão geral da infraestrutura" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Próximo
               </span>
-              Como configurar a conexão do PowerBI com o BigQuery
+              Visão geral da infraestrutura
             </div>
           </div>
           <div class="md-footer__button md-icon">

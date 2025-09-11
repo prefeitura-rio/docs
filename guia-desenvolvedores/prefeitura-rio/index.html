@@ -282,20 +282,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutoriais/como-configurar-conexao-powerbi-bigquery/" class="md-nav__link">
-        Como configurar a conexão do PowerBI com o BigQuery
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -665,7 +651,7 @@
 <p>Pacote Python que implementa utilidades para nossas Pipelines.</p>
 <h2 id="state-handlers">State handlers</h2>
 <p>Definição de credenciais na definição dos flows</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
 
 <span class="n">dump_sme_flow</span><span class="o">.</span><span class="n">state_handlers</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">partial</span><span class="p">(</span><span class="n">handler_inject_bd_credentials</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/bd-rj-chatbot-dev&quot;</span><span class="p">),</span>
